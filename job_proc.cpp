@@ -20,6 +20,8 @@ const char *JB_TOKEN = "{EOL}";
 const char *FLD_TOKEN = "{R}";
 const char *JOB_DIR = "/Jobs";
 const char *DOC_DIR = "/Docs";
+constexpr unsigned ITEM_LENGTH = 15; // length of Item column in job steps description
+constexpr unsigned VAL_LENGTH = 40; // length of the value column in jobs definition
 
 void by::JobProc::readFile(const char *fileName, std::string &str) {
   std::ifstream myFile;
@@ -111,14 +113,9 @@ void by::JobProc::exportDocs(const std::string &path) {
        << gr->m_jobs.at(0)->m_job_descr << "\n\n"
        << "## Components\n\n";
     printGroupTable(*gr, so);
+    printStepsDescriptions(*gr, so);
     std::cout << so.str() << std::endl;
   }
- /* 
-  for (const auto &gr : m_job_groups) {
-    printGroupTable(*gr, std::cout);
-    std::cout << "\n\n";
-  }
-  */
 }
 
 // ====================== PRIVATE FUNCTIONS ===========
@@ -169,17 +166,22 @@ void by::JobProc::printGroupTable(by::JobGroup &gr, std::ostream &sa) {
               gr.m_len_next_job + gr.m_len_templ;
   std::string line_(len_, '-');
 
-  sa << "| " << std::setw(gr.m_len_lp) << HEAD_COLS[0] << " | "
+  sa << std::left << "| " << std::setw(gr.m_len_lp) << HEAD_COLS[0] << " | "
      << std::setw(gr.m_len_job_cd) << HEAD_COLS[1] << " | "
      << std::setw(gr.m_len_esc) << HEAD_COLS[2] << " | "
      << std::setw(gr.m_len_sub) << HEAD_COLS[3] << " | "
      << std::setw(gr.m_len_next_job) << HEAD_COLS[4] << " | "
      << std::setw(gr.m_len_templ) << HEAD_COLS[5] << " |\n";
-  sa << line_ << "\n";
 
+  sa << std::setfill('-')<< "| " << std::setw(gr.m_len_lp) << "-" << " | "
+     << std::setw(gr.m_len_job_cd) << "-" << " | "
+     << std::setw(gr.m_len_esc) << "-" << " | "
+     << std::setw(gr.m_len_sub) << "-" << " | "
+     << std::setw(gr.m_len_next_job) << "-" << " | "
+     << std::setw(gr.m_len_templ) << "-" << " |\n";
   for (const auto &job : gr.m_jobs) {
 
-    sa << "| " << std::setw(gr.m_len_lp) << job->m_step_no << " | "
+    sa << std::left<< std::setfill(' ')<< "| " << std::setw(gr.m_len_lp) << job->m_step_no << " | "
        << std::setw(gr.m_len_job_cd) << job->m_job_cd << " | "
        << std::setw(gr.m_len_esc) << job->m_esc << " | "
        << std::setw(gr.m_len_sub) << " "
@@ -196,5 +198,38 @@ void by::JobProc::printGroupTable(by::JobGroup &gr, std::ostream &sa) {
            << " |\n";
       }
     }
+  }
+}
+
+///the function creates description for for all jobs that are a part of the group
+/// @param gr the name of the group of jobs
+/// @param sa output string to where the descripiton is to be directed
+void by::JobProc::printStepsDescriptions(const JobGroup& gr, std::ostream& sa) {
+  sa << std::left << "## Steps Description\n\n";
+  for(const auto &jb : gr.m_jobs) {
+    sa << "## " << jb->m_job_cd << "\n\n";
+    sa << "### Description\n\n";
+    sa << jb->m_job_descr << "\n\n";
+
+    sa << "### Definition\n\n";
+
+    sa << std::setfill(' ')<< "| " << std::setw(ITEM_LENGTH) << "Item" << " | " << std::setw(VAL_LENGTH) << "Value" << " |\n";
+    sa << "| " << std::setw(ITEM_LENGTH) << std::setfill('-') << "-" << " | " << std::setw(VAL_LENGTH) << std::setfill('-') << "-"<< " |\n";
+    sa << std::setfill(' ')<< "| " << std::setw(ITEM_LENGTH) << "Job Name" << " | " << std::setw(VAL_LENGTH) << jb->m_job_cd << " |\n";
+    sa << "| " << std::setw(ITEM_LENGTH) << "ESC Query" << " | " << std::setw(VAL_LENGTH) << jb->m_esc << " |\n";
+
+  // if there are sub-jobs present
+    if(! jb->m_sub_jobs_list.empty()) {
+      auto sb = jb->m_sub_jobs_list.begin() ;
+      sa << std::left << "| " << std::setw(ITEM_LENGTH) << "Sub-Job" << " | " << std::setw(VAL_LENGTH) << *sb << " |\n";
+      ++sb;
+      for( ; sb != jb->m_sub_jobs_list.end(); ++sb) {
+        sa << "| " << std::setw(ITEM_LENGTH) << "" << " | " << std::setw(VAL_LENGTH) << *sb << " |\n";
+        
+      }
+    }
+
+    sa << "\n\n";
+
   }
 }

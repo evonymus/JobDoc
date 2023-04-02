@@ -57,6 +57,7 @@ private:
   void saveFile(const std::string& fileName, const std::string& content);
   bool str_compare(const std::string& a, const std::string& b);
   void printGroupTable(JobGroup& gr, std::ostream& sa );
+  void printStepsDescriptions(const JobGroup& gr, std::ostream& sa);
 };
 
 } // namespace BY
