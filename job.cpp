@@ -1,14 +1,5 @@
-#pragma once
-
 #include "job.h"
-#include "find_str_tfunc.h"
-#include <boost/token_functions.hpp>
-#include <boost/tokenizer.hpp>
-#include <iomanip>
-#include <iostream>
-#include <iterator>
-#include <sstream>
-#include <vector>
+#include "tokenizer.h"
 
 namespace by = asarum::BY;
 
@@ -26,4 +17,11 @@ by::Job::Job(const std::vector<std::string> &vec) {
   m_subst = vec[SUBST];
   m_api = vec[API];
   m_job_type = vec[TYPE];
+
+  // if m_sub_jobs is not empty, store sub-jobs in m_sug_jobs_list vecto
+  if(! m_sub_jobs.empty()) {
+    by::Tokenizer tok;
+    tok.tokenize(m_sub_jobs, ",", m_sub_jobs_list);
+  }
+
 }

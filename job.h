@@ -10,25 +10,26 @@ namespace asarum {
 namespace BY {
 
 const int FIELDS_NO = 14; // number of fields in the vector
+enum field {
+  MASTER,
+  STEPS,
+  JOB_CD,
+  NEXT_JOB,
+  SUB_JOBS,
+  ESC,
+  TEMPL,
+  SQL,
+  XML,
+  SUBST,
+  TMPL_FILE,
+  DESCR,
+  API,
+  TYPE
+};
 
 class Job {
 public:
-  enum field {
-    MASTER,
-    STEPS,
-    JOB_CD,
-    NEXT_JOB,
-    SUB_JOBS,
-    ESC,
-    TEMPL,
-    SQL,
-    XML,
-    SUBST,
-    TMPL_FILE,
-    DESCR,
-    API,
-    TYPE
-  };
+
   Job(const std::vector<std::string> &vec);
   
   unsigned m_step_no;
@@ -44,6 +45,8 @@ public:
   std::string m_job_descr;
   std::string m_api;
   std::string m_job_type;
+
+  std::vector<std::string> m_sub_jobs_list;
   
 private:
   void setJobFields(const std::vector<std::string> &vec);

@@ -19,7 +19,7 @@ const char *JB_TOKEN = "{EOL}";
 // token separating job fields
 const char *FLD_TOKEN = "{R}";
 const char *JOB_DIR = "/Jobs";
-const char* DOC_DIR = "/Docs";
+const char *DOC_DIR = "/Docs";
 
 void by::JobProc::readFile(const char *fileName, std::string &str) {
   std::ifstream myFile;
@@ -72,7 +72,8 @@ void by::JobProc::processFile(const char *fileName) {
   }
 }
 
-/// export ESC SQL queries and XML templates
+/// export ESC SQL queries and XML templates to the Jobs folder
+/// @param path the path where the Jobs subfoler is to be created
 void by::JobProc::exportJobs(const std::string &path) {
   const std::string job_dir = path + JOB_DIR;
 
@@ -96,11 +97,12 @@ void by::JobProc::exportJobs(const std::string &path) {
   }
 }
 
-//export markdown documentation
+// export markdown documentation
 void by::JobProc::exportDocs(const std::string &path) {
   const std::string doc_dir = path + DOC_DIR;
 
   // creating Doc directory
+  
   fs::create_directory(doc_dir);
   for(const auto &gr : m_job_groups) {
     std::ostringstream so;
@@ -108,11 +110,16 @@ void by::JobProc::exportDocs(const std::string &path) {
        << "## Description\n\n"
        << gr->m_jobs.at(0)->m_job_descr << "\n\n"
        << "## Components\n\n";
-
+    printGroupTable(*gr, so);
+    std::cout << so.str() << std::endl;
   }
+ /* 
+  for (const auto &gr : m_job_groups) {
+    printGroupTable(*gr, std::cout);
+    std::cout << "\n\n";
+  }
+  */
 }
-
-
 
 // ====================== PRIVATE FUNCTIONS ===========
 
@@ -147,6 +154,47 @@ void by::JobProc::saveFile(const std::string &fileName,
   fout.close();
 }
 
-bool by::JobProc::str_compare(const std::string& a, const std::string& b) {
-    return a.size() < b.size();
+bool by::JobProc::str_compare(const std::string &a, const std::string &b) {
+  return a.size() < b.size();
+}
+
+/// the function print outs the table with information about the group to
+///  the stream given as the parameter
+///  @param gr job group for with the table is to be printed out
+///  @param sa outpt stream to where the printout is to be made
+void by::JobProc::printGroupTable(by::JobGroup &gr, std::ostream &sa) {
+
+  gr.getMaxFldLen();
+  auto len_ = gr.m_len_lp + gr.m_len_job_cd + gr.m_len_esc + gr.m_len_sub +
+              gr.m_len_next_job + gr.m_len_templ;
+  std::string line_(len_, '-');
+
+  sa << "| " << std::setw(gr.m_len_lp) << HEAD_COLS[0] << " | "
+     << std::setw(gr.m_len_job_cd) << HEAD_COLS[1] << " | "
+     << std::setw(gr.m_len_esc) << HEAD_COLS[2] << " | "
+     << std::setw(gr.m_len_sub) << HEAD_COLS[3] << " | "
+     << std::setw(gr.m_len_next_job) << HEAD_COLS[4] << " | "
+     << std::setw(gr.m_len_templ) << HEAD_COLS[5] << " |\n";
+  sa << line_ << "\n";
+
+  for (const auto &job : gr.m_jobs) {
+
+    sa << "| " << std::setw(gr.m_len_lp) << job->m_step_no << " | "
+       << std::setw(gr.m_len_job_cd) << job->m_job_cd << " | "
+       << std::setw(gr.m_len_esc) << job->m_esc << " | "
+       << std::setw(gr.m_len_sub) << " "
+       << " | " << std::setw(gr.m_len_next_job) << job->m_next_job_success
+       << " | " << std::setw(gr.m_len_templ) << job->m_templ << " |\n";
+    if (!job->m_sub_jobs_list.empty()) {
+      for (const auto &sj : job->m_sub_jobs_list) {
+        sa << "| " << std::setw(gr.m_len_lp) << " "
+           << " | " << std::setw(gr.m_len_job_cd) << " "
+           << " | " << std::setw(gr.m_len_esc) << " "
+           << " | " << std::setw(gr.m_len_sub) << sj << " | "
+           << std::setw(gr.m_len_next_job) << " "
+           << " | " << std::setw(gr.m_len_templ) << " "
+           << " |\n";
+      }
+    }
+  }
 }
