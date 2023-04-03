@@ -9,19 +9,21 @@
 #include <sstream>
 #include <exception>
 
-#include "job.h"
-#include "job_proc.h"
-
+#include "menu.h"
 namespace by = asarum::BY;
 const char* FILE_NAME = "sdl_jobs_2023-02-03.dsv";
 
 
 int main(int argc, char *argv[]) {
   try {
+    by::Menu menu(argc, argv); 
+    menu.handleMenu();
+    /*
     by::JobProc jobProc;
     jobProc.processFile(FILE_NAME);
     //jobProc.exportJobs("/tmp/MD");
     jobProc.exportDocs("/tmp/MD");
+    */
 
   } 
   catch(std::exception &ex) {
