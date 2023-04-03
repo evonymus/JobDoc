@@ -20,8 +20,10 @@ const char *JB_TOKEN = "{EOL}";
 const char *FLD_TOKEN = "{R}";
 const char *JOB_DIR = "/Jobs";
 const char *DOC_DIR = "/Docs";
-constexpr unsigned ITEM_LENGTH = 15; // length of Item column in job steps description
-constexpr unsigned VAL_LENGTH = 40; // length of the value column in jobs definition
+constexpr unsigned ITEM_LENGTH =
+    20; // length of Item column in job steps description
+constexpr unsigned VAL_LENGTH =
+    40; // length of the value column in jobs definition
 
 void by::JobProc::readFile(const char *fileName, std::string &str) {
   std::ifstream myFile;
@@ -104,9 +106,9 @@ void by::JobProc::exportDocs(const std::string &path) {
   const std::string doc_dir = path + DOC_DIR;
 
   // creating Doc directory
-  
+
   fs::create_directory(doc_dir);
-  for(const auto &gr : m_job_groups) {
+  for (const auto &gr : m_job_groups) {
     std::ostringstream so;
     so << "# " << gr->m_group_name << "\n\n"
        << "## Description\n\n"
@@ -114,7 +116,7 @@ void by::JobProc::exportDocs(const std::string &path) {
        << "## Components\n\n";
     printGroupTable(*gr, so);
     printStepsDescriptions(*gr, so);
-    std::cout << so.str() << std::endl;
+    saveFile(doc_dir + "/" + gr->m_group_name + ".md", so.str());
   }
 }
 
@@ -173,20 +175,23 @@ void by::JobProc::printGroupTable(by::JobGroup &gr, std::ostream &sa) {
      << std::setw(gr.m_len_next_job) << HEAD_COLS[4] << " | "
      << std::setw(gr.m_len_templ) << HEAD_COLS[5] << " |\n";
 
-  sa << std::setfill('-')<< "| " << std::setw(gr.m_len_lp) << "-" << " | "
-     << std::setw(gr.m_len_job_cd) << "-" << " | "
-     << std::setw(gr.m_len_esc) << "-" << " | "
-     << std::setw(gr.m_len_sub) << "-" << " | "
-     << std::setw(gr.m_len_next_job) << "-" << " | "
-     << std::setw(gr.m_len_templ) << "-" << " |\n";
+  sa << std::setfill('-') << "| " << std::setw(gr.m_len_lp) << "-"
+     << " | " << std::setw(gr.m_len_job_cd) << "-"
+     << " | " << std::setw(gr.m_len_esc) << "-"
+     << " | " << std::setw(gr.m_len_sub) << "-"
+     << " | " << std::setw(gr.m_len_next_job) << "-"
+     << " | " << std::setw(gr.m_len_templ) << "-"
+     << " |\n";
   for (const auto &job : gr.m_jobs) {
 
-    sa << std::left<< std::setfill(' ')<< "| " << std::setw(gr.m_len_lp) << job->m_step_no << " | "
-       << std::setw(gr.m_len_job_cd) << job->m_job_cd << " | "
-       << std::setw(gr.m_len_esc) << job->m_esc << " | "
+    sa << std::left << std::setfill(' ') << "| " << std::setw(gr.m_len_lp)
+       << job->m_step_no << " | " << std::setw(gr.m_len_job_cd) << job->m_job_cd
+       << " | " << std::setw(gr.m_len_esc) << job->m_esc << " | "
        << std::setw(gr.m_len_sub) << " "
        << " | " << std::setw(gr.m_len_next_job) << job->m_next_job_success
        << " | " << std::setw(gr.m_len_templ) << job->m_templ << " |\n";
+
+    // if there are sub-jobs present
     if (!job->m_sub_jobs_list.empty()) {
       for (const auto &sj : job->m_sub_jobs_list) {
         sa << "| " << std::setw(gr.m_len_lp) << " "
@@ -201,35 +206,65 @@ void by::JobProc::printGroupTable(by::JobGroup &gr, std::ostream &sa) {
   }
 }
 
-///the function creates description for for all jobs that are a part of the group
-/// @param gr the name of the group of jobs
-/// @param sa output string to where the descripiton is to be directed
-void by::JobProc::printStepsDescriptions(const JobGroup& gr, std::ostream& sa) {
+/// the function creates description for for all jobs that are a part of the
+/// group
+///  @param gr the name of the group of jobs
+///  @param sa output string to where the descripiton is to be directed
+void by::JobProc::printStepsDescriptions(const JobGroup &gr, std::ostream &sa) {
   sa << std::left << "## Steps Description\n\n";
-  for(const auto &jb : gr.m_jobs) {
+  for (const auto &jb : gr.m_jobs) {
     sa << "## " << jb->m_job_cd << "\n\n";
     sa << "### Description\n\n";
     sa << jb->m_job_descr << "\n\n";
 
     sa << "### Definition\n\n";
 
-    sa << std::setfill(' ')<< "| " << std::setw(ITEM_LENGTH) << "Item" << " | " << std::setw(VAL_LENGTH) << "Value" << " |\n";
-    sa << "| " << std::setw(ITEM_LENGTH) << std::setfill('-') << "-" << " | " << std::setw(VAL_LENGTH) << std::setfill('-') << "-"<< " |\n";
-    sa << std::setfill(' ')<< "| " << std::setw(ITEM_LENGTH) << "Job Name" << " | " << std::setw(VAL_LENGTH) << jb->m_job_cd << " |\n";
-    sa << "| " << std::setw(ITEM_LENGTH) << "ESC Query" << " | " << std::setw(VAL_LENGTH) << jb->m_esc << " |\n";
+    sa << std::setfill(' ') << "| " << std::setw(ITEM_LENGTH) << "Item"
+       << " | " << std::setw(VAL_LENGTH) << "Value"
+       << " |\n";
+    sa << "| " << std::setw(ITEM_LENGTH) << std::setfill('-') << "-"
+       << " | " << std::setw(VAL_LENGTH) << std::setfill('-') << "-"
+       << " |\n";
+    sa << std::setfill(' ') << "| " << std::setw(ITEM_LENGTH) << "Job Name"
+       << " | " << std::setw(VAL_LENGTH) << jb->m_job_cd << " |\n";
+    sa << std::setfill(' ') << "| " << std::setw(ITEM_LENGTH) << "Job Type"
+       << " | " << std::setw(VAL_LENGTH) << jb->m_job_type << " |\n";
+    // if ESC query exists, add appropriate record
+    if (!jb->m_esc.empty()) {
+      sa << "| " << std::setw(ITEM_LENGTH) << "ESC Query"
+         << " | " << std::setw(VAL_LENGTH) << jb->m_esc << " |\n";
+    }
 
-  // if there are sub-jobs present
-    if(! jb->m_sub_jobs_list.empty()) {
-      auto sb = jb->m_sub_jobs_list.begin() ;
-      sa << std::left << "| " << std::setw(ITEM_LENGTH) << "Sub-Job" << " | " << std::setw(VAL_LENGTH) << *sb << " |\n";
+    // if Template in DB exists
+    if (!jb->m_templ.empty()) {
+      sa << "| " << std::setw(ITEM_LENGTH) << "Database Template"
+         << " | " << std::setw(VAL_LENGTH) << jb->m_templ << " |\n";
+    }
+
+    // if template specified in a file
+    if (!jb->m_tmpl_file.empty()) {
+      if(jb->m_tmpl_file.length() < VAL_LENGTH) {
+        sa << "| " << std::setw(ITEM_LENGTH) << "Template File"
+           << " | " << std::setw(VAL_LENGTH) << jb->m_tmpl_file 
+           << " |\n";
+      } else {
+        sa << "| " << std::setw(ITEM_LENGTH) << "Template File"
+           << " | " << std::setw(VAL_LENGTH) << "too long to display"
+           << " |\n";
+      }
+    }
+    // if there are sub-jobs present
+    if (!jb->m_sub_jobs_list.empty()) {
+      auto sb = jb->m_sub_jobs_list.begin();
+      sa << std::left << "| " << std::setw(ITEM_LENGTH) << "Sub-Job"
+         << " | " << std::setw(VAL_LENGTH) << *sb << " |\n";
       ++sb;
-      for( ; sb != jb->m_sub_jobs_list.end(); ++sb) {
-        sa << "| " << std::setw(ITEM_LENGTH) << "" << " | " << std::setw(VAL_LENGTH) << *sb << " |\n";
-        
+      for (; sb != jb->m_sub_jobs_list.end(); ++sb) {
+        sa << "| " << std::setw(ITEM_LENGTH) << ""
+           << " | " << std::setw(VAL_LENGTH) << *sb << " |\n";
       }
     }
 
     sa << "\n\n";
-
   }
 }
