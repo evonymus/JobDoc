@@ -198,48 +198,56 @@ void by::JobProc::printGroupDescription(const JobGroup& gr, std::ostringstream& 
 ///  @param gr job group for with the table is to be printed out
 ///  @param sa outpt stream to where the printout is to be made
 void by::JobProc::printGroupTable(by::JobGroup &gr, std::ostringstream &sa) {
-
+  //getting max length of the fields printed out in the table
   gr.getMaxFldLen();
-  auto len_ = gr.m_len_lp + gr.m_len_job_cd + gr.m_len_esc + gr.m_len_sub +
-              gr.m_len_next_job + gr.m_len_templ;
-  std::string line_(len_, '-');
 
+  // printing out header of the table
   sa << std::left << "| " << std::setw(gr.m_len_lp) << HEAD_COLS[0] << " | "
      << std::setw(gr.m_len_job_cd) << HEAD_COLS[1] << " | "
-     << std::setw(gr.m_len_esc) << HEAD_COLS[2] << " | "
      << std::setw(gr.m_len_sub) << HEAD_COLS[3] << " | "
-     << std::setw(gr.m_len_next_job) << HEAD_COLS[4] << " | "
-     << std::setw(gr.m_len_templ) << HEAD_COLS[5] << " |\n";
+     << std::setw(gr.m_len_next_job) << HEAD_COLS[4] 
+    << " |\n";
 
+    // printing out the line below the header
   sa << std::setfill('-') << "| " << std::setw(gr.m_len_lp) << "-"
      << " | " << std::setw(gr.m_len_job_cd) << "-"
-     << " | " << std::setw(gr.m_len_esc) << "-"
      << " | " << std::setw(gr.m_len_sub) << "-"
      << " | " << std::setw(gr.m_len_next_job) << "-"
-     << " | " << std::setw(gr.m_len_templ) << "-"
      << " |\n";
+    
+    // printing out jobs data
   for (const auto &job : gr.m_jobs) {
+    // getting the iterator to the sub-jobs
+    auto sj = job->m_sub_jobs_list.begin();
+
+    std::string first_sub_job;
+    if(sj != job->m_sub_jobs_list.end()) {
+      first_sub_job = *sj;
+    } else {
+      first_sub_job = " ";
+    }
 
     sa << std::left << std::setfill(' ') << "| " << std::setw(gr.m_len_lp)
-       << job->m_step_no << " | " << std::setw(gr.m_len_job_cd) << job->m_job_cd
-       << " | " << std::setw(gr.m_len_esc) << job->m_esc << " | "
-       << std::setw(gr.m_len_sub) << " "
-       << " | " << std::setw(gr.m_len_next_job) << job->m_next_job_success
-       << " | " << std::setw(gr.m_len_templ) << job->m_templ << " |\n";
+       << job->m_step_no << " | " 
+      << std::setw(gr.m_len_job_cd) << job->m_job_cd
+      << " | " << std::setw(gr.m_len_sub) << first_sub_job 
+      << " | " << std::setw(gr.m_len_next_job) << job->m_next_job_success
+      << " |\n";
+
 
     // if there are sub-jobs present
     if (!job->m_sub_jobs_list.empty()) {
-      for (const auto &sj : job->m_sub_jobs_list) {
+      ++sj; // getting to the next sub-job. The previous one was handled above
+      for (; sj != job->m_sub_jobs_list.end(); ++sj) {
         sa << "| " << std::setw(gr.m_len_lp) << " "
            << " | " << std::setw(gr.m_len_job_cd) << " "
-           << " | " << std::setw(gr.m_len_esc) << " "
-           << " | " << std::setw(gr.m_len_sub) << sj << " | "
+           << " | " << std::setw(gr.m_len_sub) << *sj << " | "
            << std::setw(gr.m_len_next_job) << " "
-           << " | " << std::setw(gr.m_len_templ) << " "
            << " |\n";
       }
     }
   }
+  sa << "\n\n";
 }
 
 /// the function creates description for for all jobs that are a part of the
@@ -249,7 +257,7 @@ void by::JobProc::printGroupTable(by::JobGroup &gr, std::ostringstream &sa) {
 void by::JobProc::printStepsDescriptions(const JobGroup &gr, std::ostringstream &sa, const bool withDiagram) {
   sa << std::left << "## Steps Description\n\n";
   for (const auto &jb : gr.m_jobs) {
-    sa << "## " << jb->m_job_cd << "\n\n";
+    sa << "## " << jb->m_step_no <<". " << jb->m_job_cd << "\n\n";
     sa << "### Description\n\n";
     sa << jb->m_job_descr << "\n\n";
 
@@ -281,7 +289,7 @@ void by::JobProc::printStepsDescriptions(const JobGroup &gr, std::ostringstream 
     if (!jb->m_tmpl_file.empty()) {
       if(jb->m_tmpl_file.length() < VAL_LENGTH) {
         sa << "| " << std::setw(ITEM_LENGTH) << "Template File"
-           << " | " << std::setw(VAL_LENGTH) << jb->m_tmpl_file 
+           << " | " << std::setw(VAL_LENGTH) << std::quoted(jb->m_tmpl_file)
            << " |\n";
       } else {
         sa << "| " << std::setw(ITEM_LENGTH) << "Template File"

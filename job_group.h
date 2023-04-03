@@ -10,7 +10,7 @@ namespace BY {
 * @file job.h
 * @brief class keeps stores the list of all job executed as one set.
 */
-const std::string HEAD_COLS[]{"LP", "ESC", "JOB_CD", "SUB_JOBS", "NEXT_JOB", "TEMPL"};
+const std::string HEAD_COLS[]{"LP",  "JOB_CD", "ESC" ,"SUB_JOBS", "NEXT_JOB", "TEMPL"};
 class JobGroup {
 public:
 
