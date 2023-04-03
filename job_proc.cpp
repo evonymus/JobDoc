@@ -116,7 +116,7 @@ void by::JobProc::exportDocs(const std::string &path,
     if(withDiagram) {
       printMermaidSequence(*gr, so);
     }
-    printStepsDescriptions(*gr, so);
+    printStepsDescriptions(*gr, so, withDiagram);
     saveFile(doc_dir + "/" + gr->m_group_name + ".md", so.str());
   }
 }
@@ -140,7 +140,7 @@ void by::JobProc::exportSingleDoc(const std::string &path,
     if(withDiagram) {
       printMermaidSequence(*gr, so);
     }
-    printStepsDescriptions(*gr, so);
+    printStepsDescriptions(*gr, so, withDiagram);
   }
 
   saveFile(doc_dir + "/" + fileName , so.str());
@@ -246,7 +246,7 @@ void by::JobProc::printGroupTable(by::JobGroup &gr, std::ostringstream &sa) {
 /// group
 ///  @param gr the name of the group of jobs
 ///  @param sa output string to where the descripiton is to be directed
-void by::JobProc::printStepsDescriptions(const JobGroup &gr, std::ostringstream &sa) {
+void by::JobProc::printStepsDescriptions(const JobGroup &gr, std::ostringstream &sa, const bool withDiagram) {
   sa << std::left << "## Steps Description\n\n";
   for (const auto &jb : gr.m_jobs) {
     sa << "## " << jb->m_job_cd << "\n\n";
@@ -302,7 +302,13 @@ void by::JobProc::printStepsDescriptions(const JobGroup &gr, std::ostringstream 
     }
 
     sa << "\n\n";
-  }
+
+    // if there are sub-jobs and the printout is withDigagram
+    // print diagrams for sub-jobs
+    if(! jb->m_sub_jobs_list.empty() && withDiagram) {
+      printSubjobsDiagram(*jb, sa);
+    }
+  } // end for group
 }
 
 /// The job prints a mermaid flowchart with the sequence of the job in the group
@@ -322,4 +328,18 @@ void by::JobProc::printMermaidSequence(const JobGroup& gr, std::ostringstream& s
   }
 }
 
-
+/// the function creates diagram showing the list of sub-job called
+/// by the job
+void by::JobProc::printSubjobsDiagram(const Job& jb, std::ostream& so) {
+  if( ! jb.m_sub_jobs_list.empty()) {
+    so << "### Diagram\n\n";
+    so << "```mermaid\ngraph TD\n";
+    auto sj = jb.m_sub_jobs_list.begin();
+    so << "A(" << jb.m_job_cd << ") -->" << *sj << '\n';
+    ++sj;
+    for(; sj != jb.m_sub_jobs_list.end(); ++sj) {
+      so << "A -->" << *sj << "\n";
+    }
+    so << "```\n\n";
+  }
+}

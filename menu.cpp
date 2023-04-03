@@ -77,7 +77,7 @@ void by::Menu::initCodeOptions() {
 
 void by::Menu::initDocOptions() {
   m_doc_options.add_options()
-    ("single,s",  "documentation in a single file")
+    ("single,D",  "documentation in a single file")
     ("doc,d", "document per job")
     ("output,o",po::value<std::string>(&m_single_file_name), "(optional) single documment file name")
     ("image,i", "(optional) include sequence diagrams")

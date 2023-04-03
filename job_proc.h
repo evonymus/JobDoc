@@ -61,8 +61,9 @@ private:
   bool str_compare(const std::string& a, const std::string& b);
   void printGroupDescription(const JobGroup& gr, std::ostringstream& so);
   void printGroupTable(JobGroup& gr, std::ostringstream& sa );
-  void printStepsDescriptions(const JobGroup& gr, std::ostringstream& sa);
+  void printStepsDescriptions(const JobGroup& gr, std::ostringstream& sa, const bool withDiagram = false);
   void printMermaidSequence(const JobGroup& gr, std::ostringstream& so);
+  void printSubjobsDiagram(const Job& jb, std::ostream& so);
 };
 
 } // namespace BY
