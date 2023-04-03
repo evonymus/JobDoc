@@ -47,7 +47,10 @@ public:
   /**
   * @brief the function saves documentation of jobs as a markdown files
   */
-  void exportDocs(const std::string &path="./");
+  void exportDocs(const std::string &path, const bool withDiagram=false);
+
+void exportSingleDoc(const std::string &path, const std::string &fileName,
+                     const bool withDiagram = false);
 
 private:
   asarum::BY::Tokenizer m_tokenizer;
@@ -56,8 +59,10 @@ private:
   void addJobs(const std::vector<std::string> &vec);
   void saveFile(const std::string& fileName, const std::string& content);
   bool str_compare(const std::string& a, const std::string& b);
-  void printGroupTable(JobGroup& gr, std::ostream& sa );
-  void printStepsDescriptions(const JobGroup& gr, std::ostream& sa);
+  void printGroupDescription(const JobGroup& gr, std::ostringstream& so);
+  void printGroupTable(JobGroup& gr, std::ostringstream& sa );
+  void printStepsDescriptions(const JobGroup& gr, std::ostringstream& sa);
+  void printMermaidSequence(const JobGroup& gr, std::ostringstream& so);
 };
 
 } // namespace BY

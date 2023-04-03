@@ -41,6 +41,8 @@ private:
   //-------- variables used by function called
   std::string m_path;
   std::string m_file_name;
+  std::string m_single_file_name;
+  bool m_with_images;
 
   void initMenu( int argc,  char *argv[]);
   void initGenericOptions();

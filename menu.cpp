@@ -32,8 +32,11 @@ void by::Menu::initMenu( int argc,  char *argv[]) {
                 .positional(m_pos_options)
                 .run(),
             m_var_map);
-  // setting default path
+
+  // setting default values for variables
   m_path = "./";
+  m_single_file_name = "JobServerDocument.md";
+  m_with_images = false;
 }
 
 void by::Menu::handleMenu() {
@@ -50,9 +53,10 @@ void by::Menu::handleMenu() {
   if(m_var_map.count("file") > 0 && m_var_map.count("code") > 0) {
     handleCodeGeneration();
   }
-  if(m_var_map.count("file") > 0 && m_var_map.count("doc") > 0) {
+  if (m_var_map.count("file") > 0 &&
+      m_var_map.count("doc") + m_var_map.count("single") > 0) {
     handleDocsGeneration();
-  }
+}
 }
 
 //------ PRIVATE FUNCTIONS ----------------------------
@@ -72,8 +76,12 @@ void by::Menu::initCodeOptions() {
 }
 
 void by::Menu::initDocOptions() {
-  m_doc_options.add_options()("single,D", "documentation in a single file")(
-      "doc,d", "document per job");
+  m_doc_options.add_options()
+    ("single,s",  "documentation in a single file")
+    ("doc,d", "document per job")
+    ("output,o",po::value<std::string>(&m_single_file_name), "(optional) single documment file name")
+    ("image,i", "(optional) include sequence diagrams")
+    ;
 }
 
 // ------------- handlers ----------
@@ -88,10 +96,24 @@ void by::Menu::handleCodeGeneration() {
 
 void by::Menu::handleDocsGeneration() {
 
-  if(m_var_map.count("file") > 0 && m_var_map.count("doc") > 0) {
+  if(m_var_map.count("file") > 0 ) {
     by::JobProc jobProc;
     jobProc.processFile(m_file_name.c_str());
-    jobProc.exportDocs(m_path);
+
+    if(m_var_map.count("image") > 0) {
+      m_with_images = true;
+    } else {
+      m_with_images = false;
+    }
+    // if single file option chosen
+    if(m_var_map.count("doc")) {
+      jobProc.exportDocs(m_path, m_with_images);
+    }
+
+    // export to a single file
+    if(m_var_map.count("single")) {
+      jobProc.exportSingleDoc(m_path, m_single_file_name, m_with_images);
+    }
   }
 }
 

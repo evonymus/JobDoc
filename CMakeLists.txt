@@ -9,7 +9,7 @@ ENDIF()
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(EXEC "jobDoc")
+set(EXEC "jobdoc")
 project(tokenizer VERSION 1.0)
 find_package(Boost COMPONENTS program_options REQUIRED)
 add_executable(${EXEC} main.cpp find_str_tfunc.cpp 

@@ -102,7 +102,8 @@ void by::JobProc::exportJobs(const std::string &path) {
 }
 
 // export markdown documentation
-void by::JobProc::exportDocs(const std::string &path) {
+void by::JobProc::exportDocs(const std::string &path,
+                             const bool withDiagram) {
   const std::string doc_dir = path + DOC_DIR;
 
   // creating Doc directory
@@ -110,14 +111,39 @@ void by::JobProc::exportDocs(const std::string &path) {
   fs::create_directory(doc_dir);
   for (const auto &gr : m_job_groups) {
     std::ostringstream so;
-    so << "# " << gr->m_group_name << "\n\n"
-       << "## Description\n\n"
-       << gr->m_jobs.at(0)->m_job_descr << "\n\n"
-       << "## Components\n\n";
+    printGroupDescription(*gr,so);
     printGroupTable(*gr, so);
+    if(withDiagram) {
+      printMermaidSequence(*gr, so);
+    }
     printStepsDescriptions(*gr, so);
     saveFile(doc_dir + "/" + gr->m_group_name + ".md", so.str());
   }
+}
+
+/// @brief the function saves documentation on all job in the single document
+/// @param path directory where the document is to be saved
+/// @fileName the name of the file in which the document is to be saved
+void by::JobProc::exportSingleDoc(const std::string &path,
+                                  const std::string &fileName,
+                                  const bool withDiagram) {
+
+  const std::string doc_dir = path + DOC_DIR;
+  std::ostringstream so;
+
+  // creating Doc directory
+
+  fs::create_directory(doc_dir);
+  for (const auto &gr : m_job_groups) {
+    printGroupDescription(*gr, so);
+    printGroupTable(*gr, so);
+    if(withDiagram) {
+      printMermaidSequence(*gr, so);
+    }
+    printStepsDescriptions(*gr, so);
+  }
+
+  saveFile(doc_dir + "/" + fileName , so.str());
 }
 
 // ====================== PRIVATE FUNCTIONS ===========
@@ -157,11 +183,21 @@ bool by::JobProc::str_compare(const std::string &a, const std::string &b) {
   return a.size() < b.size();
 }
 
+/// the function prints out the first sections of the document with job 
+/// documentation.
+/// @param gr job group for which the section is to be created
+/// @os  output stream
+void by::JobProc::printGroupDescription(const JobGroup& gr, std::ostringstream& so) {
+    so << "# " << gr.m_group_name << "\n\n"
+       << "## Description\n\n"
+       << gr.m_jobs.at(0)->m_job_descr << "\n\n"
+       << "## Components\n\n";
+}
 /// the function print outs the table with information about the group to
 ///  the stream given as the parameter
 ///  @param gr job group for with the table is to be printed out
 ///  @param sa outpt stream to where the printout is to be made
-void by::JobProc::printGroupTable(by::JobGroup &gr, std::ostream &sa) {
+void by::JobProc::printGroupTable(by::JobGroup &gr, std::ostringstream &sa) {
 
   gr.getMaxFldLen();
   auto len_ = gr.m_len_lp + gr.m_len_job_cd + gr.m_len_esc + gr.m_len_sub +
@@ -210,7 +246,7 @@ void by::JobProc::printGroupTable(by::JobGroup &gr, std::ostream &sa) {
 /// group
 ///  @param gr the name of the group of jobs
 ///  @param sa output string to where the descripiton is to be directed
-void by::JobProc::printStepsDescriptions(const JobGroup &gr, std::ostream &sa) {
+void by::JobProc::printStepsDescriptions(const JobGroup &gr, std::ostringstream &sa) {
   sa << std::left << "## Steps Description\n\n";
   for (const auto &jb : gr.m_jobs) {
     sa << "## " << jb->m_job_cd << "\n\n";
@@ -268,3 +304,22 @@ void by::JobProc::printStepsDescriptions(const JobGroup &gr, std::ostream &sa) {
     sa << "\n\n";
   }
 }
+
+/// The job prints a mermaid flowchart with the sequence of the job in the group
+void by::JobProc::printMermaidSequence(const JobGroup& gr, std::ostringstream& so) {
+
+  // if more than one job in the group
+  if(gr.m_jobs.size() > 1) {
+
+    so << "### Diagram\n\n";
+    so << "```mermaid\ngraph TD\n";
+    for(const auto &jb : gr.m_jobs) {
+      if(! jb->m_next_job_success.empty()) {
+        so << jb->m_job_cd << " -->" << jb->m_next_job_success << "\n";
+      }
+    }
+    so << "```\n\n";
+  }
+}
+
+
