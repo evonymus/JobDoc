@@ -5,6 +5,7 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <iterator>
 #include <memory>
 #include <sstream>
 #include <stdexcept>
@@ -26,14 +27,10 @@ constexpr unsigned VAL_LENGTH =
     40; // length of the value column in jobs definition
 
 void by::JobProc::readFile(const char *fileName, std::string &str) {
-  std::ifstream myFile;
-  myFile.open(fileName);
-  char buffer[BUFF_SIZE];
-
+  std::ifstream myFile(fileName, std::ios::in | std::ios::binary);
   if (myFile.is_open()) {
-    while (myFile.read(buffer, sizeof(buffer))) {
-      str.append(buffer, sizeof(buffer));
-    }
+    str = std::string((std::istreambuf_iterator<char>(myFile)), std::istreambuf_iterator<char>());
+    myFile.close();
   } else {
     std::string error_{"Couldn't open the file: "};
     error_ += fileName;
