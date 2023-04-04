@@ -1,31 +1,45 @@
 #include "menu.h"
 #include "job_proc.h"
+#include "version.h"
 
 #include <iostream>
 
 namespace by = asarum::BY;
 
+/// constructor
+/// @param argc number of arguments, taken from main
+/// @parm *argv[] list of arguments taken from main
 by::Menu::Menu( int argc,  char *argv[])
-    : m_generic_options("Generic Options"), m_code_options("Code Generation"),
+    : m_generic_options("Generic Options"), m_source_options("Source of Data"),
+      m_code_options("Code Generation"), m_output_options("Output Files Options"),
       m_doc_options("Docs Generation"), m_cmd_line_options(),
       m_visible_options("Allowed Options"), m_pos_options() {
 
   initMenu(argc, argv);
 }
 
+/// @brief function initializes menu
+/// @param argc number of arguments, taken from main
+/// @parm *argv[] list of arguments taken from main
 void by::Menu::initMenu( int argc,  char *argv[]) {
   initGenericOptions();
+  initSourceOptions();
   initCodeOptions();
   initDocOptions();
+  initOutputOptions();
 
   m_visible_options.add(m_generic_options)
+      .add(m_source_options)
       .add(m_code_options)
-      .add(m_doc_options);
+      .add(m_doc_options)
+      .add(m_output_options);
   m_pos_options.add("file", -1);
 
   m_cmd_line_options.add(m_generic_options)
+      .add(m_source_options)
       .add(m_code_options)
-      .add(m_doc_options);
+      .add(m_doc_options)
+      .add(m_output_options);
 
   po::store(po::command_line_parser(argc, argv)
                 .options(m_cmd_line_options)
@@ -39,6 +53,8 @@ void by::Menu::initMenu( int argc,  char *argv[]) {
   m_with_images = false;
 }
 
+/// function reacts to input, checks which menu option was selected and 
+/// calls a funtion tiggering appropriate action
 void by::Menu::handleMenu() {
   po::notify(m_var_map);
 
@@ -46,13 +62,18 @@ void by::Menu::handleMenu() {
     handleHelp();
   }
 
+  if(m_var_map.count("version") > 0)  {
+    handleVersion();
+  }
+
   if(m_var_map.count("help")) {
     handleHelp();
   }
 
   if(m_var_map.count("file") > 0 && m_var_map.count("code") > 0) {
-    handleCodeGeneration();
+    handleCodeGeneration(m_var_map.count("summary")> 0);
   }
+
   if (m_var_map.count("file") > 0 &&
       m_var_map.count("doc") + m_var_map.count("single") > 0) {
     handleDocsGeneration();
@@ -65,9 +86,13 @@ void by::Menu::initGenericOptions() {
   m_generic_options.add_options()
     ("version,v", "print version string")
     ( "help,h", "print help message")
-    ("path,p", po::value<std::string>(&m_path), "(optional) path to store results")
-    ("file,f", po::value<std::string>(&m_file_name), "the file to process")
     ;
+}
+
+void by::Menu::initSourceOptions() {
+  m_source_options.add_options()
+    ("file,f", po::value<std::string>(&m_file_name), "file to process")
+  ;
 }
 
 void by::Menu::initCodeOptions() {
@@ -79,18 +104,24 @@ void by::Menu::initDocOptions() {
   m_doc_options.add_options()
     ("single,D",  "documentation in a single file")
     ("doc,d", "document per job")
+    ;
+}
+
+void by::Menu::initOutputOptions() {
+  m_output_options.add_options()
+    ("path,p", po::value<std::string>(&m_path), "(optional) path to store files")
     ("output,o",po::value<std::string>(&m_single_file_name), "(optional) single documment file name")
     ("image,i", "(optional) include sequence diagrams")
-    ;
+  ;
 }
 
 // ------------- handlers ----------
 
-void by::Menu::handleCodeGeneration() {
+void by::Menu::handleCodeGeneration(bool withSummary) {
   if(m_var_map.count("file") > 0 && m_var_map.count("code") > 0) {
     by::JobProc jobProc;
     jobProc.processFile(m_file_name.c_str());
-    jobProc.exportJobs(m_path);
+    jobProc.exportJobs(m_path, withSummary);
   }
 }
 
@@ -118,6 +149,12 @@ void by::Menu::handleDocsGeneration() {
 }
 
 void by::Menu::handleHelp() {
-  std::cout << "usage jobdoc -f fileName -c | -j | -s \n\n"
+  std::cout << "usage jobdoc -f fileName Code|Docs Generation [Output option]  \n\n"
     << m_visible_options <<std::endl;
+}
+
+void by::Menu::handleVersion() {
+  std::cout << "TMS Job Documenter, version: " 
+    << MY_VERSION_MAJOR <<"." << MY_VERSION_MINOR 
+    << std::endl;
 }

@@ -42,14 +42,14 @@ public:
   /**
   * The function saves SQL, Templates for each Jobs Group 'Jobs' subfolder
   */
-  void exportJobs(const std::string &path="./");
+  void exportJobs(const std::string &path, const bool withSummary=false);
 
   /**
   * @brief the function saves documentation of jobs as a markdown files
   */
   void exportDocs(const std::string &path, const bool withDiagram=false);
 
-void exportSingleDoc(const std::string &path, const std::string &fileName,
+  void exportSingleDoc(const std::string &path, const std::string &fileName,
                      const bool withDiagram = false);
 
 private:
@@ -64,6 +64,7 @@ private:
   void printStepsDescriptions(const JobGroup& gr, std::ostringstream& sa, const bool withDiagram = false);
   void printMermaidSequence(const JobGroup& gr, std::ostringstream& so);
   void printSubjobsDiagram(const Job& jb, std::ostream& so);
+  void printJobSummary(const Job& job, const std::string& fileName);
 };
 
 } // namespace BY

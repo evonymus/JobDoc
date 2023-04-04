@@ -3,6 +3,9 @@
 
 namespace by = asarum::BY;
 
+///constructor
+/// @param vec reference to the vector that is to be used for initializing 
+// class fields.
 by::Job::Job(const std::vector<std::string> &vec) {
   m_step_no = atoi(vec[STEPS].c_str());
   m_job_cd = vec[JOB_CD];

@@ -28,8 +28,10 @@ public:
 private:
   std::string m_notify_list;
   po::options_description m_generic_options;
+  po::options_description m_source_options;
   po::options_description m_code_options;
   po::options_description m_doc_options;
+  po::options_description m_output_options;
 
   po::options_description m_visible_options;
   po::options_description m_cmd_line_options;
@@ -46,13 +48,16 @@ private:
 
   void initMenu( int argc,  char *argv[]);
   void initGenericOptions();
+  void initSourceOptions();
   void initCodeOptions();
   void initDocOptions();
+  void initOutputOptions();
 
   // ---------- menu handlers (triggers) ---------
-  void handleCodeGeneration();
+  void handleCodeGeneration(bool withSummary);
   void handleDocsGeneration();
   void handleHelp();
+  void handleVersion();
   /*
             po::options_description m_config_options;
             po::options_description m_analyses_options;

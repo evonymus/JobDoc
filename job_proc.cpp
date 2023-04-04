@@ -26,6 +26,9 @@ constexpr unsigned ITEM_LENGTH =
 constexpr unsigned VAL_LENGTH =
     40; // length of the value column in jobs definition
 
+/// @brief the method reads the content of the file and copies its content
+/// to the str string
+/// @param str reference to the string to where the file content is to be stored.
 void by::JobProc::readFile(const char *fileName, std::string &str) {
   std::ifstream myFile(fileName, std::ios::in | std::ios::binary);
   if (myFile.is_open()) {
@@ -38,10 +41,11 @@ void by::JobProc::readFile(const char *fileName, std::string &str) {
   }
 }
 
-/**
- * The function reads the file, tokenizes it, and creates JobGroups
- * and adds to them appropriate jobs
- */
+/// @brief The function reads the file, tokenizes it, and creates JobGroups
+/// and adds to them appropriate jobs
+///
+/// @param name of the file to process
+
 void by::JobProc::processFile(const char *fileName) {
   std::string str;
   std::vector<std::string> jobs_;
@@ -75,7 +79,7 @@ void by::JobProc::processFile(const char *fileName) {
 
 /// export ESC SQL queries and XML templates to the Jobs folder
 /// @param path the path where the Jobs subfoler is to be created
-void by::JobProc::exportJobs(const std::string &path) {
+void by::JobProc::exportJobs(const std::string &path, const bool withSummary) {
   const std::string job_dir = path + JOB_DIR;
 
   // creating directory
@@ -94,11 +98,17 @@ void by::JobProc::exportJobs(const std::string &path) {
 
       saveFile(file_patrn + ".xml", jb->m_xml);
       saveFile(file_patrn + ".sql", jb->m_sql);
+      if(withSummary) {
+        printJobSummary(*jb, file_patrn + ".md");
+      }
     }
   }
+  std::cout << "Created " << m_job_groups.size() << " directories with jobs " << std::endl;
 }
 
-// export markdown documentation
+/// export markdown documentation into separate file for each JobGroup
+/// @param path path where the Docs subfolder is to be created
+/// @param withDiagram if set to true, documents will also include mermaid diagrams
 void by::JobProc::exportDocs(const std::string &path,
                              const bool withDiagram) {
   const std::string doc_dir = path + DOC_DIR;
@@ -116,6 +126,7 @@ void by::JobProc::exportDocs(const std::string &path,
     printStepsDescriptions(*gr, so, withDiagram);
     saveFile(doc_dir + "/" + gr->m_group_name + ".md", so.str());
   }
+  std::cout << "Created " << m_job_groups.size() << " documents " << std::endl;
 }
 
 /// @brief the function saves documentation on all job in the single document
@@ -129,7 +140,6 @@ void by::JobProc::exportSingleDoc(const std::string &path,
   std::ostringstream so;
 
   // creating Doc directory
-
   fs::create_directory(doc_dir);
   for (const auto &gr : m_job_groups) {
     printGroupDescription(*gr, so);
@@ -141,10 +151,15 @@ void by::JobProc::exportSingleDoc(const std::string &path,
   }
 
   saveFile(doc_dir + "/" + fileName , so.str());
+
+  std::cout << "The document: " << fileName << " created" << std::endl;
 }
 
 // ====================== PRIVATE FUNCTIONS ===========
 
+/// The method reads the first line (header) with definition of the columns
+/// and stores the column names m_field_list variable
+/// @param str reference to the string with the content of the process file
 void by::JobProc::getFieldsDef(const std::string &str) {
   m_tokenizer.tokenize(str, FLD_TOKEN, m_fields_list);
 }
@@ -160,6 +175,9 @@ void by::JobProc::getJobDef(const std::string &str,
   m_tokenizer.tokenize(str, FLD_TOKEN, vec);
 }
 
+/// function tokenizes (splits into fields) the string given as the parameter
+/// and stores the fields in the vec vector.
+/// @param vec reference to vector<string> where are the tokenized fileds put.
 void by::JobProc::addJobs(const std::vector<std::string> &vec) {
   std::shared_ptr<std::vector<std::string>> job_{
       new std::vector<std::string>()};
@@ -168,6 +186,9 @@ void by::JobProc::addJobs(const std::vector<std::string> &vec) {
   m_tokenizer.tokenize(vec.at(1), FLD_TOKEN, *job_);
 }
 
+/// saves the string into the filename
+/// @param filename the name of the file where the file is to be saved
+/// @content the string to be saved.
 void by::JobProc::saveFile(const std::string &fileName,
                            const std::string &content) {
   std::ofstream fout(fileName);
@@ -270,6 +291,12 @@ void by::JobProc::printStepsDescriptions(const JobGroup &gr, std::ostringstream 
        << " | " << std::setw(VAL_LENGTH) << jb->m_job_cd << " |\n";
     sa << std::setfill(' ') << "| " << std::setw(ITEM_LENGTH) << "Job Type"
        << " | " << std::setw(VAL_LENGTH) << jb->m_job_type << " |\n";
+
+    // if API query exists, add appropriate record
+    if (!jb->m_esc.empty()) {
+      sa << "| " << std::setw(ITEM_LENGTH) << "API name"
+         << " | " << std::setw(VAL_LENGTH) << jb->m_api << " |\n";
+    }
     // if ESC query exists, add appropriate record
     if (!jb->m_esc.empty()) {
       sa << "| " << std::setw(ITEM_LENGTH) << "ESC Query"
@@ -316,7 +343,10 @@ void by::JobProc::printStepsDescriptions(const JobGroup &gr, std::ostringstream 
   } // end for group
 }
 
-/// The job prints a mermaid flowchart with the sequence of the job in the group
+/// The job prints a mermaid diagrams with the sequence of the job in the group
+/// @param gr JobGroup for which diagrams are created
+/// @param so ostringstream used by mother function for processing and formatting data
+///        here used for the same purpose.
 void by::JobProc::printMermaidSequence(const JobGroup& gr, std::ostringstream& so) {
 
   // if more than one job in the group
@@ -335,6 +365,9 @@ void by::JobProc::printMermaidSequence(const JobGroup& gr, std::ostringstream& s
 
 /// the function creates diagram showing the list of sub-job called
 /// by the job
+/// @param gr JobGroup for which diagrams are created
+/// @param so ostringstream used by mother function for processing and formatting data
+///        here used for the same purpose.
 void by::JobProc::printSubjobsDiagram(const Job& jb, std::ostream& so) {
   if( ! jb.m_sub_jobs_list.empty()) {
     so << "### Diagram\n\n";
@@ -347,4 +380,18 @@ void by::JobProc::printSubjobsDiagram(const Job& jb, std::ostream& so) {
     }
     so << "```\n\n";
   }
+}
+
+/// the function prints out summary of a job with including 
+/// job name, next job on success, ESC Query, and subsitution string.
+void by::JobProc::printJobSummary(const Job& job, const std::string& fileName) {
+  std::ostringstream so;
+  so << "## Job Name:\n" << job.m_job_cd 
+     << "\n\n## Next Job: \n" << job.m_next_job_success 
+     << "\n\n## ESC Quey: \n" << job.m_esc 
+     << "\n\n## Substitutions: \n" << job.m_subst
+     << "\n\n";
+
+  saveFile(fileName, so.str());
+
 }

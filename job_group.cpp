@@ -6,7 +6,9 @@ namespace by = asarum::BY;
 constexpr unsigned MAX_LEN_FIELDS = 4;
 constexpr unsigned MIN_CELL_LENGTH = 5;
 
-// constructir
+/// constructor
+/// @param group_name setting the name for the group. 
+/// here the name of the job having a schedule set.
 by::JobGroup::JobGroup(const std::string &group_name)
     : m_group_name(group_name) {
 
@@ -19,13 +21,14 @@ by::JobGroup::JobGroup(const std::string &group_name)
 }
 
 /// add job to m_jobs vector
+/// @param job reference to shared_ptr<Job> that is to be added to the group
 void by::JobGroup::addJob(const std::shared_ptr<Job> &job) {
   m_jobs.push_back(job);
 }
 
 /// get max lenght of all fields in Job objects and
 /// store the values in m_fld_len vector of std::pair
-// the pair consis of field enum and unsinged for the length
+/// the pair consis of field enum and unsinged for the length
 void by::JobGroup::getMaxFldLen() {
   for (const auto &jb : m_jobs) {
     if (!jb->m_job_cd.empty()) {
