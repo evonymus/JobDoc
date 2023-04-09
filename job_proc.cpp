@@ -95,22 +95,21 @@ void by::JobProc::exportJobs(const std::string &path, const bool withSummary) {
     for (const auto &jb : gr->m_jobs) {
       // used ostream to format the file name
       std::ostringstream so;
-      so << std::setfill('0') << std::setw(3) << jb->m_step_no << "_"
-         << jb->m_job_cd;
-      const std::string file_patrn = grp_dir + "/" + so.str();
+      so << std::setfill('0') << std::setw(3) << jb->m_step_no << "_";
+      const std::string file_num = grp_dir + "/" + so.str();
 
       // if template exists, i.e. is not empty
       if(! jb->m_xml.empty()) {
-        saveFile(file_patrn + ".xml", jb->m_xml);
+        saveFile(file_num + jb->m_templ + ".xml", jb->m_xml);
       }
 
       // if there is any sql code, i.e. the string is not empty
       if(! jb->m_sql.empty()) {
-        saveFile(file_patrn + ".sql", jb->m_sql);
+        saveFile(file_num + jb->m_esc +  ".sql", jb->m_sql);
       }
       // if there is to be generated the file with summary
       if(withSummary) {
-        printJobSummary(*jb, file_patrn + ".md");
+        printJobSummary(*jb, file_num + jb->m_job_cd +  ".md");
       }
     }
     // counting the total number of jobs
