@@ -10,6 +10,8 @@
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <algorithm>
+#include <cctype>
 
 namespace by = asarum::BY;
 namespace fs = std::filesystem;
@@ -81,6 +83,7 @@ void by::JobProc::processFile(const char *fileName) {
 /// @param path the path where the Jobs subfoler is to be created
 void by::JobProc::exportJobs(const std::string &path, const bool withSummary) {
   const std::string job_dir = path + JOB_DIR;
+  unsigned total_jobs_ = 0;
 
   // creating directory
   fs::create_directory(job_dir);
@@ -96,14 +99,25 @@ void by::JobProc::exportJobs(const std::string &path, const bool withSummary) {
          << jb->m_job_cd;
       const std::string file_patrn = grp_dir + "/" + so.str();
 
-      saveFile(file_patrn + ".xml", jb->m_xml);
-      saveFile(file_patrn + ".sql", jb->m_sql);
+      // if template exists, i.e. is not empty
+      if(! jb->m_xml.empty()) {
+        saveFile(file_patrn + ".xml", jb->m_xml);
+      }
+
+      // if there is any sql code, i.e. the string is not empty
+      if(! jb->m_sql.empty()) {
+        saveFile(file_patrn + ".sql", jb->m_sql);
+      }
+      // if there is to be generated the file with summary
       if(withSummary) {
         printJobSummary(*jb, file_patrn + ".md");
       }
     }
+    // counting the total number of jobs
+    total_jobs_ += gr->m_jobs.size();
   }
-  std::cout << "Created " << m_job_groups.size() << " directories with jobs " << std::endl;
+  std::cout << "Created " << m_job_groups.size() << " directories, with "
+            << total_jobs_ << " jobs " << std::endl;
 }
 
 /// export markdown documentation into separate file for each JobGroup
@@ -348,14 +362,18 @@ void by::JobProc::printStepsDescriptions(const JobGroup &gr, std::ostringstream 
 /// @param so ostringstream used by mother function for processing and formatting data
 ///        here used for the same purpose.
 void by::JobProc::printMermaidSequence(const JobGroup& gr, std::ostringstream& so) {
-
+   using namespace std;
   // if more than one job in the group
   if(gr.m_jobs.size() > 1) {
 
     so << "### Diagram\n\n";
     so << "```mermaid\ngraph TD\n";
-    for(const auto &jb : gr.m_jobs) {
+    for(auto &jb : gr.m_jobs) {
       if(! jb->m_next_job_success.empty()) {
+        // removing spaces from jobs names, spaces cause errors
+        jb->m_next_job_success.erase(remove_if(jb->m_next_job_success.begin()
+            , jb->m_next_job_success.end()
+            , [](unsigned char c){return isspace(c);}), jb->m_next_job_success.end()) ;
         so << jb->m_job_cd << " -->" << jb->m_next_job_success << "\n";
       }
     }
@@ -369,6 +387,7 @@ void by::JobProc::printMermaidSequence(const JobGroup& gr, std::ostringstream& s
 /// @param so ostringstream used by mother function for processing and formatting data
 ///        here used for the same purpose.
 void by::JobProc::printSubjobsDiagram(const Job& jb, std::ostream& so) {
+
   if( ! jb.m_sub_jobs_list.empty()) {
     so << "### Diagram\n\n";
     so << "```mermaid\ngraph TD\n";
@@ -376,6 +395,7 @@ void by::JobProc::printSubjobsDiagram(const Job& jb, std::ostream& so) {
     so << "A(" << jb.m_job_cd << ") -->" << *sj << '\n';
     ++sj;
     for(; sj != jb.m_sub_jobs_list.end(); ++sj) {
+      // removing spaces: a space causes an error
       so << "A -->" << *sj << "\n";
     }
     so << "```\n\n";
