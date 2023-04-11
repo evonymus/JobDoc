@@ -99,7 +99,7 @@ void by::JobProc::exportJobs(const std::string &path, const bool withSummary) {
       const std::string file_num = grp_dir + "/" + so.str();
 
       // if template exists, i.e. is not empty
-      if(! jb->m_xml.empty()) {
+      if(! jb->m_templ.empty()) {
         saveFile(file_num + jb->m_templ + ".xml", jb->m_xml);
       }
 
