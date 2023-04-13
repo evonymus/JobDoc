@@ -98,13 +98,13 @@ void by::JobProc::exportJobs(const std::string &path, const bool withSummary) {
       so << std::setfill('0') << std::setw(3) << jb->m_step_no << "_";
       const std::string file_num = grp_dir + "/" + so.str();
 
-      // if template exists, i.e. is not empty
-      if(! jb->m_templ.empty()) {
+      // if template exists, i.e. has other characters than space(s)
+      if(jb->m_templ.find_first_not_of(' ') != std::string::npos) {
         saveFile(file_num + jb->m_templ + ".xml", jb->m_xml);
       }
 
       // if there is any sql code, i.e. the string is not empty
-      if(! jb->m_sql.empty()) {
+      if(jb->m_esc.find_first_not_of(' ') != std::string::npos) {
         saveFile(file_num + jb->m_esc +  ".sql", jb->m_sql);
       }
       // if there is to be generated the file with summary
