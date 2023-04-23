@@ -4,6 +4,8 @@
 #include <vector>
 #include "tokenizer.h"
 #include "job_group.h"
+#include "db_caller.h"
+
 
 namespace asarum {
 namespace BY {
@@ -24,20 +26,16 @@ public:
   ///vector stroring groups of jobs executed in a sequence
   std::vector<std::shared_ptr<asarum::BY::JobGroup>> m_job_groups;
 
-  /**
-  * The function reads file and puts its content into str string
 
-  * @param fileName - the name of the file to read
-  * @param str string to which the file is to be read
+  void getData(const char* filename);
+  void getData(asarum::db::OrclConDef& orclConDef);
+
+  /**
+  * Function connects to DB and creates JobGroups
   */
-  void readFile(const char *fileName, std::string &str);
-
-  /**
-   * The function processes the file specified as the parameter:
-   * sets m_fields_list and m_jobs fields.
-   * @param fieldName the name of the file with definition of the jobs.
-   */
-  void processFile(const char *fileName);
+void getJobGroupsFromDB(const std::string &service, 
+                        const std::string &user,
+                        const std::string &password);
 
   /**
   * The function saves SQL, Templates for each Jobs Group 'Jobs' subfolder
@@ -54,6 +52,19 @@ public:
 
 private:
   asarum::BY::Tokenizer m_tokenizer;
+  /**
+  * The function reads file and puts its content into str string
+
+  * @param fileName - the name of the file to read
+  * @param str string to which the file is to be read
+  */
+  void readFile(const char *fileName, std::string &str);
+  /**
+   * The function processes the file specified as the parameter:
+   * sets m_fields_list and m_jobs fields.
+   * @param fieldName the name of the file with definition of the jobs.
+   */
+  void processFile(const char *fileName);
   void getFieldsDef(const std::string &str);
   void getJobDef(const std::string &str, std::vector<std::string> &vec);
   void addJobs(const std::vector<std::string> &vec);

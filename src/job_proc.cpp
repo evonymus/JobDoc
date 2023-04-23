@@ -79,6 +79,19 @@ void by::JobProc::processFile(const char *fileName) {
   }
 }
 
+/// @brief function gets data for JobsGroups
+/// @param the name of the file with data 
+void by::JobProc::getData(const char* fileName) {
+  processFile(fileName);
+}
+
+/// @brief function gets data for JobsGroups (all data)
+/// @param oracle connetion
+void by::JobProc::getData(asarum::db::OrclConDef& orclConDef) {
+  by::DbCaller dbCaller_{orclConDef};
+  dbCaller_.getJobGroups(m_job_groups);
+}
+
 /// export ESC SQL queries and XML templates to the Jobs folder
 /// @param path the path where the Jobs subfoler is to be created
 void by::JobProc::exportJobs(const std::string &path, const bool withSummary) {
