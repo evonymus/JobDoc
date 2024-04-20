@@ -1,8 +1,8 @@
 #include "menu.h"
 #include "job_proc.h"
 #include "version.h"
-#include <stdexcept>
 #include <iostream>
+#include <stdexcept>
 
 namespace by = asarum::BY;
 
@@ -25,7 +25,6 @@ by::Menu::Menu(int argc, char *argv[])
 void by::Menu::initMenu(int argc, char *argv[]) {
   initGenericOptions();
   initSourceOptions();
-  initOrclDbOptions();
   initCodeOptions();
   initDocOptions();
   initOutputOptions();
@@ -55,7 +54,6 @@ void by::Menu::initMenu(int argc, char *argv[]) {
   m_path = "./";
   m_single_file_name = "JobServerDocument.md";
   m_with_images = false;
-  mp_orclConDef = nullptr;
 }
 
 /// function reacts to input, checks which menu option was selected and
@@ -80,7 +78,7 @@ void by::Menu::handleMenu() {
   }
 
   // if any of doc options specified
-  if ( m_var_map.count("doc") + m_var_map.count("single") > 0) {
+  if (m_var_map.count("doc") + m_var_map.count("single") > 0) {
     handleDocsGeneration();
   }
 }
@@ -96,15 +94,6 @@ void by::Menu::initSourceOptions() {
   m_source_options.add_options()("file,f", po::value<std::string>(&m_file_name),
                                  "file to process")(
       "config,F", po::value<std::string>(&m_config_file_name));
-}
-
-void by::Menu::initOrclDbOptions() {
-  m_db_options.add_options()("service,S", po::value<std::string>(&m_db_service),
-                             "TNS Service Name")(
-      "user,u", po::value<std::string>(&m_db_user),
-      "user to connecto the database")("password,p",
-                                       po::value<std::string>(&m_db_password),
-                                       "password to connect do database");
 }
 
 /// initialization of Code  Menu Options
@@ -131,12 +120,10 @@ void by::Menu::initOutputOptions() {
 void by::Menu::handleCodeGeneration(bool withSummary) {
   if (m_var_map.count("code") > 0) {
     by::JobProc jobProc;
-    if(m_var_map.count("file") > 0) {
+    if (m_var_map.count("file") > 0) {
       jobProc.getData(m_file_name.c_str());
-    } else if (isConnDefined()) {
-      jobProc.getData(*mp_orclConDef); 
     } else {
-      throw std::invalid_argument("No data source defined") ;
+      throw std::invalid_argument("No data source defined");
     }
     jobProc.exportJobs(m_path, withSummary);
   }
@@ -147,12 +134,9 @@ void by::Menu::handleDocsGeneration() {
 
   if (m_var_map.count("file") > 0) {
     jobProc.getData(m_file_name.c_str());
-  } else if(isConnDefined()) {
-    jobProc.getData(*mp_orclConDef);
   } else {
-      throw std::invalid_argument("No data source defined") ;
+    throw std::invalid_argument("No data source defined");
   }
-
   if (m_var_map.count("image") > 0) {
     m_with_images = true;
   } else {
@@ -178,19 +162,4 @@ void by::Menu::handleHelp() {
 void by::Menu::handleVersion() {
   std::cout << "TMS Job Documenter, version: " << MY_VERSION_MAJOR << "."
             << MY_VERSION_MINOR << std::endl;
-}
-
-// --------------- Connection Methods -------------
-
-/// The method checks if parameters necessary for creating DB connections
-/// are available and updates m_orclConDef field
-bool by::Menu::isConnDefined() {
-  bool result_ = false;
-
-  if (m_var_map.count("service") > 0 && m_var_map.count("user") > 0 &&
-      m_var_map.count("password") > 0) {
-    mp_orclConDef = std::make_unique<asarum::db::OrclConDef>(m_db_service, m_db_user, m_db_password);
-    result_ = true;
-  }
-  return result_;
 }

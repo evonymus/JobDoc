@@ -1,11 +1,11 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.20)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(EXEC "jobdoc")
 set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
-############# Generating Doxygen Documentation ##################
+# ############ Generating Doxygen Documentation ##################
 
 set(CMAKE_INSTALL_BINDIR /usr/local/bin)
 
@@ -14,24 +14,27 @@ project(tokenizer VERSION 1.0)
 set(Boost_USE_STATIC_LIBS ON)
 
 add_subdirectory(${SRC_DIR})
-add_subdirectory(${SRC_DIR}/dbConnect)
+# add_subdirectory(${SRC_DIR}/GUI)
 
-find_package(Boost COMPONENTS program_options REQUIRED)
-add_executable(${EXEC} ${SRC_DIR}/main.cpp 
-  ${SRC_DIR}/find_str_tfunc.cpp 
-  ${SRC_DIR}/job.cpp 
-  ${SRC_DIR}/job_proc.cpp 
+find_package(
+  Boost
+  COMPONENTS program_options
+  REQUIRED)
+add_executable(
+  ${EXEC}
+  ${SRC_DIR}/main.cpp
+  ${SRC_DIR}/find_str_tfunc.cpp
+  ${SRC_DIR}/job.cpp
+  ${SRC_DIR}/job_proc.cpp
   ${SRC_DIR}/tokenizer.cpp
   ${SRC_DIR}/job_group.cpp
-  ${SRC_DIR}/menu.cpp
-  ${SRC_DIR}/db_caller.cpp
-  ${SRC_DIR}/db_queries.cpp
-)
+  ${SRC_DIR}/menu.cpp)
+
+# add_executable(GuiDoc ${SRC_DIR}/GUI/gui_main.cpp)
+# target_link_libraries(GuiDoc ${wxWidgets_LIBRARIES})
 
 message("Boost Libs" ${Boost_INCLUDE_DIR})
 target_include_directories(${EXEC} PRIVATE ${Boost_INCLUDE_DIR})
-target_link_libraries(${EXEC} ${Boost_LIBRARIES} dbConnect )
+target_link_libraries(${EXEC} ${Boost_LIBRARIES})
 
-install(TARGETS ${EXEC}
-  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-)
+install(TARGETS ${EXEC} RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})

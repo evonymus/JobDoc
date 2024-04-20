@@ -3,8 +3,8 @@
 
 namespace by = asarum::BY;
 
-///constructor
-/// @param vec reference to the vector that is to be used for initializing 
+/// constructor
+///  @param vec reference to the vector that is to be used for initializing
 // class fields.
 by::Job::Job(const std::vector<std::string> &vec) {
   m_step_no = atoi(vec[STEPS].c_str());
@@ -22,9 +22,8 @@ by::Job::Job(const std::vector<std::string> &vec) {
   m_job_type = vec[TYPE];
 
   // if m_sub_jobs is not empty, store sub-jobs in m_sug_jobs_list vecto
-  if(! m_sub_jobs.empty()) {
+  if (!m_sub_jobs.empty()) {
     by::Tokenizer tok;
     tok.tokenize(m_sub_jobs, ",", m_sub_jobs_list);
   }
-
 }

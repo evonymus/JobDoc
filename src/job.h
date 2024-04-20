@@ -1,15 +1,18 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <ostream>
 #include <istream>
 #include <memory>
+#include <ostream>
+#include <string>
+#include <vector>
 
 namespace asarum {
 namespace BY {
 
-const int FIELDS_NO = 14; // number of fields in the vector
+const int FIELDS_NO = 15; // number of fields in the vector
+///
+/// enumeratin storing fields names in the sequence returned by the query taking
+/// data from a DB
 enum field {
   MASTER,
   STEPS,
@@ -24,14 +27,14 @@ enum field {
   TMPL_FILE,
   DESCR,
   API,
-  TYPE
+  TYPE,
+  ROOT
 };
 
 class Job {
 public:
-
   Job(const std::vector<std::string> &vec);
-  
+
   unsigned m_step_no;
   std::string m_job_cd;
   std::string m_next_job_success;
@@ -47,11 +50,10 @@ public:
   std::string m_job_type;
 
   std::vector<std::string> m_sub_jobs_list;
-  
+
 private:
   void setJobFields(const std::vector<std::string> &vec);
 };
 
-
-} // namespace by
+} // namespace BY
 } // namespace asarum

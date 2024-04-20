@@ -2,9 +2,8 @@
 #include <boost/program_options.hpp>
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/positional_options.hpp>
-#include <string>
 #include <memory>
-#include "dbConnect/orcl-con-def.h"
+#include <string>
 
 namespace po = boost::program_options;
 namespace asarum {
@@ -20,12 +19,16 @@ public:
    * @param int argc - number of parameters from command prompt
    * @param argv[] array of argc parameters
    */
-  Menu( int argc,  char *arv[]);
+  Menu(int argc, char *arv[]);
   /**
    * @brief responses to the options specified in the command prompt and
    * executes appropriate menu handler
    */
   void handleMenu();
+
+  /*************************************************************
+   *                  private
+   *************************************************************/
 
 private:
   std::string m_notify_list;
@@ -48,7 +51,7 @@ private:
   std::string m_file_name;
   std::string m_config_file_name;
   std::string m_single_file_name;
-  //--------- db connection 
+  //--------- db connection
   std::string m_db_service;
   std::string m_db_user;
   std::string m_db_password;
@@ -56,11 +59,9 @@ private:
   bool m_with_images;
 
   // connection to oracle DB
-  std::unique_ptr<asarum::db::OrclConDef> mp_orclConDef;
 
-  void initMenu( int argc,  char *argv[]);
+  void initMenu(int argc, char *argv[]);
   void initGenericOptions();
-  void initOrclDbOptions();
   void initSourceOptions();
   void initCodeOptions();
   void initDocOptions();

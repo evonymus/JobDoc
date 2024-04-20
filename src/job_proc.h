@@ -1,11 +1,9 @@
 #pragma once
 
 #include "job.h"
-#include <vector>
-#include "tokenizer.h"
 #include "job_group.h"
-#include "db_caller.h"
-
+#include "tokenizer.h"
+#include <vector>
 
 namespace asarum {
 namespace BY {
@@ -23,32 +21,30 @@ public:
    */
   std::vector<std::string> m_fields_list;
 
-  ///vector stroring groups of jobs executed in a sequence
+  /// vector stroring groups of jobs executed in a sequence
   std::vector<std::shared_ptr<asarum::BY::JobGroup>> m_job_groups;
 
-
-  void getData(const char* filename);
-  void getData(asarum::db::OrclConDef& orclConDef);
+  void getData(const char *filename);
 
   /**
-  * Function connects to DB and creates JobGroups
-  */
-void getJobGroupsFromDB(const std::string &service, 
-                        const std::string &user,
-                        const std::string &password);
+   * Function connects to DB and creates JobGroups
+   */
+  /*
+  void getJobGroupsFromDB(const std::string &service, const std::string &user,
+                          const std::string &password);
+*/
+  /**
+   * The function saves SQL, Templates for each Jobs Group 'Jobs' subfolder
+   */
+  void exportJobs(const std::string &path, const bool withSummary = false);
 
   /**
-  * The function saves SQL, Templates for each Jobs Group 'Jobs' subfolder
-  */
-  void exportJobs(const std::string &path, const bool withSummary=false);
-
-  /**
-  * @brief the function saves documentation of jobs as a markdown files
-  */
-  void exportDocs(const std::string &path, const bool withDiagram=false);
+   * @brief the function saves documentation of jobs as a markdown files
+   */
+  void exportDocs(const std::string &path, const bool withDiagram = false);
 
   void exportSingleDoc(const std::string &path, const std::string &fileName,
-                     const bool withDiagram = false);
+                       const bool withDiagram = false);
 
 private:
   asarum::BY::Tokenizer m_tokenizer;
@@ -68,14 +64,15 @@ private:
   void getFieldsDef(const std::string &str);
   void getJobDef(const std::string &str, std::vector<std::string> &vec);
   void addJobs(const std::vector<std::string> &vec);
-  void saveFile(const std::string& fileName, const std::string& content);
-  bool str_compare(const std::string& a, const std::string& b);
-  void printGroupDescription(const JobGroup& gr, std::ostringstream& so);
-  void printGroupTable(JobGroup& gr, std::ostringstream& sa );
-  void printStepsDescriptions(const JobGroup& gr, std::ostringstream& sa, const bool withDiagram = false);
-  void printMermaidSequence(const JobGroup& gr, std::ostringstream& so);
-  void printSubjobsDiagram(const Job& jb, std::ostream& so);
-  void printJobSummary(const Job& job, const std::string& fileName);
+  void saveFile(const std::string &fileName, const std::string &content);
+  bool str_compare(const std::string &a, const std::string &b);
+  void printGroupDescription(const JobGroup &gr, std::ostringstream &so);
+  void printGroupTable(JobGroup &gr, std::ostringstream &sa);
+  void printStepsDescriptions(const JobGroup &gr, std::ostringstream &sa,
+                              const bool withDiagram = false);
+  void printMermaidSequence(const JobGroup &gr, std::ostringstream &so);
+  void printSubjobsDiagram(const Job &jb, std::ostream &so);
+  void printJobSummary(const Job &job, const std::string &fileName);
 };
 
 } // namespace BY
