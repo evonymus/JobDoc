@@ -1,4 +1,5 @@
 #include "job_proc.h"
+#include "sqlite_connector.h"
 #include <algorithm>
 #include <boost/filesystem/operations.hpp>
 #include <boost/tokenizer.hpp>
@@ -28,6 +29,7 @@ constexpr unsigned ITEM_LENGTH =
 constexpr unsigned VAL_LENGTH =
     40; // length of the value column in jobs definition
 
+//*************************************************************
 /// @brief the method reads the content of the file and copies its content
 /// to the str string
 /// @param str reference to the string to where the file content is to be
@@ -47,6 +49,7 @@ void by::JobProc::readFile(const char *fileName, std::string &str) {
   }
 }
 
+//*************************************************************
 /// @brief The function reads the file, tokenizes it, and creates JobGroups
 /// and adds to them appropriate jobs
 ///
@@ -96,10 +99,18 @@ void by::JobProc::processFile(const char *fileName) {
   }
 }
 
+//*************************************************************
 /// @brief function gets data for JobsGroups
 /// @param the name of the file with data
 void by::JobProc::getData(const char *fileName) { processFile(fileName); }
 
+void by::JobProc::getSQLiteData(const char *dbName) {
+  // creating connecto to the SQLite database
+  by::SQLiteConnector connector_{dbName};
+  connector_.getJobs(m_job_groups);
+}
+
+//*************************************************************
 /// export ESC SQL queries and XML templates to the Jobs folder
 /// @param path the path where the Jobs subfoler is to be created
 void by::JobProc::exportJobs(const std::string &path, const bool withSummary) {
@@ -143,6 +154,7 @@ void by::JobProc::exportJobs(const std::string &path, const bool withSummary) {
             << total_jobs_ << " jobs " << std::endl;
 }
 
+//*************************************************************
 /// export markdown documentation into separate file for each JobGroup
 /// @param path path where the Docs subfolder is to be created
 /// @param withDiagram if set to true, documents will also include mermaid
@@ -166,6 +178,7 @@ void by::JobProc::exportDocs(const std::string &path, const bool withDiagram) {
   std::cout << "Created " << m_job_groups.size() << " documents " << std::endl;
 }
 
+//*************************************************************
 /// @brief the function saves documentation on all job in the single document
 /// @param path directory where the document is to be saved
 /// @fileName the name of the file in which the document is to be saved

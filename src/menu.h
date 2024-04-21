@@ -50,6 +50,7 @@ private:
   std::string m_path;
   std::string m_file_name;
   std::string m_config_file_name;
+  std::string m_sqlite_name;
   std::string m_single_file_name;
   //--------- db connection
   std::string m_db_service;
@@ -57,8 +58,6 @@ private:
   std::string m_db_password;
 
   bool m_with_images;
-
-  // connection to oracle DB
 
   void initMenu(int argc, char *argv[]);
   void initGenericOptions();
@@ -75,6 +74,10 @@ private:
 
   // ---------- connection methods -------
   bool isConnDefined();
+  /**
+   * Returns true if the file given as the parameter exists
+   */
+  bool fileExists(const char *fileName);
 };
 
 } // namespace BY

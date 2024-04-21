@@ -1,6 +1,7 @@
 #include "menu.h"
 #include "job_proc.h"
 #include "version.h"
+#include <boost/filesystem.hpp>
 #include <iostream>
 #include <stdexcept>
 
@@ -31,7 +32,6 @@ void by::Menu::initMenu(int argc, char *argv[]) {
 
   m_visible_options.add(m_generic_options)
       .add(m_source_options)
-      .add(m_db_options)
       .add(m_code_options)
       .add(m_doc_options)
       .add(m_output_options);
@@ -60,25 +60,23 @@ void by::Menu::initMenu(int argc, char *argv[]) {
 /// calls a funtion tiggering appropriate action
 void by::Menu::handleMenu() {
   po::notify(m_var_map);
-
   if (m_var_map.empty()) {
     handleHelp();
-  }
-
-  if (m_var_map.count("version") > 0) {
+  } else if (m_var_map.count("version") > 0) {
     handleVersion();
-  }
-
-  if (m_var_map.count("help")) {
+  } else if (m_var_map.count("help")) {
     handleHelp();
   }
-
+  // checking data source
+  if (m_var_map.count("sqlite") == 0) {
+    throw std::invalid_argument("sqlite database needs to be specifies");
+  } else if (!fileExists(m_sqlite_name.c_str())) {
+    std::string message_ = "the database " + m_sqlite_name + " does not exist";
+    throw std::invalid_argument(message_);
+  }
   if (m_var_map.count("code") > 0) {
     handleCodeGeneration(m_var_map.count("summary") > 0);
-  }
-
-  // if any of doc options specified
-  if (m_var_map.count("doc") + m_var_map.count("single") > 0) {
+  } else if (m_var_map.count("doc") + m_var_map.count("single") > 0) {
     handleDocsGeneration();
   }
 }
@@ -91,9 +89,9 @@ void by::Menu::initGenericOptions() {
 }
 
 void by::Menu::initSourceOptions() {
-  m_source_options.add_options()("file,f", po::value<std::string>(&m_file_name),
-                                 "file to process")(
-      "config,F", po::value<std::string>(&m_config_file_name));
+  m_source_options.add_options()("sqlite,l",
+                                 po::value<std::string>(&m_sqlite_name),
+                                 "file with sqlite db");
 }
 
 /// initialization of Code  Menu Options
@@ -120,8 +118,9 @@ void by::Menu::initOutputOptions() {
 void by::Menu::handleCodeGeneration(bool withSummary) {
   if (m_var_map.count("code") > 0) {
     by::JobProc jobProc;
-    if (m_var_map.count("file") > 0) {
-      jobProc.getData(m_file_name.c_str());
+    if (m_var_map.count("sqlite") > 0) {
+      // get dat from sqlite db
+      jobProc.getSQLiteData(m_sqlite_name.c_str());
     } else {
       throw std::invalid_argument("No data source defined");
     }
@@ -132,8 +131,8 @@ void by::Menu::handleCodeGeneration(bool withSummary) {
 void by::Menu::handleDocsGeneration() {
   by::JobProc jobProc;
 
-  if (m_var_map.count("file") > 0) {
-    jobProc.getData(m_file_name.c_str());
+  if (m_var_map.count("sqlite") > 0) {
+    jobProc.getSQLiteData(m_sqlite_name.c_str());
   } else {
     throw std::invalid_argument("No data source defined");
   }
@@ -162,4 +161,11 @@ void by::Menu::handleHelp() {
 void by::Menu::handleVersion() {
   std::cout << "TMS Job Documenter, version: " << MY_VERSION_MAJOR << "."
             << MY_VERSION_MINOR << std::endl;
+}
+
+/**
+ * The functions returns true if the file given as the parameter exists
+ */
+bool by::Menu::fileExists(const char *fileName) {
+  return boost::filesystem::exists(fileName);
 }

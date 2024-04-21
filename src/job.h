@@ -9,7 +9,7 @@
 namespace asarum {
 namespace BY {
 
-const int FIELDS_NO = 15; // number of fields in the vector
+const int FIELDS_NO = 14; // number of fields in the vector
 ///
 /// enumeratin storing fields names in the sequence returned by the query taking
 /// data from a DB
@@ -27,12 +27,12 @@ enum field {
   TMPL_FILE,
   DESCR,
   API,
-  TYPE,
-  ROOT
+  TYPE
 };
 
 class Job {
 public:
+  Job();
   Job(const std::vector<std::string> &vec);
 
   unsigned m_step_no;
@@ -50,9 +50,6 @@ public:
   std::string m_job_type;
 
   std::vector<std::string> m_sub_jobs_list;
-
-private:
-  void setJobFields(const std::vector<std::string> &vec);
 };
 
 } // namespace BY

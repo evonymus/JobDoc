@@ -3,6 +3,7 @@
 
 namespace by = asarum::BY;
 
+by::Job::Job() {}
 /// constructor
 ///  @param vec reference to the vector that is to be used for initializing
 // class fields.
