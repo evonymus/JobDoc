@@ -4,9 +4,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(EXEC "jobdoc")
 set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
-set(CMAKE_PREFIX_PATH /usr/local/lib/cmake/Poco)
 
-# # # # # # # # # #### Generating Doxygen Documentation ##################
+# # # # # # # # # # ### Generating Doxygen Documentation ##################
 
 set(CMAKE_INSTALL_BINDIR /usr/local/bin)
 

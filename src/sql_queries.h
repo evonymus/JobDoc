@@ -52,7 +52,7 @@ from job_defn_t jdef
 left join job_sel_cta_t jc on jc.job_cd = jdef.job_cd
 left join  enty_sel_cta_t esc on esc.enty_sel_cta_cd = jc.enty_sel_cta_cd
 left join adtn_data_t ad on ad.adtn_data_id = jdef.tplt_id
-where schd_detl_id is not null and next_job_cd_success is not null
+where schd_detl_id is not null 
 
 union 
 
