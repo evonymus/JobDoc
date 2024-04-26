@@ -66,9 +66,8 @@ void by::Menu::handleMenu() {
     handleVersion();
   } else if (m_var_map.count("help")) {
     handleHelp();
-  }
-  // checking data source
-  if (m_var_map.count("sqlite") == 0) {
+    // checking if data source is defined
+  } else if (m_var_map.count("sqlite") == 0) {
     throw std::invalid_argument("sqlite database needs to be specifies");
   } else if (!fileExists(m_sqlite_name.c_str())) {
     std::string message_ = "the database " + m_sqlite_name + " does not exist";
