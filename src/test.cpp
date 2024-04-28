@@ -12,6 +12,10 @@ void Test::runTest() {
    by::JobDefGetter getter {connector.m_session_ptr};
    auto res = getter.getJobDefs();
    for(const auto i : res) {
-    std::cout << i->id() << std::endl;
+    std::cout << "Job " << i->id() <<  " Next Job "; 
+    if(i->next_job_cd_success()) {
+      std::cout << i->next_job_cd_success()->id();
+    }
+    std::cout << std::endl;
    }
 }

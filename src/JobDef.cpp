@@ -53,6 +53,63 @@ JobDef::JobDef(const JobDef& other):
 }
 
 
+JobDef::Ptr JobDef::next_job_cd_success() const
+{
+	if (!_next_job_cd_success.isNull())
+		return JobDef::find(context(), _next_job_cd_success.value());
+	else
+		return nullptr;
+}
+
+
+JobDef& JobDef::next_job_cd_success(JobDef::Ptr pObject)
+{
+	if (pObject)
+		_next_job_cd_success = pObject->id();
+	else
+		_next_job_cd_success = JobDef::INVALID_ID;
+	return *this;
+}
+
+
+JobDef::Ptr JobDef::next_job_cd_failure() const
+{
+	if (!_next_job_cd_failure.isNull())
+		return JobDef::find(context(), _next_job_cd_failure.value());
+	else
+		return nullptr;
+}
+
+
+JobDef& JobDef::next_job_cd_failure(JobDef::Ptr pObject)
+{
+	if (pObject)
+		_next_job_cd_failure = pObject->id();
+	else
+		_next_job_cd_failure = JobDef::INVALID_ID;
+	return *this;
+}
+
+
+AdtnData::Ptr JobDef::tplt_id() const
+{
+	if (!_tplt_id.isNull())
+		return AdtnData::find(context(), _tplt_id.value());
+	else
+		return nullptr;
+}
+
+
+JobDef& JobDef::tplt_id(AdtnData::Ptr pObject)
+{
+	if (pObject)
+		_tplt_id = pObject->id();
+	else
+		_tplt_id = AdtnData::INVALID_ID;
+	return *this;
+}
+
+
 JobDef::Ptr JobDef::find(Poco::ActiveRecord::Context::Ptr pContext, const ID& id)
 {
 	Poco::ActiveRecord::StatementPlaceholderProvider::Ptr pSPP(pContext->statementPlaceholderProvider());

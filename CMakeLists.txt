@@ -40,6 +40,8 @@ add_executable( ${EXEC}
   ${SRC_DIR}/jobDef.cpp
   ${SRC_DIR}/JobSelCta.cpp
   ${SRC_DIR}/EntySelCta.cpp
+  ${SRC_DIR}/AdtnData.cpp
+  ${SRC_DIR}/SchdDetl.cpp
   ${SRC_DIR}/job_def_getter.cpp
   ${SRC_DIR}/test.cpp
   ${SRC_DIR}/menu.cpp)

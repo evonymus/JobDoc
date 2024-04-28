@@ -10,6 +10,7 @@
 
 
 #include "Poco/ActiveRecord/ActiveRecord.h"
+#include "asarum/BY/AdtnData.h"
 
 
 namespace asarum {
@@ -83,12 +84,6 @@ public:
 	char actv_yn() const;
 	JobDef& actv_yn(char value);
 
-	const Poco::Nullable<std::string>& next_job_cd_success() const;
-	JobDef& next_job_cd_success(const Poco::Nullable<std::string>& value);
-
-	const Poco::Nullable<std::string>& next_job_cd_failure() const;
-	JobDef& next_job_cd_failure(const Poco::Nullable<std::string>& value);
-
 	const Poco::Nullable<std::string>& alrt_grp_cd_success() const;
 	JobDef& alrt_grp_cd_success(const Poco::Nullable<std::string>& value);
 
@@ -98,8 +93,20 @@ public:
 	const std::string& gen_enty_output_yn() const;
 	JobDef& gen_enty_output_yn(const std::string& value);
 
-	const Poco::Nullable<Poco::Int32>& tplt_id() const;
-	JobDef& tplt_id(const Poco::Nullable<Poco::Int32>& value);
+	JobDef::Ptr next_job_cd_success() const;
+	const Poco::Nullable<std::string>& next_job_cd_successID() const;
+	JobDef& next_job_cd_success(JobDef::Ptr pObject);
+	JobDef& next_job_cd_successID(const Poco::Nullable<std::string>& id);
+
+	JobDef::Ptr next_job_cd_failure() const;
+	const Poco::Nullable<std::string>& next_job_cd_failureID() const;
+	JobDef& next_job_cd_failure(JobDef::Ptr pObject);
+	JobDef& next_job_cd_failureID(const Poco::Nullable<std::string>& id);
+
+	AdtnData::Ptr tplt_id() const;
+	const Poco::Nullable<Poco::Int32>& tplt_idID() const;
+	JobDef& tplt_id(AdtnData::Ptr pObject);
+	JobDef& tplt_idID(const Poco::Nullable<Poco::Int32>& id);
 
 	static Ptr find(Poco::ActiveRecord::Context::Ptr pContext, const ID& id);
 
@@ -388,32 +395,6 @@ inline JobDef& JobDef::actv_yn(char value)
 }
 
 
-inline const Poco::Nullable<std::string>& JobDef::next_job_cd_success() const
-{
-	return _next_job_cd_success;
-}
-
-
-inline JobDef& JobDef::next_job_cd_success(const Poco::Nullable<std::string>& value)
-{
-	_next_job_cd_success = value;
-	return *this;
-}
-
-
-inline const Poco::Nullable<std::string>& JobDef::next_job_cd_failure() const
-{
-	return _next_job_cd_failure;
-}
-
-
-inline JobDef& JobDef::next_job_cd_failure(const Poco::Nullable<std::string>& value)
-{
-	_next_job_cd_failure = value;
-	return *this;
-}
-
-
 inline const Poco::Nullable<std::string>& JobDef::alrt_grp_cd_success() const
 {
 	return _alrt_grp_cd_success;
@@ -453,13 +434,39 @@ inline JobDef& JobDef::gen_enty_output_yn(const std::string& value)
 }
 
 
-inline const Poco::Nullable<Poco::Int32>& JobDef::tplt_id() const
+inline const Poco::Nullable<std::string>& JobDef::next_job_cd_successID() const
+{
+	return _next_job_cd_success;
+}
+
+
+inline JobDef& JobDef::next_job_cd_successID(const Poco::Nullable<std::string>& value)
+{
+	_next_job_cd_success = value;
+	return *this;
+}
+
+
+inline const Poco::Nullable<std::string>& JobDef::next_job_cd_failureID() const
+{
+	return _next_job_cd_failure;
+}
+
+
+inline JobDef& JobDef::next_job_cd_failureID(const Poco::Nullable<std::string>& value)
+{
+	_next_job_cd_failure = value;
+	return *this;
+}
+
+
+inline const Poco::Nullable<Poco::Int32>& JobDef::tplt_idID() const
 {
 	return _tplt_id;
 }
 
 
-inline JobDef& JobDef::tplt_id(const Poco::Nullable<Poco::Int32>& value)
+inline JobDef& JobDef::tplt_idID(const Poco::Nullable<Poco::Int32>& value)
 {
 	_tplt_id = value;
 	return *this;
