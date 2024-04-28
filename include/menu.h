@@ -1,0 +1,96 @@
+#pragma once
+
+/**
+ * @file menu.h
+ * @author Marek Dziekanki 
+ * @brief 
+ * @version 0.1
+ * @date 2024-04-27
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
+#include <boost/program_options.hpp>
+#include <boost/program_options/options_description.hpp>
+#include <boost/program_options/positional_options.hpp>
+#include <memory>
+#include <string>
+
+namespace po = boost::program_options;
+namespace asarum {
+namespace BY {
+/**
+ * @class Menu 
+ * @brief configures menu displayed on the screen  
+ * 
+ */
+class Menu {
+public:
+  /**
+   * Constructor
+   * @param int argc - number of parameters from command prompt
+   * @param argv[] array of argc parameters
+   */
+  Menu(int argc, char *arv[]);
+  /**
+   * @brief responses to the options specified in the command prompt and
+   * executes appropriate menu handler
+   */
+  void handleMenu();
+
+  /*************************************************************
+   *                  private
+   *************************************************************/
+
+private:
+  std::string m_notify_list;
+  po::options_description m_generic_options;
+  po::options_description m_source_options;
+  po::options_description m_db_options;
+  po::options_description m_code_options;
+  po::options_description m_doc_options;
+  po::options_description m_output_options;
+
+  po::options_description m_visible_options;
+  po::options_description m_cmd_line_options;
+
+  po::positional_options_description m_pos_options;
+
+  po::variables_map m_var_map;
+
+  //-------- variables used by function called
+  std::string m_path;
+  std::string m_file_name;
+  std::string m_config_file_name;
+  std::string m_sqlite_name;
+  std::string m_single_file_name;
+  //--------- db connection
+  std::string m_db_service;
+  std::string m_db_user;
+  std::string m_db_password;
+
+  bool m_with_images;
+
+  void initMenu(int argc, char *argv[]);
+  void initGenericOptions();
+  void initSourceOptions();
+  void initCodeOptions();
+  void initDocOptions();
+  void initOutputOptions();
+
+  // ---------- menu handlers (triggers) ---------
+  void handleCodeGeneration(bool withSummary);
+  void handleDocsGeneration();
+  void handleHelp();
+  void handleVersion();
+
+  // ---------- connection methods -------
+  bool isConnDefined();
+  /**
+   * Returns true if the file given as the parameter exists
+   */
+  bool fileExists(const char *fileName);
+};
+
+} // namespace BY
+} // namespace asarum
