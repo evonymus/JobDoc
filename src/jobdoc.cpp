@@ -2,13 +2,17 @@
 #include <iostream>
 #include <string>
 
-#include "menu.h"
-#include "odbc_connector.h"
+#include "asarum/BY/menu.h"
+#include "asarum/BY/odbc_connector.h"
+#include "test.h"
 namespace by = asarum::BY;
 
 int main(int argc, char *argv[]) {
   try {
     //by::OdbcConnector ocon{"DSN=ROE"};
+    //Test test;
+    //test.runTest();
+
     by::Menu menu(argc, argv);
     menu.handleMenu();
 

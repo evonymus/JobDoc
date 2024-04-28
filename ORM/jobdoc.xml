@@ -1,0 +1,58 @@
+<project namespace="asarum:BY">
+
+  <!-- job definition 
+    for all the classes, key columns are available using id() method
+  --> 
+  <class name="JobDef" table="JOB_DEFN_T" key="job_cd" >
+    <property name="job_cd" type="string"/>
+    <property name="opt_lck" type="int16"/>
+    <property name="job_desc" type="string" nullable="true"/>
+    <property name="schd_typ_enu" type="int16"/>
+    <property name="job_typ_enu" type="int16"/>
+    <property name="div_cd" type="string" nullable="true"/>
+    <property name="parm_1" type="string" nullable="true"/>
+    <property name="parm_2" type="string" nullable="true"/>
+    <property name="parm_3" type="string" nullable="true"/>
+    <property name="parm_4" type="string" nullable="true"/>
+    <property name="parm_5" type="string" nullable="true"/>
+    <property name="crtd_dtt" type="dateTime"/>
+    <property name="crtd_usr_cd" type="string"/>
+    <property name="updt_dtt" type="dateTime" nullable="true"/>
+    <property name="updt_usr_cd" type="string" nullable="true"/>
+    <property name="tplt_file" type="string" nullable="true"/>
+    <property name="outpt_file" type="string" nullable="true"/>
+    <property name="schd_detl_id" type="int32" nullable="true"/>
+    <property name="prty" type="int16" nullable="true"/>
+    <property name="actv_yn" type="char"/>
+    <property name="next_job_cd_success" type="string" nullable="true"/>
+    <property name="next_job_cd_failure" type="string" nullable="true"/>
+    <property name="alrt_grp_cd_success" type="string" nullable="true"/>
+    <property name="alrt_grp_cd_failure" type="string" nullable="true"/>
+    <property name="gen_enty_output_yn" type="string"/>
+    <property name="tplt_id" type="int32" nullable="true"/>
+  </class>
+
+  <class name="JobSelCta" table="JOB_SEL_CTA_T" key="job_sel_cta_id">
+    <property name="job_sel_cta_id" type="int32"/>
+    <property name="opt_lck" type="int16"/>
+    <property name="job_cd" type="string" references="JobDef" />
+    <property name="enty_sel_cta_cd" type="string" references="EntySelCta"  />
+  </class>
+
+  <class name="EntySelCta" table="ENTY_SEL_CTA_T" key="enty_sel_cta_cd">
+    <property name="enty_sel_cta_cd" type="string"/>
+    <property name="opt_lck" type="int16"/>
+    <property name="enty_sel_cta_desc" type="string" nullable="true"/>
+    <property name="div_cd" type="string" nullable="true"/>
+    <property name="str_id_yn" type="char" nullable="true"/>
+    <property name="enty_typ_enu" type="int16"/>
+    <property name="cta_sql" type="string" nullable="true"/>
+    <property name="cta_find_enty" type="string" nullable="true"/>
+    <property name="crtd_dtt" type="dateTime"/>
+    <property name="crtd_usr_cd" type="string"/>
+    <property name="updt_dtt" type="dateTime" nullable="true"/>
+    <property name="updt_usr_cd" type="string" nullable="true"/>
+    <property name="max_entys" type="int32" nullable="true"/>
+  </class>
+
+</project>

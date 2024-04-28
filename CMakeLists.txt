@@ -25,7 +25,7 @@ set(Boost_ROOT c:/Dev/Libs/boost)
 #option(BUILD_SHARED_LIBS OFF)
 
 find_package(Boost  REQUIRED filesystem program_options)
-find_package(Poco REQUIRED COMPONENTS Foundation Data DataSQLite DataODBC)
+find_package(Poco REQUIRED COMPONENTS Foundation Data DataSQLite DataODBC ActiveRecord)
 find_package(Boost COMPONENTS filesystem program_options REQUIRED )
 
 add_executable( ${EXEC} 
@@ -37,9 +37,14 @@ add_executable( ${EXEC}
   ${SRC_DIR}/job_group.cpp
   ${SRC_DIR}/sqlite_connector.cpp
   ${SRC_DIR}/odbc_connector.cpp
+  ${SRC_DIR}/jobDef.cpp
+  ${SRC_DIR}/JobSelCta.cpp
+  ${SRC_DIR}/EntySelCta.cpp
+  ${SRC_DIR}/job_def_getter.cpp
+  ${SRC_DIR}/test.cpp
   ${SRC_DIR}/menu.cpp)
 
 target_include_directories(${EXEC} PRIVATE  ${Boost_INCLUDE_DIR} ${Poco_INCLUDE_DIR})
-target_link_libraries(${EXEC} PRIVATE ${Boost_LIBRARIES} Poco::Foundation Poco::Data Poco::DataSQLite Poco::DataODBC)
+target_link_libraries(${EXEC} PRIVATE ${Boost_LIBRARIES} Poco::Foundation Poco::Data Poco::DataSQLite Poco::DataODBC Poco::ActiveRecord)
 
 install(TARGETS ${EXEC} RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})

@@ -18,6 +18,9 @@ namespace asarum {
 namespace BY {
 class SQLiteConnector {
 public:
+  /// @brief pointer to Poco::Data::Session object;
+  std::shared_ptr<Poco::Data::Session> m_session_ptr;
+
  /**
   * @brief Construct a new SQLiteConnector object
   * 
@@ -27,7 +30,6 @@ public:
   void getJobs(std::vector<std::shared_ptr<JobGroup>> &job_groups);
 
 private:
-  std::shared_ptr<Poco::Data::Session> m_session_ptr;
   void init();
   void shutDown();
 };

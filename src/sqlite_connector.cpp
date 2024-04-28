@@ -1,7 +1,7 @@
-#include "sqlite_connector.h"
-#include "job.h"
-#include "job_group.h"
-#include "sql_queries.h"
+#include "asarum/BY/sqlite_connector.h"
+#include "asarum/BY/job.h"
+#include "asarum/BY/job_group.h"
+#include "asarum/BY/sql_queries.h"
 #include <Poco/Data/SQLite/Connector.h>
 #include <Poco/Data/Session.h>
 #include <iostream>
