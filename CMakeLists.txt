@@ -4,6 +4,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(EXEC "jobdoc")
 set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
+set(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # # # # # # # # # # ### Generating Doxygen Documentation ##################
 
@@ -11,7 +12,7 @@ set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 
 project(Jobdoc VERSION 1.0)
-
+include_directories(${INCLUDE_DIR})
 # Boost settings
 
 set(POCO_ROOT c:/Dev/Libs/Poco)

@@ -26,9 +26,8 @@ void by::JobGroup::addJob(const std::shared_ptr<Job> &job) {
   m_jobs.push_back(job);
 }
 
-/// get max lenght of all fields in Job objects and
-/// store the values in m_fld_len vector of std::pair
-/// the pair consis of field enum and unsinged for the length
+/// @brief get max lenght of all fields in Job objects and
+/// store the values in memer fields of the class
 void by::JobGroup::getMaxFldLen() {
   for (const auto &jb : m_jobs) {
     if (!jb->m_job_cd.empty()) {

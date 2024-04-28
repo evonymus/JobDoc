@@ -104,6 +104,9 @@ void by::JobProc::processFile(const char *fileName) {
 /// @param the name of the file with data
 void by::JobProc::getData(const char *fileName) { processFile(fileName); }
 
+/// @brief function gets jobs defintions from SQLite database divides them into
+/// **job groups** and stores the groups in the **m_job_groups** vector.
+/// @param dbName 
 void by::JobProc::getSQLiteData(const char *dbName) {
   // creating connecto to the SQLite database
   by::SQLiteConnector connector_{dbName};
@@ -209,7 +212,7 @@ void by::JobProc::exportSingleDoc(const std::string &path,
 
 // ====================== PRIVATE FUNCTIONS ===========
 
-/// The method reads the first line (header) with definition of the columns
+/// @brief The method reads the first line (header) with definition of the columns
 /// and stores the column names m_field_list variable
 /// @param str reference to the string with the content of the process file
 void by::JobProc::getFieldsDef(const std::string &str) {
