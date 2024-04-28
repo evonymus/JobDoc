@@ -3,10 +3,12 @@
 #include <string>
 
 #include "menu.h"
+#include "odbc_connector.h"
 namespace by = asarum::BY;
 
 int main(int argc, char *argv[]) {
   try {
+    //by::OdbcConnector ocon{"DSN=ROE"};
     by::Menu menu(argc, argv);
     menu.handleMenu();
 

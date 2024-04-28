@@ -1,4 +1,15 @@
 #pragma once
+
+/**
+ * @file menu.h
+ * @author Marek Dziekanki 
+ * @brief 
+ * @version 0.1
+ * @date 2024-04-27
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include <boost/program_options.hpp>
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/positional_options.hpp>
@@ -9,9 +20,10 @@ namespace po = boost::program_options;
 namespace asarum {
 namespace BY {
 /**
- * Class contains menu options displayed by the program
- *
- * **/
+ * @class Menu 
+ * @brief configures menu displayed on the screen  
+ * 
+ */
 class Menu {
 public:
   /**

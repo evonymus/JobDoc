@@ -1,5 +1,10 @@
 #pragma once
 
+/**
+ *  @filename job.h 
+ *  @class 
+ **/
+
 #include <istream>
 #include <memory>
 #include <ostream>
