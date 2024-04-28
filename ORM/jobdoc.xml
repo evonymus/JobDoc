@@ -31,7 +31,7 @@
     <property name="gen_enty_output_yn" type="string"/>
     <property name="tplt_id" type="int32" nullable="true"/>
   </class>
-
+  <!-- JOB_SEL_CTA_T refrences to JobsDef and EntySelCta-->
   <class name="JobSelCta" table="JOB_SEL_CTA_T" key="job_sel_cta_id">
     <property name="job_sel_cta_id" type="int32"/>
     <property name="opt_lck" type="int16"/>
