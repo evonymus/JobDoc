@@ -21,15 +21,15 @@
     <property name="updt_usr_cd" type="string" nullable="true"/>
     <property name="tplt_file" type="string" nullable="true"/>
     <property name="outpt_file" type="string" nullable="true"/>
-    <property name="schd_detl_id" type="int32" nullable="true" refrences="SchdDetl" cardinalty="?"/>
+    <property name="schd_detl_id" type="int32" nullable="true" refrences="SchdDetl" cardinality="?"/>
     <property name="prty" type="int16" nullable="true"/>
     <property name="actv_yn" type="char"/>
-    <property name="next_job_cd_success" type="string" nullable="true" references="JobDef" cardinalty="?"/>
-    <property name="next_job_cd_failure" type="string" nullable="true" references="JobDef" cardinalty="?"/>
+    <property name="next_job_cd_success" type="string" nullable="true" references="JobDef" cardinality="?"/>
+    <property name="next_job_cd_failure" type="string" nullable="true" references="JobDef" cardinality="?"/>
     <property name="alrt_grp_cd_success" type="string" nullable="true"/>
     <property name="alrt_grp_cd_failure" type="string" nullable="true"/>
     <property name="gen_enty_output_yn" type="string"/>
-    <property name="tplt_id" type="int32" nullable="true" references="AdtnData" cardinalty="?"/>
+    <property name="tplt_id" type="int32" nullable="true" references="AdtnData" cardinaltiy="?"/>
   </class>
   <!-- JOB_SEL_CTA_T refrences to JobsDef and EntySelCta-->
   <class name="JobSelCta" table="JOB_SEL_CTA_T" key="job_sel_cta_id">
