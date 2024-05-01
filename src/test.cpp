@@ -40,7 +40,7 @@ void test_gen_script() {
    by::JobDefGetter getter {connector.m_session_ptr};
    by::JobScriptWriter writer{std::cout};
   // std::cout << getter.getJobDef("SDL_STR_SEU_UPD_BBUILD")->columns << std::endl;
-  writer.writeOrclSingleJobScript(getter.getJobDef("SDL_STR_SEU_UPD_BBUILD"));
+  writer.writeOrclSingleJobScript(getter.getJobDef("SDL_STR_UPD_LD_VSL_BK_TCD"));
 
 	//Poco::ActiveRecord::StatementPlaceholderProvider::Ptr pSPP(context()->statementPlaceholderProvider());
 

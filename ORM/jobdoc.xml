@@ -73,7 +73,7 @@
   <class name="AdtnData" table="ADTN_DATA_T" key="adtn_data_id">
     <property name="adtn_data_id" type="int32"/>
     <property name="data" type="string"/>
-    <property name="crdt_dtt" type="dateTime"/>
+    <property name="crtd_dtt" type="dateTime"/>
     <property name="adtn_data_cd" type="string" nullable="true"/>
     <property name="adtn_data_typ_enu" type="int32" nullable="true"/>
     <property name="actv_yn" type="char" nullable="true"/>

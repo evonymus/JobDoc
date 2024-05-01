@@ -27,6 +27,7 @@ namespace asarum {
       void writeOrclEscScript(const asarum::BY::EntySelCta::Ptr esc_ptr);
       void writeOrclJobScript(const asarum::BY::JobDef::Ptr job_ptr);
       void writeOrclSelCtaScript(const asarum::BY::JobDef::Ptr job_ptr);
+      void writeOrclTmplScript(const asarum::BY::AdtnData::Ptr adt_ptr);
 
       /// @brief Replaces single apostroph with two of them
       /// @param orig_str original string 

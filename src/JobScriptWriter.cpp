@@ -33,26 +33,34 @@ void by::JobScriptWriter::writeOrclJobSetScript(const std::vector<asarum::BY::Jo
 
 void by::JobScriptWriter::writeOrclSingleJobScript(const by::JobDef::Ptr job_ptr)
 {
+  static int counter = 1;
+  *mp_out << "/****************** PARENT JOB LEVEL " << counter++  <<" " << job_ptr->id() << " ***********/\n";
+
+  if(job_ptr->next_job_cd_success() != nullptr) {
+    *mp_out << "--\t\tgenerating script for: " 
+    << job_ptr->next_job_cd_success()->id() << ", Next Job Success ----- \n";
+    writeOrclSingleJobScript(job_ptr->next_job_cd_success());
+  }
+  if(job_ptr->next_job_cd_failure() != nullptr) {
+    if(job_ptr->next_job_cd_success() != nullptr && job_ptr->next_job_cd_success()->id() == job_ptr->next_job_cd_failure()->id()) {
+      // next job failure is the same as next job success, do nothing;
+      ;
+    } else {
+      *mp_out << "------- next job failure is different to next job success, generating script -----\n";
+      writeOrclSingleJobScript(job_ptr->next_job_cd_failure());
+    }
+  }
+  if(job_ptr->tplt_id() != nullptr) {
+    writeOrclTmplScript(job_ptr->tplt_id());
+  }
     // writeOrclEscScript(job_ptr);
     writeOrclJobScript(job_ptr);
 }
 
 //***************************** PRIVATE ***********************
 
-void by::JobScriptWriter::writeOrclEscScript(const by::EntySelCta::Ptr esc_ptr)
-{
-    (*mp_out) << ESC_INSERT;
-    for (const auto i : esc_ptr->columns())
-    {
-        (*mp_out) << i << ", ";
-    }
-    (*mp_out) << "SELECT "
-              << replaceSingleQuote(esc_ptr->id()) << ","
-              << esc_ptr->opt_lck() << ","
-              << esc_ptr->enty_sel_cta_desc() << ",";
-}
 /// @brief function writes to the stream specified in the constructor, INSERT statement creating a 
-/// JOB_DEFN_T record.
+/// JOB_DEFN_T record for the job itself and all its next_success and next_failure, jobs. 
 /// @param job_ptr pointer to the JobDef object, with defintion of the job.
 void asarum::BY::JobScriptWriter::writeOrclJobScript(const by::JobDef::Ptr job_ptr)
 {
@@ -62,7 +70,7 @@ void asarum::BY::JobScriptWriter::writeOrclJobScript(const by::JobDef::Ptr job_p
     {
         *mp_out << ", " << job_ptr->columns()[i];
     }
-    *mp_out << ")\nVALUES ( '" << job_ptr->id() << "'";
+    *mp_out << ")\nSELECT '" << job_ptr->id() << "'";
 		sql_cnv(job_ptr->opt_lck(), mp_out);
 		sql_cnv(job_ptr->job_desc(), mp_out);
 		sql_cnv(job_ptr->schd_typ_enu(), mp_out);
@@ -106,12 +114,71 @@ void asarum::BY::JobScriptWriter::writeOrclJobScript(const by::JobDef::Ptr job_p
     } else {
       *mp_out << ", NULL";
     }
-    *mp_out << ");\n";
+    *mp_out << " FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM JOB_DEFN_T WHERE JOB_CD ='"
+    << job_ptr->id() << "');\n\n";
 }
 
-void asarum::BY::JobScriptWriter::writeOrclSelCtaScript(const by::JobDef::Ptr job_ptr)
+/********************************* writeOrclTmplScript **************************************************/
+
+/// @brief saves template into the ADN_T balse
+/// @param adtn_ptr record of AdtnData used to create the template
+void asarum::BY::JobScriptWriter::writeOrclTmplScript(const asarum::BY::AdtnData::Ptr adt_ptr)
 {
+  // if template was defined for the job
+  if( adt_ptr!= nullptr) {
+    *mp_out << "\n-- if template does not exists, create it\n";
+    *mp_out << "INSERT INTO " << adt_ptr->table() << "( ";
+    *mp_out << adt_ptr->columns()[0];
+    // wrting out the list of columns defined for the table
+    for(auto i=1; i < adt_ptr->columns().size(); i++) {
+      *mp_out << ", " << adt_ptr->columns()[i];
+    }
+
+    *mp_out << ")\nSELECT ADTN_DATA_TSEQ.nextval " ;
+    sql_cnv(adt_ptr->data(), mp_out);
+    sql_cnv(adt_ptr->crtd_dtt(), mp_out);
+    sql_cnv(adt_ptr->adtn_data_cd(), mp_out);
+    sql_cnv(adt_ptr->adtn_data_typ_enu(), mp_out);
+    sql_cnv(adt_ptr->actv_yn(), mp_out);
+    sql_cnv(adt_ptr->crtd_usr_cd(), mp_out);
+    sql_cnv(adt_ptr->updt_usr_cd(), mp_out);
+    sql_cnv(adt_ptr->updt_dtt(), mp_out);
+    sql_cnv(adt_ptr->tplt_fmt_typ_enu(), mp_out);
+
+    *mp_out << " FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM ADTN_DATA_T"  
+    << " WHERE ADTN_DATA_CD = '" << adt_ptr->adtn_data_cd() << "' );\n\n";
+  }
 }
+
+/********************** writeOrclSelCtaScript *********************/
+void asarum::BY::JobScriptWriter::writeOrclEscScript(const asarum::BY::EntySelCta::Ptr esc_ptr) {
+  *mp_out << "-- create ESC Query if it does not exist\n";
+  *mp_out << "\nINSERT INTO ENTY_SEL_CTA_T (" ;
+  // column names are stored in columns() vector;
+  *mp_out << esc_ptr->columns()[0];
+  for(auto i=1; i < esc_ptr->columns().size(); i++) {
+    *mp_out << ", " << esc_ptr->columns()[i];
+  }
+  *mp_out << ")\nSELECT " << esc_ptr->id();
+  sql_cnv(esc_ptr->opt_lck(), mp_out);
+  sql_cnv(esc_ptr->enty_sel_cta_desc(), mp_out);
+  sql_cnv(esc_ptr->div_cd(), mp_out);
+  sql_cnv(esc_ptr->str_id_yn(), mp_out);
+  sql_cnv(esc_ptr->enty_typ_enu(), mp_out);
+  // using wrapper around the SQL code to replace single ' with double ''
+  sql_cnv(replaceSingleQuote(esc_ptr->cta_sql()), mp_out);
+  sql_cnv(esc_ptr->cta_find_enty(), mp_out);
+  sql_cnv(esc_ptr->crtd_dtt(), mp_out);
+  sql_cnv(esc_ptr->crtd_usr_cd(), mp_out);
+  sql_cnv(esc_ptr->updt_dtt(), mp_out);
+  sql_cnv(esc_ptr->updt_usr_cd(), mp_out);
+  sql_cnv(esc_ptr->max_entys(), mp_out);
+  *mp_out << "\nFROM DUAL WHERE NOT EXISTS(SELECT 1 FROM ENTY_SEL_CTA_T WHERE ENTY_SEL_CTA_CD='" 
+    << esc_ptr->id() << "')\n";
+
+}
+
+/*************************** replaceSingleQuote    ****************/
 
 /// @brief function replaces single apostroph with two of them
 /// @param original original string
@@ -136,6 +203,14 @@ std::string asarum::BY::JobScriptWriter::replaceSingleQuote(std::string const &o
     return results;
 }
 
+/**************************** sql_cnv ***********************************/
+
+/// @brief function checks type of the variable and adjusts if to be in line with SQL syntax
+/// @details ORM mapping allows both nullable and non-nullable variables. For nullable ones, first there is checked
+/// if a value is null, if so, then NULL value is returned. There is also checked if a variable is of char or string type
+/// and for those ones, the value is endrapped in '<value>' quotation marks.
+/// @param var variable of std::any type
+/// @param r_out outstream to where there is written the value of the variable
 void asarum::BY::JobScriptWriter::sql_cnv(const std::any var, std::ostream *p_out) { 
   constexpr char* DTIME_FORMAT="%Y-%m-%d %H:%M:%S";
   constexpr char* DATE_FORMAT="%Y-%m-%d";
@@ -162,6 +237,7 @@ void asarum::BY::JobScriptWriter::sql_cnv(const std::any var, std::ostream *p_ou
      *p_out << ", " << *ptr << "";
   } else if (auto ptr = std::any_cast<Poco::DateTime>(&var)) {
     *p_out << ", " << "to_date(" << fmt::format(*ptr, DTIME_FORMAT) << ", 'yyyy-mm-dd HH24:mi:ss')";
+   
   // -----------------  nullable part -----------
 
   } else if( auto ptr = std::any_cast<Poco::Nullable<std::string>>(&var)) {
