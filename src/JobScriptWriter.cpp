@@ -4,6 +4,9 @@
 #include <Poco/DateTimeFormat.h>
 #include <exception>
 #include <typeinfo>
+#include <Poco/ActiveRecord/Query.h>
+#include "asarum/BY/JobSelCta.h"
+#include "asarum/BY/tokenizer.h"
 
 namespace by = asarum::BY;
 namespace pa = Poco::ActiveRecord;
@@ -27,34 +30,56 @@ asarum::BY::JobScriptWriter::JobScriptWriter(std::ostream &r_out) : mp_out{&r_ou
 {
 }
 
+//******************************* writeOrclJobSetScript *******************************  
+
 void by::JobScriptWriter::writeOrclJobSetScript(const std::vector<asarum::BY::JobDef::Ptr> &r_jobs)
 {
+  *mp_out << "\n-- Start transaction\nBEGIN\n"
+  << "\n-- Save point, transaction can be rolled back upon error\nSAVEPOINT start_transaction\n";
+
+  std::vector<asarum::BY::JobDef::Ptr>::const_reverse_iterator ri=r_jobs.rbegin();
+  while(ri != r_jobs.rend()) {
+    writeOrclSingleJobScript(*ri);
+    ri++;
+  }
+
+  *mp_out << "\n-- Commit the transaction\nCOMMIT;\n"
+  << "\n-- Handle errors\nEXCEPTION\n-- Rollback transaction"
+  << "\n\tWHEN OTHERS THEN"
+  << "\n\t\tROLLBACK TO start_transaction;"
+  << "\n\t\tRAISE;\n"
+  << "\nEND;\n";
 }
+
+//******************************* writeOrclSingleJobScript *******************************  
 
 void by::JobScriptWriter::writeOrclSingleJobScript(const by::JobDef::Ptr job_ptr)
 {
-  static int counter = 1;
-  *mp_out << "/****************** PARENT JOB LEVEL " << counter++  <<" " << job_ptr->id() << " ***********/\n";
+  constexpr int CHAIN_JOB = 3;
 
-  if(job_ptr->next_job_cd_success() != nullptr) {
-    *mp_out << "--\t\tgenerating script for: " 
-    << job_ptr->next_job_cd_success()->id() << ", Next Job Success ----- \n";
-    writeOrclSingleJobScript(job_ptr->next_job_cd_success());
-  }
-  if(job_ptr->next_job_cd_failure() != nullptr) {
-    if(job_ptr->next_job_cd_success() != nullptr && job_ptr->next_job_cd_success()->id() == job_ptr->next_job_cd_failure()->id()) {
-      // next job failure is the same as next job success, do nothing;
-      ;
-    } else {
-      *mp_out << "------- next job failure is different to next job success, generating script -----\n";
-      writeOrclSingleJobScript(job_ptr->next_job_cd_failure());
+  if(job_ptr == nullptr) return;
+
+  *mp_out << "\n/******************  SCRIPT FOR THE JOB: " << job_ptr->id() << " *******************/\n";
+
+  if(job_ptr->job_typ_enu() == CHAIN_JOB) {
+    *mp_out << "\n------------- creating scripts for chain jobs -----------\n";
+    std::vector<std::string> chain_jobs{};
+    by::Tokenizer tokenizer{};
+    tokenizer.tokenize(job_ptr->parm_1(),",", chain_jobs);
+
+    for(const auto i: chain_jobs) {
+      by::JobDef::Ptr ch_job = nullptr;
+      ch_job =  by::JobDef::find(job_ptr->context(), i);
+      if(ch_job != nullptr) {
+        *mp_out << "\n ----------- creating script for " << ch_job->id() << " chain job ----------\n";
+         writeOrclTmplScript(ch_job->tplt_id());
+         writeOrclJobScript(ch_job);
+      }
     }
   }
-  if(job_ptr->tplt_id() != nullptr) {
-    writeOrclTmplScript(job_ptr->tplt_id());
-  }
-    // writeOrclEscScript(job_ptr);
-    writeOrclJobScript(job_ptr);
+  writeOrclJobSelCtaScript(job_ptr);
+  writeOrclTmplScript(job_ptr->tplt_id());
+  writeOrclJobScript(job_ptr);
 }
 
 //***************************** PRIVATE ***********************
@@ -62,60 +87,61 @@ void by::JobScriptWriter::writeOrclSingleJobScript(const by::JobDef::Ptr job_ptr
 /// @brief function writes to the stream specified in the constructor, INSERT statement creating a 
 /// JOB_DEFN_T record for the job itself and all its next_success and next_failure, jobs. 
 /// @param job_ptr pointer to the JobDef object, with defintion of the job.
-void asarum::BY::JobScriptWriter::writeOrclJobScript(const by::JobDef::Ptr job_ptr)
-{
-    *mp_out << JOB_DEF_INSERT;
-    *mp_out << job_ptr->columns()[0];
-    for (int i = 1; i < job_ptr->columns().size(); i++)
-    {
-        *mp_out << ", " << job_ptr->columns()[i];
-    }
-    *mp_out << ")\nSELECT '" << job_ptr->id() << "'";
-		sql_cnv(job_ptr->opt_lck(), mp_out);
-		sql_cnv(job_ptr->job_desc(), mp_out);
-		sql_cnv(job_ptr->schd_typ_enu(), mp_out);
-		sql_cnv(job_ptr->job_typ_enu(), mp_out);
-		sql_cnv(job_ptr->div_cd(), mp_out);
-		sql_cnv(job_ptr->parm_1(), mp_out);
-		sql_cnv(job_ptr->parm_2(), mp_out);
-		sql_cnv(job_ptr->parm_3(), mp_out);
-		sql_cnv(job_ptr->parm_4(), mp_out);
-		sql_cnv(job_ptr->parm_5(), mp_out);
-		sql_cnv(job_ptr->crtd_dtt(), mp_out);
-		sql_cnv(job_ptr->crtd_usr_cd(), mp_out);
-		sql_cnv(job_ptr->updt_dtt(), mp_out);
-		sql_cnv(job_ptr->updt_usr_cd(), mp_out);
-		sql_cnv(job_ptr->tplt_file(), mp_out);
-		sql_cnv(job_ptr->outpt_file(), mp_out);
+void asarum::BY::JobScriptWriter::writeOrclJobScript(const by::JobDef::Ptr job_ptr) {
+  if(job_ptr == nullptr) return;
 
-    if(job_ptr->schd_detl_id() != nullptr){
-       sql_cnv(job_ptr->schd_detl_id()->id(), mp_out);
-    } else {
-      *mp_out << ", NULL";
-    }
-		sql_cnv(job_ptr->prty(), mp_out);
-		sql_cnv(job_ptr->actv_yn(), mp_out);
-  
-    if(job_ptr->next_job_cd_success() != nullptr) {
-		  sql_cnv(job_ptr->next_job_cd_success()->id(), mp_out);
-    } else {
-      *mp_out << ", NULL";
-    }
-    if(job_ptr->next_job_cd_failure() != nullptr) {
-		  sql_cnv(job_ptr->next_job_cd_failure()->id(), mp_out);
-    } else {
-      *mp_out << ", NULL";
-    }
-		sql_cnv(job_ptr->alrt_grp_cd_success(), mp_out);
-		sql_cnv(job_ptr->alrt_grp_cd_failure(), mp_out);
-		sql_cnv(job_ptr->gen_enty_output_yn(), mp_out);
-    if(job_ptr->tplt_id() != nullptr) {
-      sql_cnv(job_ptr->tplt_id()->id(), mp_out); 
-    } else {
-      *mp_out << ", NULL";
-    }
-    *mp_out << " FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM JOB_DEFN_T WHERE JOB_CD ='"
-    << job_ptr->id() << "');\n\n";
+  *mp_out << JOB_DEF_INSERT;
+  *mp_out << job_ptr->columns()[0];
+  for (int i = 1; i < job_ptr->columns().size(); i++)
+  {
+      *mp_out << ", " << job_ptr->columns()[i];
+  }
+  *mp_out << ")\nSELECT '" << job_ptr->id() << "'";
+  sql_cnv(job_ptr->opt_lck(), mp_out);
+  sql_cnv(job_ptr->job_desc(), mp_out);
+  sql_cnv(job_ptr->schd_typ_enu(), mp_out);
+  sql_cnv(job_ptr->job_typ_enu(), mp_out);
+  sql_cnv(job_ptr->div_cd(), mp_out);
+  sql_cnv(job_ptr->parm_1(), mp_out);
+  sql_cnv(job_ptr->parm_2(), mp_out);
+  sql_cnv(job_ptr->parm_3(), mp_out);
+  sql_cnv(job_ptr->parm_4(), mp_out);
+  sql_cnv(job_ptr->parm_5(), mp_out);
+  sql_cnv(job_ptr->crtd_dtt(), mp_out);
+  sql_cnv(job_ptr->crtd_usr_cd(), mp_out);
+  sql_cnv(job_ptr->updt_dtt(), mp_out);
+  sql_cnv(job_ptr->updt_usr_cd(), mp_out);
+  sql_cnv(job_ptr->tplt_file(), mp_out);
+  sql_cnv(job_ptr->outpt_file(), mp_out);
+
+  if(job_ptr->schd_detl_id() != nullptr){
+      sql_cnv(job_ptr->schd_detl_id()->id(), mp_out);
+  } else {
+    *mp_out << ", NULL";
+  }
+  sql_cnv(job_ptr->prty(), mp_out);
+  sql_cnv(job_ptr->actv_yn(), mp_out);
+
+  if(job_ptr->next_job_cd_success() != nullptr) {
+    sql_cnv(job_ptr->next_job_cd_success()->id(), mp_out);
+  } else {
+    *mp_out << ", NULL";
+  }
+  if(job_ptr->next_job_cd_failure() != nullptr) {
+    sql_cnv(job_ptr->next_job_cd_failure()->id(), mp_out);
+  } else {
+    *mp_out << ", NULL";
+  }
+  sql_cnv(job_ptr->alrt_grp_cd_success(), mp_out);
+  sql_cnv(job_ptr->alrt_grp_cd_failure(), mp_out);
+  sql_cnv(job_ptr->gen_enty_output_yn(), mp_out);
+  if(job_ptr->tplt_id() != nullptr) {
+    sql_cnv(job_ptr->tplt_id()->id(), mp_out); 
+  } else {
+    *mp_out << ", NULL";
+  }
+  *mp_out << " FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM JOB_DEFN_T WHERE JOB_CD ='"
+  << job_ptr->id() << "');\n\n";
 }
 
 /********************************* writeOrclTmplScript **************************************************/
@@ -151,6 +177,23 @@ void asarum::BY::JobScriptWriter::writeOrclTmplScript(const asarum::BY::AdtnData
 }
 
 /********************** writeOrclSelCtaScript *********************/
+///@brief the function gets from JOB_SEL_CTA_T proper record for the job given as the parameter
+///and creates a script creating ESC qeury
+void asarum::BY::JobScriptWriter::writeOrclJobSelCtaScript(const asarum::BY::JobDef::Ptr job_ptr)
+{
+  Poco::ActiveRecord::Query<by::JobSelCta> query(job_ptr->context());
+  const std::string where = "job_cd ='" + job_ptr->id() + "'";
+  const auto result = query
+  .where(where)
+  .execute();
+
+  for(const auto i: result) {
+    writeOrclEscScript(i->enty_sel_cta_cd());
+  }
+}
+
+/************************** writeOrclEscScript ******************/
+
 void asarum::BY::JobScriptWriter::writeOrclEscScript(const asarum::BY::EntySelCta::Ptr esc_ptr) {
   *mp_out << "-- create ESC Query if it does not exist\n";
   *mp_out << "\nINSERT INTO ENTY_SEL_CTA_T (" ;
@@ -174,7 +217,7 @@ void asarum::BY::JobScriptWriter::writeOrclEscScript(const asarum::BY::EntySelCt
   sql_cnv(esc_ptr->updt_usr_cd(), mp_out);
   sql_cnv(esc_ptr->max_entys(), mp_out);
   *mp_out << "\nFROM DUAL WHERE NOT EXISTS(SELECT 1 FROM ENTY_SEL_CTA_T WHERE ENTY_SEL_CTA_CD='" 
-    << esc_ptr->id() << "')\n";
+    << esc_ptr->id() << "');\n";
 
 }
 

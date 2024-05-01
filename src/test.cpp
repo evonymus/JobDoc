@@ -4,6 +4,7 @@
 #include "asarum/BY/sqlite_connector.h"
 #include "asarum/BY/job_def_getter.h"
 #include "asarum/BY/JobScriptWriter.h"
+#include "asarum/BY/EntySelCta.h"
 
 namespace by=asarum::BY;
 
@@ -38,9 +39,10 @@ void test_gen_script() {
 
    by::SQLiteConnector connector{"H:\\BY\\JobDoc_TMS_Job_server_documenting_utility\\QA_2024-04-12-10-11-33.db"};
    by::JobDefGetter getter {connector.m_session_ptr};
+   std::vector<by::JobDef::Ptr> result{};
+   getter.getChildJobs("SDL_STR_SEU_UPD_BBUILD", result);
    by::JobScriptWriter writer{std::cout};
-  // std::cout << getter.getJobDef("SDL_STR_SEU_UPD_BBUILD")->columns << std::endl;
-  writer.writeOrclSingleJobScript(getter.getJobDef("SDL_STR_UPD_LD_VSL_BK_TCD"));
+   writer.writeOrclJobSetScript(result);
 
 	//Poco::ActiveRecord::StatementPlaceholderProvider::Ptr pSPP(context()->statementPlaceholderProvider());
 
