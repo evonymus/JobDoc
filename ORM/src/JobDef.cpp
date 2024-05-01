@@ -53,6 +53,25 @@ JobDef::JobDef(const JobDef& other):
 }
 
 
+SchdDetl::Ptr JobDef::schd_detl_id() const
+{
+	if (!_schd_detl_id.isNull())
+		return SchdDetl::find(context(), _schd_detl_id.value());
+	else
+		return nullptr;
+}
+
+
+JobDef& JobDef::schd_detl_id(SchdDetl::Ptr pObject)
+{
+	if (pObject)
+		_schd_detl_id = pObject->id();
+	else
+		_schd_detl_id = SchdDetl::INVALID_ID;
+	return *this;
+}
+
+
 JobDef::Ptr JobDef::next_job_cd_success() const
 {
 	if (!_next_job_cd_success.isNull())

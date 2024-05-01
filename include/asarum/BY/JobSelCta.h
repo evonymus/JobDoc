@@ -28,8 +28,8 @@ public:
 	JobSelCta(const JobSelCta& other);
 	~JobSelCta() = default;
 
-	Poco::Int16 opt_lck() const;
-	JobSelCta& opt_lck(Poco::Int16 value);
+	Poco::Int32 opt_lck() const;
+	JobSelCta& opt_lck(Poco::Int32 value);
 
 	JobDef::Ptr job_cd() const;
 	const std::string& job_cdID() const;
@@ -51,7 +51,7 @@ public:
 	static const std::string& table();
 
 private:
-	Poco::Int16 _opt_lck = 0;
+	Poco::Int32 _opt_lck = 0;
 	std::string _job_cd;
 	std::string _enty_sel_cta_cd;
 
@@ -59,13 +59,13 @@ private:
 };
 
 
-inline Poco::Int16 JobSelCta::opt_lck() const
+inline Poco::Int32 JobSelCta::opt_lck() const
 {
 	return _opt_lck;
 }
 
 
-inline JobSelCta& JobSelCta::opt_lck(Poco::Int16 value)
+inline JobSelCta& JobSelCta::opt_lck(Poco::Int32 value)
 {
 	_opt_lck = value;
 	return *this;
@@ -116,21 +116,21 @@ public:
 
 	static void bind(std::size_t pos, const asarum::BY::JobSelCta& ar, AbstractBinder::Ptr pBinder, AbstractBinder::Direction dir)
 	{
-		TypeHandler<Poco::Int16>::bind(pos++, ar._opt_lck, pBinder, dir);
+		TypeHandler<Poco::Int32>::bind(pos++, ar._opt_lck, pBinder, dir);
 		TypeHandler<std::string>::bind(pos++, ar._job_cd, pBinder, dir);
 		TypeHandler<std::string>::bind(pos++, ar._enty_sel_cta_cd, pBinder, dir);
 }
 
 	static void extract(std::size_t pos, asarum::BY::JobSelCta& ar, const asarum::BY::JobSelCta& deflt, AbstractExtractor::Ptr pExtr)
 	{
-		TypeHandler<Poco::Int16>::extract(pos++, ar._opt_lck, deflt._opt_lck, pExtr);
+		TypeHandler<Poco::Int32>::extract(pos++, ar._opt_lck, deflt._opt_lck, pExtr);
 		TypeHandler<std::string>::extract(pos++, ar._job_cd, deflt._job_cd, pExtr);
 		TypeHandler<std::string>::extract(pos++, ar._enty_sel_cta_cd, deflt._enty_sel_cta_cd, pExtr);
 }
 
 	static void prepare(std::size_t pos, const asarum::BY::JobSelCta& ar, AbstractPreparator::Ptr pPrep)
 	{
-		TypeHandler<Poco::Int16>::prepare(pos++, ar._opt_lck, pPrep);
+		TypeHandler<Poco::Int32>::prepare(pos++, ar._opt_lck, pPrep);
 		TypeHandler<std::string>::prepare(pos++, ar._job_cd, pPrep);
 		TypeHandler<std::string>::prepare(pos++, ar._enty_sel_cta_cd, pPrep);
 	}

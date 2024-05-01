@@ -10,6 +10,7 @@
 
 
 #include "Poco/ActiveRecord/ActiveRecord.h"
+#include "asarum/BY/SchdDetl.h"
 #include "asarum/BY/AdtnData.h"
 
 
@@ -27,17 +28,17 @@ public:
 	JobDef(const JobDef& other);
 	~JobDef() = default;
 
-	Poco::Int16 opt_lck() const;
-	JobDef& opt_lck(Poco::Int16 value);
+	Poco::Int32 opt_lck() const;
+	JobDef& opt_lck(Poco::Int32 value);
 
 	const Poco::Nullable<std::string>& job_desc() const;
 	JobDef& job_desc(const Poco::Nullable<std::string>& value);
 
-	Poco::Int16 schd_typ_enu() const;
-	JobDef& schd_typ_enu(Poco::Int16 value);
+	Poco::Int32 schd_typ_enu() const;
+	JobDef& schd_typ_enu(Poco::Int32 value);
 
-	Poco::Int16 job_typ_enu() const;
-	JobDef& job_typ_enu(Poco::Int16 value);
+	Poco::Int32 job_typ_enu() const;
+	JobDef& job_typ_enu(Poco::Int32 value);
 
 	const Poco::Nullable<std::string>& div_cd() const;
 	JobDef& div_cd(const Poco::Nullable<std::string>& value);
@@ -75,14 +76,11 @@ public:
 	const Poco::Nullable<std::string>& outpt_file() const;
 	JobDef& outpt_file(const Poco::Nullable<std::string>& value);
 
-	const Poco::Nullable<Poco::Int32>& schd_detl_id() const;
-	JobDef& schd_detl_id(const Poco::Nullable<Poco::Int32>& value);
+	const Poco::Nullable<Poco::Int32>& prty() const;
+	JobDef& prty(const Poco::Nullable<Poco::Int32>& value);
 
-	const Poco::Nullable<Poco::Int16>& prty() const;
-	JobDef& prty(const Poco::Nullable<Poco::Int16>& value);
-
-	char actv_yn() const;
-	JobDef& actv_yn(char value);
+	const std::string& actv_yn() const;
+	JobDef& actv_yn(const std::string& value);
 
 	const Poco::Nullable<std::string>& alrt_grp_cd_success() const;
 	JobDef& alrt_grp_cd_success(const Poco::Nullable<std::string>& value);
@@ -92,6 +90,11 @@ public:
 
 	const std::string& gen_enty_output_yn() const;
 	JobDef& gen_enty_output_yn(const std::string& value);
+
+	SchdDetl::Ptr schd_detl_id() const;
+	const Poco::Nullable<Poco::Int32>& schd_detl_idID() const;
+	JobDef& schd_detl_id(SchdDetl::Ptr pObject);
+	JobDef& schd_detl_idID(const Poco::Nullable<Poco::Int32>& id);
 
 	JobDef::Ptr next_job_cd_success() const;
 	const Poco::Nullable<std::string>& next_job_cd_successID() const;
@@ -118,10 +121,10 @@ public:
 	static const std::string& table();
 
 private:
-	Poco::Int16 _opt_lck = 0;
+	Poco::Int32 _opt_lck = 0;
 	Poco::Nullable<std::string> _job_desc;
-	Poco::Int16 _schd_typ_enu = 0;
-	Poco::Int16 _job_typ_enu = 0;
+	Poco::Int32 _schd_typ_enu = 0;
+	Poco::Int32 _job_typ_enu = 0;
 	Poco::Nullable<std::string> _div_cd;
 	Poco::Nullable<std::string> _parm_1;
 	Poco::Nullable<std::string> _parm_2;
@@ -135,8 +138,8 @@ private:
 	Poco::Nullable<std::string> _tplt_file;
 	Poco::Nullable<std::string> _outpt_file;
 	Poco::Nullable<Poco::Int32> _schd_detl_id;
-	Poco::Nullable<Poco::Int16> _prty;
-	char _actv_yn = 0;
+	Poco::Nullable<Poco::Int32> _prty;
+	std::string _actv_yn;
 	Poco::Nullable<std::string> _next_job_cd_success;
 	Poco::Nullable<std::string> _next_job_cd_failure;
 	Poco::Nullable<std::string> _alrt_grp_cd_success;
@@ -148,13 +151,13 @@ private:
 };
 
 
-inline Poco::Int16 JobDef::opt_lck() const
+inline Poco::Int32 JobDef::opt_lck() const
 {
 	return _opt_lck;
 }
 
 
-inline JobDef& JobDef::opt_lck(Poco::Int16 value)
+inline JobDef& JobDef::opt_lck(Poco::Int32 value)
 {
 	_opt_lck = value;
 	return *this;
@@ -174,26 +177,26 @@ inline JobDef& JobDef::job_desc(const Poco::Nullable<std::string>& value)
 }
 
 
-inline Poco::Int16 JobDef::schd_typ_enu() const
+inline Poco::Int32 JobDef::schd_typ_enu() const
 {
 	return _schd_typ_enu;
 }
 
 
-inline JobDef& JobDef::schd_typ_enu(Poco::Int16 value)
+inline JobDef& JobDef::schd_typ_enu(Poco::Int32 value)
 {
 	_schd_typ_enu = value;
 	return *this;
 }
 
 
-inline Poco::Int16 JobDef::job_typ_enu() const
+inline Poco::Int32 JobDef::job_typ_enu() const
 {
 	return _job_typ_enu;
 }
 
 
-inline JobDef& JobDef::job_typ_enu(Poco::Int16 value)
+inline JobDef& JobDef::job_typ_enu(Poco::Int32 value)
 {
 	_job_typ_enu = value;
 	return *this;
@@ -356,39 +359,26 @@ inline JobDef& JobDef::outpt_file(const Poco::Nullable<std::string>& value)
 }
 
 
-inline const Poco::Nullable<Poco::Int32>& JobDef::schd_detl_id() const
-{
-	return _schd_detl_id;
-}
-
-
-inline JobDef& JobDef::schd_detl_id(const Poco::Nullable<Poco::Int32>& value)
-{
-	_schd_detl_id = value;
-	return *this;
-}
-
-
-inline const Poco::Nullable<Poco::Int16>& JobDef::prty() const
+inline const Poco::Nullable<Poco::Int32>& JobDef::prty() const
 {
 	return _prty;
 }
 
 
-inline JobDef& JobDef::prty(const Poco::Nullable<Poco::Int16>& value)
+inline JobDef& JobDef::prty(const Poco::Nullable<Poco::Int32>& value)
 {
 	_prty = value;
 	return *this;
 }
 
 
-inline char JobDef::actv_yn() const
+inline const std::string& JobDef::actv_yn() const
 {
 	return _actv_yn;
 }
 
 
-inline JobDef& JobDef::actv_yn(char value)
+inline JobDef& JobDef::actv_yn(const std::string& value)
 {
 	_actv_yn = value;
 	return *this;
@@ -430,6 +420,19 @@ inline const std::string& JobDef::gen_enty_output_yn() const
 inline JobDef& JobDef::gen_enty_output_yn(const std::string& value)
 {
 	_gen_enty_output_yn = value;
+	return *this;
+}
+
+
+inline const Poco::Nullable<Poco::Int32>& JobDef::schd_detl_idID() const
+{
+	return _schd_detl_id;
+}
+
+
+inline JobDef& JobDef::schd_detl_idID(const Poco::Nullable<Poco::Int32>& value)
+{
+	_schd_detl_id = value;
 	return *this;
 }
 
@@ -491,10 +494,10 @@ public:
 
 	static void bind(std::size_t pos, const asarum::BY::JobDef& ar, AbstractBinder::Ptr pBinder, AbstractBinder::Direction dir)
 	{
-		TypeHandler<Poco::Int16>::bind(pos++, ar._opt_lck, pBinder, dir);
+		TypeHandler<Poco::Int32>::bind(pos++, ar._opt_lck, pBinder, dir);
 		TypeHandler<Poco::Nullable<std::string>>::bind(pos++, ar._job_desc, pBinder, dir);
-		TypeHandler<Poco::Int16>::bind(pos++, ar._schd_typ_enu, pBinder, dir);
-		TypeHandler<Poco::Int16>::bind(pos++, ar._job_typ_enu, pBinder, dir);
+		TypeHandler<Poco::Int32>::bind(pos++, ar._schd_typ_enu, pBinder, dir);
+		TypeHandler<Poco::Int32>::bind(pos++, ar._job_typ_enu, pBinder, dir);
 		TypeHandler<Poco::Nullable<std::string>>::bind(pos++, ar._div_cd, pBinder, dir);
 		TypeHandler<Poco::Nullable<std::string>>::bind(pos++, ar._parm_1, pBinder, dir);
 		TypeHandler<Poco::Nullable<std::string>>::bind(pos++, ar._parm_2, pBinder, dir);
@@ -508,8 +511,8 @@ public:
 		TypeHandler<Poco::Nullable<std::string>>::bind(pos++, ar._tplt_file, pBinder, dir);
 		TypeHandler<Poco::Nullable<std::string>>::bind(pos++, ar._outpt_file, pBinder, dir);
 		TypeHandler<Poco::Nullable<Poco::Int32>>::bind(pos++, ar._schd_detl_id, pBinder, dir);
-		TypeHandler<Poco::Nullable<Poco::Int16>>::bind(pos++, ar._prty, pBinder, dir);
-		TypeHandler<char>::bind(pos++, ar._actv_yn, pBinder, dir);
+		TypeHandler<Poco::Nullable<Poco::Int32>>::bind(pos++, ar._prty, pBinder, dir);
+		TypeHandler<std::string>::bind(pos++, ar._actv_yn, pBinder, dir);
 		TypeHandler<Poco::Nullable<std::string>>::bind(pos++, ar._next_job_cd_success, pBinder, dir);
 		TypeHandler<Poco::Nullable<std::string>>::bind(pos++, ar._next_job_cd_failure, pBinder, dir);
 		TypeHandler<Poco::Nullable<std::string>>::bind(pos++, ar._alrt_grp_cd_success, pBinder, dir);
@@ -520,10 +523,10 @@ public:
 
 	static void extract(std::size_t pos, asarum::BY::JobDef& ar, const asarum::BY::JobDef& deflt, AbstractExtractor::Ptr pExtr)
 	{
-		TypeHandler<Poco::Int16>::extract(pos++, ar._opt_lck, deflt._opt_lck, pExtr);
+		TypeHandler<Poco::Int32>::extract(pos++, ar._opt_lck, deflt._opt_lck, pExtr);
 		TypeHandler<Poco::Nullable<std::string>>::extract(pos++, ar._job_desc, deflt._job_desc, pExtr);
-		TypeHandler<Poco::Int16>::extract(pos++, ar._schd_typ_enu, deflt._schd_typ_enu, pExtr);
-		TypeHandler<Poco::Int16>::extract(pos++, ar._job_typ_enu, deflt._job_typ_enu, pExtr);
+		TypeHandler<Poco::Int32>::extract(pos++, ar._schd_typ_enu, deflt._schd_typ_enu, pExtr);
+		TypeHandler<Poco::Int32>::extract(pos++, ar._job_typ_enu, deflt._job_typ_enu, pExtr);
 		TypeHandler<Poco::Nullable<std::string>>::extract(pos++, ar._div_cd, deflt._div_cd, pExtr);
 		TypeHandler<Poco::Nullable<std::string>>::extract(pos++, ar._parm_1, deflt._parm_1, pExtr);
 		TypeHandler<Poco::Nullable<std::string>>::extract(pos++, ar._parm_2, deflt._parm_2, pExtr);
@@ -537,8 +540,8 @@ public:
 		TypeHandler<Poco::Nullable<std::string>>::extract(pos++, ar._tplt_file, deflt._tplt_file, pExtr);
 		TypeHandler<Poco::Nullable<std::string>>::extract(pos++, ar._outpt_file, deflt._outpt_file, pExtr);
 		TypeHandler<Poco::Nullable<Poco::Int32>>::extract(pos++, ar._schd_detl_id, deflt._schd_detl_id, pExtr);
-		TypeHandler<Poco::Nullable<Poco::Int16>>::extract(pos++, ar._prty, deflt._prty, pExtr);
-		TypeHandler<char>::extract(pos++, ar._actv_yn, deflt._actv_yn, pExtr);
+		TypeHandler<Poco::Nullable<Poco::Int32>>::extract(pos++, ar._prty, deflt._prty, pExtr);
+		TypeHandler<std::string>::extract(pos++, ar._actv_yn, deflt._actv_yn, pExtr);
 		TypeHandler<Poco::Nullable<std::string>>::extract(pos++, ar._next_job_cd_success, deflt._next_job_cd_success, pExtr);
 		TypeHandler<Poco::Nullable<std::string>>::extract(pos++, ar._next_job_cd_failure, deflt._next_job_cd_failure, pExtr);
 		TypeHandler<Poco::Nullable<std::string>>::extract(pos++, ar._alrt_grp_cd_success, deflt._alrt_grp_cd_success, pExtr);
@@ -549,10 +552,10 @@ public:
 
 	static void prepare(std::size_t pos, const asarum::BY::JobDef& ar, AbstractPreparator::Ptr pPrep)
 	{
-		TypeHandler<Poco::Int16>::prepare(pos++, ar._opt_lck, pPrep);
+		TypeHandler<Poco::Int32>::prepare(pos++, ar._opt_lck, pPrep);
 		TypeHandler<Poco::Nullable<std::string>>::prepare(pos++, ar._job_desc, pPrep);
-		TypeHandler<Poco::Int16>::prepare(pos++, ar._schd_typ_enu, pPrep);
-		TypeHandler<Poco::Int16>::prepare(pos++, ar._job_typ_enu, pPrep);
+		TypeHandler<Poco::Int32>::prepare(pos++, ar._schd_typ_enu, pPrep);
+		TypeHandler<Poco::Int32>::prepare(pos++, ar._job_typ_enu, pPrep);
 		TypeHandler<Poco::Nullable<std::string>>::prepare(pos++, ar._div_cd, pPrep);
 		TypeHandler<Poco::Nullable<std::string>>::prepare(pos++, ar._parm_1, pPrep);
 		TypeHandler<Poco::Nullable<std::string>>::prepare(pos++, ar._parm_2, pPrep);
@@ -566,8 +569,8 @@ public:
 		TypeHandler<Poco::Nullable<std::string>>::prepare(pos++, ar._tplt_file, pPrep);
 		TypeHandler<Poco::Nullable<std::string>>::prepare(pos++, ar._outpt_file, pPrep);
 		TypeHandler<Poco::Nullable<Poco::Int32>>::prepare(pos++, ar._schd_detl_id, pPrep);
-		TypeHandler<Poco::Nullable<Poco::Int16>>::prepare(pos++, ar._prty, pPrep);
-		TypeHandler<char>::prepare(pos++, ar._actv_yn, pPrep);
+		TypeHandler<Poco::Nullable<Poco::Int32>>::prepare(pos++, ar._prty, pPrep);
+		TypeHandler<std::string>::prepare(pos++, ar._actv_yn, pPrep);
 		TypeHandler<Poco::Nullable<std::string>>::prepare(pos++, ar._next_job_cd_success, pPrep);
 		TypeHandler<Poco::Nullable<std::string>>::prepare(pos++, ar._next_job_cd_failure, pPrep);
 		TypeHandler<Poco::Nullable<std::string>>::prepare(pos++, ar._alrt_grp_cd_success, pPrep);

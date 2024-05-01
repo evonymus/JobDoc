@@ -35,8 +35,8 @@ public:
 	const Poco::Nullable<std::string>& adtn_data_cd() const;
 	AdtnData& adtn_data_cd(const Poco::Nullable<std::string>& value);
 
-	const Poco::Nullable<Poco::Int16>& adtn_data_enu() const;
-	AdtnData& adtn_data_enu(const Poco::Nullable<Poco::Int16>& value);
+	const Poco::Nullable<Poco::Int32>& adtn_data_typ_enu() const;
+	AdtnData& adtn_data_typ_enu(const Poco::Nullable<Poco::Int32>& value);
 
 	const Poco::Nullable<char>& actv_yn() const;
 	AdtnData& actv_yn(const Poco::Nullable<char>& value);
@@ -50,8 +50,8 @@ public:
 	const Poco::Nullable<Poco::DateTime>& updt_dtt() const;
 	AdtnData& updt_dtt(const Poco::Nullable<Poco::DateTime>& value);
 
-	const Poco::Nullable<Poco::Int16>& tplt_fmt_typ_enu() const;
-	AdtnData& tplt_fmt_typ_enu(const Poco::Nullable<Poco::Int16>& value);
+	const Poco::Nullable<Poco::Int32>& tplt_fmt_typ_enu() const;
+	AdtnData& tplt_fmt_typ_enu(const Poco::Nullable<Poco::Int32>& value);
 
 	static Ptr find(Poco::ActiveRecord::Context::Ptr pContext, const ID& id);
 
@@ -66,12 +66,12 @@ private:
 	std::string _data;
 	Poco::DateTime _crdt_dtt;
 	Poco::Nullable<std::string> _adtn_data_cd;
-	Poco::Nullable<Poco::Int16> _adtn_data_enu;
+	Poco::Nullable<Poco::Int32> _adtn_data_typ_enu;
 	Poco::Nullable<char> _actv_yn;
 	Poco::Nullable<std::string> _crtd_usr_cd;
 	Poco::Nullable<std::string> _updt_usr_cd;
 	Poco::Nullable<Poco::DateTime> _updt_dtt;
-	Poco::Nullable<Poco::Int16> _tplt_fmt_typ_enu;
+	Poco::Nullable<Poco::Int32> _tplt_fmt_typ_enu;
 
 	friend class Poco::Data::TypeHandler<AdtnData>;
 };
@@ -116,15 +116,15 @@ inline AdtnData& AdtnData::adtn_data_cd(const Poco::Nullable<std::string>& value
 }
 
 
-inline const Poco::Nullable<Poco::Int16>& AdtnData::adtn_data_enu() const
+inline const Poco::Nullable<Poco::Int32>& AdtnData::adtn_data_typ_enu() const
 {
-	return _adtn_data_enu;
+	return _adtn_data_typ_enu;
 }
 
 
-inline AdtnData& AdtnData::adtn_data_enu(const Poco::Nullable<Poco::Int16>& value)
+inline AdtnData& AdtnData::adtn_data_typ_enu(const Poco::Nullable<Poco::Int32>& value)
 {
-	_adtn_data_enu = value;
+	_adtn_data_typ_enu = value;
 	return *this;
 }
 
@@ -181,13 +181,13 @@ inline AdtnData& AdtnData::updt_dtt(const Poco::Nullable<Poco::DateTime>& value)
 }
 
 
-inline const Poco::Nullable<Poco::Int16>& AdtnData::tplt_fmt_typ_enu() const
+inline const Poco::Nullable<Poco::Int32>& AdtnData::tplt_fmt_typ_enu() const
 {
 	return _tplt_fmt_typ_enu;
 }
 
 
-inline AdtnData& AdtnData::tplt_fmt_typ_enu(const Poco::Nullable<Poco::Int16>& value)
+inline AdtnData& AdtnData::tplt_fmt_typ_enu(const Poco::Nullable<Poco::Int32>& value)
 {
 	_tplt_fmt_typ_enu = value;
 	return *this;
@@ -215,12 +215,12 @@ public:
 		TypeHandler<std::string>::bind(pos++, ar._data, pBinder, dir);
 		TypeHandler<Poco::DateTime>::bind(pos++, ar._crdt_dtt, pBinder, dir);
 		TypeHandler<Poco::Nullable<std::string>>::bind(pos++, ar._adtn_data_cd, pBinder, dir);
-		TypeHandler<Poco::Nullable<Poco::Int16>>::bind(pos++, ar._adtn_data_enu, pBinder, dir);
+		TypeHandler<Poco::Nullable<Poco::Int32>>::bind(pos++, ar._adtn_data_typ_enu, pBinder, dir);
 		TypeHandler<Poco::Nullable<char>>::bind(pos++, ar._actv_yn, pBinder, dir);
 		TypeHandler<Poco::Nullable<std::string>>::bind(pos++, ar._crtd_usr_cd, pBinder, dir);
 		TypeHandler<Poco::Nullable<std::string>>::bind(pos++, ar._updt_usr_cd, pBinder, dir);
 		TypeHandler<Poco::Nullable<Poco::DateTime>>::bind(pos++, ar._updt_dtt, pBinder, dir);
-		TypeHandler<Poco::Nullable<Poco::Int16>>::bind(pos++, ar._tplt_fmt_typ_enu, pBinder, dir);
+		TypeHandler<Poco::Nullable<Poco::Int32>>::bind(pos++, ar._tplt_fmt_typ_enu, pBinder, dir);
 }
 
 	static void extract(std::size_t pos, asarum::BY::AdtnData& ar, const asarum::BY::AdtnData& deflt, AbstractExtractor::Ptr pExtr)
@@ -228,12 +228,12 @@ public:
 		TypeHandler<std::string>::extract(pos++, ar._data, deflt._data, pExtr);
 		TypeHandler<Poco::DateTime>::extract(pos++, ar._crdt_dtt, deflt._crdt_dtt, pExtr);
 		TypeHandler<Poco::Nullable<std::string>>::extract(pos++, ar._adtn_data_cd, deflt._adtn_data_cd, pExtr);
-		TypeHandler<Poco::Nullable<Poco::Int16>>::extract(pos++, ar._adtn_data_enu, deflt._adtn_data_enu, pExtr);
+		TypeHandler<Poco::Nullable<Poco::Int32>>::extract(pos++, ar._adtn_data_typ_enu, deflt._adtn_data_typ_enu, pExtr);
 		TypeHandler<Poco::Nullable<char>>::extract(pos++, ar._actv_yn, deflt._actv_yn, pExtr);
 		TypeHandler<Poco::Nullable<std::string>>::extract(pos++, ar._crtd_usr_cd, deflt._crtd_usr_cd, pExtr);
 		TypeHandler<Poco::Nullable<std::string>>::extract(pos++, ar._updt_usr_cd, deflt._updt_usr_cd, pExtr);
 		TypeHandler<Poco::Nullable<Poco::DateTime>>::extract(pos++, ar._updt_dtt, deflt._updt_dtt, pExtr);
-		TypeHandler<Poco::Nullable<Poco::Int16>>::extract(pos++, ar._tplt_fmt_typ_enu, deflt._tplt_fmt_typ_enu, pExtr);
+		TypeHandler<Poco::Nullable<Poco::Int32>>::extract(pos++, ar._tplt_fmt_typ_enu, deflt._tplt_fmt_typ_enu, pExtr);
 }
 
 	static void prepare(std::size_t pos, const asarum::BY::AdtnData& ar, AbstractPreparator::Ptr pPrep)
@@ -241,12 +241,12 @@ public:
 		TypeHandler<std::string>::prepare(pos++, ar._data, pPrep);
 		TypeHandler<Poco::DateTime>::prepare(pos++, ar._crdt_dtt, pPrep);
 		TypeHandler<Poco::Nullable<std::string>>::prepare(pos++, ar._adtn_data_cd, pPrep);
-		TypeHandler<Poco::Nullable<Poco::Int16>>::prepare(pos++, ar._adtn_data_enu, pPrep);
+		TypeHandler<Poco::Nullable<Poco::Int32>>::prepare(pos++, ar._adtn_data_typ_enu, pPrep);
 		TypeHandler<Poco::Nullable<char>>::prepare(pos++, ar._actv_yn, pPrep);
 		TypeHandler<Poco::Nullable<std::string>>::prepare(pos++, ar._crtd_usr_cd, pPrep);
 		TypeHandler<Poco::Nullable<std::string>>::prepare(pos++, ar._updt_usr_cd, pPrep);
 		TypeHandler<Poco::Nullable<Poco::DateTime>>::prepare(pos++, ar._updt_dtt, pPrep);
-		TypeHandler<Poco::Nullable<Poco::Int16>>::prepare(pos++, ar._tplt_fmt_typ_enu, pPrep);
+		TypeHandler<Poco::Nullable<Poco::Int32>>::prepare(pos++, ar._tplt_fmt_typ_enu, pPrep);
 	}
 };
 

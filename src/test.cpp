@@ -13,7 +13,7 @@ void test_getting_childs() {
    std::vector<by::JobDef::Ptr> result{};
    getter.getChildJobs("SDL_STR_SEU_UPD_BBUILD", result);
    for(const auto i: result) {
-    std::cout << i->id() << std::endl;
+    std::cout << i->id() <<  '\n';
 
    }
 
@@ -64,7 +64,7 @@ void test_getting_all_jobs() {
 
 void Test::runTest() {
    std::cout << "test run\n"; 
-  // test_getting_childs();
+   //test_getting_childs();
   //test_get_columns();
   test_gen_script();
 }

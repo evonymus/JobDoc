@@ -3,6 +3,7 @@
 #include <Poco/DateTime.h>
 #include <Poco/DateTimeFormat.h>
 #include <exception>
+#include <typeinfo>
 
 namespace by = asarum::BY;
 namespace pa = Poco::ActiveRecord;
@@ -50,7 +51,9 @@ void by::JobScriptWriter::writeOrclEscScript(const by::EntySelCta::Ptr esc_ptr)
               << esc_ptr->opt_lck() << ","
               << esc_ptr->enty_sel_cta_desc() << ",";
 }
-
+/// @brief function writes to the stream specified in the constructor, INSERT statement creating a 
+/// JOB_DEFN_T record.
+/// @param job_ptr pointer to the JobDef object, with defintion of the job.
 void asarum::BY::JobScriptWriter::writeOrclJobScript(const by::JobDef::Ptr job_ptr)
 {
     *mp_out << JOB_DEF_INSERT;
@@ -60,7 +63,6 @@ void asarum::BY::JobScriptWriter::writeOrclJobScript(const by::JobDef::Ptr job_p
         *mp_out << ", " << job_ptr->columns()[i];
     }
     *mp_out << ")\nVALUES ( '" << job_ptr->id() << "'";
-
 		sql_cnv(job_ptr->opt_lck(), mp_out);
 		sql_cnv(job_ptr->job_desc(), mp_out);
 		sql_cnv(job_ptr->schd_typ_enu(), mp_out);
@@ -77,15 +79,33 @@ void asarum::BY::JobScriptWriter::writeOrclJobScript(const by::JobDef::Ptr job_p
 		sql_cnv(job_ptr->updt_usr_cd(), mp_out);
 		sql_cnv(job_ptr->tplt_file(), mp_out);
 		sql_cnv(job_ptr->outpt_file(), mp_out);
-		sql_cnv(job_ptr->schd_detl_id(), mp_out);
+
+    if(job_ptr->schd_detl_id() != nullptr){
+       sql_cnv(job_ptr->schd_detl_id()->id(), mp_out);
+    } else {
+      *mp_out << ", NULL";
+    }
 		sql_cnv(job_ptr->prty(), mp_out);
 		sql_cnv(job_ptr->actv_yn(), mp_out);
-		sql_cnv(job_ptr->next_job_cd_success(), mp_out);
-		sql_cnv(job_ptr->next_job_cd_failure(), mp_out);
+  
+    if(job_ptr->next_job_cd_success() != nullptr) {
+		  sql_cnv(job_ptr->next_job_cd_success()->id(), mp_out);
+    } else {
+      *mp_out << ", NULL";
+    }
+    if(job_ptr->next_job_cd_failure() != nullptr) {
+		  sql_cnv(job_ptr->next_job_cd_failure()->id(), mp_out);
+    } else {
+      *mp_out << ", NULL";
+    }
 		sql_cnv(job_ptr->alrt_grp_cd_success(), mp_out);
 		sql_cnv(job_ptr->alrt_grp_cd_failure(), mp_out);
 		sql_cnv(job_ptr->gen_enty_output_yn(), mp_out);
-		sql_cnv(job_ptr->tplt_id(), mp_out);
+    if(job_ptr->tplt_id() != nullptr) {
+      sql_cnv(job_ptr->tplt_id()->id(), mp_out); 
+    } else {
+      *mp_out << ", NULL";
+    }
     *mp_out << ");\n";
 }
 
@@ -180,7 +200,7 @@ void asarum::BY::JobScriptWriter::sql_cnv(const std::any var, std::ostream *p_ou
     } else {
         *p_out << ", " << *ptr << "";
     }
-  } else if( auto ptr = std::any_cast<Poco::Nullable<Poco::Int32>>(&var)) {
+  } else if( auto ptr = std::any_cast<const Poco::Nullable<Poco::Int32>>(&var)) {
     if(ptr->isNull()) {
          *p_out << ", NULL";
     } else {
@@ -216,7 +236,8 @@ void asarum::BY::JobScriptWriter::sql_cnv(const std::any var, std::ostream *p_ou
     } else {
       *p_out << ", " << "to_date(" << fmt::format(*ptr, DATE_FORMAT) << ", 'yyyy-mm-dd HH24:mi:ss')";
     }
-  } else {
+  } 
+  else {
     const std::string msg{"Could not find find SQL conversion for the type: "};
     *mp_out << msg << '\n';
     throw std::invalid_argument(msg);
