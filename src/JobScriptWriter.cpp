@@ -15,11 +15,11 @@ using std::shared_ptr;
 using std::type_info;
 using fmt=Poco::DateTimeFormatter;
 
-constexpr char *ESC_INSERT = "-- If ESC doesn't exist, create it\n INSERT INTO ENTY_SEL_CTA_T (";
-constexpr char *JOB_DEF_INSERT = "-- Insert the parent job definition\n"
+constexpr char *ESC_INSERT = "\n-- If ESC doesn't exist, create it\n INSERT INTO ENTY_SEL_CTA_T (";
+constexpr char *JOB_DEF_INSERT = "\n-- Insert the parent job definition\n"
                                  "INSERT INTO JOB_DEFN_T (";
 
-constexpr char *SEL_CTA_INSERT = "-- Create mapping JOB->ESC\n"
+constexpr char *SEL_CTA_INSERT = "\n-- Create mapping JOB->ESC\n"
                                  "INSERT INTO JOB_SEL_CTA_T (JOB_SEL_CTA_ID, OPT_LCK, JOB_CD, ENTY_SEL_CTA_CD)\n";
 
 /// constructor
@@ -182,27 +182,42 @@ void asarum::BY::JobScriptWriter::writeOrclTmplScript(const asarum::BY::AdtnData
 void asarum::BY::JobScriptWriter::writeOrclJobSelCtaScript(const asarum::BY::JobDef::Ptr job_ptr)
 {
   Poco::ActiveRecord::Query<by::JobSelCta> query(job_ptr->context());
+  constexpr int OPT_LCK = 1;
   const std::string where = "job_cd ='" + job_ptr->id() + "'";
   const auto result = query
   .where(where)
   .execute();
 
   for(const auto i: result) {
+    // write ESC query defintion to ENTY_SEL_CTA_T
     writeOrclEscScript(i->enty_sel_cta_cd());
+
+    *mp_out << "\n-------------- creating record in JOB_SEL_CTA_T ---------------\n"
+    << "INSERT INTO JOB_SEL_CTA_T (";
+    *mp_out << i->columns()[0];
+    for(auto j=1; j < i->columns().size(); j++) {
+      *mp_out << ", " << i->columns()[j];
+    }
+    *mp_out << ")\nSELECT " << i->id();
+    sql_cnv(i->opt_lck(), mp_out);
+    sql_cnv(i->job_cd()->id(), mp_out);
+    sql_cnv(i->enty_sel_cta_cd()->id(), mp_out);
+    *mp_out << "\nFROM DUAL WHERE NOT EXISTS(SELECT 1 FROM JOB_SEL_CTA_T WHERE JOB_SEL_CTA_ID ="
+    << i->id() << ");";
   }
 }
 
 /************************** writeOrclEscScript ******************/
 
 void asarum::BY::JobScriptWriter::writeOrclEscScript(const asarum::BY::EntySelCta::Ptr esc_ptr) {
-  *mp_out << "-- create ESC Query if it does not exist\n";
+  *mp_out << "\n-- create ESC Query if it does not exist";
   *mp_out << "\nINSERT INTO ENTY_SEL_CTA_T (" ;
   // column names are stored in columns() vector;
   *mp_out << esc_ptr->columns()[0];
   for(auto i=1; i < esc_ptr->columns().size(); i++) {
     *mp_out << ", " << esc_ptr->columns()[i];
   }
-  *mp_out << ")\nSELECT " << esc_ptr->id();
+  *mp_out << ")\nSELECT '" << esc_ptr->id() << "'";
   sql_cnv(esc_ptr->opt_lck(), mp_out);
   sql_cnv(esc_ptr->enty_sel_cta_desc(), mp_out);
   sql_cnv(esc_ptr->div_cd(), mp_out);

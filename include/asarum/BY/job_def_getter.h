@@ -26,8 +26,16 @@ namespace BY {
         /// @return Poco::AutoPtr pointer to the job 
         Poco::AutoPtr<asarum::BY::JobDef> getJobDef(const char* job_name);
 
+        /// @brief function gets data stored in JOB_SEL_CTA_T, table linking 
+        /// jobs with EntitySelectionCriteria (ESC)
+        /// @return vector of JobSelCta pointers
+        /// @see asarum::BY::JobSelCta 
         std::vector<Poco::AutoPtr<asarum::BY::JobSelCta>> getJobSelCtas();
 
+        /// @brief function return the content of ENTY_SEL_CTA_T table 
+        /// i.e., the table storing ESC queries
+        /// @return vector of EntySelCta pointers 
+        /// @see asarum::BY:EntySelCta
         std::vector<Poco::AutoPtr<asarum::BY::EntySelCta>> getEntySelCtas();
 
         /// @brief function get the list of the jobs having a schedule. Those ones 

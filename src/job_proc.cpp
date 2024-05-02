@@ -268,6 +268,9 @@ void by::JobProc::printGroupDescription(const JobGroup &gr,
      << gr.m_jobs.at(0)->m_job_descr << "\n\n"
      << "## Components\n\n";
 }
+
+//**************************************************************
+
 /// the function print outs the table with information about the group to
 ///  the stream given as the parameter
 ///  @param gr job group for with the table is to be printed out
