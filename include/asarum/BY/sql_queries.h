@@ -1,5 +1,45 @@
 #pragma once
-const char *JOB_DEFS = R"SQL(
+
+
+constexpr char* JOB_DEFN_T_CREATE = R"SQL(
+CREATE TABLE 'JOB_DEFN_T' ('JOB_CD' TEXT,'OPT_LCK' NUMERIC,'
+JOB_DESC' TEXT,'SCHD_TYP_ENU' NUMERIC,'JOB_TYP_ENU' NUMERIC,
+'DIV_CD' TEXT,'PARM_1' TEXT,'PARM_2' TEXT,'PARM_3' TEXT,'PAR
+M_4' TEXT,'PARM_5' TEXT,'CRTD_DTT' TEXT,'CRTD_USR_CD' TEXT,'
+UPDT_DTT' TEXT,'UPDT_USR_CD' TEXT,'TPLT_FILE' TEXT,'OUTPT_FI
+LE' TEXT,'SCHD_DETL_ID' NUMERIC,'PRTY' NUMERIC,'ACTV_YN' TEX
+T,'NEXT_JOB_CD_SUCCESS' TEXT,'NEXT_JOB_CD_FAILURE' TEXT,'ALR
+T_GRP_CD_SUCCESS' TEXT,'ALRT_GRP_CD_FAILURE' TEXT,'GEN_ENTY_
+OUTPUT_YN' TEXT,'TPLT_ID' NUMERIC);                          
+)SQL";
+
+//**************************************************************
+constexpr char* ENTY_SEL_CTA_T_CREATE = R"SQL(
+CREATE TABLE 'ENTY_SEL_CTA_T' ('ENTY_SEL_CTA_CD' TEXT,'OPT_L
+CK' NUMERIC,'ENTY_SEL_CTA_DESC' TEXT,'DIV_CD' TEXT,'STR_ID_Y
+N' TEXT,'ENTY_TYP_ENU' NUMERIC,'CTA_SQL' TEXT,'CTA_FIND_ENTY
+' TEXT,'CRTD_DTT' TEXT,'CRTD_USR_CD' TEXT,'UPDT_DTT' TEXT,'U
+PDT_USR_CD' TEXT,'MAX_ENTYS' NUMERIC);
+)SQL";
+
+//**************************************************************
+
+constexpr char* JOB_SEL_CTA_T_CREATE = R"SQL(
+CREATE TABLE 'JOB_SEL_CTA_T' ('JOB_SEL_CTA_ID' NUMERIC,'OPT_
+LCK' NUMERIC,'JOB_CD' TEXT,'ENTY_SEL_CTA_CD' TEXT);          
+)SQL";
+
+//**************************************************************
+constexpr char* SCHD_DETL_T_CREATE = R"SQL(
+CREATE TABLE 'SCHD_DETL_T' ('SCHD_DETL_ID' NUMERIC,'OPT_LCK'
+ NUMERIC,'RCURNCE_TYP_ENU' NUMERIC,'EFCT_DT' TEXT,'EXPD_DT' 
+TEXT,'STRT_TM' TEXT,'END_TM' TEXT,'DAY_OF_MTH' NUMERIC,'ITVL
+' NUMERIC,'FXD_ITVL_SRC_ENU' NUMERIC,'BUS_DAYS_CD' TEXT,'BUS
+_MTHS_CD' TEXT);
+)SQL";
+
+//**************************************************************
+constexpr char *JOB_DEFS_QRY = R"SQL(
 with RECURSIVE jobs(
   master,level , job_cd, child, sub_jobs 
   , ESC, TEMPL , sql, xml, subst 

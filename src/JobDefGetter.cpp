@@ -1,4 +1,4 @@
-#include "asarum/BY/job_def_getter.h"
+#include "asarum/BY/JobDefGetter.h"
 #include <Poco/ActiveRecord/Query.h>
 #include <exception>
 

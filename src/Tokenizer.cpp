@@ -1,5 +1,5 @@
-#include "asarum/BY/tokenizer.h"
-#include "asarum/BY/find_str_tfunc.h"
+#include "asarum/BY/Tokenizer.h"
+#include "asarum/BY/FindStrTFunc.h"
 #include <boost/tokenizer.hpp>
 
 namespace by = asarum::BY;

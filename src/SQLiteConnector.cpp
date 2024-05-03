@@ -1,4 +1,4 @@
-#include "asarum/BY/sqlite_connector.h"
+#include "asarum/BY/SQLiteConnector.h"
 #include "asarum/BY/job.h"
 #include "asarum/BY/job_group.h"
 #include "asarum/BY/sql_queries.h"
@@ -31,7 +31,7 @@ void by::SQLiteConnector::getJobs(
   Statement select(*m_session_ptr);
   std::shared_ptr<by::JobGroup> current_group = nullptr;
 
-  select << JOB_DEFS, into(fld[0]), into(fld[1]), into(fld[2]), into(fld[3]),
+  select << JOB_DEFS_QRY, into(fld[0]), into(fld[1]), into(fld[2]), into(fld[3]),
       into(fld[4]), into(fld[5]), into(fld[6]), into(fld[7]), into(fld[8]),
       into(fld[9]), into(fld[10]), into(fld[11]), into(fld[12]), into(fld[13]),
       range(0, 1);

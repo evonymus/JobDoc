@@ -3,7 +3,6 @@
 #include <string>
 
 #include "asarum/BY/menu.h"
-#include "asarum/BY/odbc_connector.h"
 #include "test.h"
 namespace by = asarum::BY;
 

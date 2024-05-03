@@ -29,21 +29,23 @@ find_package(Poco REQUIRED COMPONENTS Foundation Data DataSQLite DataODBC Active
 find_package(Boost COMPONENTS filesystem program_options REQUIRED )
 
 add_executable( ${EXEC} 
-  ${SRC_DIR}/jobdoc.cpp
-  ${SRC_DIR}/find_str_tfunc.cpp
+  ${SRC_DIR}/main.cpp
+  ${SRC_DIR}/FindStrTFunc.cpp
   ${SRC_DIR}/job.cpp
   ${SRC_DIR}/job_proc.cpp
-  ${SRC_DIR}/tokenizer.cpp
+  ${SRC_DIR}/Tokenizer.cpp
   ${SRC_DIR}/job_group.cpp
-  ${SRC_DIR}/sqlite_connector.cpp
-  ${SRC_DIR}/odbc_connector.cpp
+  ${SRC_DIR}/SQLiteConnector.cpp
+  ${SRC_DIR}/OdbcConnector.cpp
   ${SRC_DIR}/jobDef.cpp
   ${SRC_DIR}/JobSelCta.cpp
   ${SRC_DIR}/EntySelCta.cpp
   ${SRC_DIR}/AdtnData.cpp
   ${SRC_DIR}/SchdDetl.cpp
-  ${SRC_DIR}/job_def_getter.cpp
+  ${SRC_DIR}/JobDefGetter.cpp
   ${SRC_DIR}/JobScriptWriter.cpp
+  ${SRC_DIR}/DocWriter.cpp
+  ${SRC_DIR}/DataCopier.cpp
   ${SRC_DIR}/test.cpp
   ${SRC_DIR}/menu.cpp)
 

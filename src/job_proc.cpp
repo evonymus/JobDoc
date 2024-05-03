@@ -1,5 +1,5 @@
 #include "asarum/BY/job_proc.h"
-#include "asarum/BY/sqlite_connector.h"
+#include "asarum/BY/SQLiteConnector.h"
 #include <algorithm>
 #include <boost/filesystem/operations.hpp>
 #include <boost/tokenizer.hpp>

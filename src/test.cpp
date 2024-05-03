@@ -1,10 +1,10 @@
 #include "test.h"
 #include <iostream>
-#include "asarum/BY/job_def_getter.h"
-#include "asarum/BY/sqlite_connector.h"
-#include "asarum/BY/job_def_getter.h"
+#include "asarum/BY/JobDefGetter.h"
+#include "asarum/BY/SQLiteConnector.h"
 #include "asarum/BY/JobScriptWriter.h"
 #include "asarum/BY/EntySelCta.h"
+#include "asarum/BY/DataCopier.h"
 
 namespace by=asarum::BY;
 
@@ -64,9 +64,16 @@ void test_getting_all_jobs() {
    }
 }
 
+void test_CreateDestDB() {
+   by::DataCopier copier("DSN=ROE", "MY_DB.db");
+   copier.createDestDB();
+   copier.copyData();
+}
+
 void Test::runTest() {
    std::cout << "test run\n"; 
    //test_getting_childs();
   //test_get_columns();
-  test_gen_script();
+  //test_gen_script();
+  test_CreateDestDB();
 }

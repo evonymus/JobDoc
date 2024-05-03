@@ -1,4 +1,4 @@
-#include "asarum/BY/find_str_tfunc.h"
+#include "asarum/BY/FindStrTFunc.h"
 #include <algorithm>
 #include <string>
 
