@@ -35,8 +35,8 @@ public:
 	const Poco::Nullable<std::string>& div_cd() const;
 	EntySelCta& div_cd(const Poco::Nullable<std::string>& value);
 
-	const Poco::Nullable<char>& str_id_yn() const;
-	EntySelCta& str_id_yn(const Poco::Nullable<char>& value);
+	const Poco::Nullable<std::string>& str_id_yn() const;
+	EntySelCta& str_id_yn(const Poco::Nullable<std::string>& value);
 
 	Poco::Int32 enty_typ_enu() const;
 	EntySelCta& enty_typ_enu(Poco::Int32 value);
@@ -75,7 +75,7 @@ private:
 	Poco::Int32 _opt_lck = 0;
 	Poco::Nullable<std::string> _enty_sel_cta_desc;
 	Poco::Nullable<std::string> _div_cd;
-	Poco::Nullable<char> _str_id_yn;
+	Poco::Nullable<std::string> _str_id_yn;
 	Poco::Int32 _enty_typ_enu = 0;
 	Poco::Nullable<std::string> _cta_sql;
 	Poco::Nullable<std::string> _cta_find_enty;
@@ -128,13 +128,13 @@ inline EntySelCta& EntySelCta::div_cd(const Poco::Nullable<std::string>& value)
 }
 
 
-inline const Poco::Nullable<char>& EntySelCta::str_id_yn() const
+inline const Poco::Nullable<std::string>& EntySelCta::str_id_yn() const
 {
 	return _str_id_yn;
 }
 
 
-inline EntySelCta& EntySelCta::str_id_yn(const Poco::Nullable<char>& value)
+inline EntySelCta& EntySelCta::str_id_yn(const Poco::Nullable<std::string>& value)
 {
 	_str_id_yn = value;
 	return *this;
@@ -266,7 +266,7 @@ public:
 		TypeHandler<Poco::Int32>::bind(pos++, ar._opt_lck, pBinder, dir);
 		TypeHandler<Poco::Nullable<std::string>>::bind(pos++, ar._enty_sel_cta_desc, pBinder, dir);
 		TypeHandler<Poco::Nullable<std::string>>::bind(pos++, ar._div_cd, pBinder, dir);
-		TypeHandler<Poco::Nullable<char>>::bind(pos++, ar._str_id_yn, pBinder, dir);
+		TypeHandler<Poco::Nullable<std::string>>::bind(pos++, ar._str_id_yn, pBinder, dir);
 		TypeHandler<Poco::Int32>::bind(pos++, ar._enty_typ_enu, pBinder, dir);
 		TypeHandler<Poco::Nullable<std::string>>::bind(pos++, ar._cta_sql, pBinder, dir);
 		TypeHandler<Poco::Nullable<std::string>>::bind(pos++, ar._cta_find_enty, pBinder, dir);
@@ -282,7 +282,7 @@ public:
 		TypeHandler<Poco::Int32>::extract(pos++, ar._opt_lck, deflt._opt_lck, pExtr);
 		TypeHandler<Poco::Nullable<std::string>>::extract(pos++, ar._enty_sel_cta_desc, deflt._enty_sel_cta_desc, pExtr);
 		TypeHandler<Poco::Nullable<std::string>>::extract(pos++, ar._div_cd, deflt._div_cd, pExtr);
-		TypeHandler<Poco::Nullable<char>>::extract(pos++, ar._str_id_yn, deflt._str_id_yn, pExtr);
+		TypeHandler<Poco::Nullable<std::string>>::extract(pos++, ar._str_id_yn, deflt._str_id_yn, pExtr);
 		TypeHandler<Poco::Int32>::extract(pos++, ar._enty_typ_enu, deflt._enty_typ_enu, pExtr);
 		TypeHandler<Poco::Nullable<std::string>>::extract(pos++, ar._cta_sql, deflt._cta_sql, pExtr);
 		TypeHandler<Poco::Nullable<std::string>>::extract(pos++, ar._cta_find_enty, deflt._cta_find_enty, pExtr);
@@ -298,7 +298,7 @@ public:
 		TypeHandler<Poco::Int32>::prepare(pos++, ar._opt_lck, pPrep);
 		TypeHandler<Poco::Nullable<std::string>>::prepare(pos++, ar._enty_sel_cta_desc, pPrep);
 		TypeHandler<Poco::Nullable<std::string>>::prepare(pos++, ar._div_cd, pPrep);
-		TypeHandler<Poco::Nullable<char>>::prepare(pos++, ar._str_id_yn, pPrep);
+		TypeHandler<Poco::Nullable<std::string>>::prepare(pos++, ar._str_id_yn, pPrep);
 		TypeHandler<Poco::Int32>::prepare(pos++, ar._enty_typ_enu, pPrep);
 		TypeHandler<Poco::Nullable<std::string>>::prepare(pos++, ar._cta_sql, pPrep);
 		TypeHandler<Poco::Nullable<std::string>>::prepare(pos++, ar._cta_find_enty, pPrep);
