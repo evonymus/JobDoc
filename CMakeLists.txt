@@ -47,7 +47,7 @@ add_executable( ${EXEC}
   ${SRC_DIR}/DocWriter.cpp
   ${SRC_DIR}/DataCopier.cpp
   ${SRC_DIR}/test.cpp
-  ${SRC_DIR}/menu.cpp)
+  ${SRC_DIR}/Menu.cpp)
 
 target_include_directories(${EXEC} PRIVATE  ${Boost_INCLUDE_DIR} ${Poco_INCLUDE_DIR})
 target_link_libraries(${EXEC} PRIVATE ${Boost_LIBRARIES} Poco::Foundation Poco::Data Poco::DataSQLite Poco::DataODBC Poco::ActiveRecord)

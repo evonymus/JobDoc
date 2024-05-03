@@ -36,6 +36,9 @@ asarum::BY::JobScriptWriter::JobScriptWriter(std::ostream &r_out) : mp_out{&r_ou
 
 void by::JobScriptWriter::writeOrclJobSetScript(const std::vector<asarum::BY::JobDef::Ptr> &r_jobs)
 {
+  if(r_jobs.size() ==  0 ) {
+    throw std::invalid_argument("The passed vector has not jobs");
+  }
   *mp_out << "\n-- Start transaction\nBEGIN\n"
           << "\n-- Save point, transaction can be rolled back upon error\nSAVEPOINT start_transaction\n";
 
@@ -51,11 +54,15 @@ void by::JobScriptWriter::writeOrclJobSetScript(const std::vector<asarum::BY::Jo
           << "\n\tWHEN OTHERS THEN"
           << "\n\t\tROLLBACK TO start_transaction;"
           << "\n\t\tRAISE;\n"
-          << "\nEND;\n";
+          << "\nEND;\n" << std::endl;
 }
 
 void asarum::BY::JobScriptWriter::writeOrclJobSetScript(const char *parent_job_name, std::shared_ptr<Poco::Data::Session> session_ptr)
 {
+  if(session_ptr == nullptr) {
+    throw new std::invalid_argument("pointer to the session is null");
+  }
+
   by::JobDefGetter job_getter(session_ptr);
 
   std::vector<by::JobDef::Ptr> jobs{};

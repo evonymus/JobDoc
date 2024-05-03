@@ -8,7 +8,7 @@ namespace pa=Poco::ActiveRecord;
 using namespace std;
 
 /// @brief maximal number of child jobs. Used to react in case jobs are infinitely looping.
-constexpr unsigned MAX_CHILDREN_COUNT = 100;
+constexpr unsigned MAX_CHILDREN_COUNT = 10000;
 
 by::JobDefGetter ::JobDefGetter(std::shared_ptr<Poco::Data::Session> session_ptr)   {
         m_session_ptr = session_ptr;
