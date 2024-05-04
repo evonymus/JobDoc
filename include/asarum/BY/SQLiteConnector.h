@@ -12,15 +12,13 @@
  */
 #include "job_group.h"
 #include <Poco/Data/Session.h>
+#include "BaseConnector.h"
 #include <memory>
 
 namespace asarum {
 namespace BY {
-class SQLiteConnector {
+class SQLiteConnector : public BaseConnector{
 public:
-  /// @brief pointer to Poco::Data::Session object;
-  std::shared_ptr<Poco::Data::Session> m_session_ptr;
-
   /**
    * @brief Construct a new SQLiteConnector object
    *

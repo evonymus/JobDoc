@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <Poco/Data/Session.h>
+#include "BaseConnector.h"
 /**
  * @file  odbc_connector.h
  * @author Marek Dziekanski 
@@ -10,11 +11,8 @@
 namespace asarum {
 namespace BY {
 
-class OdbcConnector {
+class OdbcConnector : public BaseConnector {
 public:
-  /// @brief pointer to Poco::Data::Session object;
-  std::shared_ptr<Poco::Data::Session> m_session_ptr;
-
   /**
    * @brief Construct a new Odbc Connector object
    * 

@@ -19,8 +19,8 @@ constexpr char *SCRIPT_DIR = "/Scripts";
 /// constructor
 /// @param argc number of arguments, taken from main
 /// @parm *argv[] list of arguments taken from main
-by::Menu::Menu(int argc, char *argv[])
-    : m_generic_options("Generic Options"), m_source_options("Source of Data"),
+by::Menu::Menu(int argc, char *argv[]) : m_connector_ptr{nullptr},
+     m_generic_options("Generic Options"), m_source_options("Source of Data"),
       m_db_options("DB Connection"), m_code_options("Code Generation"),
       m_output_options("Output Files Options"),
       m_doc_options("Docs Generation"), m_cmd_line_options(),
@@ -305,3 +305,5 @@ bool by::Menu::fileExists(const char *fileName)
 {
   return boost::filesystem::exists(fileName);
 }
+
+//***************** Connectors *************************

@@ -64,6 +64,16 @@ void test_getting_all_jobs() {
    }
 }
 
+void test_job_frm_odbs() {
+   by::OdbcConnector conn{"DSN=JOBS;Uid=trans_manager_scn;Pwd=sql"};
+   std::cout << "\nconn created\n";
+   by::JobDefGetter getter{conn.m_session_ptr};
+   auto res = getter.getAllJobDefs();
+   for(const auto i: res) {
+      std::cout << i->id() << '\n';
+   }
+}
+
 void test_CreateDestDB() {
    by::DataCopier copier("DSN=ROE", "MY_DB.db");
    copier.createDestDB();
@@ -75,5 +85,6 @@ void Test::runTest() {
    //test_getting_childs();
   //test_get_columns();
   //test_gen_script();
-  test_CreateDestDB();
+  //test_CreateDestDB();
+  test_job_frm_odbs();
 }

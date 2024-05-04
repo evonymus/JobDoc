@@ -15,6 +15,10 @@
 #include <boost/program_options/positional_options.hpp>
 #include <memory>
 #include <string>
+#include "BaseConnector.h"
+#include "SQLiteConnector.h"
+#include "OdbcConnector.h"
+#include <Poco/Data/Session.h>
 
 namespace po = boost::program_options;
 namespace asarum {
@@ -43,6 +47,7 @@ public:
    *************************************************************/
 
 private:
+  std::unique_ptr<BaseConnector> m_connector_ptr;
   std::string m_notify_list;
   po::options_description m_generic_options;
   po::options_description m_source_options;
@@ -92,7 +97,8 @@ private:
   void handleVersion();
 
   // ---------- connection methods -------
-  bool isConnDefined();
+  void setSQLiteConnector(const char* conn_string);
+  void setOdbcConnector(const char* conn_string);
   /**
    * Returns true if the file given as the parameter exists
    */

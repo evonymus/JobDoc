@@ -10,6 +10,7 @@
 #include <Poco/Data/Transaction.h>
 #include <Poco/Data/RecordSet.h>
 #include <list>
+#include <vector>
 namespace by = asarum::BY;
 namespace pd = Poco::Data;
 using stringstream = std::stringstream;
@@ -39,27 +40,20 @@ void asarum::BY::DataCopier::copyData()
         }
         insert_sql << ")";
 
-        std::cout << "\n" << insert_sql.str() << std::endl;
 
         by::SQLiteConnector frm_conn{"H:\\BY\\JobDoc_TMS_Job_server_documenting_utility\\QA_2024-04-12-10-11-33.db"};
         by::SQLiteConnector to_conn{m_db_name};
         pd::Transaction trans(*to_conn.m_session_ptr);
 
-        pd::Statement select(*frm_conn.m_session_ptr);
-        select << "SELECT * FROM JOB_DEFN_T", pd::Keywords::list, pd::Keywords::now;
-        pd::RecordSet rs(select);
-        pd::Statement insert(*to_conn.m_session_ptr);
-        pd::RecordSet::Iterator it = rs.begin();
+        //pd::Statement select(*frm_conn.m_session_ptr);
+        //select << "SELECT * FROM JOB_DEFN_T", pd::Keywords::into(jobs), pd::Keywords::now;
+        //pd::RecordSet rs(*frm_conn.m_session_ptr, "SELECT * from JOB_DEFN_T", new pd::SimpleRowFormatter);
+        //pd::Statement insert(*to_conn.m_session_ptr);
+        //pd::RecordSet::Iterator it = rs.begin();
         //insert << insert_sql.str(), pd::Keywords::use((*it).names());
         //     insert << pd::Keywords::use(i);
         // }
         //insert << pd::Keywords::now;
-
-        std::cout << "rows: " << rs.rowCount() << ", columns: " << rs.columnCount() << std::endl;
-
-        for(; it != rs.end(); ++it) {
-            std::cout << (*it)[0].toString() << '\n';
-        }
         trans.commit();
     }
     catch (const Poco::Exception &ex)
