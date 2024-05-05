@@ -370,7 +370,7 @@ std::string asarum::BY::DocWriter::getJobType(int typ_enu)
 /***************************************************************/
 void asarum::BY::DocWriter::printItemTableDef(std::ofstream &r_out)
 {
-  r_out << std::setfill(' ') << "| " << std::setw(NAME_LENGTH) << "Item"
+  r_out << std::left << std::setfill(' ') << "| " << std::setw(NAME_LENGTH) << "Item"
         << " | " << std::setw(VALUE_LENGTH) << "Value"
         << " |\n";
   r_out << "| " << std::setw(NAME_LENGTH) << std::setfill('-') << "-"
@@ -384,8 +384,7 @@ template <typename T>
 void asarum::BY::DocWriter::printItemRow(T item, const char *label,
                                          std::ofstream &r_out)
 {
-
-  r_out << std::setfill(' ')
+  r_out << std::left << std::setfill(' ')
         << "| " << std::setw(NAME_LENGTH) << label << " | "
         << std::setw(VALUE_LENGTH) << item << " |\n";
 }
