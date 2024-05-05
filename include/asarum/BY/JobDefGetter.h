@@ -29,8 +29,9 @@ namespace BY {
         /// @brief function gets data stored in JOB_SEL_CTA_T, table linking 
         /// jobs with EntitySelectionCriteria (ESC)
         /// @return vector of JobSelCta pointers
+        /// @param job_ptr, pointer to the job for which selection crtieria is sought
         /// @see asarum::BY::JobSelCta 
-        std::vector<Poco::AutoPtr<asarum::BY::JobSelCta>> getJobSelCtas();
+        std::vector<Poco::AutoPtr<asarum::BY::JobSelCta>> getJobSelCtas(const Poco::AutoPtr<JobDef> job_ptr);
 
         /// @brief function return the content of ENTY_SEL_CTA_T table 
         /// i.e., the table storing ESC queries
