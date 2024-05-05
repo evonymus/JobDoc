@@ -1,5 +1,6 @@
 #include "asarum/BY/DocWriter.h"
 #include "asarum/BY/JobDef.h"
+#include "asarum/BY/Tokenizer.h"
 #include <Poco/Data/Date.h>
 #include <Poco/DateTime.h>
 #include <Poco/DateTimeFormatter.h>
@@ -202,6 +203,11 @@ void asarum::BY::DocWriter::printEscDetails(const Poco::AutoPtr<JobDef> job_ptr,
 /***************************************************************/
 void asarum::BY::DocWriter::printJobDetails(const Poco::AutoPtr<JobDef> job_ptr, std::ofstream &r_out)
 {
+  std::vector<std::string> chain_job_names{};
+  std::vector<Poco::AutoPtr<by::JobDef>> chain_jobs{};
+  const int API = 2;
+  const int CHAIN = 3;
+
   r_out << "\n\n### Details of " << job_ptr->id() << "\n\n";
   if (!job_ptr->job_desc().isNull())
   {
@@ -211,6 +217,69 @@ void asarum::BY::DocWriter::printJobDetails(const Poco::AutoPtr<JobDef> job_ptr,
   printItemRow(job_ptr->id(), "Job Name", r_out);
   printItemRow(getSchdTypeEnu(job_ptr->schd_typ_enu()), "Sched. Type", r_out);
   printItemRow(getJobType(job_ptr->job_typ_enu()), "Job Type", r_out);
+
+  // if job is API, write API name
+  if (job_ptr->job_typ_enu() == API && job_ptr->parm_1().isNull() == false)
+  {
+    printItemRow(job_ptr->parm_1().value(), "API called", r_out);
+  }
+  // if job type is Chain and chain jobs are defined
+  if (job_ptr->job_typ_enu() == CHAIN && job_ptr->parm_1().isNull() == false)
+  {
+    by::Tokenizer::tokenize(job_ptr->parm_1().value(), ",", chain_job_names);
+    printItemRow(chain_job_names[0], "Chain Jobs", r_out);
+    // vector to store definition of the chain jobs
+    for (auto i = 1; i < chain_job_names.size(); i++)
+    {
+      printItemRow(chain_job_names[i], "", r_out);
+      chain_jobs.push_back(m_job_getter_ptr->getJobDef(chain_job_names[i].c_str()));
+    }
+  }
+  printItemRow(job_ptr->actv_yn(), "Active", r_out);
+  printItemRow(convertDate(job_ptr->crtd_dtt()), "Created On", r_out);
+  printItemRow(job_ptr->crtd_usr_cd(), "Created By", r_out);
+
+  // if job was updated
+  if(!job_ptr->updt_dtt().isNull()) {
+    printItemRow(convertDate(job_ptr->updt_dtt().value()),"Updated On", r_out);
+  }
+  // updated by
+  if(!job_ptr->updt_usr_cd().isNull()) {
+    printItemRow(job_ptr->updt_usr_cd().value(), "Updated By", r_out);
+  }
+
+  // if template is stored in a file
+  if(!job_ptr->tplt_file().isNull()) {
+    std::string value = job_ptr->tplt_file().value();
+    int strSize = value.size();
+    // if string > max cell size, trim it to the size
+    printItemRow(strSize > VALUE_LENGTH ? value.substr(strSize - VAL_LENGTH): value, "Template File", r_out );
+  }
+
+  if(!job_ptr->next_job_cd_success().isNull()) {
+    printItemRow(job_ptr->next_job_cd_success()->id().c_str(), "Next on Success", r_out);
+  }
+
+  if(!job_ptr->next_job_cd_failure().isNull()) {
+    printItemRow(job_ptr->next_job_cd_failure()->id().c_str(), "Next on Failure", r_out);
+  }
+
+  // printing template names
+  if(!job_ptr->tplt_id().isNull() || chain_jobs.size() > 0) {
+    r_out << "\n\n### Templates\n\n";
+    printItemTableDef(r_out);
+    if(!job_ptr->tplt_id().isNull()) {
+      //printing JobName, Template Name
+      printItemRow(job_ptr->tplt_id()->adtn_data_cd().value(), job_ptr->id().c_str(), r_out) ;
+    }
+    for(const auto i: chain_jobs) {
+      if(!i->tplt_id().isNull()) {
+        //printing JobName, Template Name
+        printItemRow(i->tplt_id()->adtn_data_cd().value(), i->id().c_str(), r_out) ;
+      }
+   }
+  }
+
 }
 
 /***************************************************************/

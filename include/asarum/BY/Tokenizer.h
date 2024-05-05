@@ -15,7 +15,7 @@ namespace BY {
 */
 class Tokenizer {
 public:
-  void tokenize(const std::string &str, const char *sep,
+  static void tokenize(const std::string &str, const char *sep,
                 std::vector<std::string> &vec);
 };
 
