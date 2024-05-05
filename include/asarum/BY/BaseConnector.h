@@ -19,6 +19,7 @@ namespace asarum
             /// @brief getter for the Poco::Data::Session
             /// @return Poco::Data::Session object
             std::shared_ptr<Poco::Data::Session> getSession();
+            void execSQL(const char* sql);
         };
 
         inline std::shared_ptr<Poco::Data::Session> asarum::BY::BaseConnector::getSession()

@@ -31,4 +31,10 @@ by::OdbcConnector::OdbcConnector(const char *dbName) {
     */
 }
 
+void asarum::BY::OdbcConnector::changeSchema(const char * schema_name)
+{
+    const std::string sql="alter session set current_schema =" + std::string(schema_name) + std::string(";");
+    execSQL(sql.c_str());
+}
+
 

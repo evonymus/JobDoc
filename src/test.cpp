@@ -5,6 +5,7 @@
 #include "asarum/BY/JobScriptWriter.h"
 #include "asarum/BY/EntySelCta.h"
 #include "asarum/BY/DataCopier.h"
+#include "asarum/BY/DocWriter.h"
 
 namespace by=asarum::BY;
 
@@ -65,7 +66,8 @@ void test_getting_all_jobs() {
 }
 
 void test_job_frm_odbs() {
-   by::OdbcConnector conn{"DSN=JOBS;Uid=trans_manager_scn;Pwd=sql"};
+   by::OdbcConnector conn{"DSN=JOBS;Uid=system;Pwd=sql"};
+   conn.changeSchema("TRANS_MANAGER_SCN");
    std::cout << "\nconn created\n";
    by::JobDefGetter getter{conn.m_session_ptr};
    auto res = getter.getAllJobDefs();
@@ -80,11 +82,18 @@ void test_CreateDestDB() {
    copier.copyData();
 }
 
+void test_printDoc() {
+   by::SQLiteConnector connector{"H:\\BY\\JobDoc_TMS_Job_server_documenting_utility\\QA_2024-04-12-10-11-33.db"};
+   by::DocWriter writer(connector.m_session_ptr);
+   writer.docScheduledJobs("test.md");
+}
+
 void Test::runTest() {
    std::cout << "test run\n"; 
    //test_getting_childs();
   //test_get_columns();
   //test_gen_script();
   //test_CreateDestDB();
-  test_job_frm_odbs();
+  //test_job_frm_odbs();
+  test_printDoc();
 }

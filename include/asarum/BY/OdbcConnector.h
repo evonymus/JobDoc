@@ -19,6 +19,9 @@ public:
    * @param dbName ODBC database. Use "DSN=MyConn" syntax.
    */
   OdbcConnector(const char *dbName);
+  /// @brief changes the current schema.
+  /// @param schema_name name of the schema
+  void changeSchema(const char* schema_name);
 };
 } // namespace BY
 } // namespace asarum
