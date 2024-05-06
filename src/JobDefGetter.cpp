@@ -24,7 +24,7 @@ vector<Poco::AutoPtr<by::JobDef>> by::JobDefGetter::getAllJobDefs()
 {
     pa::Query<by::JobDef> query{m_context_ptr};
     vector<Poco::AutoPtr<by::JobDef>> result = query
-                                                   .where("schd_detl_id is NOT null")
+                                                   .orderBy("job_cd ASC")
                                                    .execute();
     return result;
 }

@@ -21,6 +21,7 @@ public:
   /// @param job_name name of the job
   void writeOrclSingleJobScript(const asarum::BY::JobDef::Ptr job_ptr);
   void writeOrclSingleJobScript(const char* job_name, std::shared_ptr<Poco::Data::Session> session_ptr);
+
   void writeOrclJobSetScript(const std::vector<asarum::BY::JobDef::Ptr> &r_jobs);
   void writeOrclJobSetScript(const char* parent_job_name, std::shared_ptr<Poco::Data::Session> session_ptr);
 

@@ -82,7 +82,6 @@ void asarum::BY::JobScriptWriter::writeOrclJobSetScript(const char *parent_job_n
 void by::JobScriptWriter::writeOrclSingleJobScript(const by::JobDef::Ptr job_ptr)
 {
   constexpr int CHAIN_JOB = 3;
-
   if (job_ptr == nullptr)
     return;
 
@@ -119,13 +118,19 @@ void asarum::BY::JobScriptWriter::writeOrclSingleJobScript(const char *job_name,
 {
   by::JobDefGetter job_getter(session_ptr);
 
+  std::cout << "\n section one\n";
+
   Poco::AutoPtr<asarum::BY::JobDef> job_ptr = job_getter.getJobDef(job_name);
+
+  std::cout << "\n job is " << job_ptr->id() << "\n";
   if (job_ptr == nullptr)
   {
     std::stringstream str{};
     str << "The job: " << job_name << " not found";
     throw std::invalid_argument(str.str());
   }
+
+  std::cout << "\n calling funtion\n";
   writeOrclSingleJobScript(job_ptr);
 }
 //***************************** PRIVATE ***********************

@@ -107,7 +107,7 @@ private:
   void setOdbcConnector(const char* conn_string);
   /// @brief checks if there is a connection to database defined
   /// @return true if the connection exists, otherwise false 
-  bool isConnecionDefined();
+  bool isConnectionDefined();
   std::shared_ptr<Poco::Data::Session> getSession();
   /**
    * Returns true if the file given as the parameter exists

@@ -88,6 +88,17 @@ void test_printDoc() {
    writer.docScheduledJobs("test.md");
 }
 
+void test_find_job() {
+   by::OdbcConnector conn{"DSN=JOBS;Uid=system;Pwd=sql"};
+   conn.changeSchema("TRANS_MANAGER_SCN");
+   std::cout << "\nconn created\n";
+   by::JobDefGetter getter{conn.m_session_ptr};
+   auto ptr = getter.getJobDef("SDL_STR_SEU_UPD_BBUILD");
+   if(ptr) {
+      std::cout << ptr->id() << '\n';
+   } else std::cout << "\n job not found\n";
+}
+
 void Test::runTest() {
    std::cout << "test run\n"; 
    //test_getting_childs();
@@ -95,5 +106,6 @@ void Test::runTest() {
   //test_gen_script();
   //test_CreateDestDB();
   //test_job_frm_odbs();
-  test_printDoc();
+  //test_printDoc();
+  test_find_job();
 }
