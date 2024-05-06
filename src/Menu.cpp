@@ -92,7 +92,7 @@ void by::Menu::handleMenu()
   {
     setSQLiteConnector(m_sqlite_name.c_str());
   }
-  else if (m_var_map.count("odbc") < 0)
+  else if (m_var_map.count("odbc") > 0)
   {
     setOdbcConnector(m_odbc_string.c_str());
   }
@@ -293,6 +293,7 @@ void by::Menu::handleDocsGeneration()
   {
     by::DocWriter writer{getSession()};
     writer.docScheduledJobs(file_name);
+    std::cout << "\nGeneration of " << file_name << " document completed\n";
   }
 }
 
