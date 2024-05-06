@@ -30,20 +30,17 @@ asarum::BY::DocWriter::DocWriter(
 /***************************************************************/
 
 void asarum::BY::DocWriter::docScheduledJobs(const std::string &r_file_name,
-                                             const bool withSummary)
-{
+                                             const bool withSummary) {
   std::ofstream fout{r_file_name};
   // if stream fails, throw exception
-  if (fout.fail())
-  {
+  if (fout.fail()) {
     std::stringstream msg{};
-    msg << "Couldn't opne the file " << r_file_name << " for writing";
+    msg << "Couldn't open the file " << r_file_name << " for writing";
     throw std::invalid_argument(msg.str());
   }
   std::vector<Poco::AutoPtr<asarum::BY::JobDef>> schdl_jobs =
       m_job_getter_ptr->getScheduledJobDefs();
-  for (const auto i : schdl_jobs)
-  {
+  for (const auto i : schdl_jobs) {
     printGroupHeader(i, fout);
     printGroupSchedule(i, fout);
 
@@ -52,13 +49,11 @@ void asarum::BY::DocWriter::docScheduledJobs(const std::string &r_file_name,
 
     printStepsDescriptions(jobs, fout, false);
     fout << "\n\n## Details of Job Components\n\n";
-    for (const auto i : jobs)
-    {
-      printEscDetails(i, fout);
-      printJobDetails(i, fout);
+    for (const auto j : jobs) {
+      printEscDetails(j, fout);
+      printJobDetails(j, fout);
     }
   }
-  fout.close();
 }
 
 /***************************************************************/
@@ -69,8 +64,7 @@ void asarum::BY::DocWriter::docAllJobs(const std::string &r_file_name,
 //******************************** PRIVATE *******************************
 
 void asarum::BY::DocWriter::printGroupHeader(
-    const Poco::AutoPtr<JobDef> job_ptr, std::ofstream &r_out)
-{
+    const Poco::AutoPtr<JobDef> job_ptr, std::ofstream &r_out) {
   r_out << "\n# " << job_ptr->id() << '\n'
         << "\n## Description" << '\n'
         << '\n'
@@ -79,10 +73,8 @@ void asarum::BY::DocWriter::printGroupHeader(
 
 //**************************************************************
 void asarum::BY::DocWriter::printGroupSchedule(
-    const Poco::AutoPtr<JobDef> job_ptr, std::ofstream &r_out)
-{
-  if (job_ptr->schd_detl_id() != nullptr)
-  {
+    const Poco::AutoPtr<JobDef> job_ptr, std::ofstream &r_out) {
+  if (job_ptr->schd_detl_id() != nullptr) {
     r_out << "\n## Schedule Details\n\n";
 
     printItemTableDef(r_out);
@@ -90,8 +82,7 @@ void asarum::BY::DocWriter::printGroupSchedule(
     r_out << std::setfill(' ') << "| " << std::setw(NAME_LENGTH) << "Recurrence"
           << " | " << std::setw(VALUE_LENGTH);
 
-    switch (job_ptr->schd_detl_id()->rcurnce_typ_enu())
-    {
+    switch (job_ptr->schd_detl_id()->rcurnce_typ_enu()) {
     case 1:
       r_out << "Daily";
       break;
@@ -107,16 +98,14 @@ void asarum::BY::DocWriter::printGroupSchedule(
 
     r_out << " |\n";
     // if interval is set, print its deatils
-    if (job_ptr->schd_detl_id()->itvl() > 0)
-    {
+    if (job_ptr->schd_detl_id()->itvl() > 0) {
       printItemRow(job_ptr->schd_detl_id()->itvl(), "Interval", r_out);
     }
     printItemRow(convertDate(job_ptr->schd_detl_id()->efct_dt()),
                  "EffectiveDate", r_out);
     printItemRow(convertDate(job_ptr->schd_detl_id()->expd_dt()),
                  "ExpirationDate", r_out);
-    if (!job_ptr->schd_detl_id()->day_of_mth().isNull())
-    {
+    if (!job_ptr->schd_detl_id()->day_of_mth().isNull()) {
       printItemRow(job_ptr->schd_detl_id()->day_of_mth().value(),
                    "Day Of Month", r_out);
     }
@@ -127,8 +116,7 @@ void asarum::BY::DocWriter::printGroupSchedule(
 
 void by::DocWriter::printStepsDescriptions(
     std::vector<Poco::AutoPtr<by::JobDef>> grp_ptr, std::ofstream &r_out,
-    const bool withDiagram)
-{
+    const bool withDiagram) {
   const int n_no = 4;
   const int n_job_cd = 40;
   const int n_job_type = 30;
@@ -137,18 +125,14 @@ void by::DocWriter::printStepsDescriptions(
 
   r_out << "\n## Job Set Components\n";
 
-  r_out << "\n|" << std::setw(n_no) << "No"
-        << " | " << std::setw(n_job_cd)
-        << "Job Name"
-        << " | " << std::setw(n_job_type) << "Type"
-        << "|\n"
+  r_out << "\n|" << std::setw(n_no) << "No" << " | " << std::setw(n_job_cd)
+        << "Job Name" << " | " << std::setw(n_job_type) << "Type" << "|\n"
         << "|" << std::setw(n_no) << std::setfill('-') << '-' << " | "
         << std::setw(n_job_cd) << std::setfill('-') << '-' << " | "
         << std::setw(n_job_type) << std::setfill('-') << '-' << "|\n"
         << std::setfill(' ');
 
-  for (const auto i : grp_ptr)
-  {
+  for (const auto i : grp_ptr) {
     r_out << "|" << std::setw(n_no) << ++counter << " | " << std::setw(n_job_cd)
           << i->id() << " | " << std::setw(n_job_type)
           << getJobType(i->job_typ_enu()) << "|\n";
@@ -157,60 +141,57 @@ void by::DocWriter::printStepsDescriptions(
 
 /***************************************************************/
 
-void asarum::BY::DocWriter::printEscDetails(const Poco::AutoPtr<JobDef> job_ptr,
-                                            std::ofstream &r_out)
-{
-  const auto esc_ptr = m_job_getter_ptr->getJobSelCtas(job_ptr);
+void asarum::BY::DocWriter::printEscDetails(
+    const Poco::AutoPtr<by::JobDef> job_ptr, std::ofstream &r_out) {
+  const auto jb_sel_cta = m_job_getter_ptr->getJobSelCtas(job_ptr);
+  for (const auto i : jb_sel_cta) {
+    printEscDetails(i->enty_sel_cta_cd(), r_out);
+  }
+}
+/***************************************************************/
+void asarum::BY::DocWriter::printEscDetails(
+    const Poco::AutoPtr<EntySelCta> esc_ptr, std::ofstream &r_out) {
+  if (esc_ptr == nullptr)
+    return;
   r_out << "\n### ESC Query\n\n";
   // write ESC description
-  if (!esc_ptr[0]->enty_sel_cta_cd()->enty_sel_cta_desc().isNull())
-  {
-    r_out << "\n**Description**: "
-          << esc_ptr[0]->enty_sel_cta_cd()->enty_sel_cta_desc().value()
+  if (!esc_ptr->enty_sel_cta_desc().isNull()) {
+    r_out << "\n**Description**: " << esc_ptr->enty_sel_cta_desc().value()
           << "\n\n";
   }
   printItemTableDef(r_out);
-  for (const auto i : esc_ptr)
-  {
-    printItemRow(i->enty_sel_cta_cd()->id(), "ESC Name", r_out);
-    // DIV_CD if exists
-    if (!i->enty_sel_cta_cd()->div_cd().isNull())
-    {
-      printItemRow(i->enty_sel_cta_cd()->div_cd().value(), "Division", r_out);
-    }
-    printItemRow(getEntyTyp(i->enty_sel_cta_cd()->enty_typ_enu()),
-                 "Entity Type", r_out);
-    printItemRow(i->enty_sel_cta_cd()->crtd_usr_cd(), "Created By", r_out);
-    printItemRow(convertDate(i->enty_sel_cta_cd()->crtd_dtt()), "Created On", r_out);
+  printItemRow(esc_ptr->id(), "ESC Name", r_out);
+  // DIV_CD if exists
+  if (!esc_ptr->div_cd().isNull()) {
+    printItemRow(esc_ptr->div_cd().value(), "Division", r_out);
+  }
+  printItemRow(getEntyTyp(esc_ptr->enty_typ_enu()), "Entity Type", r_out);
+  printItemRow(esc_ptr->crtd_usr_cd(), "Created By", r_out);
+  printItemRow(convertDate(esc_ptr->crtd_dtt()), "Created On", r_out);
 
-    if (!i->enty_sel_cta_cd()->updt_dtt().isNull())
-    {
-      printItemRow(convertDate(i->enty_sel_cta_cd()->updt_dtt().value()), "Updted On", r_out);
-    }
+  if (!esc_ptr->updt_dtt().isNull()) {
+    printItemRow(convertDate(esc_ptr->updt_dtt().value()), "Updted On", r_out);
+  }
 
-    if (!i->enty_sel_cta_cd()->updt_usr_cd().isNull())
-    {
-      printItemRow(i->enty_sel_cta_cd()->crtd_usr_cd(), "Updated By", r_out);
-    }
+  if (!esc_ptr->updt_usr_cd().isNull()) {
+    printItemRow(esc_ptr->crtd_usr_cd(), "Updated By", r_out);
+  }
 
-    if (!i->enty_sel_cta_cd()->max_entys().isNull())
-    {
-      printItemRow(i->enty_sel_cta_cd()->max_entys().value(), "Max Entities", r_out);
-    }
+  if (!esc_ptr->max_entys().isNull()) {
+    printItemRow(esc_ptr->max_entys().value(), "Max Entities", r_out);
   }
 }
 
 /***************************************************************/
-void asarum::BY::DocWriter::printJobDetails(const Poco::AutoPtr<JobDef> job_ptr, std::ofstream &r_out)
-{
+void asarum::BY::DocWriter::printJobDetails(const Poco::AutoPtr<JobDef> job_ptr,
+                                            std::ofstream &r_out) {
   std::vector<std::string> chain_job_names{};
   std::vector<Poco::AutoPtr<by::JobDef>> chain_jobs{};
   const int API = 2;
   const int CHAIN = 3;
 
   r_out << "\n\n### Details of " << job_ptr->id() << "\n\n";
-  if (!job_ptr->job_desc().isNull())
-  {
+  if (!job_ptr->job_desc().isNull()) {
     r_out << "**Descripion**: " << job_ptr->job_desc() << "\n\n";
   }
   printItemTableDef(r_out);
@@ -219,20 +200,18 @@ void asarum::BY::DocWriter::printJobDetails(const Poco::AutoPtr<JobDef> job_ptr,
   printItemRow(getJobType(job_ptr->job_typ_enu()), "Job Type", r_out);
 
   // if job is API, write API name
-  if (job_ptr->job_typ_enu() == API && job_ptr->parm_1().isNull() == false)
-  {
+  if (job_ptr->job_typ_enu() == API && job_ptr->parm_1().isNull() == false) {
     printItemRow(job_ptr->parm_1().value(), "API called", r_out);
   }
   // if job type is Chain and chain jobs are defined
-  if (job_ptr->job_typ_enu() == CHAIN && job_ptr->parm_1().isNull() == false)
-  {
+  if (job_ptr->job_typ_enu() == CHAIN && job_ptr->parm_1().isNull() == false) {
     by::Tokenizer::tokenize(job_ptr->parm_1().value(), ",", chain_job_names);
     printItemRow(chain_job_names[0], "Chain Jobs", r_out);
     // vector to store definition of the chain jobs
-    for (auto i = 1; i < chain_job_names.size(); i++)
-    {
+    for (auto i = 1; i < chain_job_names.size(); i++) {
       printItemRow(chain_job_names[i], "", r_out);
-      chain_jobs.push_back(m_job_getter_ptr->getJobDef(chain_job_names[i].c_str()));
+      chain_jobs.push_back(
+          m_job_getter_ptr->getJobDef(chain_job_names[i].c_str()));
     }
   }
   printItemRow(job_ptr->actv_yn(), "Active", r_out);
@@ -240,57 +219,60 @@ void asarum::BY::DocWriter::printJobDetails(const Poco::AutoPtr<JobDef> job_ptr,
   printItemRow(job_ptr->crtd_usr_cd(), "Created By", r_out);
 
   // if job was updated
-  if(!job_ptr->updt_dtt().isNull()) {
-    printItemRow(convertDate(job_ptr->updt_dtt().value()),"Updated On", r_out);
+  if (!job_ptr->updt_dtt().isNull()) {
+    printItemRow(convertDate(job_ptr->updt_dtt().value()), "Updated On", r_out);
   }
   // updated by
-  if(!job_ptr->updt_usr_cd().isNull()) {
+  if (!job_ptr->updt_usr_cd().isNull()) {
     printItemRow(job_ptr->updt_usr_cd().value(), "Updated By", r_out);
   }
 
   // if template is stored in a file
-  if(!job_ptr->tplt_file().isNull()) {
+  if (!job_ptr->tplt_file().isNull()) {
     std::string value = job_ptr->tplt_file().value();
     int strSize = value.size();
     // if string > max cell size, trim it to the size
-    printItemRow(strSize > VALUE_LENGTH ? value.substr(strSize - VAL_LENGTH): value, "Template File", r_out );
+    printItemRow(strSize > VALUE_LENGTH ? value.substr(strSize - VAL_LENGTH)
+                                        : value,
+                 "Template File", r_out);
   }
 
-  if(!job_ptr->next_job_cd_success().isNull()) {
-    printItemRow(job_ptr->next_job_cd_success()->id().c_str(), "Next on Success", r_out);
+  if (!job_ptr->next_job_cd_success().isNull()) {
+    printItemRow(job_ptr->next_job_cd_success()->id().c_str(),
+                 "Next on Success", r_out);
   }
 
-  if(!job_ptr->next_job_cd_failure().isNull()) {
-    printItemRow(job_ptr->next_job_cd_failure()->id().c_str(), "Next on Failure", r_out);
+  if (!job_ptr->next_job_cd_failure().isNull()) {
+    printItemRow(job_ptr->next_job_cd_failure()->id().c_str(),
+                 "Next on Failure", r_out);
   }
 
   // printing template names
-  if(!job_ptr->tplt_id().isNull() || chain_jobs.size() > 0) {
+  if (!job_ptr->tplt_id().isNull() || chain_jobs.size() > 0) {
     r_out << "\n\n### Templates\n\n";
     printItemTableDef(r_out);
-    if(!job_ptr->tplt_id().isNull()) {
-      //printing JobName, Template Name
-      printItemRow(job_ptr->tplt_id()->adtn_data_cd().value(), job_ptr->id().c_str(), r_out) ;
+    if (!job_ptr->tplt_id().isNull()) {
+      // printing JobName, Template Name
+      printItemRow(job_ptr->tplt_id()->adtn_data_cd().value(),
+                   job_ptr->id().c_str(), r_out);
     }
-    for(const auto i: chain_jobs) {
-      if(!i->tplt_id().isNull()) {
-        //printing JobName, Template Name
-        printItemRow(i->tplt_id()->adtn_data_cd().value(), i->id().c_str(), r_out) ;
+    for (const auto i : chain_jobs) {
+      if (!i->tplt_id().isNull()) {
+        // printing JobName, Template Name
+        printItemRow(i->tplt_id()->adtn_data_cd().value(), i->id().c_str(),
+                     r_out);
       }
-   }
+    }
   }
-
 }
 
 /***************************************************************/
 
 std::string asarum::BY::DocWriter::convertDate(
-    const Poco::Nullable<Poco::Data::Date> &n_date)
-{
+    const Poco::Nullable<Poco::Data::Date> &n_date) {
   if (n_date.isNull())
     return "Null";
-  else
-  {
+  else {
     std::stringstream ss{};
     ss << n_date.value().year() << "-" << std::setfill('0') << std::setw(2)
        << n_date.value().month() << "-" << std::setfill('0') << std::setw(2)
@@ -301,21 +283,17 @@ std::string asarum::BY::DocWriter::convertDate(
 
 /***************************************************************/
 
-std::string asarum::BY::DocWriter::convertDate(const Poco::Data::Date &date)
-{
+std::string asarum::BY::DocWriter::convertDate(const Poco::Data::Date &date) {
   std::stringstream ss{};
-  ss << date.year() << "-" << std::setfill('0') << std::setw(2)
-     << date.month() << "-" << std::setfill('0') << std::setw(2)
-     << date.day();
+  ss << date.year() << "-" << std::setfill('0') << std::setw(2) << date.month()
+     << "-" << std::setfill('0') << std::setw(2) << date.day();
   return ss.str();
   return std::string();
 }
 /***************************************************************/
 
-std::string asarum::BY::DocWriter::getJobType(int typ_enu)
-{
-  switch (typ_enu)
-  {
+std::string asarum::BY::DocWriter::getJobType(int typ_enu) {
+  switch (typ_enu) {
   case 1:
     return "RRS";
     break;
@@ -368,33 +346,26 @@ std::string asarum::BY::DocWriter::getJobType(int typ_enu)
 }
 
 /***************************************************************/
-void asarum::BY::DocWriter::printItemTableDef(std::ofstream &r_out)
-{
-  r_out << std::left << std::setfill(' ') << "| " << std::setw(NAME_LENGTH) << "Item"
-        << " | " << std::setw(VALUE_LENGTH) << "Value"
-        << " |\n";
-  r_out << "| " << std::setw(NAME_LENGTH) << std::setfill('-') << "-"
-        << " | "
-        << std::setw(VALUE_LENGTH) << std::setfill('-') << "-"
-        << " |\n";
+void asarum::BY::DocWriter::printItemTableDef(std::ofstream &r_out) {
+  r_out << std::left << std::setfill(' ') << "| " << std::setw(NAME_LENGTH)
+        << "Item" << " | " << std::setw(VALUE_LENGTH) << "Value" << " |\n";
+  r_out << "| " << std::setw(NAME_LENGTH) << std::setfill('-') << "-" << " | "
+        << std::setw(VALUE_LENGTH) << std::setfill('-') << "-" << " |\n";
 }
 
 /***************************************************************/
 template <typename T>
 void asarum::BY::DocWriter::printItemRow(T item, const char *label,
-                                         std::ofstream &r_out)
-{
-  r_out << std::left << std::setfill(' ')
-        << "| " << std::setw(NAME_LENGTH) << label << " | "
-        << std::setw(VALUE_LENGTH) << item << " |\n";
+                                         std::ofstream &r_out) {
+  r_out << std::left << std::setfill(' ') << "| " << std::setw(NAME_LENGTH)
+        << label << " | " << std::setw(VALUE_LENGTH) << item << " |"
+        << std::endl;
 }
 
 /***************************************************************/
 
-std::string asarum::BY::DocWriter::getEntyTyp(int enty_typ_enu)
-{
-  switch (enty_typ_enu)
-  {
+std::string asarum::BY::DocWriter::getEntyTyp(int enty_typ_enu) {
+  switch (enty_typ_enu) {
   case 1:
     return "Shipment";
     break;
@@ -447,10 +418,8 @@ std::string asarum::BY::DocWriter::getEntyTyp(int enty_typ_enu)
 
 /***************************************************************/
 
-std::string asarum::BY::DocWriter::getSchdTypeEnu(int schd_typ_enu)
-{
-  switch (schd_typ_enu)
-  {
+std::string asarum::BY::DocWriter::getSchdTypeEnu(int schd_typ_enu) {
+  switch (schd_typ_enu) {
   case 1:
     return "On Demand";
     break;

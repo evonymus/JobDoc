@@ -1,11 +1,14 @@
 #include "asarum/BY/Menu.h"
-#include "asarum/BY/job_proc.h"
 #include "asarum/BY/SQLiteConnector.h"
 #include "asarum/BY/JobScriptWriter.h"
 #include "asarum/BY/JobDefGetter.h"
+#include "asarum/BY/DocWriter.h"
 #include "version.h"
 #include <boost/filesystem.hpp>
 #include <iostream>
+#include <iomanip>
+#include <sstream>
+#include <ctime>
 #include <fstream>
 #include <stdexcept>
 
@@ -19,12 +22,12 @@ constexpr char *SCRIPT_DIR = "/Scripts";
 /// constructor
 /// @param argc number of arguments, taken from main
 /// @parm *argv[] list of arguments taken from main
-by::Menu::Menu(int argc, char *argv[]) : m_connector_ptr{nullptr},
-     m_generic_options("Generic Options"), m_source_options("Source of Data"),
-      m_db_options("DB Connection"), m_code_options("Code Generation"),
-      m_output_options("Output Files Options"),
-      m_doc_options("Docs Generation"), m_cmd_line_options(),
-      m_visible_options("Allowed Options"), m_pos_options()
+by::Menu::Menu(int argc, char *argv[]) : m_generic_options("Generic Options"),
+                                         m_source_options("Source of Data"),
+                                         m_db_options("DB Connection"), m_code_options("Code Generation"),
+                                         m_output_options("Output Files Options"),
+                                         m_doc_options("Docs Generation"), m_cmd_line_options(),
+                                         m_visible_options("Allowed Options"), m_pos_options()
 {
 
   initMenu(argc, argv);
@@ -84,19 +87,15 @@ void by::Menu::handleMenu()
   {
     handleHelp();
     // checking if data source is defined
+  } else if (m_var_map.count("sqlite") > 0) {
+    setSQLiteConnector(m_sqlite_name.c_str());
+  } else if (m_var_map.count("odbc") < 0 ) {
+    setOdbcConnector(m_odbc_string.c_str());
   }
-  else if (m_var_map.count("sqlite") == 0)
+
+  if (m_var_map.count("sequence") > 0)
   {
-    throw std::invalid_argument("sqlite database needs to be specifies");
-  }
-  else if (!fileExists(m_sqlite_name.c_str()))
-  {
-    std::string message_ = "the database " + m_sqlite_name + " does not exist";
-    throw std::invalid_argument(message_);
-  }
-  else if (m_var_map.count("single") > 0)
-  {
-    handleSingleJobScriptGeneration();
+    handleDocsGeneration();
   }
   else if (m_var_map.count("nexts") > 0)
   {
@@ -106,13 +105,16 @@ void by::Menu::handleMenu()
   {
     handleScriptAllScheduled();
   }
-  else if (m_var_map.count("doc") + m_var_map.count("single") > 0)
+  else if (m_var_map.count("sequence") + m_var_map.count("all_jobs") > 0)
   {
+    std::cout << "\ngenerating documents";
     handleDocsGeneration();
   }
 }
 
 //------ PRIVATE FUNCTIONS ----------------------------
+
+/***************************************************************/
 
 void by::Menu::initGenericOptions()
 {
@@ -120,14 +122,22 @@ void by::Menu::initGenericOptions()
       "help,h", "print help message");
 }
 
+/***************************************************************/
+
 void by::Menu::initSourceOptions()
 {
   m_source_options.add_options()("sqlite,l",
                                  po::value<std::string>(&m_sqlite_name),
-                                 "file with sqlite db");
+                                 "file with sqlite db")(
+      "odbc,o",
+      po::value<std::string>(&m_odbc_string),
+      "odbc connection string");
 }
 
 /// initialization of Code  Menu Options
+
+/***************************************************************/
+
 void by::Menu::initCodeOptions()
 {
   m_code_options.add_options()("all,a", "Script all scheduled jobs")(
@@ -137,15 +147,17 @@ void by::Menu::initCodeOptions()
 
 void by::Menu::initDocOptions()
 {
-  m_doc_options.add_options()("one,D", "documentation in a single file")(
-      "doc,d", "document per job");
+  m_doc_options.add_options()("all_jobs,D", "document all jobs")(
+      "sequence,d", "document sequence of job triggered by a schedule");
 }
+
+/***************************************************************/
 
 void by::Menu::initOutputOptions()
 {
   m_output_options.add_options()("path,P", po::value<std::string>(&m_path),
                                  "(optional) path to store files")(
-      "output,o", po::value<std::string>(&m_single_file_name),
+      "filename,f", po::value<std::string>(&m_single_file_name),
       "(optional) single documment file name")(
       "image,i", "(optional) include sequence diagrams");
 }
@@ -223,6 +235,7 @@ void asarum::BY::Menu::handleScriptAllScheduled()
   {
     if (m_var_map.count("sqlite") > 0)
     {
+      std::vector<by::BaseConnector> v_conn;
       by::SQLiteConnector sqlite_connector{m_sqlite_name.c_str()};
       by::JobDefGetter job_getter{sqlite_connector.m_session_ptr};
       fs::create_directory(script_dir);
@@ -254,34 +267,23 @@ void asarum::BY::Menu::handleScriptAllScheduled()
 
 void by::Menu::handleDocsGeneration()
 {
-  by::JobProc jobProc;
+  const std::string doc_dir = m_path + DOC_DIR;
+  auto t = std::time(nullptr);
+  auto tm = *std::localtime(&t);
 
-  if (m_var_map.count("sqlite") > 0)
-  {
-    jobProc.getSQLiteData(m_sqlite_name.c_str());
-  }
-  else
-  {
-    throw std::invalid_argument("No data source defined");
-  }
-  if (m_var_map.count("image") > 0)
-  {
-    m_with_images = true;
-  }
-  else
-  {
-    m_with_images = false;
-  }
-  // if single file option chosen
-  if (m_var_map.count("doc"))
-  {
-    jobProc.exportDocs(m_path, m_with_images);
-  }
+  fs::create_directory(doc_dir);
 
-  // export to a single file
-  if (m_var_map.count("one"))
-  {
-    jobProc.exportSingleDoc(m_path, m_single_file_name, m_with_images);
+  std::stringstream ss{};
+  ss <<  "Docs" << "\\JobsDocumentation_" << std::put_time(&tm, "%Y-%m-%d") << ".md";
+  const std::string file_name = ss.str();
+
+  if(! isConnecionDefined()) {
+    throw std::invalid_argument("No connection to database was defined");
+  }
+  
+  if(m_var_map.count("sequence")> 0) {
+    by::DocWriter writer{getSession()};
+    writer.docScheduledJobs(file_name);
   }
 }
 
@@ -307,3 +309,43 @@ bool by::Menu::fileExists(const char *fileName)
 }
 
 //***************** Connectors *************************
+///
+void asarum::BY::Menu::setSQLiteConnector(const char *conn_string)
+{
+  std::unique_ptr<by::SQLiteConnector> con_ptr{new by::SQLiteConnector(m_sqlite_name.c_str())};
+  m_sqlite_conn_ptr = std::move(con_ptr);
+}
+
+/***************************************************************/
+
+void asarum::BY::Menu::setOdbcConnector(const char *conn_string)
+{
+  std::unique_ptr<by::OdbcConnector> ptr{new by::OdbcConnector(conn_string)};
+  m_odbc_conn_ptr = std::move(ptr);
+}
+/***************************************************************/
+
+void asarum::BY::Menu::setDataSource()
+{
+  if (m_var_map.count("sqlite") > 0)
+  {
+    setSQLiteConnector(m_sqlite_name.c_str());
+  }
+}
+
+/***************************************************************/
+bool asarum::BY::Menu::isConnecionDefined()
+{
+  if(m_sqlite_conn_ptr != nullptr) return true;
+  else if(m_odbc_conn_ptr != nullptr) return true;
+  else return false;
+}
+
+/***************************************************************/
+
+std::shared_ptr<Poco::Data::Session> asarum::BY::Menu::getSession()
+{
+  if(m_odbc_conn_ptr != nullptr) return m_odbc_conn_ptr->m_session_ptr;
+  else if(m_sqlite_conn_ptr != nullptr) return m_sqlite_conn_ptr->m_session_ptr;
+  else throw std::runtime_error("No connection to DB is available");
+}

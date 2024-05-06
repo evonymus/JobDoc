@@ -47,7 +47,8 @@ public:
    *************************************************************/
 
 private:
-  std::unique_ptr<BaseConnector> m_connector_ptr;
+  std::unique_ptr<SQLiteConnector> m_sqlite_conn_ptr;
+  std::unique_ptr<OdbcConnector> m_odbc_conn_ptr;
   std::string m_notify_list;
   po::options_description m_generic_options;
   po::options_description m_source_options;
@@ -68,6 +69,7 @@ private:
   std::string m_file_name;
   std::string m_config_file_name;
   std::string m_sqlite_name;
+  std::string m_odbc_string;
   std::string m_single_file_name;
   // variable used to generate script for a single job
   std::string m_job_name;
@@ -95,10 +97,17 @@ private:
   void handleDocsGeneration();
   void handleHelp();
   void handleVersion();
+  void setDataSource();
 
   // ---------- connection methods -------
+  
+  /// crates SQLite connector and assigns its address to m_sqllite_conn_ptr
   void setSQLiteConnector(const char* conn_string);
   void setOdbcConnector(const char* conn_string);
+  /// @brief checks if there is a connection to database defined
+  /// @return true if the connection exists, otherwise false 
+  bool isConnecionDefined();
+  std::shared_ptr<Poco::Data::Session> getSession();
   /**
    * Returns true if the file given as the parameter exists
    */

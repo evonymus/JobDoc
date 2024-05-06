@@ -27,6 +27,7 @@ namespace asarum
       void printGroupSchedule(const Poco::AutoPtr<JobDef> job_ptr, std::ofstream &r_out);
       void printGroupComponents(const std::vector<Poco::AutoPtr<JobDef>> job_ptr_vec, std::ofstream &r_out);
       void printGroupDiagram(const std::vector<Poco::AutoPtr<JobDef>> job_ptr_vec, std::ofstream &r_out);
+      void printEscDetails(const Poco::AutoPtr<EntySelCta> esc_ptr, std::ofstream &r_out);
       void printEscDetails(const Poco::AutoPtr<JobDef> job_ptr, std::ofstream &r_out);
       void printJobDetails(const Poco::AutoPtr<JobDef> job_ptr, std::ofstream &r_out);
       void printItemTableDef(std::ofstream &r_out);

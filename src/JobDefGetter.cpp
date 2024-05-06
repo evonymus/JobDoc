@@ -16,7 +16,6 @@ by::JobDefGetter ::JobDefGetter(std::shared_ptr<Poco::Data::Session> session_ptr
     m_context_ptr = new pa::Context(*m_session_ptr);
 }
 
-
 /***************************************************************/
 
 /// @brief  Gets vector with the Jobs defintion
@@ -30,7 +29,6 @@ vector<Poco::AutoPtr<by::JobDef>> by::JobDefGetter::getAllJobDefs()
     return result;
 }
 
-
 /***************************************************************/
 
 /// @brief returns pointer to the jobs which name is given as the parameter
@@ -40,7 +38,6 @@ Poco::AutoPtr<asarum::BY::JobDef> asarum::BY::JobDefGetter::getJobDef(const char
 {
     return by::JobDef::find(m_context_ptr, job_name);
 }
-
 
 /***************************************************************/
 vector<Poco::AutoPtr<by::EntySelCta>> by::JobDefGetter::getEntySelCtas()
@@ -59,6 +56,22 @@ std::vector<Poco::AutoPtr<asarum::BY::JobSelCta>> asarum::BY::JobDefGetter::getJ
                             .where(where)
                             .execute();
     return result;
+}
+std::vector<Poco::AutoPtr<asarum::BY::JobSelCta>> asarum::BY::JobDefGetter::getAllSelCtas()
+{
+    Poco::ActiveRecord::Query<by::JobSelCta> query(m_context_ptr);
+    const auto result = query.execute();
+    return result;
+}
+/***************************************************************/
+std::unique_ptr<by::EscMap> asarum::BY::JobDefGetter::getEscMap()
+{
+    std::unique_ptr<EscMap> esc_map{new EscMap()};
+    auto job_esc_vect = getAllSelCtas();
+    for(const auto i : job_esc_vect) {
+        (*esc_map)[i->job_cd()->id()] = i->enty_sel_cta_cd();
+    }
+    return esc_map;
 }
 by::JobDefGetter::~JobDefGetter() {}
 

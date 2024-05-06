@@ -11,8 +11,11 @@
 #include "asarum/BY/EntySelCta.h"
 namespace asarum {
 namespace BY {
-    class JobDefGetter
+using JobPtr=Poco::AutoPtr<JobDef>;
+using JobSelCtaPtr=Poco::AutoPtr<JobSelCta>;
+using EscMap=std::map<std::string, Poco::AutoPtr<EntySelCta>>;
 
+    class JobDefGetter
     {
     public:
         JobDefGetter (std::shared_ptr<Poco::Data::Session> session_ptr);
@@ -31,7 +34,9 @@ namespace BY {
         /// @return vector of JobSelCta pointers
         /// @param job_ptr, pointer to the job for which selection crtieria is sought
         /// @see asarum::BY::JobSelCta 
-        std::vector<Poco::AutoPtr<asarum::BY::JobSelCta>> getJobSelCtas(const Poco::AutoPtr<JobDef> job_ptr);
+        std::vector<JobSelCtaPtr> getJobSelCtas(const JobPtr job_ptr);
+        std::vector<JobSelCtaPtr> getAllSelCtas();
+        std::unique_ptr<EscMap> getEscMap();
 
         /// @brief function return the content of ENTY_SEL_CTA_T table 
         /// i.e., the table storing ESC queries
