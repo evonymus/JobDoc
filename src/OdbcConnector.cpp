@@ -37,4 +37,11 @@ void asarum::BY::OdbcConnector::changeSchema(const char * schema_name)
     execSQL(sql.c_str());
 }
 
+/// @brief wrapper to allow using std::string arguments
+/// @param r_schema_name 
+void asarum::BY::OdbcConnector::changeSchema(const std::string & r_schema_name)
+{
+    changeSchema(r_schema_name.c_str());
+}
+
 

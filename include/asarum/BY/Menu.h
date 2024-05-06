@@ -70,6 +70,7 @@ private:
   std::string m_config_file_name;
   std::string m_sqlite_name;
   std::string m_odbc_string;
+  std::string m_odbc_schema;
   std::string m_single_file_name;
   // variable used to generate script for a single job
   std::string m_job_name;

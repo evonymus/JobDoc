@@ -22,6 +22,10 @@ public:
   /// @brief changes the current schema.
   /// @param schema_name name of the schema
   void changeSchema(const char* schema_name);
+
+  /// @brief changes the current schema.
+  /// @param schema_name name of the schema
+  void changeSchema(const std::string &r_schema_name);
 };
 } // namespace BY
 } // namespace asarum

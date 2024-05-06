@@ -1,2 +1,2 @@
 #define MY_VERSION_MAJOR 0
-#define MY_VERSION_MINOR 6.0
+#define MY_VERSION_MINOR 7.0

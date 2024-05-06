@@ -87,9 +87,13 @@ void by::Menu::handleMenu()
   {
     handleHelp();
     // checking if data source is defined
-  } else if (m_var_map.count("sqlite") > 0) {
+  }
+  else if (m_var_map.count("sqlite") > 0)
+  {
     setSQLiteConnector(m_sqlite_name.c_str());
-  } else if (m_var_map.count("odbc") < 0 ) {
+  }
+  else if (m_var_map.count("odbc") < 0)
+  {
     setOdbcConnector(m_odbc_string.c_str());
   }
 
@@ -127,11 +131,13 @@ void by::Menu::initGenericOptions()
 void by::Menu::initSourceOptions()
 {
   m_source_options.add_options()("sqlite,l",
-                                 po::value<std::string>(&m_sqlite_name),
-                                 "file with sqlite db")(
-      "odbc,o",
-      po::value<std::string>(&m_odbc_string),
-      "odbc connection string");
+       po::value<std::string>(&m_sqlite_name),
+       "file with sqlite db")(
+      "odbc,o", po::value<std::string>(&m_odbc_string),
+      "odbc connection string")(
+      "schema,t", po::value<std::string>(&m_odbc_schema),
+      "schema to connect using ODBC connection"
+      );
 }
 
 /// initialization of Code  Menu Options
@@ -274,14 +280,17 @@ void by::Menu::handleDocsGeneration()
   fs::create_directory(doc_dir);
 
   std::stringstream ss{};
-  ss <<  "Docs" << "\\JobsDocumentation_" << std::put_time(&tm, "%Y-%m-%d") << ".md";
+  ss << "Docs"
+     << "\\JobsDocumentation_" << std::put_time(&tm, "%Y-%m-%d") << ".md";
   const std::string file_name = ss.str();
 
-  if(! isConnecionDefined()) {
+  if (!isConnecionDefined())
+  {
     throw std::invalid_argument("No connection to database was defined");
   }
-  
-  if(m_var_map.count("sequence")> 0) {
+
+  if (m_var_map.count("sequence") > 0)
+  {
     by::DocWriter writer{getSession()};
     writer.docScheduledJobs(file_name);
   }
@@ -322,6 +331,9 @@ void asarum::BY::Menu::setOdbcConnector(const char *conn_string)
 {
   std::unique_ptr<by::OdbcConnector> ptr{new by::OdbcConnector(conn_string)};
   m_odbc_conn_ptr = std::move(ptr);
+  if(m_var_map.count("schema") > 0) {
+    m_odbc_conn_ptr->changeSchema(m_odbc_schema);
+  }
 }
 /***************************************************************/
 
@@ -336,16 +348,22 @@ void asarum::BY::Menu::setDataSource()
 /***************************************************************/
 bool asarum::BY::Menu::isConnecionDefined()
 {
-  if(m_sqlite_conn_ptr != nullptr) return true;
-  else if(m_odbc_conn_ptr != nullptr) return true;
-  else return false;
+  if (m_sqlite_conn_ptr != nullptr)
+    return true;
+  else if (m_odbc_conn_ptr != nullptr)
+    return true;
+  else
+    return false;
 }
 
 /***************************************************************/
 
 std::shared_ptr<Poco::Data::Session> asarum::BY::Menu::getSession()
 {
-  if(m_odbc_conn_ptr != nullptr) return m_odbc_conn_ptr->m_session_ptr;
-  else if(m_sqlite_conn_ptr != nullptr) return m_sqlite_conn_ptr->m_session_ptr;
-  else throw std::runtime_error("No connection to DB is available");
+  if (m_odbc_conn_ptr != nullptr)
+    return m_odbc_conn_ptr->m_session_ptr;
+  else if (m_sqlite_conn_ptr != nullptr)
+    return m_sqlite_conn_ptr->m_session_ptr;
+  else
+    throw std::runtime_error("No connection to DB is available");
 }
