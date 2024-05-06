@@ -239,14 +239,17 @@ void asarum::BY::Menu::handleScriptAllScheduled()
   const std::string script_dir = m_path + SCRIPT_DIR;
   if (m_var_map.count("all") > 0)
   {
-    if (m_var_map.count("sqlite") > 0)
+    if (isConnecionDefined())
     {
-      std::vector<by::BaseConnector> v_conn;
-      by::SQLiteConnector sqlite_connector{m_sqlite_name.c_str()};
-      by::JobDefGetter job_getter{sqlite_connector.m_session_ptr};
+      by::JobDefGetter job_getter{getSession()};
       fs::create_directory(script_dir);
 
       std::vector<Poco::AutoPtr<asarum::BY::JobDef>> jobs_to_process = job_getter.getScheduledJobDefs();
+      if(jobs_to_process.size() > 0 ) {
+        std::cout << "\nStarting script generation, it may take while ...\n";
+      } else {
+        std::cout << "\nNo scheduled job found\n";
+      }
       for (auto job : jobs_to_process)
       {
         std::stringstream ss_file_name;
@@ -255,9 +258,11 @@ void asarum::BY::Menu::handleScriptAllScheduled()
 
         std::ofstream fout(file_name.c_str());
         by::JobScriptWriter scriptWriter(fout);
-        scriptWriter.writeOrclJobSetScript(job->id().c_str(), sqlite_connector.m_session_ptr);
+        scriptWriter.writeOrclJobSetScript(job->id().c_str(), getSession());
         fout.close();
       }
+
+      std::cout << "\nGeneration of the scripts completed\n";
     }
     else
     {
@@ -292,6 +297,7 @@ void by::Menu::handleDocsGeneration()
   if (m_var_map.count("sequence") > 0)
   {
     by::DocWriter writer{getSession()};
+    std::cout << "\nGenerating of documentation started, it may take a while ...\n";
     writer.docScheduledJobs(file_name);
     std::cout << "\nGeneration of " << file_name << " document completed\n";
   }

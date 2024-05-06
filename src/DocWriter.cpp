@@ -8,6 +8,7 @@
 #include <iomanip>
 #include <utility>
 #include <vector>
+#include <algorithm>
 
 namespace pc = Poco;
 namespace pd = Poco::Data;
@@ -170,7 +171,7 @@ void asarum::BY::DocWriter::printEscDetails(
   printItemRow(convertDate(esc_ptr->crtd_dtt()), "Created On", r_out);
 
   if (!esc_ptr->updt_dtt().isNull()) {
-    printItemRow(convertDate(esc_ptr->updt_dtt().value()), "Updted On", r_out);
+    printItemRow(convertDate(esc_ptr->updt_dtt().value()), "Updated On", r_out);
   }
 
   if (!esc_ptr->updt_usr_cd().isNull()) {
@@ -192,7 +193,7 @@ void asarum::BY::DocWriter::printJobDetails(const Poco::AutoPtr<JobDef> job_ptr,
 
   r_out << "\n\n### Details of " << job_ptr->id() << "\n\n";
   if (!job_ptr->job_desc().isNull()) {
-    r_out << "**Descripion**: " << job_ptr->job_desc() << "\n\n";
+    r_out << "**Description**: " << job_ptr->job_desc() << "\n\n";
   }
   printItemTableDef(r_out);
   printItemRow(job_ptr->id(), "Job Name", r_out);
@@ -230,6 +231,7 @@ void asarum::BY::DocWriter::printJobDetails(const Poco::AutoPtr<JobDef> job_ptr,
   // if template is stored in a file
   if (!job_ptr->tplt_file().isNull()) {
     std::string value = job_ptr->tplt_file().value();
+    std::replace(value.begin(), value.end(), '\\', '/');
     int strSize = value.size();
     // if string > max cell size, trim it to the size
     printItemRow(strSize > VALUE_LENGTH ? value.substr(strSize - VAL_LENGTH)
