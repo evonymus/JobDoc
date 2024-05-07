@@ -40,7 +40,7 @@ void by::JobScriptWriter::writeOrclJobSetScript(const std::vector<asarum::BY::Jo
     throw std::invalid_argument("The passed vector has not jobs");
   }
   *mp_out << "\n-- Start transaction\nBEGIN\n"
-          << "\n-- Save point, transaction can be rolled back upon error\nSAVEPOINT start_transaction\n";
+          << "\n-- Save point, transaction can be rolled back upon error\nSAVEPOINT start_transaction;\n";
 
   std::vector<asarum::BY::JobDef::Ptr>::const_reverse_iterator ri = r_jobs.rbegin();
   while (ri != r_jobs.rend())
@@ -106,9 +106,9 @@ void by::JobScriptWriter::writeOrclSingleJobScript(const by::JobDef::Ptr job_ptr
       }
     }
   }
-  writeOrclJobSelCtaScript(job_ptr);
   writeOrclTmplScript(job_ptr->tplt_id());
   writeOrclJobScript(job_ptr);
+  writeOrclJobSelCtaScript(job_ptr);
 }
 
 //******************************* writeOrclSingleJobScript *******************************
@@ -134,14 +134,9 @@ void asarum::BY::JobScriptWriter::writeOrclSingleJobScript(const char *job_name,
   writeOrclSingleJobScript(job_ptr);
 }
 //***************************** PRIVATE ***********************
-
-/// @brief function writes to the stream specified in the constructor, INSERT statement creating a
-/// JOB_DEFN_T record for the job itself and all its next_success and next_failure, jobs.
-/// @param job_ptr pointer to the JobDef object, with defintion of the job.
-void asarum::BY::JobScriptWriter::writeOrclJobScript(const by::JobDef::Ptr job_ptr)
-{
-  if (job_ptr == nullptr)
-    return;
+/// @brief function writes to the stream specified in the constructor, INSERT statement creating a /// JOB_DEFN_T record for the job itself and all its next_success and next_failure, jobs.  /// @param job_ptr pointer to the JobDef object, with defintion of the job.  
+void asarum::BY::JobScriptWriter::writeOrclJobScript(const by::JobDef::Ptr job_ptr) { 
+  if (job_ptr == nullptr) return;
 
   *mp_out << JOB_DEF_INSERT;
   *mp_out << job_ptr->columns()[0];
@@ -175,6 +170,7 @@ void asarum::BY::JobScriptWriter::writeOrclJobScript(const by::JobDef::Ptr job_p
   {
     *mp_out << ", NULL";
   }
+
   sql_cnv(job_ptr->prty(), mp_out);
   sql_cnv(job_ptr->actv_yn(), mp_out);
 
@@ -265,14 +261,15 @@ void asarum::BY::JobScriptWriter::writeOrclJobSelCtaScript(const asarum::BY::Job
     *mp_out << i->columns()[0];
     for (auto j = 1; j < i->columns().size(); j++)
     {
+      if( j % 6)
       *mp_out << ", " << i->columns()[j];
     }
-    *mp_out << ")\nSELECT " << i->id();
+    *mp_out << ")\nSELECT " << "JOB_SEL_CTA_TSEQ.nextval ";
     sql_cnv(i->opt_lck(), mp_out);
     sql_cnv(i->job_cd()->id(), mp_out);
     sql_cnv(i->enty_sel_cta_cd()->id(), mp_out);
-    *mp_out << "\nFROM DUAL WHERE NOT EXISTS(SELECT 1 FROM JOB_SEL_CTA_T WHERE JOB_SEL_CTA_ID ="
-            << i->id() << ");";
+    *mp_out << "\nFROM DUAL WHERE NOT EXISTS(SELECT 1 FROM JOB_SEL_CTA_T WHERE JOB_CD = '"
+            << i->job_cd()->id() << "');";
   }
 }
 
@@ -387,7 +384,7 @@ void asarum::BY::JobScriptWriter::sql_cnv(const std::any var, std::ostream *p_ou
   else if (auto ptr = std::any_cast<Poco::DateTime>(&var))
   {
     *p_out << ", "
-           << "to_date(" << fmt::format(*ptr, DTIME_FORMAT) << ", 'yyyy-mm-dd HH24:mi:ss')";
+           << "to_date('" << fmt::format(*ptr, DTIME_FORMAT) << "', 'yyyy-mm-dd HH24:mi:ss')";
 
     // -----------------  nullable part -----------
   }
@@ -510,7 +507,7 @@ void asarum::BY::JobScriptWriter::sql_cnv(const std::any var, std::ostream *p_ou
     else
     {
       *p_out << ", "
-             << "to_date(" << fmt::format(*ptr, DTIME_FORMAT) << ", 'yyyy-mm-dd HH24:mi:ss')";
+             << "to_date('" << fmt::format(*ptr, DTIME_FORMAT) << "', 'yyyy-mm-dd HH24:mi:ss')";
     }
   }
   else if (auto ptr = std::any_cast<Poco::Nullable<Poco::DateTime>>(&var))
@@ -522,7 +519,7 @@ void asarum::BY::JobScriptWriter::sql_cnv(const std::any var, std::ostream *p_ou
     else
     {
       *p_out << ", "
-             << "to_date(" << fmt::format(*ptr, DATE_FORMAT) << ", 'yyyy-mm-dd HH24:mi:ss')";
+             << "to_date('" << fmt::format(*ptr, DATE_FORMAT) << "', 'yyyy-mm-dd HH24:mi:ss')";
     }
   }
   else
