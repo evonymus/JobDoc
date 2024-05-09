@@ -31,9 +31,7 @@ find_package(Boost COMPONENTS filesystem program_options REQUIRED )
 add_executable( ${EXEC} 
   ${SRC_DIR}/main.cpp
   ${SRC_DIR}/FindStrTFunc.cpp
-  ${SRC_DIR}/job.cpp
   ${SRC_DIR}/Tokenizer.cpp
-  ${SRC_DIR}/job_group.cpp
   ${SRC_DIR}/SQLiteConnector.cpp
   ${SRC_DIR}/OdbcConnector.cpp
   ${SRC_DIR}/jobDef.cpp

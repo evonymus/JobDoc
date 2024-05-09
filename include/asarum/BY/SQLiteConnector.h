@@ -10,14 +10,13 @@
  * @copyright Copyright (c) 2024
  *
  */
-#include "job_group.h"
-#include <Poco/Data/Session.h>
 #include "BaseConnector.h"
+#include <Poco/Data/Session.h>
 #include <memory>
 
 namespace asarum {
 namespace BY {
-class SQLiteConnector : public BaseConnector{
+class SQLiteConnector : public BaseConnector {
 public:
   /**
    * @brief Construct a new SQLiteConnector object
@@ -25,7 +24,6 @@ public:
    * @param dbName name of the file with SQLite database
    */
   SQLiteConnector(const char *dbName);
-  void getJobs(std::vector<std::shared_ptr<JobGroup>> &job_groups);
 
 private:
   void init();
