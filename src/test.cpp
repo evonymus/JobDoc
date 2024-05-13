@@ -78,7 +78,6 @@ void test_job_frm_odbs() {
 
 void test_CreateDestDB() {
    by::DataCopier copier("DSN=ROE", "MY_DB.db");
-   copier.createDestDB();
    copier.copyData();
 }
 
@@ -99,6 +98,12 @@ void test_find_job() {
    } else std::cout << "\n job not found\n";
 }
 
+void test_copy_data() {
+   by::DataCopier copier("DSN=JOBS;Uid=system;Pwd=sql","my_test.db");
+   copier.copyData();
+   std::cout << "Data copied\n";
+}
+
 void Test::runTest() {
    std::cout << "test run\n"; 
    //test_getting_childs();
@@ -107,5 +112,6 @@ void Test::runTest() {
   //test_CreateDestDB();
   //test_job_frm_odbs();
   //test_printDoc();
-  test_find_job();
+  //test_find_job();
+  test_copy_data();
 }

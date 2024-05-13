@@ -13,48 +13,88 @@
 #include <vector>
 namespace by = asarum::BY;
 namespace pd = Poco::Data;
+namespace pa = Poco::ActiveRecord;
 using stringstream = std::stringstream;
+using JobPtr_t = Poco::AutoPtr<by::JobDef>;
 
-asarum::BY::DataCopier::DataCopier(const char *odbc_dsn, const char *db_name)
+asarum::BY::DataCopier::DataCopier(const char *odbc_dsn, const char *db_name, const char *schema)
     : m_odbc_dsn{odbc_dsn}, m_db_name{db_name},
       m_orig_conn_ptr{new by::OdbcConnector(odbc_dsn)},
       m_dest_conn_ptr{new by::SQLiteConnector(db_name)}
+
 {
+    // if schema parameter specified, change schema
+    if (schema != nullptr)
+    {
+        m_orig_conn_ptr->changeSchema(schema);
+    }
 }
+
+/***************************************************************/
+
+asarum::BY::DataCopier::DataCopier(std::shared_ptr<OdbcConnector> odbc_conn_ptr, const char *db_name, const char *schema)
+    : m_odbc_dsn{nullptr}, m_db_name{db_name},
+      m_orig_conn_ptr{odbc_conn_ptr},
+      m_dest_conn_ptr{new by::SQLiteConnector(db_name)}
+{
+    // if schema parameter specified, change schema
+    if (schema != nullptr)
+    {
+        m_orig_conn_ptr->changeSchema(schema);
+    }
+}
+/***************************************************************/
 
 void asarum::BY::DataCopier::copyData()
 {
     try
     {
-        stringstream insert_sql{};
-        insert_sql << "INSERT INTO JOB_DEF_T ( ";
-        insert_sql << by::JobDef::columns()[0];
-        for(auto i = 1; i < by::JobDef::columns().size(); i++) {
-           insert_sql << ", "  << by::JobDef::columns()[i];
+        by::JobDefGetter from_getter{m_orig_conn_ptr->m_session_ptr};
+        pa::Context::Ptr dest_context_ptr{new pa::Context(*m_dest_conn_ptr->m_session_ptr)};
+
+        std::vector<JobPtr_t> jobs = from_getter.getAllJobDefs();
+
+        // if no record found, throw exceptin
+        if (jobs.empty())
+        {
+            std::stringstream ss{};
+            ss << "No job defintion found in the source database " << m_db_name;
+            throw std::invalid_argument(ss.str());
         }
-        
-        insert_sql << ") VALUES (?" ;
+        createDestDB();
 
-        for(auto i=1; i < by::JobDef::columns().size(); i++) {
-            insert_sql << ", ?";
+        // copying JOB_DEFN_T and ADTN_DATA_T
+        for (const auto i : jobs)
+        {
+            // if template record exists, create a template record
+            if (!i->tplt_id().isNull())
+            {
+                by::AdtnData::Ptr tmpl_ptr = new by::AdtnData(*i->tplt_id());
+                tmpl_ptr->create(dest_context_ptr);
+            }
+            by::JobDef::Ptr job_ptr = new by::JobDef(*i);
+            job_ptr->create(dest_context_ptr);
         }
-        insert_sql << ")";
 
+        std::vector<JobSelCtaPtr> job_esc_ptr = from_getter.getAllSelCtas();
 
-        by::SQLiteConnector frm_conn{"H:\\BY\\JobDoc_TMS_Job_server_documenting_utility\\QA_2024-04-12-10-11-33.db"};
-        by::SQLiteConnector to_conn{m_db_name};
-        pd::Transaction trans(*to_conn.m_session_ptr);
+        // if not ESC fond, throw exception
+        if (job_esc_ptr.empty())
+        {
+            std::stringstream ss{};
+            ss << "No ESC queries found in the source databaee " << m_db_name;
+            throw std::invalid_argument(ss.str());
+        }
 
-        //pd::Statement select(*frm_conn.m_session_ptr);
-        //select << "SELECT * FROM JOB_DEFN_T", pd::Keywords::into(jobs), pd::Keywords::now;
-        //pd::RecordSet rs(*frm_conn.m_session_ptr, "SELECT * from JOB_DEFN_T", new pd::SimpleRowFormatter);
-        //pd::Statement insert(*to_conn.m_session_ptr);
-        //pd::RecordSet::Iterator it = rs.begin();
-        //insert << insert_sql.str(), pd::Keywords::use((*it).names());
-        //     insert << pd::Keywords::use(i);
-        // }
-        //insert << pd::Keywords::now;
-        trans.commit();
+        for (const auto i : job_esc_ptr)
+        {
+            // inserting ESC query
+            by::EntySelCta::Ptr esc_ptr = new by::EntySelCta(*i->enty_sel_cta_cd());
+            esc_ptr->create(dest_context_ptr);
+
+            by::JobSelCta::Ptr jb_cta_ptr = new by::JobSelCta(*i);
+            jb_cta_ptr->create(dest_context_ptr);
+        }
     }
     catch (const Poco::Exception &ex)
     {
@@ -62,39 +102,18 @@ void asarum::BY::DataCopier::copyData()
     }
 }
 
-const char *asarum::BY::DataCopier::getJobSelect()
+/// @brief descturctor. Closing connections
+asarum::BY::DataCopier::~DataCopier()
 {
-    stringstream select{"SELECT job_cd "};
-    for (auto i = 1; i < by::JobDef::columns().size(); i++)
+    if (m_dest_conn_ptr->m_session_ptr != nullptr)
     {
-        select << "" << by::JobDef::columns()[i];
+        m_dest_conn_ptr->m_session_ptr->close();
     }
-    select << " FROM " << by::JobDef::table();
-    return select.str().c_str();
-}
 
-//**************************************************************
-
-const std::string asarum::BY::DataCopier::getJobInsert()
-{
-    static stringstream insert;
-    if (insert.str().length() == 0)
+    if (m_orig_conn_ptr->m_session_ptr != nullptr)
     {
-
-        insert << "INSERT INTO ";
-        insert << by::JobDef::table() << "(" << by::JobDef::columns()[0];
-        for (auto i = 1; i < by::JobDef::columns().size(); i++)
-        {
-            insert << ", " << by::JobDef::columns()[i];
-        }
-        insert << ") SELECT job_cd ";
-        for (auto i = 1; i < by::JobDef::columns().size(); i++)
-        {
-            insert << "" << by::JobDef::columns()[i];
-        }
-        insert << " FROM JOB_DEFN_T;";
+        m_orig_conn_ptr->m_session_ptr->close();
     }
-    return insert.str();
 }
 
 //**************************************************************
@@ -107,11 +126,13 @@ void asarum::BY::DataCopier::createDestDB()
         *m_dest_conn_ptr->m_session_ptr << "DROP TABLE IF EXISTS SCHD_DETL_T", pd::Keywords::now;
         *m_dest_conn_ptr->m_session_ptr << "DROP TABLE IF EXISTS JOB_SEL_CTA_T", pd::Keywords::now;
         *m_dest_conn_ptr->m_session_ptr << "DROP TABLE IF EXISTS JOB_DEFN_T", pd::Keywords::now;
+        *m_dest_conn_ptr->m_session_ptr << "DROP TABLE IF EXISTS ADTN_DATA_T", pd::Keywords::now;
 
         *m_dest_conn_ptr->m_session_ptr << ENTY_SEL_CTA_T_CREATE, pd::Keywords::now;
         *m_dest_conn_ptr->m_session_ptr << SCHD_DETL_T_CREATE, pd::Keywords::now;
         *m_dest_conn_ptr->m_session_ptr << JOB_SEL_CTA_T_CREATE, pd::Keywords::now;
         *m_dest_conn_ptr->m_session_ptr << JOB_DEFN_T_CREATE, pd::Keywords::now;
+        *m_dest_conn_ptr->m_session_ptr << ADTN_DATA_T_CREATE, pd::Keywords::now;
     }
     catch (Poco::Exception &ex)
     {

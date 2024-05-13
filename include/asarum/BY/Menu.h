@@ -47,15 +47,15 @@ public:
    *************************************************************/
 
 private:
-  std::unique_ptr<SQLiteConnector> m_sqlite_conn_ptr;
-  std::unique_ptr<OdbcConnector> m_odbc_conn_ptr;
+  std::shared_ptr<SQLiteConnector> m_sqlite_conn_ptr;
+  std::shared_ptr<OdbcConnector> m_odbc_conn_ptr;
   std::string m_notify_list;
   po::options_description m_generic_options;
   po::options_description m_source_options;
-  po::options_description m_db_options;
   po::options_description m_code_options;
   po::options_description m_doc_options;
   po::options_description m_output_options;
+  po::options_description m_copy_options;
 
   po::options_description m_visible_options;
   po::options_description m_cmd_line_options;
@@ -76,6 +76,8 @@ private:
   std::string m_job_name;
   // variable used to generate script for the parent job and all descendants
   std::string m_parent_job_name;
+  // 
+  std::string m_copy_to_db_name;
   //--------- db connection
   std::string m_db_service;
   std::string m_db_user;
@@ -88,6 +90,7 @@ private:
   void initSourceOptions();
   void initCodeOptions();
   void initDocOptions();
+  void initCopyOptions();
   void initOutputOptions();
 
   // ---------- menu handlers (triggers) ---------
@@ -98,6 +101,7 @@ private:
   void handleDocsGeneration();
   void handleHelp();
   void handleVersion();
+  void handleCopyDB();
   void setDataSource();
 
   // ---------- connection methods -------

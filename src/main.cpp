@@ -11,9 +11,9 @@ int main(int argc, char *argv[])
   try
   {
     // by::OdbcConnector ocon{"DSN=ROE"};
-    // Test test;
-    // test.runTest();
-    // return 0;
+     //Test test;
+     //test.runTest();
+     //return 0;
 
     by::Menu menu(argc, argv);
     menu.handleMenu();
