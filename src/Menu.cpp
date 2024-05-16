@@ -117,13 +117,9 @@ void by::Menu::handleMenu()
     setOdbcConnector(m_odbc_string.c_str());
   }
 
-  if (m_var_map.count("sequence") + m_var_map.count("all-jobs") > 0)
+  if (m_var_map.count("doc-seq") + m_var_map.count("doc-all-jobs") > 0)
   {
     handleDocsGeneration();
-  }
-  else if (m_var_map.count("single") > 0)
-  {
-    handleSingleJobScriptGeneration();
   }
   else if (m_var_map.count("all") > 0)
   {
@@ -321,12 +317,12 @@ void by::Menu::handleDocsGeneration()
     throw std::invalid_argument("No connection to database was defined");
   }
 
-  if (m_var_map.count("sequence") + m_var_map.count("all-jobs") > 0)
+  if (m_var_map.count("doc-seq") + m_var_map.count("doc-all-jobs") > 0)
   {
     by::DocWriter writer{getSession()};
     std::cout
         << "\nGenerating of documentation started, it may take a while ...\n";
-    if (m_var_map.count("sequence") > 0)
+    if (m_var_map.count("doc-seq") > 0)
     {
       writer.docScheduledJobs(file_name);
     }
