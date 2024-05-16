@@ -40,13 +40,21 @@ Poco::AutoPtr<asarum::BY::JobDef> asarum::BY::JobDefGetter::getJobDef(const char
 }
 
 /***************************************************************/
-vector<Poco::AutoPtr<by::EntySelCta>> by::JobDefGetter::getEntySelCtas()
+vector<Poco::AutoPtr<by::EntySelCta>> by::JobDefGetter::getAllEntySelCtas()
 {
-    pa::Context::Ptr pContext = new pa::Context(*m_session_ptr);
     pa::Query<by::EntySelCta> query{m_context_ptr};
     return query.execute();
 }
 /***************************************************************/
+std::vector<Poco::AutoPtr<by::AdtnData>> asarum::BY::JobDefGetter::getAllAdtnTemplates()
+{
+    pa::Query<by::AdtnData> query(m_context_ptr);
+    return query
+    .where("ADTN_DATA_CD IS NOT NULL")
+    .execute();
+}
+
+//**************************************************************
 
 std::vector<Poco::AutoPtr<asarum::BY::JobSelCta>> asarum::BY::JobDefGetter::getJobSelCtas(const Poco::AutoPtr<JobDef> job_ptr)
 {
@@ -57,17 +65,27 @@ std::vector<Poco::AutoPtr<asarum::BY::JobSelCta>> asarum::BY::JobDefGetter::getJ
                             .execute();
     return result;
 }
-std::vector<Poco::AutoPtr<asarum::BY::JobSelCta>> asarum::BY::JobDefGetter::getAllSelCtas()
+
+//**************************************************************
+std::vector<Poco::AutoPtr<by::JobSelCta>> asarum::BY::JobDefGetter::getAllJobSelCtas()
 {
-    Poco::ActiveRecord::Query<by::JobSelCta> query(m_context_ptr);
-    const auto result = query.execute();
-    return result;
+    pa::Query<by::JobSelCta> query(m_context_ptr);
+    return query.execute();
 }
+
+//**************************************************************
+
+std::vector<Poco::AutoPtr<by::SchdDetl>> asarum::BY::JobDefGetter::getAllSchdDetls()
+{
+    pa::Query<by::SchdDetl> query(m_context_ptr);
+    return query.execute();
+}
+
 /***************************************************************/
 std::unique_ptr<by::EscMap> asarum::BY::JobDefGetter::getEscMap()
 {
     std::unique_ptr<EscMap> esc_map{new EscMap()};
-    auto job_esc_vect = getAllSelCtas();
+    auto job_esc_vect = getAllJobSelCtas();
     for(const auto i : job_esc_vect) {
         (*esc_map)[i->job_cd()->id()] = i->enty_sel_cta_cd();
     }

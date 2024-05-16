@@ -35,14 +35,26 @@ using EscMap=std::map<std::string, Poco::AutoPtr<EntySelCta>>;
         /// @param job_ptr, pointer to the job for which selection crtieria is sought
         /// @see asarum::BY::JobSelCta 
         std::vector<JobSelCtaPtr> getJobSelCtas(const JobPtr job_ptr);
-        std::vector<JobSelCtaPtr> getAllSelCtas();
+
+        /// @brief gets the content of JOB_DEFN_SEL_CTA_T
+        /// @return vector of JobSelCta
+        std::vector<Poco::AutoPtr<JobSelCta>> getAllJobSelCtas();
+
+        /// @brief gets those records from ADTN_DATA_T that have ADTN_DATA_CD NOT Null. ADTN_DATA_CD contains the name of the template
+        /// @return vector of AdtnData objects 
+        std::vector<Poco::AutoPtr<AdtnData>> getAllAdtnTemplates();
+
+        /// @brief gets the content of SCHD_DETL_T table
+        /// @return vector of SchdDetl objects 
+        std::vector<Poco::AutoPtr<SchdDetl>> getAllSchdDetls();
+
         std::unique_ptr<EscMap> getEscMap();
 
         /// @brief function return the content of ENTY_SEL_CTA_T table 
         /// i.e., the table storing ESC queries
         /// @return vector of EntySelCta pointers 
         /// @see asarum::BY:EntySelCta
-        std::vector<Poco::AutoPtr<asarum::BY::EntySelCta>> getEntySelCtas();
+        std::vector<Poco::AutoPtr<asarum::BY::EntySelCta>> getAllEntySelCtas();
 
         /// @brief function get the list of the jobs having a schedule. Those ones 
         /// can potentially have NEXT_JOB_CD_SUCCESS set

@@ -4,6 +4,7 @@
 #include <memory>
 #include "OdbcConnector.h"
 #include "SQLiteConnector.h"
+#include "JobDefGetter.h"
 /// @brief imports data from ODBC to SQLite database
 namespace asarum
 {
@@ -25,6 +26,7 @@ namespace asarum
             virtual ~DataCopier();
 
 
+
         private:
             const char* m_odbc_dsn;
             const char* m_db_name;
@@ -33,6 +35,31 @@ namespace asarum
 
             /// @brief creates SQLite Database tables
             void createDestDB();
+
+            /// @brief copies templates from ADTN_DATA_T, using from_getter
+            /// @param from_getter JobDefGetter object creted using odbc source data 
+            /// @param dest_context_ptr Poco::ActiveRecord::Context created for the destination, SQLite database 
+            void copyAdtnTemplates(JobDefGetter &from_getter, Poco::ActiveRecord::Context::Ptr dest_context_ptr);
+            
+            /// @brief copies schedules from SCHD_DETL_T, using from_getter
+            /// @param from_getter JobDefGetter object creted using odbc source data 
+            /// @param dest_context_ptr Poco::ActiveRecord::Context created for the destination, SQLite database 
+            void copySchdlDetls(JobDefGetter &from_getter, Poco::ActiveRecord::Context::Ptr dest_context_ptr);
+
+            /// @brief copies Job Definitions from JOB_DEFN_T, using from_getter
+            /// @param from_getter JobDefGetter object creted using odbc source data 
+            /// @param dest_context_ptr Poco::ActiveRecord::Context created for the destination, SQLite database 
+            void copyJobs(JobDefGetter &from_getter, Poco::ActiveRecord::Context::Ptr dest_context_ptr);
+
+            /// @brief copies Entity Selection Criterias from ENTY_SEL_CTA_T, using from_getter
+            /// @param from_getter JobDefGetter object creted using odbc source data 
+            /// @param dest_context_ptr Poco::ActiveRecord::Context created for the destination, SQLite database 
+            void copyEntySelCtas(JobDefGetter &from_getter, Poco::ActiveRecord::Context::Ptr dest_context_ptr);
+
+            /// @brief copies the content of JOB_SEL_CTA_T table , using from_getter
+            /// @param from_getter JobDefGetter object creted using odbc source data 
+            /// @param dest_context_ptr Poco::ActiveRecord::Context created for the destination, SQLite database 
+            void copyJobSelCtas(JobDefGetter &from_getter, Poco::ActiveRecord::Context::Ptr dest_context_ptr);
 
         };
     }

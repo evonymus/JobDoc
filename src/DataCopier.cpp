@@ -13,9 +13,14 @@
 #include <vector>
 namespace by = asarum::BY;
 namespace pd = Poco::Data;
+namespace pk = Poco::Data::Keywords;
 namespace pa = Poco::ActiveRecord;
 using stringstream = std::stringstream;
 using JobPtr_t = Poco::AutoPtr<by::JobDef>;
+using EntySelCtaPtr_t = Poco::AutoPtr<by::EntySelCta>;
+using AdtnDatPtr_t = Poco::AutoPtr<by::AdtnData>;
+using SchdDtlPtr_t = Poco::AutoPtr<by::SchdDetl>;
+using JobSelCtaPtr_t = Poco::AutoPtr<by::JobSelCta>;
 
 asarum::BY::DataCopier::DataCopier(const char *odbc_dsn, const char *db_name, const char *schema)
     : m_odbc_dsn{odbc_dsn}, m_db_name{db_name},
@@ -43,8 +48,8 @@ asarum::BY::DataCopier::DataCopier(std::shared_ptr<OdbcConnector> odbc_conn_ptr,
         m_orig_conn_ptr->changeSchema(schema);
     }
 }
-/***************************************************************/
 
+/***************************************************************/
 void asarum::BY::DataCopier::copyData()
 {
     try
@@ -54,47 +59,14 @@ void asarum::BY::DataCopier::copyData()
 
         std::vector<JobPtr_t> jobs = from_getter.getAllJobDefs();
 
-        // if no record found, throw exceptin
-        if (jobs.empty())
-        {
-            std::stringstream ss{};
-            ss << "No job defintion found in the source database " << m_db_name;
-            throw std::invalid_argument(ss.str());
-        }
         createDestDB();
+        copyAdtnTemplates(from_getter, dest_context_ptr);
+        copySchdlDetls(from_getter, dest_context_ptr);
+        copyEntySelCtas(from_getter, dest_context_ptr);
+        copyJobs(from_getter, dest_context_ptr);
+        copyJobSelCtas(from_getter, dest_context_ptr);
 
-        // copying JOB_DEFN_T and ADTN_DATA_T
-        for (const auto i : jobs)
-        {
-            // if template record exists, create a template record
-            if (!i->tplt_id().isNull())
-            {
-                by::AdtnData::Ptr tmpl_ptr = new by::AdtnData(*i->tplt_id());
-                tmpl_ptr->create(dest_context_ptr);
-            }
-            by::JobDef::Ptr job_ptr = new by::JobDef(*i);
-            job_ptr->create(dest_context_ptr);
-        }
 
-        std::vector<JobSelCtaPtr> job_esc_ptr = from_getter.getAllSelCtas();
-
-        // if not ESC fond, throw exception
-        if (job_esc_ptr.empty())
-        {
-            std::stringstream ss{};
-            ss << "No ESC queries found in the source databaee " << m_db_name;
-            throw std::invalid_argument(ss.str());
-        }
-
-        for (const auto i : job_esc_ptr)
-        {
-            // inserting ESC query
-            by::EntySelCta::Ptr esc_ptr = new by::EntySelCta(*i->enty_sel_cta_cd());
-            esc_ptr->create(dest_context_ptr);
-
-            by::JobSelCta::Ptr jb_cta_ptr = new by::JobSelCta(*i);
-            jb_cta_ptr->create(dest_context_ptr);
-        }
     }
     catch (const Poco::Exception &ex)
     {
@@ -140,5 +112,74 @@ void asarum::BY::DataCopier::createDestDB()
         msg << m_db_name << " failed, Poco:Exception thrown"
             << ex.what() << '\n';
         throw std::exception(msg.str().c_str());
+    }
+}
+
+//**************************************************************
+
+void asarum::BY::DataCopier::copyAdtnTemplates(JobDefGetter &from_getter, Poco::ActiveRecord::Context::Ptr dest_context_ptr)
+{
+    std::vector<AdtnDatPtr_t> templates = from_getter.getAllAdtnTemplates();
+
+    for(const auto i: templates) {
+        by::AdtnData::Ptr templ_ptr = new by::AdtnData(*i);
+        templ_ptr->create(dest_context_ptr);
+    }
+}
+//**************************************************************
+
+void asarum::BY::DataCopier::copySchdlDetls(by::JobDefGetter &from_getter, Poco::ActiveRecord::Context::Ptr dest_context_ptr)
+{
+    std::vector<SchdDtlPtr_t> schedules = from_getter.getAllSchdDetls();
+
+    for(const auto i: schedules) {
+        SchdDtlPtr_t schdl_ptr = new by::SchdDetl(*i);
+        schdl_ptr->create(dest_context_ptr);
+    }
+}
+
+//**************************************************************
+
+void asarum::BY::DataCopier::copyJobs(JobDefGetter &from_getter, Poco::ActiveRecord::Context::Ptr dest_context_ptr)
+{
+
+    std::vector<JobPtr_t> jobs = from_getter.getAllJobDefs();
+
+    // if no record found, throw exceptin
+    if (jobs.empty())
+    {
+        std::stringstream ss{};
+        ss << "No job defintion found in the source database " << m_db_name;
+        throw std::invalid_argument(ss.str());
+    }
+
+    for (const auto i : jobs)
+    {
+        by::JobDef::Ptr job_ptr = new by::JobDef(*i);
+        job_ptr->create(dest_context_ptr);
+    }
+}
+
+
+//**************************************************************
+
+void asarum::BY::DataCopier::copyEntySelCtas(JobDefGetter &from_getter, Poco::ActiveRecord::Context::Ptr dest_context_ptr)
+{
+    std::vector<EntySelCtaPtr_t> escs = from_getter.getAllEntySelCtas();
+
+    for(const auto i : escs) {
+        by::EntySelCta::Ptr esc_ptr = new by::EntySelCta(*i);
+        esc_ptr->create(dest_context_ptr);
+    }
+}
+
+//**************************************************************
+
+void asarum::BY::DataCopier::copyJobSelCtas(JobDefGetter &from_getter, Poco::ActiveRecord::Context::Ptr dest_context_ptr)
+{
+    std::vector<JobSelCtaPtr_t> jb_sel_ctas = from_getter.getAllJobSelCtas();
+    for(const auto i : jb_sel_ctas) {
+       JobSelCtaPtr_t jb_esc = new by::JobSelCta(*i);
+       jb_esc->create(dest_context_ptr);
     }
 }
