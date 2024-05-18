@@ -7,6 +7,8 @@
 #include <Poco/DateTimeFormat.h>
 #include <any>
 #include <exception>
+#include <iomanip>
+#include <pplinterface.h>
 #include <sstream>
 #include <typeinfo>
 
@@ -128,6 +130,7 @@ void by::JobScriptWriter::writeSingleJobScript(const by::JobDef::Ptr job_ptr,
     }
   }
   writeTmplScript(job_ptr->tplt_id(), variant);
+  writeSchdlDetlScript(job_ptr->schd_detl_id(), variant);
   writeJobScript(job_ptr, variant);
   writeJobSelCtaScript(job_ptr, variant);
 }
@@ -165,6 +168,11 @@ void asarum::BY::JobScriptWriter::writeJobScript(const by::JobDef::Ptr job_ptr,
   *mp_out << JOB_DEF_INSERT;
   *mp_out << job_ptr->columns()[0];
   for (int i = 1; i < job_ptr->columns().size(); i++) {
+
+    // add line break every 6 columns
+    if (i % 6 == 0)
+      *mp_out << '\n';
+
     *mp_out << ", " << job_ptr->columns()[i];
   }
   *mp_out << ")\nSELECT '" << job_ptr->id() << "'";
@@ -173,12 +181,18 @@ void asarum::BY::JobScriptWriter::writeJobScript(const by::JobDef::Ptr job_ptr,
   sql_cnv_variant(job_ptr->schd_typ_enu(), mp_out, variant);
   sql_cnv_variant(job_ptr->job_typ_enu(), mp_out, variant);
   sql_cnv_variant(job_ptr->div_cd(), mp_out, variant);
+
+  *mp_out << '\n';
+
   sql_cnv_variant(job_ptr->parm_1(), mp_out, variant);
   sql_cnv_variant(job_ptr->parm_2(), mp_out, variant);
   sql_cnv_variant(job_ptr->parm_3(), mp_out, variant);
   sql_cnv_variant(job_ptr->parm_4(), mp_out, variant);
   sql_cnv_variant(job_ptr->parm_5(), mp_out, variant);
   sql_cnv_variant(job_ptr->crtd_dtt(), mp_out, variant);
+
+  *mp_out << '\n';
+
   sql_cnv_variant(job_ptr->crtd_usr_cd(), mp_out, variant);
   sql_cnv_variant(job_ptr->updt_dtt(), mp_out, variant);
   sql_cnv_variant(job_ptr->updt_usr_cd(), mp_out, variant);
@@ -190,6 +204,8 @@ void asarum::BY::JobScriptWriter::writeJobScript(const by::JobDef::Ptr job_ptr,
   } else {
     *mp_out << ", NULL";
   }
+
+  *mp_out << '\n';
 
   sql_cnv_variant(job_ptr->prty(), mp_out, variant);
   sql_cnv_variant(job_ptr->actv_yn(), mp_out, variant);
@@ -206,6 +222,9 @@ void asarum::BY::JobScriptWriter::writeJobScript(const by::JobDef::Ptr job_ptr,
   }
   sql_cnv_variant(job_ptr->alrt_grp_cd_success(), mp_out, variant);
   sql_cnv_variant(job_ptr->alrt_grp_cd_failure(), mp_out, variant);
+
+  *mp_out << '\n';
+
   sql_cnv_variant(job_ptr->gen_enty_output_yn(), mp_out, variant);
   if (job_ptr->tplt_id() != nullptr) {
     sql_cnv_variant(job_ptr->tplt_id()->id(), mp_out, variant);
@@ -232,8 +251,9 @@ void asarum::BY::JobScriptWriter::writeTmplScript(
     *mp_out << "\n-- if template does not exists, create it\n";
 
     if (variant == by::DB_VARIANT::MSSQL) {
-      *mp_out << "\nSwitchinf off identity insert to be able to insert ID\n"
-              << "\nSET IDENTITY_INSERT ON\n";
+      *mp_out
+          << "\n\t -- Switchinf off identity insert to be able to insert ID\n"
+          << "\nSET IDENTITY_INSERT ON\n";
     }
 
     *mp_out << "INSERT INTO " << adt_ptr->table() << "( ";
@@ -243,7 +263,8 @@ void asarum::BY::JobScriptWriter::writeTmplScript(
       *mp_out << ", " << adt_ptr->columns()[i];
     }
 
-    *mp_out << ")\nSELECT ADTN_DATA_TSEQ.nextval ";
+    *mp_out << ")\nSELECT " << adt_ptr->id();
+
     sql_cnv_variant(adt_ptr->data(), mp_out, variant);
     sql_cnv_variant(adt_ptr->crtd_dtt(), mp_out, variant);
     sql_cnv_variant(adt_ptr->adtn_data_cd(), mp_out, variant);
@@ -263,12 +284,59 @@ void asarum::BY::JobScriptWriter::writeTmplScript(
             << "' );\n\n";
 
     if (variant == by::DB_VARIANT::MSSQL) {
-      *mp_out << "\nswitchin Indentity Insert off\n"
+      *mp_out << "\n\t -- switchin Indentity Insert off\n"
               << "\n SET IDENTITY_INSERT OFF\n";
     }
   }
 }
 
+/***************************************************************/
+
+void asarum::BY::JobScriptWriter::writeSchdlDetlScript(
+    const asarum::BY::SchdDetl::Ptr schdl_ptr, by::DB_VARIANT variant) {
+  if (schdl_ptr != nullptr) {
+    *mp_out << "\n\t -- If SCHDL_DETL_T record does not exist, create it\n";
+
+    if (variant == by::DB_VARIANT::MSSQL) {
+      *mp_out << "\n\t -- Switching off Idenity Insert to allow inseting "
+                 "schd_detl_id\n"
+              << "\nSET IDENTITY_INSERT ON\n";
+    }
+
+    *mp_out << "\nINSERT INTO " << schdl_ptr->table() << " ("
+            << schdl_ptr->columns()[0];
+
+    for (auto i = 1; i < schdl_ptr->columns().size(); i++) {
+      *mp_out << ", " << schdl_ptr->columns()[i];
+    }
+
+    *mp_out << ")\nSELECT " << schdl_ptr->id();
+
+    sql_cnv_variant(schdl_ptr->opt_lck(), mp_out, variant);
+    sql_cnv_variant(schdl_ptr->rcurnce_typ_enu(), mp_out, variant);
+    sql_cnv_variant(schdl_ptr->efct_dt(), mp_out, variant);
+    sql_cnv_variant(schdl_ptr->expd_dt(), mp_out, variant);
+    sql_cnv_variant(schdl_ptr->strt_tm(), mp_out, variant);
+    sql_cnv_variant(schdl_ptr->end_tm(), mp_out, variant);
+    sql_cnv_variant(schdl_ptr->day_of_mth(), mp_out, variant);
+    sql_cnv_variant(schdl_ptr->itvl(), mp_out, variant);
+    sql_cnv_variant(schdl_ptr->fxd_itvl_src_enu(), mp_out, variant);
+    sql_cnv_variant(schdl_ptr->bus_days_cd(), mp_out, variant);
+    sql_cnv_variant(schdl_ptr->bus_mths_cd(), mp_out, variant);
+
+    if (variant == by::DB_VARIANT::ORACLE) {
+      *mp_out << "\nFROM DUAL ";
+    }
+
+    *mp_out << "\nWHERE NOT EXISTS(SELECT 1 FROM " << schdl_ptr->table()
+            << " WHERE SCHD_DETL_ID = " << schdl_ptr->id() << ");\n\n";
+
+    if (variant == by::DB_VARIANT::MSSQL) {
+      *mp_out << "\n\t -- switchin identity insert back to off\n"
+              << "\nSET IDENTITY_INSERT OFF\n";
+    }
+  }
+}
 /********************** writeJobSelCtaScript *********************/
 ///@brief the function gets from JOB_SEL_CTA_T proper record for the job given
 /// as the parameter
@@ -432,9 +500,28 @@ void asarum::BY::JobScriptWriter::sql_cnv_variant(const std::any var,
     default:
       throw std::runtime_error("unknown database variant");
     }
-
     // -----------------  nullable part -----------
-  } else if (auto ptr = std::any_cast<Poco::Nullable<std::string>>(&var)) {
+  }
+
+  else if (auto ptr = std::any_cast<Poco::Data::Date>(&var)) {
+    *p_out << ", ";
+
+    // check the DB variant and generate a proper conversion function
+    switch (variant) {
+    case DB_VARIANT::ORACLE:
+      *p_out << "to_date('" << ptr->year() << '-' << std::setfill('0')
+             << std::setw(2) << ptr->month() << '-' << ptr->day()
+             << "', 'yyyy-mm-dd')";
+      break;
+    case DB_VARIANT::MSSQL:
+      *p_out << "convert(date, fmt::format(*ptr, DTIME_FORMAT), 104)";
+      break;
+    default:
+      throw std::runtime_error("unknown database variant");
+    }
+  }
+
+  else if (auto ptr = std::any_cast<Poco::Nullable<std::string>>(&var)) {
     if (ptr->isNull()) {
       *p_out << ", NULL";
     } else {
@@ -495,7 +582,9 @@ void asarum::BY::JobScriptWriter::sql_cnv_variant(const std::any var,
     } else {
       *p_out << ", " << *ptr << "";
     }
-  } else if (auto ptr = std::any_cast<Poco::Nullable<Poco::DateTime>>(&var)) {
+  }
+
+  else if (auto ptr = std::any_cast<Poco::Nullable<Poco::Data::Date>>(&var)) {
     if (ptr->isNull()) {
       *p_out << ", NULL";
     } else {
@@ -504,8 +593,9 @@ void asarum::BY::JobScriptWriter::sql_cnv_variant(const std::any var,
       // check the DB variant and generate a proper conversion function
       switch (variant) {
       case DB_VARIANT::ORACLE:
-        *p_out << "to_date('" << fmt::format(*ptr, DTIME_FORMAT)
-               << "', 'yyyy-mm-dd HH24:mi:ss')";
+        *p_out << "to_date('" << ptr->value().year() << '-' << std::setfill('0')
+               << std::setw(2) << ptr->value().month() << '-'
+               << ptr->value().day() << "', 'yyyy-mm-dd')";
         break;
       case DB_VARIANT::MSSQL:
         *p_out << "convert(date, fmt::format(*ptr, DTIME_FORMAT), 104)";
@@ -514,7 +604,9 @@ void asarum::BY::JobScriptWriter::sql_cnv_variant(const std::any var,
         throw std::runtime_error("unknown database variant");
       }
     }
-  } else if (auto ptr = std::any_cast<Poco::Nullable<Poco::DateTime>>(&var)) {
+  }
+
+  else if (auto ptr = std::any_cast<Poco::Nullable<Poco::DateTime>>(&var)) {
     if (ptr->isNull()) {
       *p_out << ", NULL";
     } else {
@@ -527,7 +619,7 @@ void asarum::BY::JobScriptWriter::sql_cnv_variant(const std::any var,
                << "', 'yyyy-mm-dd HH24:mi:ss')";
         break;
       case DB_VARIANT::MSSQL:
-        *p_out << "convert(date, fmt::format(*ptr, DTIME_FORMAT), 104)";
+        *p_out << "convert(date, fmt::format(*ptr, DTIME_FORMAT), 23)";
         break;
       default:
         throw std::runtime_error("unknown database variant");

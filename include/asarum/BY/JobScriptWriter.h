@@ -90,6 +90,7 @@ private:
   void writeJobScript(const asarum::BY::JobDef::Ptr job_ptr, DB_VARIANT variant);
   void writeJobSelCtaScript(const asarum::BY::JobDef::Ptr job_ptr, DB_VARIANT variant);
   void writeTmplScript(const asarum::BY::AdtnData::Ptr adt_ptr, DB_VARIANT variant);
+  void writeSchdlDetlScript(const asarum::BY::SchdDetl::Ptr schdl_ptr, DB_VARIANT variant);
   /// @brief gets all subsequent jobs
   /// @param parent paernt job name 
   /// @param session_ptr pointer to session
