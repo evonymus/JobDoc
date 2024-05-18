@@ -18,6 +18,7 @@
 #include "BaseConnector.h"
 #include "SQLiteConnector.h"
 #include "OdbcConnector.h"
+#include "JobScriptWriter.h"
 #include <Poco/Data/Session.h>
 
 namespace po = boost::program_options;
@@ -76,12 +77,14 @@ private:
   std::string m_job_name;
   // variable used to generate script for the parent job and all descendants
   std::string m_parent_job_name;
-  // 
+  // name of SQLite database for the copy of ODBC db 
   std::string m_copy_to_db_name;
+  DB_VARIANT m_db_variant;
   //--------- db connection
   std::string m_db_service;
   std::string m_db_user;
   std::string m_db_password;
+
 
   bool m_with_images;
 

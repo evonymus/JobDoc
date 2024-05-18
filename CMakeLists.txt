@@ -24,7 +24,7 @@ set(Boost_ROOT c:/Dev/Libs/boost)
 #add_definitions(-DPOCO_STATIC)
 #option(BUILD_SHARED_LIBS OFF)
 
-find_package(Boost  REQUIRED filesystem program_options)
+#find_package(Boost  REQUIRED filesystem program_options)
 find_package(Poco REQUIRED COMPONENTS Foundation Data DataSQLite DataODBC ActiveRecord)
 find_package(Boost COMPONENTS filesystem program_options REQUIRED )
 

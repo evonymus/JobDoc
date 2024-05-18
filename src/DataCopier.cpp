@@ -111,7 +111,7 @@ void asarum::BY::DataCopier::createDestDB()
         stringstream msg{"Creating of tables in the database "};
         msg << m_db_name << " failed, Poco:Exception thrown"
             << ex.what() << '\n';
-        throw std::exception(msg.str().c_str());
+        throw std::exception(ex);
     }
 }
 
