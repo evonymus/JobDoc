@@ -39,7 +39,7 @@ by::Menu::Menu(int argc, char *argv[])
 
 /// @brief function initializes menu
 /// @param argc number of arguments, taken from main
-/// @parm *argv[] list of arguments taken from main
+/// @parm *argv[] list of arguments taken from man
 void by::Menu::initMenu(int argc, char *argv[]) {
 
   auto t = std::time(nullptr);
@@ -197,11 +197,11 @@ void by::Menu::initOutputOptions() {
 
 void asarum::BY::Menu::handleSingleJobScriptGeneration() {
 
-  by::DB_VARIANT variant;
-
   const std::string script_dir = m_path + SCRIPT_DIR;
   if (m_var_map.count("one") > 0 && m_parent_job_name.length() > 0) {
+
     if (isConnectionDefined()) {
+      std::cout << "\nstarting creating script for " << m_parent_job_name << '\n';
 
       std::stringstream ss_file_name;
       ss_file_name << script_dir << "/" << m_parent_job_name << "_src.sql";
@@ -209,9 +209,10 @@ void asarum::BY::Menu::handleSingleJobScriptGeneration() {
       fs::create_directory(script_dir);
       std::ofstream fout(ss_file_name.str());
       by::JobScriptWriter scriptWriter(fout);
-      scriptWriter.writeSingleJobScript(m_parent_job_name.c_str(), getSession(),
-                                        m_db_variant);
+      if(m_db_variant == by::DB_VARIANT::ORACLE) scriptWriter.writeOrclJobSetScript(m_parent_job_name.c_str(), getSession());
+      else scriptWriter.writeMssqlJobSetScript(m_parent_job_name.c_str(), getSession());
       fout.close();
+      std::cout << "\nscript saved as " << ss_file_name.str() << '\n';
     } else {
       throw std::invalid_argument(
           "No data source for script generation defined");

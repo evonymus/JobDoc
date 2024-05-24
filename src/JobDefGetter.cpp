@@ -97,6 +97,8 @@ vector<Poco::AutoPtr<by::JobDef>> by::JobDefGetter::getScheduledJobDefs() {
   return result;
 }
 
+//**************************************************************
+
 /// @brief functions iterates through all jobs using next_job_success and adds
 /// all found records to r_result vector
 /// @param job_ptr root job
@@ -107,20 +109,22 @@ void by::JobDefGetter::getChildJobs(const by::JobDef::Ptr job_ptr,
   std::unordered_set<std::string> inserted_jobs_{};
   by::JobDef::Ptr current_job = job_ptr;
   // if next_job_cd exists, and the jobs is not already in the vector
-  while (current_job != nullptr &&
-         inserted_jobs_.find(current_job->id()) == inserted_jobs_.end()) {
+  while (current_job != nullptr && inserted_jobs_.find(current_job->id()) == inserted_jobs_.end()) 
+         {
     r_result.push_back(current_job);
 
-    current_job = current_job->next_job_cd_success();
     if (current_job != nullptr) {
       inserted_jobs_.insert(current_job->id());
     }
+    current_job = current_job->next_job_cd_success();
     count++;
     if (count > MAX_CHILDREN_COUNT) {
       throw runtime_error("Too many children exception");
     }
   }
 }
+
+//**************************************************************
 
 /// @brief functions iterates through all jobs using next_job_success and adds
 /// all found records to r_result vector

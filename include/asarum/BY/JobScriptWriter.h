@@ -86,6 +86,12 @@ public:
 private:
   /// @brief stream where script is sent to.
   std::ostream *mp_out;
+  // begin / commit strings
+  void writeOrclTransBegin();
+  void writeOrclTransEnd();
+  void writeMssqlTransBegin();
+  void writeMssqlTransEnd();
+
   void writeEscScript(const asarum::BY::EntySelCta::Ptr esc_ptr, DB_VARIANT variant);
   void writeJobScript(const asarum::BY::JobDef::Ptr job_ptr, DB_VARIANT variant);
   void writeJobSelCtaScript(const asarum::BY::JobDef::Ptr job_ptr, DB_VARIANT variant);

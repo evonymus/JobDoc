@@ -43,9 +43,8 @@ void by::JobScriptWriter::writeOrclJobSetScript(
   if (r_jobs.size() == 0) {
     throw std::invalid_argument("The passed vector has not jobs");
   }
-  *mp_out << "\n-- Start transaction\nBEGIN\n"
-          << "\n-- Save point, transaction can be rolled back upon "
-             "error\nSAVEPOINT start_transaction;\n";
+  // string with begin trans
+  writeOrclTransBegin();
 
   std::vector<asarum::BY::JobDef::Ptr>::const_reverse_iterator ri =
       r_jobs.rbegin();
@@ -55,12 +54,9 @@ void by::JobScriptWriter::writeOrclJobSetScript(
     ri++;
   }
 
-  *mp_out << "\n-- Commit the transaction\nCOMMIT;\n"
-          << "\n-- Handle errors\nEXCEPTION\n-- Rollback transaction"
-          << "\n\tWHEN OTHERS THEN" << "\n\t\tROLLBACK TO start_transaction;"
-          << "\n\t\tRAISE;\n"
-          << "\nEND;\n"
-          << std::endl;
+  // string with commit / rolback tran
+  writeOrclTransEnd();
+
 }
 
 //******************************* writeOrclJobSetScript **********************
@@ -79,7 +75,8 @@ void asarum::BY::JobScriptWriter::writeMssqlJobSetScript(
     throw std::invalid_argument("The passed vector has not jobs");
   }
 
-  *mp_out << "\n BEGIN TRY\n\t-- Start the transaction\nBEGIN TRANSACTION;\n";
+  // write begin trans command string
+  writeMssqlTransBegin();
 
   std::vector<asarum::BY::JobDef::Ptr>::const_reverse_iterator ri =
       r_jobs.rbegin();
@@ -89,11 +86,8 @@ void asarum::BY::JobScriptWriter::writeMssqlJobSetScript(
     ri++;
   }
 
-  *mp_out << "\nCOMMIT TRANSACTION;\n"
-          << "\nEND TRY\nBEGIN CATCH\n"
-          << "\t-- Rollback transacion if an error occurs\n"
-          << "\nROLLBACK TRANSACTION;\nEND CATCH;\n"
-          << std::endl;
+  // write commit / rollback command
+  writeMssqlTransEnd();
 }
 
 void asarum::BY::JobScriptWriter::writeMssqlJobSetScript(
@@ -111,6 +105,10 @@ void by::JobScriptWriter::writeSingleJobScript(const by::JobDef::Ptr job_ptr,
 
   *mp_out << "\n/******************  SCRIPT FOR THE JOB: " << job_ptr->id()
           << " *******************/\n";
+  
+  // write begin trans string depending for the version
+  if(variant == by::DB_VARIANT::ORACLE) writeOrclTransBegin();
+  else writeMssqlTransBegin(); 
 
   if (job_ptr->job_typ_enu() == CHAIN_JOB) {
     *mp_out << "\n------------- creating scripts for chain jobs -----------\n";
@@ -133,6 +131,10 @@ void by::JobScriptWriter::writeSingleJobScript(const by::JobDef::Ptr job_ptr,
   writeSchdlDetlScript(job_ptr->schd_detl_id(), variant);
   writeJobScript(job_ptr, variant);
   writeJobSelCtaScript(job_ptr, variant);
+
+  // write commit / rollback command for the variant
+  if(variant == by::DB_VARIANT::ORACLE) writeOrclTransEnd();
+  else writeMssqlTransEnd();
 }
 
 //***************** writeOrclSingleJobScript **************************
@@ -651,4 +653,45 @@ std::vector<by::JobDef::Ptr> asarum::BY::JobScriptWriter::getSubsequentJobs(
     throw std::invalid_argument(str.str());
   }
   return jobs;
+}
+
+
+//**************************************************************
+
+void asarum::BY::JobScriptWriter::writeOrclTransBegin()
+{
+  *mp_out << "\n-- Start transaction\nBEGIN\n"
+          << "\n-- Save point, transaction can be rolled back upon "
+             "error\nSAVEPOINT start_transaction;\n";
+
+}
+
+//**************************************************************
+
+void asarum::BY::JobScriptWriter::writeOrclTransEnd()
+{
+  *mp_out << "\n-- Commit the transaction\nCOMMIT;\n"
+          << "\n-- Handle errors\nEXCEPTION\n-- Rollback transaction"
+          << "\n\tWHEN OTHERS THEN" << "\n\t\tROLLBACK TO start_transaction;"
+          << "\n\t\tRAISE;\n"
+          << "\nEND;\n"
+          << std::endl;
+}
+
+//**************************************************************
+
+void asarum::BY::JobScriptWriter::writeMssqlTransBegin()
+{
+  *mp_out << "\n BEGIN TRY\n\t-- Start the transaction\nBEGIN TRANSACTION;\n";
+}
+
+//**************************************************************
+
+void asarum::BY::JobScriptWriter::writeMssqlTransEnd()
+{
+  *mp_out << "\nCOMMIT TRANSACTION;\n"
+          << "\nEND TRY\nBEGIN CATCH\n"
+          << "\t-- Rollback transacion if an error occurs\n"
+          << "\nROLLBACK TRANSACTION;\nEND CATCH;\n"
+          << std::endl;
 }
