@@ -7,6 +7,11 @@
 #include "EntySelCta.h"
 namespace asarum {
 	namespace BY {
+
+		/// <summary>
+		/// The class used for creating JMeter (*.jmx) files with tests
+		/// of ESC queries
+		/// </summary>
 		class Meter {
 		public:
 			Meter(std::shared_ptr<Poco::Data::Session> session_ptr);

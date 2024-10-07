@@ -9,6 +9,9 @@ namespace asarum
 {
   namespace BY
   {
+    /// <summary>
+    /// The class is used to generate documentation about Jobs in markdown format
+    /// </summary>
     class DocWriter
     {
     public:

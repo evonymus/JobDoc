@@ -8,11 +8,19 @@ namespace asarum
 {
     namespace BY
     {
+        /// <summary>
+        /// The class used to write (save) the SQL code of the ESC Queries.
+        /// </summary>
         class CodeWriter
         {
         public:
             CodeWriter(const std::shared_ptr<Poco::Data::Session> session_ptr);
 
+            /// <summary>
+            /// Saves all the queries that have sql code != nullptr to the
+            /// directory. The code is save using the original ESC names
+            /// </summary>
+            /// <param name="r_dir"></param>
             void saveEscQueries(const std::string& r_dir);
 
         private:

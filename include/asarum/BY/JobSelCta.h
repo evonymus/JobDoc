@@ -17,7 +17,10 @@
 namespace asarum {
 namespace BY {
 
-
+/// <summary>
+/// The class is used to store a record of a JOB_SEL_CTA, the table
+///  that connects JOB_T with ENTY_SEL_CTA_T 
+/// </summary>
 class JobSelCta: public Poco::ActiveRecord::ActiveRecord<Poco::Int32>
 {
 public:

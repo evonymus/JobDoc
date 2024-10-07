@@ -15,7 +15,9 @@
 namespace asarum {
 namespace BY {
 
-
+/// <summary>
+/// The class storing a record from ENTY_SEL_CTA_T table
+/// </summary>
 class EntySelCta: public Poco::ActiveRecord::ActiveRecord<std::string>
 {
 public:

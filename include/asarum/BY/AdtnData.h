@@ -15,7 +15,9 @@
 namespace asarum {
 namespace BY {
 
-
+/// <summary>
+/// Class storing data from ADTN_T table
+/// </summary>
 class AdtnData: public Poco::ActiveRecord::ActiveRecord<Poco::Int32>
 {
 public:

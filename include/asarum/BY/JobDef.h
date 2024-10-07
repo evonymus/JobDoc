@@ -17,7 +17,9 @@
 namespace asarum {
 namespace BY {
 
-
+/// <summary>
+/// The class is used to store a record of JOB_T table.
+/// </summary>
 class JobDef: public Poco::ActiveRecord::ActiveRecord<std::string>
 {
 public:

@@ -10,6 +10,10 @@ namespace asarum
 {
     namespace BY
     {
+        /// <summary>
+        /// The class is used to copy Jobs Definition from ODBC data source to a local
+        /// SQLite database
+        /// </summary>
         class DataCopier
         {
         public:

@@ -18,6 +18,10 @@ namespace BY {
 /// Oracle or MS SQL
 enum class DB_VARIANT { ORACLE = 0, MSSQL = 1 };
 
+/// <summary>
+/// The class is used to generate SQL script that then can be used to re-create
+/// jobs definitions i.e. jobs, templates, ESC queries etc.
+/// </summary>
 class JobScriptWriter {
   ///@//d class JobScriptWriter {
 public:

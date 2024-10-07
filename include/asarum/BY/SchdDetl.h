@@ -15,7 +15,9 @@
 namespace asarum {
 namespace BY {
 
-
+/// <summary>
+/// The class stores a signle record of SCHD_DETL_T, schedules used by jobs
+/// </summary>
 class SchdDetl: public Poco::ActiveRecord::ActiveRecord<Poco::Int32>
 {
 public:
