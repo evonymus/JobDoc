@@ -1,0 +1,593 @@
+\doxysection{Job\+Def.\+h}
+\hypertarget{include_2asarum_2_b_y_2_job_def_8h_source}{}\label{include_2asarum_2_b_y_2_job_def_8h_source}\index{include/asarum/BY/JobDef.h@{include/asarum/BY/JobDef.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ JobDef.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ This\ file\ has\ been\ generated\ from\ jobdoc.xml.\ Do\ not\ edit.}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ asarum\_BY\_JobDef\_INCLUDED}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ asarum\_BY\_JobDef\_INCLUDED}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}Poco/ActiveRecord/ActiveRecord.h"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}asarum/BY/SchdDetl.h"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}asarum/BY/AdtnData.h"{}}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{namespace\ }asarum\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{namespace\ }BY\ \{}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }JobDef:\ \textcolor{keyword}{public}\ Poco::ActiveRecord::ActiveRecord<std::string>}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{using\ }Ptr\ =\ Poco::AutoPtr<JobDef>;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{explicit}\ JobDef(ID\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00027\ \ \ \ \ JobDef()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00028\ \ \ \ \ JobDef(\textcolor{keyword}{const}\ JobDef\&\ other);}
+\DoxyCodeLine{00029\ \ \ \ \ \string~JobDef()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ Poco::Int32\ opt\_lck()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00032\ \ \ \ \ JobDef\&\ opt\_lck(Poco::Int32\ value);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ job\_desc()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00035\ \ \ \ \ JobDef\&\ job\_desc(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ Poco::Int32\ schd\_typ\_enu()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ \ \ \ \ JobDef\&\ schd\_typ\_enu(Poco::Int32\ value);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ Poco::Int32\ job\_typ\_enu()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00041\ \ \ \ \ JobDef\&\ job\_typ\_enu(Poco::Int32\ value);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ div\_cd()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00044\ \ \ \ \ JobDef\&\ div\_cd(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ parm\_1()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00047\ \ \ \ \ JobDef\&\ parm\_1(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ parm\_2()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00050\ \ \ \ \ JobDef\&\ parm\_2(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ parm\_3()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00053\ \ \ \ \ JobDef\&\ parm\_3(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ parm\_4()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00056\ \ \ \ \ JobDef\&\ parm\_4(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ parm\_5()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00059\ \ \ \ \ JobDef\&\ parm\_5(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{const}\ Poco::DateTime\&\ crtd\_dtt()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00062\ \ \ \ \ JobDef\&\ crtd\_dtt(\textcolor{keyword}{const}\ Poco::DateTime\&\ value);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ crtd\_usr\_cd()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00065\ \ \ \ \ JobDef\&\ crtd\_usr\_cd(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<Poco::DateTime>\&\ updt\_dtt()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00068\ \ \ \ \ JobDef\&\ updt\_dtt(\textcolor{keyword}{const}\ Poco::Nullable<Poco::DateTime>\&\ value);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ updt\_usr\_cd()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00071\ \ \ \ \ JobDef\&\ updt\_usr\_cd(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ tplt\_file()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00074\ \ \ \ \ JobDef\&\ tplt\_file(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value);}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ outpt\_file()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00077\ \ \ \ \ JobDef\&\ outpt\_file(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<Poco::Int32>\&\ prty()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00080\ \ \ \ \ JobDef\&\ prty(\textcolor{keyword}{const}\ Poco::Nullable<Poco::Int32>\&\ value);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{char}\ actv\_yn()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00083\ \ \ \ \ JobDef\&\ actv\_yn(\textcolor{keywordtype}{char}\ value);}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ alrt\_grp\_cd\_success()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00086\ \ \ \ \ JobDef\&\ alrt\_grp\_cd\_success(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ alrt\_grp\_cd\_failure()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00089\ \ \ \ \ JobDef\&\ alrt\_grp\_cd\_failure(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value);}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ gen\_enty\_output\_yn()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00092\ \ \ \ \ JobDef\&\ gen\_enty\_output\_yn(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ SchdDetl::Ptr\ schd\_detl\_id()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<Poco::Int32>\&\ schd\_detl\_idID()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00096\ \ \ \ \ JobDef\&\ schd\_detl\_id(SchdDetl::Ptr\ pObject);}
+\DoxyCodeLine{00097\ \ \ \ \ JobDef\&\ schd\_detl\_idID(\textcolor{keyword}{const}\ Poco::Nullable<Poco::Int32>\&\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ JobDef::Ptr\ next\_job\_cd\_success()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ next\_job\_cd\_successID()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00101\ \ \ \ \ JobDef\&\ next\_job\_cd\_success(JobDef::Ptr\ pObject);}
+\DoxyCodeLine{00102\ \ \ \ \ JobDef\&\ next\_job\_cd\_successID(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ JobDef::Ptr\ next\_job\_cd\_failure()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ next\_job\_cd\_failureID()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00106\ \ \ \ \ JobDef\&\ next\_job\_cd\_failure(JobDef::Ptr\ pObject);}
+\DoxyCodeLine{00107\ \ \ \ \ JobDef\&\ next\_job\_cd\_failureID(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ AdtnData::Ptr\ tplt\_id()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<Poco::Int32>\&\ tplt\_idID()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00111\ \ \ \ \ JobDef\&\ tplt\_id(AdtnData::Ptr\ pObject);}
+\DoxyCodeLine{00112\ \ \ \ \ JobDef\&\ tplt\_idID(\textcolor{keyword}{const}\ Poco::Nullable<Poco::Int32>\&\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keyword}{static}\ Ptr\ find(Poco::ActiveRecord::Context::Ptr\ pContext,\ \textcolor{keyword}{const}\ ID\&\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{void}\ insert();}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{void}\ update();}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{void}\ remove();}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::vector<std::string>\&\ columns();}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::string\&\ table();}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00124\ \ \ \ \ Poco::Int32\ \_opt\_lck\ =\ 0;}
+\DoxyCodeLine{00125\ \ \ \ \ Poco::Nullable<std::string>\ \_job\_desc;}
+\DoxyCodeLine{00126\ \ \ \ \ Poco::Int32\ \_schd\_typ\_enu\ =\ 0;}
+\DoxyCodeLine{00127\ \ \ \ \ Poco::Int32\ \_job\_typ\_enu\ =\ 0;}
+\DoxyCodeLine{00128\ \ \ \ \ Poco::Nullable<std::string>\ \_div\_cd;}
+\DoxyCodeLine{00129\ \ \ \ \ Poco::Nullable<std::string>\ \_parm\_1;}
+\DoxyCodeLine{00130\ \ \ \ \ Poco::Nullable<std::string>\ \_parm\_2;}
+\DoxyCodeLine{00131\ \ \ \ \ Poco::Nullable<std::string>\ \_parm\_3;}
+\DoxyCodeLine{00132\ \ \ \ \ Poco::Nullable<std::string>\ \_parm\_4;}
+\DoxyCodeLine{00133\ \ \ \ \ Poco::Nullable<std::string>\ \_parm\_5;}
+\DoxyCodeLine{00134\ \ \ \ \ Poco::DateTime\ \_crtd\_dtt;}
+\DoxyCodeLine{00135\ \ \ \ \ std::string\ \_crtd\_usr\_cd;}
+\DoxyCodeLine{00136\ \ \ \ \ Poco::Nullable<Poco::DateTime>\ \_updt\_dtt;}
+\DoxyCodeLine{00137\ \ \ \ \ Poco::Nullable<std::string>\ \_updt\_usr\_cd;}
+\DoxyCodeLine{00138\ \ \ \ \ Poco::Nullable<std::string>\ \_tplt\_file;}
+\DoxyCodeLine{00139\ \ \ \ \ Poco::Nullable<std::string>\ \_outpt\_file;}
+\DoxyCodeLine{00140\ \ \ \ \ Poco::Nullable<Poco::Int32>\ \_schd\_detl\_id;}
+\DoxyCodeLine{00141\ \ \ \ \ Poco::Nullable<Poco::Int32>\ \_prty;}
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordtype}{char}\ \_actv\_yn\ =\ 0;}
+\DoxyCodeLine{00143\ \ \ \ \ Poco::Nullable<std::string>\ \_next\_job\_cd\_success;}
+\DoxyCodeLine{00144\ \ \ \ \ Poco::Nullable<std::string>\ \_next\_job\_cd\_failure;}
+\DoxyCodeLine{00145\ \ \ \ \ Poco::Nullable<std::string>\ \_alrt\_grp\_cd\_success;}
+\DoxyCodeLine{00146\ \ \ \ \ Poco::Nullable<std::string>\ \_alrt\_grp\_cd\_failure;}
+\DoxyCodeLine{00147\ \ \ \ \ std::string\ \_gen\_enty\_output\_yn;}
+\DoxyCodeLine{00148\ \ \ \ \ Poco::Nullable<Poco::Int32>\ \_tplt\_id;}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }Poco::Data::TypeHandler<JobDef>;}
+\DoxyCodeLine{00151\ \};}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \textcolor{keyword}{inline}\ Poco::Int32\ JobDef::opt\_lck()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00155\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordflow}{return}\ \_opt\_lck;}
+\DoxyCodeLine{00157\ \}}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::opt\_lck(Poco::Int32\ value)}
+\DoxyCodeLine{00161\ \{}
+\DoxyCodeLine{00162\ \ \ \ \ \_opt\_lck\ =\ value;}
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00164\ \}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ JobDef::job\_desc()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00168\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordflow}{return}\ \_job\_desc;}
+\DoxyCodeLine{00170\ \}}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::job\_desc(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value)}
+\DoxyCodeLine{00174\ \{}
+\DoxyCodeLine{00175\ \ \ \ \ \_job\_desc\ =\ value;}
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00177\ \}}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \textcolor{keyword}{inline}\ Poco::Int32\ JobDef::schd\_typ\_enu()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00181\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordflow}{return}\ \_schd\_typ\_enu;}
+\DoxyCodeLine{00183\ \}}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::schd\_typ\_enu(Poco::Int32\ value)}
+\DoxyCodeLine{00187\ \{}
+\DoxyCodeLine{00188\ \ \ \ \ \_schd\_typ\_enu\ =\ value;}
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00190\ \}}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \textcolor{keyword}{inline}\ Poco::Int32\ JobDef::job\_typ\_enu()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00194\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keywordflow}{return}\ \_job\_typ\_enu;}
+\DoxyCodeLine{00196\ \}}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::job\_typ\_enu(Poco::Int32\ value)}
+\DoxyCodeLine{00200\ \{}
+\DoxyCodeLine{00201\ \ \ \ \ \_job\_typ\_enu\ =\ value;}
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00203\ \}}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ JobDef::div\_cd()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00207\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{keywordflow}{return}\ \_div\_cd;}
+\DoxyCodeLine{00209\ \}}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::div\_cd(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value)}
+\DoxyCodeLine{00213\ \{}
+\DoxyCodeLine{00214\ \ \ \ \ \_div\_cd\ =\ value;}
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00216\ \}}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00219\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ JobDef::parm\_1()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00220\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{keywordflow}{return}\ \_parm\_1;}
+\DoxyCodeLine{00222\ \}}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::parm\_1(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value)}
+\DoxyCodeLine{00226\ \{}
+\DoxyCodeLine{00227\ \ \ \ \ \_parm\_1\ =\ value;}
+\DoxyCodeLine{00228\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00229\ \}}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ JobDef::parm\_2()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00233\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{keywordflow}{return}\ \_parm\_2;}
+\DoxyCodeLine{00235\ \}}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00238\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::parm\_2(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value)}
+\DoxyCodeLine{00239\ \{}
+\DoxyCodeLine{00240\ \ \ \ \ \_parm\_2\ =\ value;}
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00242\ \}}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ JobDef::parm\_3()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00246\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keywordflow}{return}\ \_parm\_3;}
+\DoxyCodeLine{00248\ \}}
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::parm\_3(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value)}
+\DoxyCodeLine{00252\ \{}
+\DoxyCodeLine{00253\ \ \ \ \ \_parm\_3\ =\ value;}
+\DoxyCodeLine{00254\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00255\ \}}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00257\ }
+\DoxyCodeLine{00258\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ JobDef::parm\_4()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00259\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00260\ \ \ \ \ \textcolor{keywordflow}{return}\ \_parm\_4;}
+\DoxyCodeLine{00261\ \}}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::parm\_4(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value)}
+\DoxyCodeLine{00265\ \{}
+\DoxyCodeLine{00266\ \ \ \ \ \_parm\_4\ =\ value;}
+\DoxyCodeLine{00267\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00268\ \}}
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ JobDef::parm\_5()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00272\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00273\ \ \ \ \ \textcolor{keywordflow}{return}\ \_parm\_5;}
+\DoxyCodeLine{00274\ \}}
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00277\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::parm\_5(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value)}
+\DoxyCodeLine{00278\ \{}
+\DoxyCodeLine{00279\ \ \ \ \ \_parm\_5\ =\ value;}
+\DoxyCodeLine{00280\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00281\ \}}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00283\ }
+\DoxyCodeLine{00284\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::DateTime\&\ JobDef::crtd\_dtt()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00285\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00286\ \ \ \ \ \textcolor{keywordflow}{return}\ \_crtd\_dtt;}
+\DoxyCodeLine{00287\ \}}
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00289\ }
+\DoxyCodeLine{00290\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::crtd\_dtt(\textcolor{keyword}{const}\ Poco::DateTime\&\ value)}
+\DoxyCodeLine{00291\ \{}
+\DoxyCodeLine{00292\ \ \ \ \ \_crtd\_dtt\ =\ value;}
+\DoxyCodeLine{00293\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00294\ \}}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ }
+\DoxyCodeLine{00297\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ std::string\&\ JobDef::crtd\_usr\_cd()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00298\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00299\ \ \ \ \ \textcolor{keywordflow}{return}\ \_crtd\_usr\_cd;}
+\DoxyCodeLine{00300\ \}}
+\DoxyCodeLine{00301\ }
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00303\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::crtd\_usr\_cd(\textcolor{keyword}{const}\ std::string\&\ value)}
+\DoxyCodeLine{00304\ \{}
+\DoxyCodeLine{00305\ \ \ \ \ \_crtd\_usr\_cd\ =\ value;}
+\DoxyCodeLine{00306\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00307\ \}}
+\DoxyCodeLine{00308\ }
+\DoxyCodeLine{00309\ }
+\DoxyCodeLine{00310\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<Poco::DateTime>\&\ JobDef::updt\_dtt()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00311\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00312\ \ \ \ \ \textcolor{keywordflow}{return}\ \_updt\_dtt;}
+\DoxyCodeLine{00313\ \}}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00315\ }
+\DoxyCodeLine{00316\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::updt\_dtt(\textcolor{keyword}{const}\ Poco::Nullable<Poco::DateTime>\&\ value)}
+\DoxyCodeLine{00317\ \{}
+\DoxyCodeLine{00318\ \ \ \ \ \_updt\_dtt\ =\ value;}
+\DoxyCodeLine{00319\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00320\ \}}
+\DoxyCodeLine{00321\ }
+\DoxyCodeLine{00322\ }
+\DoxyCodeLine{00323\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ JobDef::updt\_usr\_cd()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00324\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00325\ \ \ \ \ \textcolor{keywordflow}{return}\ \_updt\_usr\_cd;}
+\DoxyCodeLine{00326\ \}}
+\DoxyCodeLine{00327\ }
+\DoxyCodeLine{00328\ }
+\DoxyCodeLine{00329\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::updt\_usr\_cd(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value)}
+\DoxyCodeLine{00330\ \{}
+\DoxyCodeLine{00331\ \ \ \ \ \_updt\_usr\_cd\ =\ value;}
+\DoxyCodeLine{00332\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00333\ \}}
+\DoxyCodeLine{00334\ }
+\DoxyCodeLine{00335\ }
+\DoxyCodeLine{00336\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ JobDef::tplt\_file()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00337\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00338\ \ \ \ \ \textcolor{keywordflow}{return}\ \_tplt\_file;}
+\DoxyCodeLine{00339\ \}}
+\DoxyCodeLine{00340\ }
+\DoxyCodeLine{00341\ }
+\DoxyCodeLine{00342\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::tplt\_file(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value)}
+\DoxyCodeLine{00343\ \{}
+\DoxyCodeLine{00344\ \ \ \ \ \_tplt\_file\ =\ value;}
+\DoxyCodeLine{00345\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00346\ \}}
+\DoxyCodeLine{00347\ }
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00349\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ JobDef::outpt\_file()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00350\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00351\ \ \ \ \ \textcolor{keywordflow}{return}\ \_outpt\_file;}
+\DoxyCodeLine{00352\ \}}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00354\ }
+\DoxyCodeLine{00355\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::outpt\_file(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value)}
+\DoxyCodeLine{00356\ \{}
+\DoxyCodeLine{00357\ \ \ \ \ \_outpt\_file\ =\ value;}
+\DoxyCodeLine{00358\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00359\ \}}
+\DoxyCodeLine{00360\ }
+\DoxyCodeLine{00361\ }
+\DoxyCodeLine{00362\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<Poco::Int32>\&\ JobDef::prty()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00363\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00364\ \ \ \ \ \textcolor{keywordflow}{return}\ \_prty;}
+\DoxyCodeLine{00365\ \}}
+\DoxyCodeLine{00366\ }
+\DoxyCodeLine{00367\ }
+\DoxyCodeLine{00368\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::prty(\textcolor{keyword}{const}\ Poco::Nullable<Poco::Int32>\&\ value)}
+\DoxyCodeLine{00369\ \{}
+\DoxyCodeLine{00370\ \ \ \ \ \_prty\ =\ value;}
+\DoxyCodeLine{00371\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00372\ \}}
+\DoxyCodeLine{00373\ }
+\DoxyCodeLine{00374\ }
+\DoxyCodeLine{00375\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{char}\ JobDef::actv\_yn()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00376\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00377\ \ \ \ \ \textcolor{keywordflow}{return}\ \_actv\_yn;}
+\DoxyCodeLine{00378\ \}}
+\DoxyCodeLine{00379\ }
+\DoxyCodeLine{00380\ }
+\DoxyCodeLine{00381\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::actv\_yn(\textcolor{keywordtype}{char}\ value)}
+\DoxyCodeLine{00382\ \{}
+\DoxyCodeLine{00383\ \ \ \ \ \_actv\_yn\ =\ value;}
+\DoxyCodeLine{00384\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00385\ \}}
+\DoxyCodeLine{00386\ }
+\DoxyCodeLine{00387\ }
+\DoxyCodeLine{00388\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ JobDef::alrt\_grp\_cd\_success()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00389\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00390\ \ \ \ \ \textcolor{keywordflow}{return}\ \_alrt\_grp\_cd\_success;}
+\DoxyCodeLine{00391\ \}}
+\DoxyCodeLine{00392\ }
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00394\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::alrt\_grp\_cd\_success(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value)}
+\DoxyCodeLine{00395\ \{}
+\DoxyCodeLine{00396\ \ \ \ \ \_alrt\_grp\_cd\_success\ =\ value;}
+\DoxyCodeLine{00397\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00398\ \}}
+\DoxyCodeLine{00399\ }
+\DoxyCodeLine{00400\ }
+\DoxyCodeLine{00401\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ JobDef::alrt\_grp\_cd\_failure()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00402\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00403\ \ \ \ \ \textcolor{keywordflow}{return}\ \_alrt\_grp\_cd\_failure;}
+\DoxyCodeLine{00404\ \}}
+\DoxyCodeLine{00405\ }
+\DoxyCodeLine{00406\ }
+\DoxyCodeLine{00407\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::alrt\_grp\_cd\_failure(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value)}
+\DoxyCodeLine{00408\ \{}
+\DoxyCodeLine{00409\ \ \ \ \ \_alrt\_grp\_cd\_failure\ =\ value;}
+\DoxyCodeLine{00410\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00411\ \}}
+\DoxyCodeLine{00412\ }
+\DoxyCodeLine{00413\ }
+\DoxyCodeLine{00414\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ std::string\&\ JobDef::gen\_enty\_output\_yn()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00415\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00416\ \ \ \ \ \textcolor{keywordflow}{return}\ \_gen\_enty\_output\_yn;}
+\DoxyCodeLine{00417\ \}}
+\DoxyCodeLine{00418\ }
+\DoxyCodeLine{00419\ }
+\DoxyCodeLine{00420\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::gen\_enty\_output\_yn(\textcolor{keyword}{const}\ std::string\&\ value)}
+\DoxyCodeLine{00421\ \{}
+\DoxyCodeLine{00422\ \ \ \ \ \_gen\_enty\_output\_yn\ =\ value;}
+\DoxyCodeLine{00423\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00424\ \}}
+\DoxyCodeLine{00425\ }
+\DoxyCodeLine{00426\ }
+\DoxyCodeLine{00427\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<Poco::Int32>\&\ JobDef::schd\_detl\_idID()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00428\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00429\ \ \ \ \ \textcolor{keywordflow}{return}\ \_schd\_detl\_id;}
+\DoxyCodeLine{00430\ \}}
+\DoxyCodeLine{00431\ }
+\DoxyCodeLine{00432\ }
+\DoxyCodeLine{00433\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::schd\_detl\_idID(\textcolor{keyword}{const}\ Poco::Nullable<Poco::Int32>\&\ value)}
+\DoxyCodeLine{00434\ \{}
+\DoxyCodeLine{00435\ \ \ \ \ \_schd\_detl\_id\ =\ value;}
+\DoxyCodeLine{00436\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00437\ \}}
+\DoxyCodeLine{00438\ }
+\DoxyCodeLine{00439\ }
+\DoxyCodeLine{00440\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ JobDef::next\_job\_cd\_successID()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00441\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00442\ \ \ \ \ \textcolor{keywordflow}{return}\ \_next\_job\_cd\_success;}
+\DoxyCodeLine{00443\ \}}
+\DoxyCodeLine{00444\ }
+\DoxyCodeLine{00445\ }
+\DoxyCodeLine{00446\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::next\_job\_cd\_successID(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value)}
+\DoxyCodeLine{00447\ \{}
+\DoxyCodeLine{00448\ \ \ \ \ \_next\_job\_cd\_success\ =\ value;}
+\DoxyCodeLine{00449\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00450\ \}}
+\DoxyCodeLine{00451\ }
+\DoxyCodeLine{00452\ }
+\DoxyCodeLine{00453\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ JobDef::next\_job\_cd\_failureID()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00454\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00455\ \ \ \ \ \textcolor{keywordflow}{return}\ \_next\_job\_cd\_failure;}
+\DoxyCodeLine{00456\ \}}
+\DoxyCodeLine{00457\ }
+\DoxyCodeLine{00458\ }
+\DoxyCodeLine{00459\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::next\_job\_cd\_failureID(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value)}
+\DoxyCodeLine{00460\ \{}
+\DoxyCodeLine{00461\ \ \ \ \ \_next\_job\_cd\_failure\ =\ value;}
+\DoxyCodeLine{00462\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00463\ \}}
+\DoxyCodeLine{00464\ }
+\DoxyCodeLine{00465\ }
+\DoxyCodeLine{00466\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<Poco::Int32>\&\ JobDef::tplt\_idID()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00467\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00468\ \ \ \ \ \textcolor{keywordflow}{return}\ \_tplt\_id;}
+\DoxyCodeLine{00469\ \}}
+\DoxyCodeLine{00470\ }
+\DoxyCodeLine{00471\ }
+\DoxyCodeLine{00472\ \textcolor{keyword}{inline}\ JobDef\&\ JobDef::tplt\_idID(\textcolor{keyword}{const}\ Poco::Nullable<Poco::Int32>\&\ value)}
+\DoxyCodeLine{00473\ \{}
+\DoxyCodeLine{00474\ \ \ \ \ \_tplt\_id\ =\ value;}
+\DoxyCodeLine{00475\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00476\ \}}
+\DoxyCodeLine{00477\ }
+\DoxyCodeLine{00478\ }
+\DoxyCodeLine{00479\ \}\ \}\ \textcolor{comment}{//\ namespace\ asarum:BY}}
+\DoxyCodeLine{00480\ }
+\DoxyCodeLine{00481\ }
+\DoxyCodeLine{00482\ \textcolor{keyword}{namespace\ }Poco\ \{}
+\DoxyCodeLine{00483\ \textcolor{keyword}{namespace\ }Data\ \{}
+\DoxyCodeLine{00484\ }
+\DoxyCodeLine{00485\ }
+\DoxyCodeLine{00486\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00487\ \textcolor{keyword}{class\ }TypeHandler<asarum::BY::JobDef>}
+\DoxyCodeLine{00488\ \{}
+\DoxyCodeLine{00489\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00490\ \ \ \ \ \textcolor{keyword}{static}\ std::size\_t\ size()}
+\DoxyCodeLine{00491\ \ \ \ \ \{}
+\DoxyCodeLine{00492\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 25;}
+\DoxyCodeLine{00493\ \ \ \ \ \}}
+\DoxyCodeLine{00494\ }
+\DoxyCodeLine{00495\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ bind(std::size\_t\ pos,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def}{asarum::BY::JobDef}}\&\ ar,\ AbstractBinder::Ptr\ pBinder,\ AbstractBinder::Direction\ dir)}
+\DoxyCodeLine{00496\ \ \ \ \ \{}
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Int32>::bind(pos++,\ ar.\_opt\_lck,\ pBinder,\ dir);}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::bind(pos++,\ ar.\_job\_desc,\ pBinder,\ dir);}
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Int32>::bind(pos++,\ ar.\_schd\_typ\_enu,\ pBinder,\ dir);}
+\DoxyCodeLine{00500\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Int32>::bind(pos++,\ ar.\_job\_typ\_enu,\ pBinder,\ dir);}
+\DoxyCodeLine{00501\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::bind(pos++,\ ar.\_div\_cd,\ pBinder,\ dir);}
+\DoxyCodeLine{00502\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::bind(pos++,\ ar.\_parm\_1,\ pBinder,\ dir);}
+\DoxyCodeLine{00503\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::bind(pos++,\ ar.\_parm\_2,\ pBinder,\ dir);}
+\DoxyCodeLine{00504\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::bind(pos++,\ ar.\_parm\_3,\ pBinder,\ dir);}
+\DoxyCodeLine{00505\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::bind(pos++,\ ar.\_parm\_4,\ pBinder,\ dir);}
+\DoxyCodeLine{00506\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::bind(pos++,\ ar.\_parm\_5,\ pBinder,\ dir);}
+\DoxyCodeLine{00507\ \ \ \ \ \ \ \ \ TypeHandler<Poco::DateTime>::bind(pos++,\ ar.\_crtd\_dtt,\ pBinder,\ dir);}
+\DoxyCodeLine{00508\ \ \ \ \ \ \ \ \ TypeHandler<std::string>::bind(pos++,\ ar.\_crtd\_usr\_cd,\ pBinder,\ dir);}
+\DoxyCodeLine{00509\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::DateTime>>::bind(pos++,\ ar.\_updt\_dtt,\ pBinder,\ dir);}
+\DoxyCodeLine{00510\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::bind(pos++,\ ar.\_updt\_usr\_cd,\ pBinder,\ dir);}
+\DoxyCodeLine{00511\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::bind(pos++,\ ar.\_tplt\_file,\ pBinder,\ dir);}
+\DoxyCodeLine{00512\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::bind(pos++,\ ar.\_outpt\_file,\ pBinder,\ dir);}
+\DoxyCodeLine{00513\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::Int32>>::bind(pos++,\ ar.\_schd\_detl\_id,\ pBinder,\ dir);}
+\DoxyCodeLine{00514\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::Int32>>::bind(pos++,\ ar.\_prty,\ pBinder,\ dir);}
+\DoxyCodeLine{00515\ \ \ \ \ \ \ \ \ TypeHandler<char>::bind(pos++,\ ar.\_actv\_yn,\ pBinder,\ dir);}
+\DoxyCodeLine{00516\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::bind(pos++,\ ar.\_next\_job\_cd\_success,\ pBinder,\ dir);}
+\DoxyCodeLine{00517\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::bind(pos++,\ ar.\_next\_job\_cd\_failure,\ pBinder,\ dir);}
+\DoxyCodeLine{00518\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::bind(pos++,\ ar.\_alrt\_grp\_cd\_success,\ pBinder,\ dir);}
+\DoxyCodeLine{00519\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::bind(pos++,\ ar.\_alrt\_grp\_cd\_failure,\ pBinder,\ dir);}
+\DoxyCodeLine{00520\ \ \ \ \ \ \ \ \ TypeHandler<std::string>::bind(pos++,\ ar.\_gen\_enty\_output\_yn,\ pBinder,\ dir);}
+\DoxyCodeLine{00521\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::Int32>>::bind(pos++,\ ar.\_tplt\_id,\ pBinder,\ dir);}
+\DoxyCodeLine{00522\ \}}
+\DoxyCodeLine{00523\ }
+\DoxyCodeLine{00524\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ extract(std::size\_t\ pos,\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def}{asarum::BY::JobDef}}\&\ ar,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def}{asarum::BY::JobDef}}\&\ deflt,\ AbstractExtractor::Ptr\ pExtr)}
+\DoxyCodeLine{00525\ \ \ \ \ \{}
+\DoxyCodeLine{00526\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Int32>::extract(pos++,\ ar.\_opt\_lck,\ deflt.\_opt\_lck,\ pExtr);}
+\DoxyCodeLine{00527\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::extract(pos++,\ ar.\_job\_desc,\ deflt.\_job\_desc,\ pExtr);}
+\DoxyCodeLine{00528\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Int32>::extract(pos++,\ ar.\_schd\_typ\_enu,\ deflt.\_schd\_typ\_enu,\ pExtr);}
+\DoxyCodeLine{00529\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Int32>::extract(pos++,\ ar.\_job\_typ\_enu,\ deflt.\_job\_typ\_enu,\ pExtr);}
+\DoxyCodeLine{00530\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::extract(pos++,\ ar.\_div\_cd,\ deflt.\_div\_cd,\ pExtr);}
+\DoxyCodeLine{00531\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::extract(pos++,\ ar.\_parm\_1,\ deflt.\_parm\_1,\ pExtr);}
+\DoxyCodeLine{00532\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::extract(pos++,\ ar.\_parm\_2,\ deflt.\_parm\_2,\ pExtr);}
+\DoxyCodeLine{00533\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::extract(pos++,\ ar.\_parm\_3,\ deflt.\_parm\_3,\ pExtr);}
+\DoxyCodeLine{00534\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::extract(pos++,\ ar.\_parm\_4,\ deflt.\_parm\_4,\ pExtr);}
+\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::extract(pos++,\ ar.\_parm\_5,\ deflt.\_parm\_5,\ pExtr);}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ TypeHandler<Poco::DateTime>::extract(pos++,\ ar.\_crtd\_dtt,\ deflt.\_crtd\_dtt,\ pExtr);}
+\DoxyCodeLine{00537\ \ \ \ \ \ \ \ \ TypeHandler<std::string>::extract(pos++,\ ar.\_crtd\_usr\_cd,\ deflt.\_crtd\_usr\_cd,\ pExtr);}
+\DoxyCodeLine{00538\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::DateTime>>::extract(pos++,\ ar.\_updt\_dtt,\ deflt.\_updt\_dtt,\ pExtr);}
+\DoxyCodeLine{00539\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::extract(pos++,\ ar.\_updt\_usr\_cd,\ deflt.\_updt\_usr\_cd,\ pExtr);}
+\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::extract(pos++,\ ar.\_tplt\_file,\ deflt.\_tplt\_file,\ pExtr);}
+\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::extract(pos++,\ ar.\_outpt\_file,\ deflt.\_outpt\_file,\ pExtr);}
+\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::Int32>>::extract(pos++,\ ar.\_schd\_detl\_id,\ deflt.\_schd\_detl\_id,\ pExtr);}
+\DoxyCodeLine{00543\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::Int32>>::extract(pos++,\ ar.\_prty,\ deflt.\_prty,\ pExtr);}
+\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ TypeHandler<char>::extract(pos++,\ ar.\_actv\_yn,\ deflt.\_actv\_yn,\ pExtr);}
+\DoxyCodeLine{00545\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::extract(pos++,\ ar.\_next\_job\_cd\_success,\ deflt.\_next\_job\_cd\_success,\ pExtr);}
+\DoxyCodeLine{00546\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::extract(pos++,\ ar.\_next\_job\_cd\_failure,\ deflt.\_next\_job\_cd\_failure,\ pExtr);}
+\DoxyCodeLine{00547\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::extract(pos++,\ ar.\_alrt\_grp\_cd\_success,\ deflt.\_alrt\_grp\_cd\_success,\ pExtr);}
+\DoxyCodeLine{00548\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::extract(pos++,\ ar.\_alrt\_grp\_cd\_failure,\ deflt.\_alrt\_grp\_cd\_failure,\ pExtr);}
+\DoxyCodeLine{00549\ \ \ \ \ \ \ \ \ TypeHandler<std::string>::extract(pos++,\ ar.\_gen\_enty\_output\_yn,\ deflt.\_gen\_enty\_output\_yn,\ pExtr);}
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::Int32>>::extract(pos++,\ ar.\_tplt\_id,\ deflt.\_tplt\_id,\ pExtr);}
+\DoxyCodeLine{00551\ \}}
+\DoxyCodeLine{00552\ }
+\DoxyCodeLine{00553\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prepare(std::size\_t\ pos,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def}{asarum::BY::JobDef}}\&\ ar,\ AbstractPreparator::Ptr\ pPrep)}
+\DoxyCodeLine{00554\ \ \ \ \ \{}
+\DoxyCodeLine{00555\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Int32>::prepare(pos++,\ ar.\_opt\_lck,\ pPrep);}
+\DoxyCodeLine{00556\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::prepare(pos++,\ ar.\_job\_desc,\ pPrep);}
+\DoxyCodeLine{00557\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Int32>::prepare(pos++,\ ar.\_schd\_typ\_enu,\ pPrep);}
+\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Int32>::prepare(pos++,\ ar.\_job\_typ\_enu,\ pPrep);}
+\DoxyCodeLine{00559\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::prepare(pos++,\ ar.\_div\_cd,\ pPrep);}
+\DoxyCodeLine{00560\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::prepare(pos++,\ ar.\_parm\_1,\ pPrep);}
+\DoxyCodeLine{00561\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::prepare(pos++,\ ar.\_parm\_2,\ pPrep);}
+\DoxyCodeLine{00562\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::prepare(pos++,\ ar.\_parm\_3,\ pPrep);}
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::prepare(pos++,\ ar.\_parm\_4,\ pPrep);}
+\DoxyCodeLine{00564\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::prepare(pos++,\ ar.\_parm\_5,\ pPrep);}
+\DoxyCodeLine{00565\ \ \ \ \ \ \ \ \ TypeHandler<Poco::DateTime>::prepare(pos++,\ ar.\_crtd\_dtt,\ pPrep);}
+\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ TypeHandler<std::string>::prepare(pos++,\ ar.\_crtd\_usr\_cd,\ pPrep);}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::DateTime>>::prepare(pos++,\ ar.\_updt\_dtt,\ pPrep);}
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::prepare(pos++,\ ar.\_updt\_usr\_cd,\ pPrep);}
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::prepare(pos++,\ ar.\_tplt\_file,\ pPrep);}
+\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::prepare(pos++,\ ar.\_outpt\_file,\ pPrep);}
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::Int32>>::prepare(pos++,\ ar.\_schd\_detl\_id,\ pPrep);}
+\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::Int32>>::prepare(pos++,\ ar.\_prty,\ pPrep);}
+\DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ TypeHandler<char>::prepare(pos++,\ ar.\_actv\_yn,\ pPrep);}
+\DoxyCodeLine{00574\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::prepare(pos++,\ ar.\_next\_job\_cd\_success,\ pPrep);}
+\DoxyCodeLine{00575\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::prepare(pos++,\ ar.\_next\_job\_cd\_failure,\ pPrep);}
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::prepare(pos++,\ ar.\_alrt\_grp\_cd\_success,\ pPrep);}
+\DoxyCodeLine{00577\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::prepare(pos++,\ ar.\_alrt\_grp\_cd\_failure,\ pPrep);}
+\DoxyCodeLine{00578\ \ \ \ \ \ \ \ \ TypeHandler<std::string>::prepare(pos++,\ ar.\_gen\_enty\_output\_yn,\ pPrep);}
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::Int32>>::prepare(pos++,\ ar.\_tplt\_id,\ pPrep);}
+\DoxyCodeLine{00580\ \ \ \ \ \}}
+\DoxyCodeLine{00581\ \};}
+\DoxyCodeLine{00582\ }
+\DoxyCodeLine{00583\ }
+\DoxyCodeLine{00584\ \}\ \}\ \textcolor{comment}{//\ namespace\ Poco::Data}}
+\DoxyCodeLine{00585\ }
+\DoxyCodeLine{00586\ }
+\DoxyCodeLine{00587\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ asarum\_BY\_JobDef\_INCLUDED}}
+
+\end{DoxyCode}

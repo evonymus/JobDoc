@@ -1,0 +1,64 @@
+\doxysection{include/asarum/\+BY/job.h File Reference}
+\hypertarget{job_8h}{}\label{job_8h}\index{include/asarum/BY/job.h@{include/asarum/BY/job.h}}
+
+
+class keeps stores the list of all job executed as one set.  
+
+
+{\ttfamily \#include $<$istream$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$ostream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job}{asarum\+::\+BY\+::\+Job}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{job_8h_aa2d79c0d8458f696e53f56d2a9e1bc63}{asarum\+::\+BY\+::field}} \{ \newline
+{\bfseries MASTER}
+, {\bfseries STEPS}
+, {\bfseries JOB\+\_\+\+CD}
+, {\bfseries NEXT\+\_\+\+JOB}
+, \newline
+{\bfseries SUB\+\_\+\+JOBS}
+, {\bfseries ESC}
+, {\bfseries TEMPL}
+, {\bfseries SQL}
+, \newline
+{\bfseries XML}
+, {\bfseries SUBST}
+, {\bfseries TMPL\+\_\+\+FILE}
+, {\bfseries DESCR}
+, \newline
+{\bfseries API}
+, {\bfseries TYPE}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{job_8h_aed401187338c25c31ade19c746e53a3d}\label{job_8h_aed401187338c25c31ade19c746e53a3d} 
+const int {\bfseries asarum\+::\+BY\+::\+FIELDS\+\_\+\+NO} = 14
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+class keeps stores the list of all job executed as one set. 
+
+\begin{DoxyAuthor}{Author}
+Marek Dziekanski 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{job_8h_aa2d79c0d8458f696e53f56d2a9e1bc63}\label{job_8h_aa2d79c0d8458f696e53f56d2a9e1bc63} 
+\index{job.h@{job.h}!field@{field}}
+\index{field@{field}!job.h@{job.h}}
+\doxysubsubsection{\texorpdfstring{field}{field}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{job_8h_aa2d79c0d8458f696e53f56d2a9e1bc63}{asarum\+::\+BY\+::field}}}
+
+enumeratin storing fields names in the sequence returned by the query taking data from a DB 

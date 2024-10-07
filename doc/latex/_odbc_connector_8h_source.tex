@@ -1,0 +1,22 @@
+\doxysection{Odbc\+Connector.\+h}
+\hypertarget{_odbc_connector_8h_source}{}\label{_odbc_connector_8h_source}\index{include/asarum/BY/OdbcConnector.h@{include/asarum/BY/OdbcConnector.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <Poco/Data/Session.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_base_connector_8h}{BaseConnector.h}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceasarum}{asarum}}\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }BY\ \{}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classasarum_1_1_b_y_1_1_odbc_connector}{OdbcConnector}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_base_connector}{BaseConnector}}\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_odbc_connector_adbe9fabeebad6d9e2b6bc2fdfa72da6e}{OdbcConnector}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *dbName);}
+\DoxyCodeLine{00024\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_odbc_connector_adf7a539714faf5d7750c2fc3bcddf300}{changeSchema}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ schema\_name);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00028\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_odbc_connector_adf7a539714faf5d7750c2fc3bcddf300}{changeSchema}}(\textcolor{keyword}{const}\ std::string\ \&r\_schema\_name);}
+\DoxyCodeLine{00029\ \};}
+\DoxyCodeLine{00030\ \}\ \textcolor{comment}{//\ namespace\ BY}}
+\DoxyCodeLine{00031\ \}\ \textcolor{comment}{//\ namespace\ asarum}}
+
+\end{DoxyCode}

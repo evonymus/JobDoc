@@ -1,0 +1,28 @@
+\doxysection{con-\/def.h}
+\hypertarget{con-def_8h_source}{}\label{con-def_8h_source}\index{src/dbConnect/con-\/def.h@{src/dbConnect/con-\/def.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ \_\_CON\_DEF\_\_}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ \_\_CON\_DEF\_\_}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <soci/soci-\/backend.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceasarum}{asarum}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }db\ \{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classasarum_1_1db_1_1_con_def}{ConDef}}\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{const}\ std::string\ getConString()\ =\ 0;}
+\DoxyCodeLine{00015\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{const}\ soci::backend\_factory\&\ getBackendFactory()\ =\ 0;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \}\ \textcolor{comment}{//\ namespace\ db}}
+\DoxyCodeLine{00021\ \}\ \textcolor{comment}{//\ namespace\ asarum}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ ifndef\ \ \_\_CON\_DEF\_\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

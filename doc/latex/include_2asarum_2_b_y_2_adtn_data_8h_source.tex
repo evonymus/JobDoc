@@ -1,0 +1,263 @@
+\doxysection{Adtn\+Data.\+h}
+\hypertarget{include_2asarum_2_b_y_2_adtn_data_8h_source}{}\label{include_2asarum_2_b_y_2_adtn_data_8h_source}\index{include/asarum/BY/AdtnData.h@{include/asarum/BY/AdtnData.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ AdtnData.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ This\ file\ has\ been\ generated\ from\ jobdoc.xml.\ Do\ not\ edit.}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ asarum\_BY\_AdtnData\_INCLUDED}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ asarum\_BY\_AdtnData\_INCLUDED}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}Poco/ActiveRecord/ActiveRecord.h"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }asarum\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }BY\ \{}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{AdtnData}}:\ \textcolor{keyword}{public}\ Poco::ActiveRecord::ActiveRecord<Poco::Int32>}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{using\ }Ptr\ =\ Poco::AutoPtr<AdtnData>;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{AdtnData}}(ID\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{AdtnData}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{AdtnData}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{AdtnData}}\&\ other);}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{\string~AdtnData}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ data()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{AdtnData}}\&\ data(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{const}\ Poco::DateTime\&\ crdt\_dtt()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{AdtnData}}\&\ crdt\_dtt(\textcolor{keyword}{const}\ Poco::DateTime\&\ value);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ adtn\_data\_cd()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{AdtnData}}\&\ adtn\_data\_cd(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<Poco::Int32>\&\ adtn\_data\_typ\_enu()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{AdtnData}}\&\ adtn\_data\_typ\_enu(\textcolor{keyword}{const}\ Poco::Nullable<Poco::Int32>\&\ value);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<char>\&\ actv\_yn()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{AdtnData}}\&\ actv\_yn(\textcolor{keyword}{const}\ Poco::Nullable<char>\&\ value);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ crtd\_usr\_cd()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{AdtnData}}\&\ crtd\_usr\_cd(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ updt\_usr\_cd()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{AdtnData}}\&\ updt\_usr\_cd(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<Poco::DateTime>\&\ updt\_dtt()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{AdtnData}}\&\ updt\_dtt(\textcolor{keyword}{const}\ Poco::Nullable<Poco::DateTime>\&\ value);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{const}\ Poco::Nullable<Poco::Int32>\&\ tplt\_fmt\_typ\_enu()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{AdtnData}}\&\ tplt\_fmt\_typ\_enu(\textcolor{keyword}{const}\ Poco::Nullable<Poco::Int32>\&\ value);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{static}\ Ptr\ find(Poco::ActiveRecord::Context::Ptr\ pContext,\ \textcolor{keyword}{const}\ ID\&\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ insert();}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ update();}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ remove();}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::vector<std::string>\&\ columns();}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::string\&\ table();}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00066\ \ \ \ \ std::string\ \_data;}
+\DoxyCodeLine{00067\ \ \ \ \ Poco::DateTime\ \_crdt\_dtt;}
+\DoxyCodeLine{00068\ \ \ \ \ Poco::Nullable<std::string>\ \_adtn\_data\_cd;}
+\DoxyCodeLine{00069\ \ \ \ \ Poco::Nullable<Poco::Int32>\ \_adtn\_data\_typ\_enu;}
+\DoxyCodeLine{00070\ \ \ \ \ Poco::Nullable<char>\ \_actv\_yn;}
+\DoxyCodeLine{00071\ \ \ \ \ Poco::Nullable<std::string>\ \_crtd\_usr\_cd;}
+\DoxyCodeLine{00072\ \ \ \ \ Poco::Nullable<std::string>\ \_updt\_usr\_cd;}
+\DoxyCodeLine{00073\ \ \ \ \ Poco::Nullable<Poco::DateTime>\ \_updt\_dtt;}
+\DoxyCodeLine{00074\ \ \ \ \ Poco::Nullable<Poco::Int32>\ \_tplt\_fmt\_typ\_enu;}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }Poco::Data::TypeHandler<\mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{AdtnData}}>;}
+\DoxyCodeLine{00077\ \};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ std::string\&\ AdtnData::data()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00081\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{return}\ \_data;}
+\DoxyCodeLine{00083\ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \textcolor{keyword}{inline}\ AdtnData\&\ AdtnData::data(\textcolor{keyword}{const}\ std::string\&\ value)}
+\DoxyCodeLine{00087\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \_data\ =\ value;}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00090\ \}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::DateTime\&\ AdtnData::crdt\_dtt()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00094\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{return}\ \_crdt\_dtt;}
+\DoxyCodeLine{00096\ \}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{keyword}{inline}\ AdtnData\&\ AdtnData::crdt\_dtt(\textcolor{keyword}{const}\ Poco::DateTime\&\ value)}
+\DoxyCodeLine{00100\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \_crdt\_dtt\ =\ value;}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00103\ \}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ AdtnData::adtn\_data\_cd()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00107\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordflow}{return}\ \_adtn\_data\_cd;}
+\DoxyCodeLine{00109\ \}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \textcolor{keyword}{inline}\ AdtnData\&\ AdtnData::adtn\_data\_cd(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value)}
+\DoxyCodeLine{00113\ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \_adtn\_data\_cd\ =\ value;}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00116\ \}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<Poco::Int32>\&\ AdtnData::adtn\_data\_typ\_enu()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00120\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordflow}{return}\ \_adtn\_data\_typ\_enu;}
+\DoxyCodeLine{00122\ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \textcolor{keyword}{inline}\ AdtnData\&\ AdtnData::adtn\_data\_typ\_enu(\textcolor{keyword}{const}\ Poco::Nullable<Poco::Int32>\&\ value)}
+\DoxyCodeLine{00126\ \{}
+\DoxyCodeLine{00127\ \ \ \ \ \_adtn\_data\_typ\_enu\ =\ value;}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00129\ \}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<char>\&\ AdtnData::actv\_yn()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00133\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordflow}{return}\ \_actv\_yn;}
+\DoxyCodeLine{00135\ \}}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \textcolor{keyword}{inline}\ AdtnData\&\ AdtnData::actv\_yn(\textcolor{keyword}{const}\ Poco::Nullable<char>\&\ value)}
+\DoxyCodeLine{00139\ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \_actv\_yn\ =\ value;}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00142\ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ AdtnData::crtd\_usr\_cd()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00146\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordflow}{return}\ \_crtd\_usr\_cd;}
+\DoxyCodeLine{00148\ \}}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \textcolor{keyword}{inline}\ AdtnData\&\ AdtnData::crtd\_usr\_cd(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value)}
+\DoxyCodeLine{00152\ \{}
+\DoxyCodeLine{00153\ \ \ \ \ \_crtd\_usr\_cd\ =\ value;}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00155\ \}}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ AdtnData::updt\_usr\_cd()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00159\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordflow}{return}\ \_updt\_usr\_cd;}
+\DoxyCodeLine{00161\ \}}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \textcolor{keyword}{inline}\ AdtnData\&\ AdtnData::updt\_usr\_cd(\textcolor{keyword}{const}\ Poco::Nullable<std::string>\&\ value)}
+\DoxyCodeLine{00165\ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \_updt\_usr\_cd\ =\ value;}
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00168\ \}}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<Poco::DateTime>\&\ AdtnData::updt\_dtt()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00172\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordflow}{return}\ \_updt\_dtt;}
+\DoxyCodeLine{00174\ \}}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \textcolor{keyword}{inline}\ AdtnData\&\ AdtnData::updt\_dtt(\textcolor{keyword}{const}\ Poco::Nullable<Poco::DateTime>\&\ value)}
+\DoxyCodeLine{00178\ \{}
+\DoxyCodeLine{00179\ \ \ \ \ \_updt\_dtt\ =\ value;}
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00181\ \}}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Poco::Nullable<Poco::Int32>\&\ AdtnData::tplt\_fmt\_typ\_enu()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00185\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keywordflow}{return}\ \_tplt\_fmt\_typ\_enu;}
+\DoxyCodeLine{00187\ \}}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \textcolor{keyword}{inline}\ AdtnData\&\ AdtnData::tplt\_fmt\_typ\_enu(\textcolor{keyword}{const}\ Poco::Nullable<Poco::Int32>\&\ value)}
+\DoxyCodeLine{00191\ \{}
+\DoxyCodeLine{00192\ \ \ \ \ \_tplt\_fmt\_typ\_enu\ =\ value;}
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00194\ \}}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \}\ \}\ \textcolor{comment}{//\ namespace\ asarum:BY}}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \textcolor{keyword}{namespace\ }Poco\ \{}
+\DoxyCodeLine{00201\ \textcolor{keyword}{namespace\ }Data\ \{}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00205\ \textcolor{keyword}{class\ }TypeHandler<asarum::BY::AdtnData>}
+\DoxyCodeLine{00206\ \{}
+\DoxyCodeLine{00207\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{keyword}{static}\ std::size\_t\ size()}
+\DoxyCodeLine{00209\ \ \ \ \ \{}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 9;}
+\DoxyCodeLine{00211\ \ \ \ \ \}}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ bind(std::size\_t\ pos,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{asarum::BY::AdtnData}}\&\ ar,\ AbstractBinder::Ptr\ pBinder,\ AbstractBinder::Direction\ dir)}
+\DoxyCodeLine{00214\ \ \ \ \ \{}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ TypeHandler<std::string>::bind(pos++,\ ar.\_data,\ pBinder,\ dir);}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ TypeHandler<Poco::DateTime>::bind(pos++,\ ar.\_crdt\_dtt,\ pBinder,\ dir);}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::bind(pos++,\ ar.\_adtn\_data\_cd,\ pBinder,\ dir);}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::Int32>>::bind(pos++,\ ar.\_adtn\_data\_typ\_enu,\ pBinder,\ dir);}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<char>>::bind(pos++,\ ar.\_actv\_yn,\ pBinder,\ dir);}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::bind(pos++,\ ar.\_crtd\_usr\_cd,\ pBinder,\ dir);}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::bind(pos++,\ ar.\_updt\_usr\_cd,\ pBinder,\ dir);}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::DateTime>>::bind(pos++,\ ar.\_updt\_dtt,\ pBinder,\ dir);}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::Int32>>::bind(pos++,\ ar.\_tplt\_fmt\_typ\_enu,\ pBinder,\ dir);}
+\DoxyCodeLine{00224\ \}}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ extract(std::size\_t\ pos,\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{asarum::BY::AdtnData}}\&\ ar,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{asarum::BY::AdtnData}}\&\ deflt,\ AbstractExtractor::Ptr\ pExtr)}
+\DoxyCodeLine{00227\ \ \ \ \ \{}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ TypeHandler<std::string>::extract(pos++,\ ar.\_data,\ deflt.\_data,\ pExtr);}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ TypeHandler<Poco::DateTime>::extract(pos++,\ ar.\_crdt\_dtt,\ deflt.\_crdt\_dtt,\ pExtr);}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::extract(pos++,\ ar.\_adtn\_data\_cd,\ deflt.\_adtn\_data\_cd,\ pExtr);}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::Int32>>::extract(pos++,\ ar.\_adtn\_data\_typ\_enu,\ deflt.\_adtn\_data\_typ\_enu,\ pExtr);}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<char>>::extract(pos++,\ ar.\_actv\_yn,\ deflt.\_actv\_yn,\ pExtr);}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::extract(pos++,\ ar.\_crtd\_usr\_cd,\ deflt.\_crtd\_usr\_cd,\ pExtr);}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::extract(pos++,\ ar.\_updt\_usr\_cd,\ deflt.\_updt\_usr\_cd,\ pExtr);}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::DateTime>>::extract(pos++,\ ar.\_updt\_dtt,\ deflt.\_updt\_dtt,\ pExtr);}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::Int32>>::extract(pos++,\ ar.\_tplt\_fmt\_typ\_enu,\ deflt.\_tplt\_fmt\_typ\_enu,\ pExtr);}
+\DoxyCodeLine{00237\ \}}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00239\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prepare(std::size\_t\ pos,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{asarum::BY::AdtnData}}\&\ ar,\ AbstractPreparator::Ptr\ pPrep)}
+\DoxyCodeLine{00240\ \ \ \ \ \{}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ TypeHandler<std::string>::prepare(pos++,\ ar.\_data,\ pPrep);}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ TypeHandler<Poco::DateTime>::prepare(pos++,\ ar.\_crdt\_dtt,\ pPrep);}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::prepare(pos++,\ ar.\_adtn\_data\_cd,\ pPrep);}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::Int32>>::prepare(pos++,\ ar.\_adtn\_data\_typ\_enu,\ pPrep);}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<char>>::prepare(pos++,\ ar.\_actv\_yn,\ pPrep);}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::prepare(pos++,\ ar.\_crtd\_usr\_cd,\ pPrep);}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<std::string>>::prepare(pos++,\ ar.\_updt\_usr\_cd,\ pPrep);}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::DateTime>>::prepare(pos++,\ ar.\_updt\_dtt,\ pPrep);}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Nullable<Poco::Int32>>::prepare(pos++,\ ar.\_tplt\_fmt\_typ\_enu,\ pPrep);}
+\DoxyCodeLine{00250\ \ \ \ \ \}}
+\DoxyCodeLine{00251\ \};}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00254\ \}\ \}\ \textcolor{comment}{//\ namespace\ Poco::Data}}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00257\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ asarum\_BY\_AdtnData\_INCLUDED}}
+
+\end{DoxyCode}

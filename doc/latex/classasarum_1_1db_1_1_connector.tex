@@ -1,0 +1,70 @@
+\doxysection{asarum\+::db\+::Connector Class Reference}
+\hypertarget{classasarum_1_1db_1_1_connector}{}\label{classasarum_1_1db_1_1_connector}\index{asarum::db::Connector@{asarum::db::Connector}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classasarum_1_1db_1_1_connector_aad48724426558cd3aa3c931aac87bc0d}{Connector}} (\mbox{\hyperlink{classasarum_1_1db_1_1_con_def}{Con\+Def}} \&con\+Def)
+\begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classasarum_1_1db_1_1_connector_a8d7b5caad7447ef9adb8b0534a803faa}{exec\+Sql}} (const std\+::string \&sql)
+\item 
+soci\+::rowset$<$ soci\+::row $>$ \mbox{\hyperlink{classasarum_1_1db_1_1_connector_a0d4dd40b18c84f525cd22a948fcf919e}{get\+Query\+Data}} (const char \texorpdfstring{$\ast$}{*}query)
+\begin{DoxyCompactList}\small\item\em metod returning data as a rowset or rows \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classasarum_1_1db_1_1_connector_acbce09d8d065ab407f6e7dbd81fbb00b}\label{classasarum_1_1db_1_1_connector_acbce09d8d065ab407f6e7dbd81fbb00b} 
+soci\+::session {\bfseries m\+\_\+sql}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classasarum_1_1db_1_1_connector_aad48724426558cd3aa3c931aac87bc0d}\label{classasarum_1_1db_1_1_connector_aad48724426558cd3aa3c931aac87bc0d} 
+\index{asarum::db::Connector@{asarum::db::Connector}!Connector@{Connector}}
+\index{Connector@{Connector}!asarum::db::Connector@{asarum::db::Connector}}
+\doxysubsubsection{\texorpdfstring{Connector()}{Connector()}}
+{\footnotesize\ttfamily asarum\+::db\+::\+Connector\+::\+Connector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classasarum_1_1db_1_1_con_def}{Con\+Def}} \&}]{con\+Def }\end{DoxyParamCaption})}
+
+
+
+constructor 
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em con\+Def,const} & reference to a \doxylink{classasarum_1_1db_1_1_con_def}{Con\+Def} object storing details of the connection. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classasarum_1_1db_1_1_connector_a8d7b5caad7447ef9adb8b0534a803faa}\label{classasarum_1_1db_1_1_connector_a8d7b5caad7447ef9adb8b0534a803faa} 
+\index{asarum::db::Connector@{asarum::db::Connector}!execSql@{execSql}}
+\index{execSql@{execSql}!asarum::db::Connector@{asarum::db::Connector}}
+\doxysubsubsection{\texorpdfstring{execSql()}{execSql()}}
+{\footnotesize\ttfamily void asarum\+::db\+::\+Connector\+::exec\+Sql (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{sql }\end{DoxyParamCaption})}
+
+the fuction executes sql passed as the parameter 
+\begin{DoxyParams}{Parameters}
+{\em sql} & code to execute \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classasarum_1_1db_1_1_connector_a0d4dd40b18c84f525cd22a948fcf919e}\label{classasarum_1_1db_1_1_connector_a0d4dd40b18c84f525cd22a948fcf919e} 
+\index{asarum::db::Connector@{asarum::db::Connector}!getQueryData@{getQueryData}}
+\index{getQueryData@{getQueryData}!asarum::db::Connector@{asarum::db::Connector}}
+\doxysubsubsection{\texorpdfstring{getQueryData()}{getQueryData()}}
+{\footnotesize\ttfamily soci\+::rowset$<$ soci\+::row $>$ asarum\+::db\+::\+Connector\+::get\+Query\+Data (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{query }\end{DoxyParamCaption})}
+
+
+
+metod returning data as a rowset or rows 
+
+method returns the result of the query as soci\+::rowset$<$soci\+::row$>$ 
+\begin{DoxyParams}{Parameters}
+{\em query} & -\/ the query for which the results is to be returned \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/db\+Connect/connector.\+h\item 
+src/db\+Connect/connector.\+cpp\end{DoxyCompactItemize}

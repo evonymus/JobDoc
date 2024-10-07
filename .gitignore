@@ -1,0 +1,7 @@
+.vs/
+build/
+out/
+ORM/include
+ORM/src
+Doxyfile
+Doxyfile.in

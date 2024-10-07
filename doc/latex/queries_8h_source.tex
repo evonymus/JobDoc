@@ -1,0 +1,64 @@
+\doxysection{queries.\+h}
+\hypertarget{queries_8h_source}{}\label{queries_8h_source}\index{src/dbConnect/queries.h@{src/dbConnect/queries.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ \_\_QUERIES\_\_}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ \_\_QUERIES\_\_\ }}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceasarum}{asarum}}\ \{}
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }db\ \{}
+\DoxyCodeLine{00007\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ JOB\_DEFS\ =\ R\textcolor{stringliteral}{"{}"{}"{}"{}(select\ sd.job\_cd\ as\ master,\ \ LEVEL,\ jb.job\_cd,\ jb.next\_job\_cd\_success}}
+\DoxyCodeLine{00008\ \textcolor{stringliteral}{,\ case\ jb.job\_typ\_enu}}
+\DoxyCodeLine{00009\ \textcolor{stringliteral}{\ \ \ \ when\ 3\ -\/-\/\ chain}}
+\DoxyCodeLine{00010\ \textcolor{stringliteral}{\ \ \ \ then\ jb.parm\_1}}
+\DoxyCodeLine{00011\ \textcolor{stringliteral}{\ \ \ \ else\ ''}}
+\DoxyCodeLine{00012\ \textcolor{stringliteral}{end\ as\ sub\_jobs}}
+\DoxyCodeLine{00013\ \textcolor{stringliteral}{,\ jc.enty\_sel\_cta\_cd\ as\ ESC}}
+\DoxyCodeLine{00014\ \textcolor{stringliteral}{,\ ad.adtn\_data\_cd\ as\ TEMPL}}
+\DoxyCodeLine{00015\ \textcolor{stringliteral}{,\ nvl(esc.cta\_sql,\ '\ ')\ as\ sql}}
+\DoxyCodeLine{00016\ \textcolor{stringliteral}{,\ nvl(ad.data,\ '\ ')\ as\ xml}}
+\DoxyCodeLine{00017\ \textcolor{stringliteral}{,\ case\ jb.job\_typ\_enu}}
+\DoxyCodeLine{00018\ \textcolor{stringliteral}{\ \ \ \ when\ 2\ then\ jb.parm\_3}}
+\DoxyCodeLine{00019\ \textcolor{stringliteral}{\ \ \ \ else\ ''}}
+\DoxyCodeLine{00020\ \textcolor{stringliteral}{end\ as\ subst}}
+\DoxyCodeLine{00021\ \textcolor{stringliteral}{,\ jb.tplt\_file}}
+\DoxyCodeLine{00022\ \textcolor{stringliteral}{,\ jb.job\_desc}}
+\DoxyCodeLine{00023\ \textcolor{stringliteral}{,\ case\ jb.job\_typ\_enu}}
+\DoxyCodeLine{00024\ \textcolor{stringliteral}{\ \ \ \ when\ 2\ then\ jb.parm\_1}}
+\DoxyCodeLine{00025\ \textcolor{stringliteral}{\ \ \ \ else\ ''}}
+\DoxyCodeLine{00026\ \textcolor{stringliteral}{\ \ end\ as\ api}}
+\DoxyCodeLine{00027\ \textcolor{stringliteral}{,\ case\ jb.job\_typ\_enu}}
+\DoxyCodeLine{00028\ \textcolor{stringliteral}{\ \ \ \ when\ 1\ then\ 'RRS'}}
+\DoxyCodeLine{00029\ \textcolor{stringliteral}{\ \ \ \ when\ 2\ then\ 'API'}}
+\DoxyCodeLine{00030\ \textcolor{stringliteral}{\ \ \ \ when\ 3\ then\ 'Chain'}}
+\DoxyCodeLine{00031\ \textcolor{stringliteral}{\ \ \ \ when\ 4\ then\ 'Decision'}}
+\DoxyCodeLine{00032\ \textcolor{stringliteral}{\ \ \ \ when\ 6\ then\ 'MMSI'}}
+\DoxyCodeLine{00033\ \textcolor{stringliteral}{\ \ \ \ when\ 7\ then\ 'Trans\ Voyant\ Ocean'}}
+\DoxyCodeLine{00034\ \textcolor{stringliteral}{\ \ \ \ when\ 8\ then\ 'Intra\ Ocean\ Schedule'}}
+\DoxyCodeLine{00035\ \textcolor{stringliteral}{\ \ \ \ when\ 17\ then\ 'Intra\ Send'}}
+\DoxyCodeLine{00036\ \textcolor{stringliteral}{\ \ \ \ when\ 18\ then\ 'Intra\ Receive'}}
+\DoxyCodeLine{00037\ \textcolor{stringliteral}{\ \ \ \ when\ 19\ then\ 'Directory\ Watch'}}
+\DoxyCodeLine{00038\ \textcolor{stringliteral}{\ \ \ \ when\ 20\ then\ 'Transp.Order\ Consol.'}}
+\DoxyCodeLine{00039\ \textcolor{stringliteral}{\ \ \ \ when\ 22\ then\ 'Dispatch'}}
+\DoxyCodeLine{00040\ \textcolor{stringliteral}{\ \ \ \ when\ 23\ then\ 'Tracking'}}
+\DoxyCodeLine{00041\ \textcolor{stringliteral}{\ \ \ \ when\ 25\ then\ 'Reoptymalization'}}
+\DoxyCodeLine{00042\ \textcolor{stringliteral}{\ \ \ \ when\ 26\ then\ 'Notification'}}
+\DoxyCodeLine{00043\ \textcolor{stringliteral}{\ \ \ \ else\ 'Other'}}
+\DoxyCodeLine{00044\ \textcolor{stringliteral}{\ \ end\ as\ job\_typ}}
+\DoxyCodeLine{00045\ \textcolor{stringliteral}{from\ job\_defn\_t\ jb}}
+\DoxyCodeLine{00046\ \textcolor{stringliteral}{left\ join\ job\_defn\_t\ sd\ on\ jb.job\_cd\ =\ sd.job\_cd\ and\ jb.schd\_typ\_enu\ =\ 2}}
+\DoxyCodeLine{00047\ \textcolor{stringliteral}{left\ join\ adtn\_data\_t\ ad\ on\ ad.adtn\_data\_id\ =\ jb.tplt\_id}}
+\DoxyCodeLine{00048\ \textcolor{stringliteral}{left\ join\ job\_sel\_cta\_t\ jc\ on\ jc.job\_cd\ =\ jb.job\_cd}}
+\DoxyCodeLine{00049\ \textcolor{stringliteral}{left\ join\ \ enty\_sel\_cta\_t\ esc\ on\ esc.enty\_sel\_cta\_cd\ =\ jc.enty\_sel\_cta\_cd}}
+\DoxyCodeLine{00050\ \textcolor{stringliteral}{left\ join\ adtn\_data\_t\ ad\ on\ ad.adtn\_data\_id\ =\ jb.tplt\_id}}
+\DoxyCodeLine{00051\ \textcolor{stringliteral}{connect\ by\ \ \ prior\ jb.next\_job\_cd\_success\ =\ jb.job\_cd}}
+\DoxyCodeLine{00052\ \textcolor{stringliteral}{start\ with\ jb.job\_cd\ =\ sd.job\_cd}}
+\DoxyCodeLine{00053\ \textcolor{stringliteral}{-\/-\/\ ver.2.1}}
+\DoxyCodeLine{00054\ \textcolor{stringliteral}{-\/-\/\ Marek\ Dziekanski\ 2023-\/04-\/11\ 14:54}}
+\DoxyCodeLine{00055\ \textcolor{stringliteral}{)"{}"{}"{}"{};}}
+\DoxyCodeLine{00056\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00057\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00058\ \textcolor{stringliteral}{}\textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ ifndef\ \_\_QUERIES\_\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

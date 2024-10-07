@@ -1,0 +1,92 @@
+\doxysection{asarum\+::db\+::Orcl\+Con\+Def Class Reference}
+\hypertarget{classasarum_1_1db_1_1_orcl_con_def}{}\label{classasarum_1_1db_1_1_orcl_con_def}\index{asarum::db::OrclConDef@{asarum::db::OrclConDef}}
+
+
+Oracle implementation of abstract class Conn\+Def.  
+
+
+
+
+{\ttfamily \#include $<$orcl-\/con-\/def.\+h$>$}
+
+Inheritance diagram for asarum\+::db\+::Orcl\+Con\+Def\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classasarum_1_1db_1_1_orcl_con_def}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classasarum_1_1db_1_1_orcl_con_def_ab107ec0a611095e8aa0c537f43c4e351}{Orcl\+Con\+Def}} (const std\+::string service, const std\+::string user, const std\+::string password)
+\item 
+virtual const std\+::string \mbox{\hyperlink{classasarum_1_1db_1_1_orcl_con_def_a1dd3c56578df13ed2dc37fb84b796264}{get\+Con\+String}} ()
+\begin{DoxyCompactList}\small\item\em the method returns connection string used to connect to an oracle DB \end{DoxyCompactList}\item 
+virtual const soci\+::backend\+\_\+factory \& \mbox{\hyperlink{classasarum_1_1db_1_1_orcl_con_def_abccb5bb89583e3fe7b03b6db29bed68b}{get\+Backend\+Factory}} ()
+\begin{DoxyCompactList}\small\item\em returns reference to oracle\+\_\+backend\+\_\+factory \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classasarum_1_1db_1_1_orcl_con_def_a80a1925b8dc16390461336d8bcdddd87}\label{classasarum_1_1db_1_1_orcl_con_def_a80a1925b8dc16390461336d8bcdddd87} 
+std\+::string {\bfseries m\+\_\+service}
+\item 
+\Hypertarget{classasarum_1_1db_1_1_orcl_con_def_ad6eafceb683dc7daf24a5687b49fdb16}\label{classasarum_1_1db_1_1_orcl_con_def_ad6eafceb683dc7daf24a5687b49fdb16} 
+std\+::string {\bfseries m\+\_\+user}
+\item 
+\Hypertarget{classasarum_1_1db_1_1_orcl_con_def_a1c6fbddaf5885930eafa99f7ab6ace5e}\label{classasarum_1_1db_1_1_orcl_con_def_a1c6fbddaf5885930eafa99f7ab6ace5e} 
+std\+::string {\bfseries m\+\_\+password}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Oracle implementation of abstract class Conn\+Def. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classasarum_1_1db_1_1_orcl_con_def_ab107ec0a611095e8aa0c537f43c4e351}\label{classasarum_1_1db_1_1_orcl_con_def_ab107ec0a611095e8aa0c537f43c4e351} 
+\index{asarum::db::OrclConDef@{asarum::db::OrclConDef}!OrclConDef@{OrclConDef}}
+\index{OrclConDef@{OrclConDef}!asarum::db::OrclConDef@{asarum::db::OrclConDef}}
+\doxysubsubsection{\texorpdfstring{OrclConDef()}{OrclConDef()}}
+{\footnotesize\ttfamily asarum\+::db\+::\+Orcl\+Con\+Def\+::\+Orcl\+Con\+Def (\begin{DoxyParamCaption}\item[{const std\+::string}]{service,  }\item[{const std\+::string}]{user,  }\item[{const std\+::string}]{password }\end{DoxyParamCaption})}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em service} & the name of the service from tnsnames.\+ora @user user id @password password \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classasarum_1_1db_1_1_orcl_con_def_abccb5bb89583e3fe7b03b6db29bed68b}\label{classasarum_1_1db_1_1_orcl_con_def_abccb5bb89583e3fe7b03b6db29bed68b} 
+\index{asarum::db::OrclConDef@{asarum::db::OrclConDef}!getBackendFactory@{getBackendFactory}}
+\index{getBackendFactory@{getBackendFactory}!asarum::db::OrclConDef@{asarum::db::OrclConDef}}
+\doxysubsubsection{\texorpdfstring{getBackendFactory()}{getBackendFactory()}}
+{\footnotesize\ttfamily const soci\+::backend\+\_\+factory \& asarum\+::db\+::\+Orcl\+Con\+Def\+::get\+Backend\+Factory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+returns reference to oracle\+\_\+backend\+\_\+factory 
+
+
+
+Implements \mbox{\hyperlink{classasarum_1_1db_1_1_con_def}{asarum\+::db\+::\+Con\+Def}}.
+
+\Hypertarget{classasarum_1_1db_1_1_orcl_con_def_a1dd3c56578df13ed2dc37fb84b796264}\label{classasarum_1_1db_1_1_orcl_con_def_a1dd3c56578df13ed2dc37fb84b796264} 
+\index{asarum::db::OrclConDef@{asarum::db::OrclConDef}!getConString@{getConString}}
+\index{getConString@{getConString}!asarum::db::OrclConDef@{asarum::db::OrclConDef}}
+\doxysubsubsection{\texorpdfstring{getConString()}{getConString()}}
+{\footnotesize\ttfamily const std\+::string asarum\+::db\+::\+Orcl\+Con\+Def\+::get\+Con\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+the method returns connection string used to connect to an oracle DB 
+
+
+
+Implements \mbox{\hyperlink{classasarum_1_1db_1_1_con_def}{asarum\+::db\+::\+Con\+Def}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/db\+Connect/orcl-\/con-\/def.\+h\item 
+src/db\+Connect/orcl-\/con-\/def.\+cpp\end{DoxyCompactItemize}

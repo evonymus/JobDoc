@@ -1,0 +1,155 @@
+\doxysection{sql\+\_\+queries.\+h}
+\hypertarget{sql__queries_8h_source}{}\label{sql__queries_8h_source}\index{include/asarum/BY/sql\_queries.h@{include/asarum/BY/sql\_queries.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{char}*\ JOB\_DEFN\_T\_CREATE\ =\ R\textcolor{stringliteral}{"{}SQL(}}
+\DoxyCodeLine{00005\ \textcolor{stringliteral}{CREATE\ TABLE\ 'JOB\_DEFN\_T'\ ('JOB\_CD'\ TEXT\ primary\ key,'OPT\_LCK'\ NUMERIC}}
+\DoxyCodeLine{00006\ \textcolor{stringliteral}{,'JOB\_DESC'\ TEXT,'SCHD\_TYP\_ENU'\ NUMERIC,'JOB\_TYP\_ENU'\ NUMERIC,}}
+\DoxyCodeLine{00007\ \textcolor{stringliteral}{'DIV\_CD'\ TEXT,'PARM\_1'\ TEXT,'PARM\_2'\ TEXT,'PARM\_3'\ TEXT,}}
+\DoxyCodeLine{00008\ \textcolor{stringliteral}{'PARM\_4'\ TEXT,'PARM\_5'\ TEXT,'CRTD\_DTT'\ TEXT,'CRTD\_USR\_CD'\ TEXT,}}
+\DoxyCodeLine{00009\ \textcolor{stringliteral}{'UPDT\_DTT'\ TEXT,'UPDT\_USR\_CD'\ TEXT,'TPLT\_FILE'\ TEXT,}}
+\DoxyCodeLine{00010\ \textcolor{stringliteral}{'OUTPT\_FILE'\ TEXT,'SCHD\_DETL\_ID'\ NUMERIC,'PRTY'\ NUMERIC,}}
+\DoxyCodeLine{00011\ \textcolor{stringliteral}{'ACTV\_YN'\ TEXT,'NEXT\_JOB\_CD\_SUCCESS'\ TEXT,'NEXT\_JOB\_CD\_FAILURE'\ TEXT,}}
+\DoxyCodeLine{00012\ \textcolor{stringliteral}{'ALRT\_GRP\_CD\_SUCCESS'\ TEXT,'ALRT\_GRP\_CD\_FAILURE'\ TEXT,}}
+\DoxyCodeLine{00013\ \textcolor{stringliteral}{'GEN\_ENTY\_OUTPUT\_YN'\ TEXT,'TPLT\_ID'\ NUMERIC);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00014\ \textcolor{stringliteral}{)SQL"{};}}
+\DoxyCodeLine{00015\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00016\ \textcolor{stringliteral}{}\textcolor{comment}{//**************************************************************}}
+\DoxyCodeLine{00017\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{char}*\ ENTY\_SEL\_CTA\_T\_CREATE\ =\ R\textcolor{stringliteral}{"{}SQL(}}
+\DoxyCodeLine{00018\ \textcolor{stringliteral}{CREATE\ TABLE\ 'ENTY\_SEL\_CTA\_T'\ ('ENTY\_SEL\_CTA\_CD'\ TEXT\ primary\ key,'OPT\_LCK'\ NUMERIC}}
+\DoxyCodeLine{00019\ \textcolor{stringliteral}{,'ENTY\_SEL\_CTA\_DESC'\ TEXT,'DIV\_CD'\ TEXT,'STR\_ID\_YN'\ TEXT,}}
+\DoxyCodeLine{00020\ \textcolor{stringliteral}{'ENTY\_TYP\_ENU'\ NUMERIC,'CTA\_SQL'\ TEXT,'CTA\_FIND\_ENTY'\ TEXT,}}
+\DoxyCodeLine{00021\ \textcolor{stringliteral}{'CRTD\_DTT'\ TEXT,'CRTD\_USR\_CD'\ TEXT,'UPDT\_DTT'\ TEXT,'UPDT\_USR\_CD'\ TEXT,'MAX\_ENTYS'\ NUMERIC);}}
+\DoxyCodeLine{00022\ \textcolor{stringliteral}{)SQL"{};}}
+\DoxyCodeLine{00023\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00024\ \textcolor{stringliteral}{}\textcolor{comment}{//**************************************************************}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{char}*\ JOB\_SEL\_CTA\_T\_CREATE\ =\ R\textcolor{stringliteral}{"{}SQL(}}
+\DoxyCodeLine{00027\ \textcolor{stringliteral}{CREATE\ TABLE\ 'JOB\_SEL\_CTA\_T'\ ('JOB\_SEL\_CTA\_ID'\ NUMERIC,'OPT\_LCK'\ NUMERIC,}}
+\DoxyCodeLine{00028\ \textcolor{stringliteral}{'JOB\_CD'\ TEXT,'ENTY\_SEL\_CTA\_CD'\ TEXT);\ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00029\ \textcolor{stringliteral}{)SQL"{};}}
+\DoxyCodeLine{00030\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00031\ \textcolor{stringliteral}{}\textcolor{comment}{//**************************************************************}}
+\DoxyCodeLine{00032\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{char}*\ SCHD\_DETL\_T\_CREATE\ =\ R\textcolor{stringliteral}{"{}SQL(}}
+\DoxyCodeLine{00033\ \textcolor{stringliteral}{CREATE\ TABLE\ 'SCHD\_DETL\_T'\ ('SCHD\_DETL\_ID'\ NUMERIC\ primary\ key,'OPT\_LCK'\ NUMERIC,}}
+\DoxyCodeLine{00034\ \textcolor{stringliteral}{'RCURNCE\_TYP\_ENU'\ NUMERIC,'EFCT\_DT'\ TEXT,'EXPD\_DT'\ TEXT}}
+\DoxyCodeLine{00035\ \textcolor{stringliteral}{,'STRT\_TM'\ TEXT,'END\_TM'\ TEXT,'DAY\_OF\_MTH'\ NUMERIC,}}
+\DoxyCodeLine{00036\ \textcolor{stringliteral}{'ITVL'\ NUMERIC,'FXD\_ITVL\_SRC\_ENU'\ NUMERIC,'BUS\_DAYS\_CD'\ TEXT,'BUS\_MTHS\_CD'\ TEXT);}}
+\DoxyCodeLine{00037\ \textcolor{stringliteral}{)SQL"{};}}
+\DoxyCodeLine{00038\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00039\ \textcolor{stringliteral}{}\textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{char}*\ ADTN\_DATA\_T\_CREATE\ =\ R\textcolor{stringliteral}{"{}SQL(}}
+\DoxyCodeLine{00040\ \textcolor{stringliteral}{CREATE\ TABLE\ 'ADTN\_DATA\_T'\ ('ADTN\_DATA\_ID'\ NUMERIC\ primary\ key,'DATA'\ TEXT,'CRTD\_DTT'\ TEXT,'ADTN\_DATA\_CD'\ TEXT,'ADTN\_DATA\_TYP\_ENU'\ NUMERIC,'ACTV\_YN'\ TEXT,'CRTD\_USR\_CD'\ TEXT,'UPDT\_USR\_CD'\ TEXT,'UPDT\_DTT'\ TEXT,'TPLT\_FMT\_TYP\_ENU'\ NUMERIC);}}
+\DoxyCodeLine{00041\ \textcolor{stringliteral}{)SQL"{};}}
+\DoxyCodeLine{00042\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00043\ \textcolor{stringliteral}{}\textcolor{comment}{//**************************************************************}}
+\DoxyCodeLine{00044\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{char}\ *JOB\_DEFS\_QRY\ =\ R\textcolor{stringliteral}{"{}SQL(}}
+\DoxyCodeLine{00045\ \textcolor{stringliteral}{with\ RECURSIVE\ jobs(}}
+\DoxyCodeLine{00046\ \textcolor{stringliteral}{\ \ master,level\ ,\ job\_cd,\ child,\ sub\_jobs\ }}
+\DoxyCodeLine{00047\ \textcolor{stringliteral}{\ \ ,\ ESC,\ TEMPL\ ,\ sql,\ xml,\ subst\ }}
+\DoxyCodeLine{00048\ \textcolor{stringliteral}{\ \ ,\ tpl\_file,\ job\_desc\ ,\ api,\ job\_typ}}
+\DoxyCodeLine{00049\ \textcolor{stringliteral}{)\ }}
+\DoxyCodeLine{00050\ \textcolor{stringliteral}{as\ (}}
+\DoxyCodeLine{00051\ \textcolor{stringliteral}{select\ jdef.job\_cd\ as\ master}}
+\DoxyCodeLine{00052\ \textcolor{stringliteral}{,\ 1\ as\ level\ }}
+\DoxyCodeLine{00053\ \textcolor{stringliteral}{,\ jdef.job\_cd\ as\ job\_cd}}
+\DoxyCodeLine{00054\ \textcolor{stringliteral}{,\ jdef.next\_job\_cd\_success\ as\ child}}
+\DoxyCodeLine{00055\ \textcolor{stringliteral}{-\/-\/\ if\ Chain\ JOB\ then\ specify\ sub\_jobs}}
+\DoxyCodeLine{00056\ \textcolor{stringliteral}{,\ case\ jdef.job\_typ\_enu\ }}
+\DoxyCodeLine{00057\ \textcolor{stringliteral}{\ \ \ \ when\ 3\ then\ jdef.parm\_1\ }}
+\DoxyCodeLine{00058\ \textcolor{stringliteral}{\ \ \ \ else\ null\ }}
+\DoxyCodeLine{00059\ \textcolor{stringliteral}{\ \ end\ as\ sub\_jobs}}
+\DoxyCodeLine{00060\ \textcolor{stringliteral}{,\ jc.enty\_sel\_cta\_cd\ as\ ESC}}
+\DoxyCodeLine{00061\ \textcolor{stringliteral}{,\ ad.adtn\_data\_cd\ as\ TEMPL}}
+\DoxyCodeLine{00062\ \textcolor{stringliteral}{,\ case\ when\ esc.cta\_sql\ is\ null\ then\ ''\ else\ esc.cta\_sql\ end\ as\ sql}}
+\DoxyCodeLine{00063\ \textcolor{stringliteral}{,\ case\ when\ ad.data\ is\ null\ then\ ''\ else\ ad.data\ end\ as\ xml}}
+\DoxyCodeLine{00064\ \textcolor{stringliteral}{,\ case\ jdef.job\_typ\_enu}}
+\DoxyCodeLine{00065\ \textcolor{stringliteral}{\ \ \ \ when\ 2\ then\ jdef.parm\_3}}
+\DoxyCodeLine{00066\ \textcolor{stringliteral}{\ \ \ \ else\ ''}}
+\DoxyCodeLine{00067\ \textcolor{stringliteral}{end\ as\ subst}}
+\DoxyCodeLine{00068\ \textcolor{stringliteral}{,\ jdef.tplt\_file}}
+\DoxyCodeLine{00069\ \textcolor{stringliteral}{,\ jdef.job\_desc}}
+\DoxyCodeLine{00070\ \textcolor{stringliteral}{,\ case\ jdef.job\_typ\_enu}}
+\DoxyCodeLine{00071\ \textcolor{stringliteral}{\ \ \ \ when\ 2\ then\ jdef.parm\_1}}
+\DoxyCodeLine{00072\ \textcolor{stringliteral}{\ \ \ \ else\ ''}}
+\DoxyCodeLine{00073\ \textcolor{stringliteral}{\ \ end\ as\ api}}
+\DoxyCodeLine{00074\ \textcolor{stringliteral}{,\ case\ jdef.job\_typ\_enu}}
+\DoxyCodeLine{00075\ \textcolor{stringliteral}{\ \ \ \ when\ 1\ then\ 'RRS'}}
+\DoxyCodeLine{00076\ \textcolor{stringliteral}{\ \ \ \ when\ 2\ then\ 'API'}}
+\DoxyCodeLine{00077\ \textcolor{stringliteral}{\ \ \ \ when\ 3\ then\ 'Chain'}}
+\DoxyCodeLine{00078\ \textcolor{stringliteral}{\ \ \ \ when\ 4\ then\ 'Decision'}}
+\DoxyCodeLine{00079\ \textcolor{stringliteral}{\ \ \ \ when\ 6\ then\ 'MMSI'}}
+\DoxyCodeLine{00080\ \textcolor{stringliteral}{\ \ \ \ when\ 7\ then\ 'Trans\ Voyant\ Ocean'}}
+\DoxyCodeLine{00081\ \textcolor{stringliteral}{\ \ \ \ when\ 8\ then\ 'Intra\ Ocean\ Schedule'}}
+\DoxyCodeLine{00082\ \textcolor{stringliteral}{\ \ \ \ when\ 17\ then\ 'Intra\ Send'}}
+\DoxyCodeLine{00083\ \textcolor{stringliteral}{\ \ \ \ when\ 18\ then\ 'Intra\ Receive'}}
+\DoxyCodeLine{00084\ \textcolor{stringliteral}{\ \ \ \ when\ 19\ then\ 'Directory\ Watch'}}
+\DoxyCodeLine{00085\ \textcolor{stringliteral}{\ \ \ \ when\ 20\ then\ 'Transp.Order\ Consol.'}}
+\DoxyCodeLine{00086\ \textcolor{stringliteral}{\ \ \ \ when\ 22\ then\ 'Dispatch'}}
+\DoxyCodeLine{00087\ \textcolor{stringliteral}{\ \ \ \ when\ 23\ then\ 'Tracking'}}
+\DoxyCodeLine{00088\ \textcolor{stringliteral}{\ \ \ \ when\ 25\ then\ 'Reoptymalization'}}
+\DoxyCodeLine{00089\ \textcolor{stringliteral}{\ \ \ \ when\ 26\ then\ 'Notification'}}
+\DoxyCodeLine{00090\ \textcolor{stringliteral}{\ \ \ \ else\ 'Other'}}
+\DoxyCodeLine{00091\ \textcolor{stringliteral}{\ \ end\ as\ job\_typ}}
+\DoxyCodeLine{00092\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00093\ \textcolor{stringliteral}{from\ job\_defn\_t\ jdef}}
+\DoxyCodeLine{00094\ \textcolor{stringliteral}{left\ join\ job\_sel\_cta\_t\ jc\ on\ jc.job\_cd\ =\ jdef.job\_cd}}
+\DoxyCodeLine{00095\ \textcolor{stringliteral}{left\ join\ \ enty\_sel\_cta\_t\ esc\ on\ esc.enty\_sel\_cta\_cd\ =\ jc.enty\_sel\_cta\_cd}}
+\DoxyCodeLine{00096\ \textcolor{stringliteral}{left\ join\ adtn\_data\_t\ ad\ on\ ad.adtn\_data\_id\ =\ jdef.tplt\_id}}
+\DoxyCodeLine{00097\ \textcolor{stringliteral}{where\ schd\_detl\_id\ is\ not\ null\ }}
+\DoxyCodeLine{00098\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00099\ \textcolor{stringliteral}{union\ }}
+\DoxyCodeLine{00100\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00101\ \textcolor{stringliteral}{select\ jb.master}}
+\DoxyCodeLine{00102\ \textcolor{stringliteral}{,\ jb.level\ +\ 1}}
+\DoxyCodeLine{00103\ \textcolor{stringliteral}{,\ \ aa.job\_cd}}
+\DoxyCodeLine{00104\ \textcolor{stringliteral}{,\ aa.next\_job\_cd\_success}}
+\DoxyCodeLine{00105\ \textcolor{stringliteral}{,\ case\ aa.job\_typ\_enu\ }}
+\DoxyCodeLine{00106\ \textcolor{stringliteral}{\ \ \ \ when\ 3\ then\ aa.parm\_1\ }}
+\DoxyCodeLine{00107\ \textcolor{stringliteral}{\ \ \ \ else\ null\ }}
+\DoxyCodeLine{00108\ \textcolor{stringliteral}{\ \ end\ as\ sub\_jobs}}
+\DoxyCodeLine{00109\ \textcolor{stringliteral}{,\ jc.enty\_sel\_cta\_cd\ as\ ESC}}
+\DoxyCodeLine{00110\ \textcolor{stringliteral}{,\ ad.adtn\_data\_cd\ as\ TEMPL}}
+\DoxyCodeLine{00111\ \textcolor{stringliteral}{,\ case\ when\ esc.cta\_sql\ is\ null\ then\ ''\ else\ esc.cta\_sql\ end\ as\ sql}}
+\DoxyCodeLine{00112\ \textcolor{stringliteral}{,\ case\ when\ ad.data\ is\ null\ then\ ''\ else\ ad.data\ end\ as\ xml}}
+\DoxyCodeLine{00113\ \textcolor{stringliteral}{,\ case\ aa.job\_typ\_enu}}
+\DoxyCodeLine{00114\ \textcolor{stringliteral}{\ \ \ \ when\ 2\ then\ aa.parm\_3}}
+\DoxyCodeLine{00115\ \textcolor{stringliteral}{\ \ \ \ else\ ''}}
+\DoxyCodeLine{00116\ \textcolor{stringliteral}{end\ as\ subst}}
+\DoxyCodeLine{00117\ \textcolor{stringliteral}{,\ aa.tplt\_file}}
+\DoxyCodeLine{00118\ \textcolor{stringliteral}{,\ aa.job\_desc}}
+\DoxyCodeLine{00119\ \textcolor{stringliteral}{,\ case\ aa.job\_typ\_enu}}
+\DoxyCodeLine{00120\ \textcolor{stringliteral}{\ \ \ \ when\ 2\ then\ aa.parm\_1}}
+\DoxyCodeLine{00121\ \textcolor{stringliteral}{\ \ \ \ else\ ''}}
+\DoxyCodeLine{00122\ \textcolor{stringliteral}{\ \ end\ as\ api}}
+\DoxyCodeLine{00123\ \textcolor{stringliteral}{,\ case\ aa.job\_typ\_enu}}
+\DoxyCodeLine{00124\ \textcolor{stringliteral}{\ \ \ \ when\ 1\ then\ 'RRS'}}
+\DoxyCodeLine{00125\ \textcolor{stringliteral}{\ \ \ \ when\ 2\ then\ 'API'}}
+\DoxyCodeLine{00126\ \textcolor{stringliteral}{\ \ \ \ when\ 3\ then\ 'Chain'}}
+\DoxyCodeLine{00127\ \textcolor{stringliteral}{\ \ \ \ when\ 4\ then\ 'Decision'}}
+\DoxyCodeLine{00128\ \textcolor{stringliteral}{\ \ \ \ when\ 6\ then\ 'MMSI'}}
+\DoxyCodeLine{00129\ \textcolor{stringliteral}{\ \ \ \ when\ 7\ then\ 'Trans\ Voyant\ Ocean'}}
+\DoxyCodeLine{00130\ \textcolor{stringliteral}{\ \ \ \ when\ 8\ then\ 'Intra\ Ocean\ Schedule'}}
+\DoxyCodeLine{00131\ \textcolor{stringliteral}{\ \ \ \ when\ 17\ then\ 'Intra\ Send'}}
+\DoxyCodeLine{00132\ \textcolor{stringliteral}{\ \ \ \ when\ 18\ then\ 'Intra\ Receive'}}
+\DoxyCodeLine{00133\ \textcolor{stringliteral}{\ \ \ \ when\ 19\ then\ 'Directory\ Watch'}}
+\DoxyCodeLine{00134\ \textcolor{stringliteral}{\ \ \ \ when\ 20\ then\ 'Transp.Order\ Consol.'}}
+\DoxyCodeLine{00135\ \textcolor{stringliteral}{\ \ \ \ when\ 22\ then\ 'Dispatch'}}
+\DoxyCodeLine{00136\ \textcolor{stringliteral}{\ \ \ \ when\ 23\ then\ 'Tracking'}}
+\DoxyCodeLine{00137\ \textcolor{stringliteral}{\ \ \ \ when\ 25\ then\ 'Reoptymalization'}}
+\DoxyCodeLine{00138\ \textcolor{stringliteral}{\ \ \ \ when\ 26\ then\ 'Notification'}}
+\DoxyCodeLine{00139\ \textcolor{stringliteral}{\ \ \ \ else\ 'Other'}}
+\DoxyCodeLine{00140\ \textcolor{stringliteral}{\ \ end\ as\ job\_typ}}
+\DoxyCodeLine{00141\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00142\ \textcolor{stringliteral}{from\ job\_defn\_t\ aa\ }}
+\DoxyCodeLine{00143\ \textcolor{stringliteral}{inner\ join\ jobs\ jb\ on\ aa.job\_cd\ =\ jb.child}}
+\DoxyCodeLine{00144\ \textcolor{stringliteral}{left\ join\ job\_sel\_cta\_t\ jc\ on\ jc.job\_cd\ =\ aa.job\_cd}}
+\DoxyCodeLine{00145\ \textcolor{stringliteral}{left\ join\ \ enty\_sel\_cta\_t\ esc\ on\ esc.enty\_sel\_cta\_cd\ =\ jc.enty\_sel\_cta\_cd}}
+\DoxyCodeLine{00146\ \textcolor{stringliteral}{left\ join\ adtn\_data\_t\ ad\ on\ ad.adtn\_data\_id\ =\ aa.tplt\_id}}
+\DoxyCodeLine{00147\ \textcolor{stringliteral}{)}}
+\DoxyCodeLine{00148\ \textcolor{stringliteral}{select\ *\ from\ jobs\ order\ by\ master,\ level;}}
+\DoxyCodeLine{00149\ \textcolor{stringliteral}{\ \ )SQL"{};}}
+
+\end{DoxyCode}

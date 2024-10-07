@@ -1,0 +1,75 @@
+\doxysection{menu.\+h}
+\hypertarget{menu_8h_source}{}\label{menu_8h_source}\index{include/asarum/BY/menu.h@{include/asarum/BY/menu.h}}
+\mbox{\hyperlink{menu_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <boost/program\_options.hpp>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <boost/program\_options/options\_description.hpp>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <boost/program\_options/positional\_options.hpp>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{namespace\ }po\ =\ boost::program\_options;}
+\DoxyCodeLine{00020\ \textcolor{keyword}{namespace\ }asarum\ \{}
+\DoxyCodeLine{00021\ \textcolor{keyword}{namespace\ }BY\ \{}
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classasarum_1_1_b_y_1_1_menu}{Menu}}\ \{}
+\DoxyCodeLine{00028\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_menu_a5d2fae3ba0344af73569d414865fc74d}{Menu}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ *arv[]);}
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_menu_ad137c64218abc368893c012c1a14ac89}{handleMenu}}();}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{comment}{\ \ /*************************************************************}}
+\DoxyCodeLine{00042\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ private}}
+\DoxyCodeLine{00043\ \textcolor{comment}{\ \ \ *************************************************************/}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00046\ \ \ std::string\ m\_notify\_list;}
+\DoxyCodeLine{00047\ \ \ po::options\_description\ m\_generic\_options;}
+\DoxyCodeLine{00048\ \ \ po::options\_description\ m\_source\_options;}
+\DoxyCodeLine{00049\ \ \ po::options\_description\ m\_db\_options;}
+\DoxyCodeLine{00050\ \ \ po::options\_description\ m\_code\_options;}
+\DoxyCodeLine{00051\ \ \ po::options\_description\ m\_doc\_options;}
+\DoxyCodeLine{00052\ \ \ po::options\_description\ m\_output\_options;}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ po::options\_description\ m\_visible\_options;}
+\DoxyCodeLine{00055\ \ \ po::options\_description\ m\_cmd\_line\_options;}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ po::positional\_options\_description\ m\_pos\_options;}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ po::variables\_map\ m\_var\_map;}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/\ variables\ used\ by\ function\ called}}
+\DoxyCodeLine{00062\ \ \ std::string\ m\_path;}
+\DoxyCodeLine{00063\ \ \ std::string\ m\_file\_name;}
+\DoxyCodeLine{00064\ \ \ std::string\ m\_config\_file\_name;}
+\DoxyCodeLine{00065\ \ \ std::string\ m\_sqlite\_name;}
+\DoxyCodeLine{00066\ \ \ std::string\ m\_single\_file\_name;}
+\DoxyCodeLine{00067\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/\ db\ connection}}
+\DoxyCodeLine{00068\ \ \ std::string\ m\_db\_service;}
+\DoxyCodeLine{00069\ \ \ std::string\ m\_db\_user;}
+\DoxyCodeLine{00070\ \ \ std::string\ m\_db\_password;}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \textcolor{keywordtype}{bool}\ m\_with\_images;}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \textcolor{keywordtype}{void}\ initMenu(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ *argv[]);}
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordtype}{void}\ initGenericOptions();}
+\DoxyCodeLine{00076\ \ \ \textcolor{keywordtype}{void}\ initSourceOptions();}
+\DoxyCodeLine{00077\ \ \ \textcolor{keywordtype}{void}\ initCodeOptions();}
+\DoxyCodeLine{00078\ \ \ \textcolor{keywordtype}{void}\ initDocOptions();}
+\DoxyCodeLine{00079\ \ \ \textcolor{keywordtype}{void}\ initOutputOptions();}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ menu\ handlers\ (triggers)\ -\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00082\ \ \ \textcolor{keywordtype}{void}\ handleCodeGeneration(\textcolor{keywordtype}{bool}\ withSummary);}
+\DoxyCodeLine{00083\ \ \ \textcolor{keywordtype}{void}\ handleDocsGeneration();}
+\DoxyCodeLine{00084\ \ \ \textcolor{keywordtype}{void}\ handleHelp();}
+\DoxyCodeLine{00085\ \ \ \textcolor{keywordtype}{void}\ handleVersion();}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ connection\ methods\ -\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00088\ \ \ \textcolor{keywordtype}{bool}\ isConnDefined();}
+\DoxyCodeLine{00092\ \ \ \textcolor{keywordtype}{bool}\ fileExists(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *fileName);}
+\DoxyCodeLine{00093\ \};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \}\ \textcolor{comment}{//\ namespace\ BY}}
+\DoxyCodeLine{00096\ \}\ \textcolor{comment}{//\ namespace\ asarum}}
+
+\end{DoxyCode}

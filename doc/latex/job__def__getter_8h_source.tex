@@ -1,0 +1,48 @@
+\doxysection{job\+\_\+def\+\_\+getter.\+h}
+\hypertarget{job__def__getter_8h_source}{}\label{job__def__getter_8h_source}\index{include/asarum/BY/job\_def\_getter.h@{include/asarum/BY/job\_def\_getter.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <Poco/Data/Session.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <Poco/AutoPtr.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <Poco/ActiveRecord/Context.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}asarum/BY/JobDef.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}asarum/BY/JobSelCta.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}asarum/BY/EntySelCta.h"{}}}
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }asarum\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }BY\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter}{JobDefGetter}}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter}{JobDefGetter}}\ (std::shared\_ptr<Poco::Data::Session>\ session\_ptr);}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ std::vector<Poco::AutoPtr<asarum::BY::JobDef>>\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter_aa0f485eeab37f60c384aedd94c2f7877}{getAllJobDefs}}();}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ Poco::AutoPtr<asarum::BY::JobDef>\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter_adfa7bc2cfb6cbf4d5bf200cb43a9ede5}{getJobDef}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ job\_name);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ std::vector<Poco::AutoPtr<asarum::BY::JobSelCta>>\ getJobSelCtas();}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ std::vector<Poco::AutoPtr<asarum::BY::EntySelCta>>\ getEntySelCtas();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ std::vector<Poco::AutoPtr<asarum::BY::JobDef>>\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter_ab3cc1192df84107cc645a6ba23fb4334}{getScheduledJobDefs}}();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter}{\string~JobDefGetter}}\ ();}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ from\ the\ parent\ one,\ given\ as\ the\ p\_job\ parameter}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter_a651cd3da07cf322006e824ac97ae36bd}{getChildJobs}}(\textcolor{keyword}{const}\ asarum::BY::JobDef::Ptr\ pJob,}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<asarum::BY::JobDef::Ptr>\ \&r\_result);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter_a651cd3da07cf322006e824ac97ae36bd}{getChildJobs}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ job\_name,}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<asarum::BY::JobDef::Ptr>\ \&r\_result);}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ std::shared\_ptr<Poco::Data::Session>\ m\_session\_ptr;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ Poco::ActiveRecord::Context::Ptr\ m\_context\_ptr;}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \};}
+\DoxyCodeLine{00057\ \}}
+\DoxyCodeLine{00058\ \}}
+
+\end{DoxyCode}

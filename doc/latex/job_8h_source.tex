@@ -1,0 +1,59 @@
+\doxysection{job.\+h}
+\hypertarget{job_8h_source}{}\label{job_8h_source}\index{include/asarum/BY/job.h@{include/asarum/BY/job.h}}
+\mbox{\hyperlink{job_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <istream>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <ostream>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }asarum\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }BY\ \{}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ FIELDS\_NO\ =\ 14;\ \textcolor{comment}{//\ number\ of\ fields\ in\ the\ vector}}
+\DoxyCodeLine{00021\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{job_8h_aa2d79c0d8458f696e53f56d2a9e1bc63}{field}}\ \{}
+\DoxyCodeLine{00022\ \ \ MASTER,}
+\DoxyCodeLine{00023\ \ \ STEPS,}
+\DoxyCodeLine{00024\ \ \ JOB\_CD,}
+\DoxyCodeLine{00025\ \ \ NEXT\_JOB,}
+\DoxyCodeLine{00026\ \ \ SUB\_JOBS,}
+\DoxyCodeLine{00027\ \ \ ESC,}
+\DoxyCodeLine{00028\ \ \ TEMPL,}
+\DoxyCodeLine{00029\ \ \ SQL,}
+\DoxyCodeLine{00030\ \ \ XML,}
+\DoxyCodeLine{00031\ \ \ SUBST,}
+\DoxyCodeLine{00032\ \ \ TMPL\_FILE,}
+\DoxyCodeLine{00033\ \ \ DESCR,}
+\DoxyCodeLine{00034\ \ \ API,}
+\DoxyCodeLine{00035\ \ \ TYPE}
+\DoxyCodeLine{00036\ \};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classasarum_1_1_b_y_1_1_job}{Job}}\ \{}
+\DoxyCodeLine{00039\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00040\ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job}{Job}}();}
+\DoxyCodeLine{00041\ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job}{Job}}(\textcolor{keyword}{const}\ std::vector<std::string>\ \&vec);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordtype}{unsigned}\ m\_step\_no;}
+\DoxyCodeLine{00044\ \ \ std::string\ m\_job\_cd;}
+\DoxyCodeLine{00045\ \ \ std::string\ m\_next\_job\_success;}
+\DoxyCodeLine{00046\ \ \ std::string\ m\_sub\_jobs;}
+\DoxyCodeLine{00047\ \ \ std::string\ m\_esc;}
+\DoxyCodeLine{00048\ \ \ std::string\ m\_templ;}
+\DoxyCodeLine{00049\ \ \ std::string\ m\_sql;}
+\DoxyCodeLine{00050\ \ \ std::string\ m\_xml;}
+\DoxyCodeLine{00051\ \ \ std::string\ m\_subst;}
+\DoxyCodeLine{00052\ \ \ std::string\ m\_tmpl\_file;}
+\DoxyCodeLine{00053\ \ \ std::string\ m\_job\_descr;}
+\DoxyCodeLine{00054\ \ \ std::string\ m\_api;}
+\DoxyCodeLine{00055\ \ \ std::string\ m\_job\_type;}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ std::vector<std::string>\ m\_sub\_jobs\_list;}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \}\ \textcolor{comment}{//\ namespace\ BY}}
+\DoxyCodeLine{00061\ \}\ \textcolor{comment}{//\ namespace\ asarum}}
+
+\end{DoxyCode}

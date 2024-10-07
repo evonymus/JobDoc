@@ -1,0 +1,27 @@
+\doxysection{sqlite\+\_\+connector.\+h}
+\hypertarget{sqlite__connector_8h_source}{}\label{sqlite__connector_8h_source}\index{include/asarum/BY/sqlite\_connector.h@{include/asarum/BY/sqlite\_connector.h}}
+\mbox{\hyperlink{sqlite__connector_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}job\_group.h"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <Poco/Data/Session.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{namespace\ }asarum\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{namespace\ }BY\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classasarum_1_1_b_y_1_1_s_q_lite_connector}{SQLiteConnector}}\ \{}
+\DoxyCodeLine{00020\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ std::shared\_ptr<Poco::Data::Session>\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_s_q_lite_connector_ae6aeb68034c25258a96f127067cd4f0a}{m\_session\_ptr}};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00029\ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_s_q_lite_connector_ac6b7e4b57d94283edce60ad0b2963dbe}{SQLiteConnector}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *dbName);}
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{void}\ getJobs(std::vector<std::shared\_ptr<JobGroup>>\ \&job\_groups);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{void}\ init();}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{void}\ shutDown();}
+\DoxyCodeLine{00035\ \};}
+\DoxyCodeLine{00036\ \}\ \textcolor{comment}{//\ namespace\ BY}}
+\DoxyCodeLine{00037\ \}\ \textcolor{comment}{//\ namespace\ asarum}}
+
+\end{DoxyCode}

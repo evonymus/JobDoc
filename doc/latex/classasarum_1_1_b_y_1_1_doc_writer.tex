@@ -1,0 +1,55 @@
+\doxysection{asarum\+::BY\+::Doc\+Writer Class Reference}
+\hypertarget{classasarum_1_1_b_y_1_1_doc_writer}{}\label{classasarum_1_1_b_y_1_1_doc_writer}\index{asarum::BY::DocWriter@{asarum::BY::DocWriter}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classasarum_1_1_b_y_1_1_doc_writer_aa5f32d140bd9ea1dd4fb81a0515e126d}\label{classasarum_1_1_b_y_1_1_doc_writer_aa5f32d140bd9ea1dd4fb81a0515e126d} 
+{\bfseries Doc\+Writer} (const std\+::shared\+\_\+ptr$<$ Poco\+::\+Data\+::\+Session $>$ session\+\_\+ptr)
+\item 
+void \mbox{\hyperlink{classasarum_1_1_b_y_1_1_doc_writer_a48e9f68331f75e1993a10473be036a34}{doc\+Scheduled\+Jobs}} (const std\+::string \&r\+\_\+file\+\_\+name, const bool with\+\_\+diagrams=false)
+\begin{DoxyCompactList}\small\item\em writes documentation if markdown format for all jobs having a schedule and all jobs called next using next job on success value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classasarum_1_1_b_y_1_1_doc_writer_a46cf6fa3e63ce801ea0abbba0eabe8e3}{doc\+All\+Jobs}} (const std\+::string \&r\+\_\+file\+\_\+name, const bool with\+\_\+diagrams=false)
+\begin{DoxyCompactList}\small\item\em writes documentation if markdown format for all jobs \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classasarum_1_1_b_y_1_1_doc_writer_a46cf6fa3e63ce801ea0abbba0eabe8e3}\label{classasarum_1_1_b_y_1_1_doc_writer_a46cf6fa3e63ce801ea0abbba0eabe8e3} 
+\index{asarum::BY::DocWriter@{asarum::BY::DocWriter}!docAllJobs@{docAllJobs}}
+\index{docAllJobs@{docAllJobs}!asarum::BY::DocWriter@{asarum::BY::DocWriter}}
+\doxysubsubsection{\texorpdfstring{docAllJobs()}{docAllJobs()}}
+{\footnotesize\ttfamily void asarum\+::\+BY\+::\+Doc\+Writer\+::doc\+All\+Jobs (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{r\+\_\+file\+\_\+name,  }\item[{const bool}]{with\+\_\+diagrams = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+writes documentation if markdown format for all jobs 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r\+\_\+file\+\_\+name} & -\/ name of the file \\
+\hline
+{\em with\+\_\+diagrams} & -\/ if set to true, mermaid diagrams are included \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classasarum_1_1_b_y_1_1_doc_writer_a48e9f68331f75e1993a10473be036a34}\label{classasarum_1_1_b_y_1_1_doc_writer_a48e9f68331f75e1993a10473be036a34} 
+\index{asarum::BY::DocWriter@{asarum::BY::DocWriter}!docScheduledJobs@{docScheduledJobs}}
+\index{docScheduledJobs@{docScheduledJobs}!asarum::BY::DocWriter@{asarum::BY::DocWriter}}
+\doxysubsubsection{\texorpdfstring{docScheduledJobs()}{docScheduledJobs()}}
+{\footnotesize\ttfamily void asarum\+::\+BY\+::\+Doc\+Writer\+::doc\+Scheduled\+Jobs (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{r\+\_\+file\+\_\+name,  }\item[{const bool}]{with\+\_\+diagrams = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+writes documentation if markdown format for all jobs having a schedule and all jobs called next using next job on success value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r\+\_\+file\+\_\+name} & -\/ name of the file \\
+\hline
+{\em with\+\_\+diagrams} & -\/ if set to true, mermaid diagrams are included \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/asarum/\+BY/Doc\+Writer.\+h\item 
+src/Doc\+Writer.\+cpp\end{DoxyCompactItemize}

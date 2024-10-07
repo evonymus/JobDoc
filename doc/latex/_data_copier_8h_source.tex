@@ -1,0 +1,50 @@
+\doxysection{Data\+Copier.\+h}
+\hypertarget{_data_copier_8h_source}{}\label{_data_copier_8h_source}\index{include/asarum/BY/DataCopier.h@{include/asarum/BY/DataCopier.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}OdbcConnector.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}SQLiteConnector.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}JobDefGetter.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceasarum}{asarum}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{namespace\ }BY}
+\DoxyCodeLine{00012\ \ \ \ \ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classasarum_1_1_b_y_1_1_data_copier}{DataCopier}}}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_data_copier_af126c6f8b2d78bc1e30e7c858192679d}{DataCopier}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ odbc\_dsn,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ db\_name,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ schema=\textcolor{keyword}{nullptr}\ );}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_data_copier_af126c6f8b2d78bc1e30e7c858192679d}{DataCopier}}(std::shared\_ptr<OdbcConnector>\ odbc\_conn\_ptr,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ db\_name,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ schema=\textcolor{keyword}{nullptr}\ );}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_data_copier_ad85e63603920a05993dfefd17986bdcc}{copyData}}();}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_data_copier_a569d592efbee0fd3b5805af6942b1a54}{\string~DataCopier}}();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ m\_odbc\_dsn;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ m\_db\_name;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<OdbcConnector>\ m\_orig\_conn\_ptr;}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ std::unique\_ptr<SQLiteConnector>\ m\_dest\_conn\_ptr;}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ createDestDB();}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ copyAdtnTemplates(\mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter}{JobDefGetter}}\ \&from\_getter,\ Poco::ActiveRecord::Context::Ptr\ dest\_context\_ptr);}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ copySchdlDetls(\mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter}{JobDefGetter}}\ \&from\_getter,\ Poco::ActiveRecord::Context::Ptr\ dest\_context\_ptr);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ copyJobs(\mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter}{JobDefGetter}}\ \&from\_getter,\ Poco::ActiveRecord::Context::Ptr\ dest\_context\_ptr);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ copyEntySelCtas(\mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter}{JobDefGetter}}\ \&from\_getter,\ Poco::ActiveRecord::Context::Ptr\ dest\_context\_ptr);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ copyJobSelCtas(\mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter}{JobDefGetter}}\ \&from\_getter,\ Poco::ActiveRecord::Context::Ptr\ dest\_context\_ptr);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00065\ \ \ \ \ \}}
+\DoxyCodeLine{00066\ \}}
+
+\end{DoxyCode}

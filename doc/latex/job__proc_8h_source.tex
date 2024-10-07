@@ -1,0 +1,59 @@
+\doxysection{job\+\_\+proc.\+h}
+\hypertarget{job__proc_8h_source}{}\label{job__proc_8h_source}\index{include/asarum/BY/job\_proc.h@{include/asarum/BY/job\_proc.h}}
+\mbox{\hyperlink{job__proc_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{job_8h}{job.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}job\_group.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tokenizer_8h}{tokenizer.h}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }asarum\ \{}
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }BY\ \{}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_proc}{JobProc}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ std::vector<std::string>\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_proc_a4f19118ee7edaf50a8bb1088aaf15c46}{m\_fields\_list}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00022\ \ \ std::vector<std::shared\_ptr<asarum::BY::JobGroup>>\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_proc_a8f71652b755d7c5ea868f1cfda9e537c}{m\_job\_groups}};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_proc_ae979e56087f52e9079e96b45df2de027}{getData}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *filename);}
+\DoxyCodeLine{00025\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_proc_a14be426cc55f8017a652f5206c53cdac}{getSQLiteData}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *dbName);}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00030\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ \ void\ getJobGroupsFromDB(const\ std::string\ \&service,\ const\ std::string\ \&user,}}
+\DoxyCodeLine{00032\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ const\ std::string\ \&password);}}
+\DoxyCodeLine{00033\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_proc_a310f8e591e7c3a1cea5bdf9a34f89e76}{exportJobs}}(\textcolor{keyword}{const}\ std::string\ \&path,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ withSummary\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_proc_a47c4e1c3c0f17575158fae40cc8fb762}{exportDocs}}(\textcolor{keyword}{const}\ std::string\ \&path,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ withDiagram\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_proc_a5dabde1a970f1449598cca360188e00d}{exportSingleDoc}}(\textcolor{keyword}{const}\ std::string\ \&path,\ \textcolor{keyword}{const}\ std::string\ \&fileName,}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ withDiagram\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00048\ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_tokenizer}{asarum::BY::Tokenizer}}\ m\_tokenizer;}
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{void}\ readFile(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *fileName,\ std::string\ \&str);}
+\DoxyCodeLine{00061\ \ \ \textcolor{keywordtype}{void}\ processFile(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *fileName);}
+\DoxyCodeLine{00066\ \ \ \textcolor{keywordtype}{void}\ processSQLite(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *dbName);}
+\DoxyCodeLine{00067\ \ \ \textcolor{keywordtype}{void}\ getFieldsDef(\textcolor{keyword}{const}\ std::string\ \&str);}
+\DoxyCodeLine{00068\ \ \ \textcolor{keywordtype}{void}\ getJobDef(\textcolor{keyword}{const}\ std::string\ \&str,\ std::vector<std::string>\ \&vec);}
+\DoxyCodeLine{00069\ \ \ \textcolor{keywordtype}{void}\ addJobs(\textcolor{keyword}{const}\ std::vector<std::string>\ \&vec);}
+\DoxyCodeLine{00070\ \ \ \textcolor{keywordtype}{void}\ saveFile(\textcolor{keyword}{const}\ std::string\ \&fileName,\ \textcolor{keyword}{const}\ std::string\ \&content);}
+\DoxyCodeLine{00071\ \ \ \textcolor{keywordtype}{bool}\ str\_compare(\textcolor{keyword}{const}\ std::string\ \&a,\ \textcolor{keyword}{const}\ std::string\ \&b);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \textcolor{comment}{//****************\ Handling\ Generation\ of\ Documents\ **************************}}
+\DoxyCodeLine{00074\ \ \ \textcolor{keywordtype}{void}\ printGroupDescription(\textcolor{keyword}{const}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_group}{JobGroup}}\ \&gr,\ std::ostringstream\ \&so);}
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordtype}{void}\ printGroupTable(\mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_group}{JobGroup}}\ \&gr,\ std::ostringstream\ \&sa);}
+\DoxyCodeLine{00076\ \ \ \textcolor{keywordtype}{void}\ printStepsDescriptions(\textcolor{keyword}{const}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_group}{JobGroup}}\ \&gr,\ std::ostringstream\ \&sa,}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ withDiagram\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00078\ \ \ \textcolor{keywordtype}{void}\ printMermaidSequence(\textcolor{keyword}{const}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_group}{JobGroup}}\ \&gr,\ std::ostringstream\ \&so);}
+\DoxyCodeLine{00079\ \ \ \textcolor{keywordtype}{void}\ printSubjobsDiagram(\textcolor{keyword}{const}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job}{Job}}\ \&jb,\ std::ostream\ \&so);}
+\DoxyCodeLine{00080\ \ \ \textcolor{keywordtype}{void}\ printJobSummary(\textcolor{keyword}{const}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job}{Job}}\ \&job,\ \textcolor{keyword}{const}\ std::string\ \&fileName);}
+\DoxyCodeLine{00081\ \};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \}\ \textcolor{comment}{//\ namespace\ BY}}
+\DoxyCodeLine{00084\ \}\ \textcolor{comment}{//\ namespace\ asarum}}
+
+\end{DoxyCode}

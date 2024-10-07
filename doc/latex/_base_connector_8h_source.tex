@@ -1,0 +1,30 @@
+\doxysection{Base\+Connector.\+h}
+\hypertarget{_base_connector_8h_source}{}\label{_base_connector_8h_source}\index{include/asarum/BY/BaseConnector.h@{include/asarum/BY/BaseConnector.h}}
+\mbox{\hyperlink{_base_connector_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <Poco/Data/Session.h>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceasarum}{asarum}}}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{namespace\ }BY}
+\DoxyCodeLine{00013\ \ \ \ \ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classasarum_1_1_b_y_1_1_base_connector}{BaseConnector}}}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<Poco::Data::Session>\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_base_connector_aefe9c53f75cfcf14169e3489a255d66a}{m\_session\_ptr}};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<Poco::Data::Session>\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_base_connector_a0c0046e9b508bd85c5368d88eb95e715}{getSession}}();}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ execSQL(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ sql);}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ std::shared\_ptr<Poco::Data::Session>\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_base_connector_a0c0046e9b508bd85c5368d88eb95e715}{asarum::BY::BaseConnector::getSession}}()}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ m\_session\_ptr;}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \}}
+\DoxyCodeLine{00031\ \}}
+
+\end{DoxyCode}

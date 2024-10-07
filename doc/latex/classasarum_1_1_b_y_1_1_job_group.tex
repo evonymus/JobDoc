@@ -1,0 +1,119 @@
+\doxysection{asarum\+::BY\+::Job\+Group Class Reference}
+\hypertarget{classasarum_1_1_b_y_1_1_job_group}{}\label{classasarum_1_1_b_y_1_1_job_group}\index{asarum::BY::JobGroup@{asarum::BY::JobGroup}}
+
+
+class storing vector of sequentially called jobs  
+
+
+
+
+{\ttfamily \#include $<$job\+\_\+group.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_group_a95c5ee82048141c722e54f5bedc32815}{Job\+Group}} (const std\+::string \&group\+\_\+name)
+\begin{DoxyCompactList}\small\item\em creates a jobs group \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_group_af4d039fe8a944dce2540fd0e2fcf46a4}{add\+Job}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job}{Job}} $>$ \&job)
+\begin{DoxyCompactList}\small\item\em adds a job defintion to the group \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_group_a29ace53b5bbf9bd98675be9db3a0e0f3}{get\+Max\+Fld\+Len}} ()
+\begin{DoxyCompactList}\small\item\em scans all the jobs in {\bfseries{m\+\_\+jobs}} vector and stores maximal lengths of the filds in the m\+\_\+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classasarum_1_1_b_y_1_1_job_group_a760c061808d9ba93702ce385f0074aa1}\label{classasarum_1_1_b_y_1_1_job_group_a760c061808d9ba93702ce385f0074aa1} 
+static bool {\bfseries str\+\_\+compare} (const std\+::string \&a, const std\+::string \&b)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classasarum_1_1_b_y_1_1_job_group_adc228c7e0d95984e093ee49a46b01ff3}\label{classasarum_1_1_b_y_1_1_job_group_adc228c7e0d95984e093ee49a46b01ff3} 
+const std\+::string {\bfseries m\+\_\+group\+\_\+name}
+\begin{DoxyCompactList}\small\item\em name of the group. Set with the name of the first job run as a group. \end{DoxyCompactList}\item 
+\Hypertarget{classasarum_1_1_b_y_1_1_job_group_a5f96e0a232f5c00a124c094516f236cf}\label{classasarum_1_1_b_y_1_1_job_group_a5f96e0a232f5c00a124c094516f236cf} 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job}{Job}} $>$ $>$ {\bfseries m\+\_\+jobs}
+\begin{DoxyCompactList}\small\item\em vector of job run as the group \end{DoxyCompactList}\item 
+\Hypertarget{classasarum_1_1_b_y_1_1_job_group_a4ad51b6a0eb191be71a98d0b3001059a}\label{classasarum_1_1_b_y_1_1_job_group_a4ad51b6a0eb191be71a98d0b3001059a} 
+unsigned {\bfseries m\+\_\+len\+\_\+lp}
+\item 
+\Hypertarget{classasarum_1_1_b_y_1_1_job_group_af915574b551a51c09957a0a8cc6bfc80}\label{classasarum_1_1_b_y_1_1_job_group_af915574b551a51c09957a0a8cc6bfc80} 
+unsigned {\bfseries m\+\_\+len\+\_\+job\+\_\+cd}
+\item 
+\Hypertarget{classasarum_1_1_b_y_1_1_job_group_a45017700d6ad1289c9e99b7a613e2d76}\label{classasarum_1_1_b_y_1_1_job_group_a45017700d6ad1289c9e99b7a613e2d76} 
+unsigned {\bfseries m\+\_\+len\+\_\+esc}
+\item 
+\Hypertarget{classasarum_1_1_b_y_1_1_job_group_ae5a3a2812128ef3227e9858f41ee3929}\label{classasarum_1_1_b_y_1_1_job_group_ae5a3a2812128ef3227e9858f41ee3929} 
+unsigned {\bfseries m\+\_\+len\+\_\+sub}
+\item 
+\Hypertarget{classasarum_1_1_b_y_1_1_job_group_ae45c80d739e3846ef3a70ad78ef57219}\label{classasarum_1_1_b_y_1_1_job_group_ae45c80d739e3846ef3a70ad78ef57219} 
+unsigned {\bfseries m\+\_\+len\+\_\+next\+\_\+job}
+\item 
+\Hypertarget{classasarum_1_1_b_y_1_1_job_group_a292bf64eef89889f5cc6ca11a8031871}\label{classasarum_1_1_b_y_1_1_job_group_a292bf64eef89889f5cc6ca11a8031871} 
+unsigned {\bfseries m\+\_\+len\+\_\+templ}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+class storing vector of sequentially called jobs 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classasarum_1_1_b_y_1_1_job_group_a95c5ee82048141c722e54f5bedc32815}\label{classasarum_1_1_b_y_1_1_job_group_a95c5ee82048141c722e54f5bedc32815} 
+\index{asarum::BY::JobGroup@{asarum::BY::JobGroup}!JobGroup@{JobGroup}}
+\index{JobGroup@{JobGroup}!asarum::BY::JobGroup@{asarum::BY::JobGroup}}
+\doxysubsubsection{\texorpdfstring{JobGroup()}{JobGroup()}}
+{\footnotesize\ttfamily asarum\+::\+BY\+::\+Job\+Group\+::\+Job\+Group (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{group\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+creates a jobs group 
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em group\+\_\+name} & name of the group\\
+\hline
+\end{DoxyParams}
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em group\+\_\+name} & setting the name for the group. here the name of the job having a schedule set. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classasarum_1_1_b_y_1_1_job_group_af4d039fe8a944dce2540fd0e2fcf46a4}\label{classasarum_1_1_b_y_1_1_job_group_af4d039fe8a944dce2540fd0e2fcf46a4} 
+\index{asarum::BY::JobGroup@{asarum::BY::JobGroup}!addJob@{addJob}}
+\index{addJob@{addJob}!asarum::BY::JobGroup@{asarum::BY::JobGroup}}
+\doxysubsubsection{\texorpdfstring{addJob()}{addJob()}}
+{\footnotesize\ttfamily void asarum\+::\+BY\+::\+Job\+Group\+::add\+Job (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job}{Job}} $>$ \&}]{job }\end{DoxyParamCaption})}
+
+
+
+adds a job defintion to the group 
+
+
+\begin{DoxyParams}{Parameters}
+{\em job} & pointer to the job ~\newline
+\\
+\hline
+\end{DoxyParams}
+add job to m\+\_\+jobs vector 
+\begin{DoxyParams}{Parameters}
+{\em job} & reference to shared\+\_\+ptr$<$\+Job$>$ that is to be added to the group \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classasarum_1_1_b_y_1_1_job_group_a29ace53b5bbf9bd98675be9db3a0e0f3}\label{classasarum_1_1_b_y_1_1_job_group_a29ace53b5bbf9bd98675be9db3a0e0f3} 
+\index{asarum::BY::JobGroup@{asarum::BY::JobGroup}!getMaxFldLen@{getMaxFldLen}}
+\index{getMaxFldLen@{getMaxFldLen}!asarum::BY::JobGroup@{asarum::BY::JobGroup}}
+\doxysubsubsection{\texorpdfstring{getMaxFldLen()}{getMaxFldLen()}}
+{\footnotesize\ttfamily void asarum\+::\+BY\+::\+Job\+Group\+::get\+Max\+Fld\+Len (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+scans all the jobs in {\bfseries{m\+\_\+jobs}} vector and stores maximal lengths of the filds in the m\+\_\+ 
+
+get max lenght of all fields in \doxylink{classasarum_1_1_b_y_1_1_job}{Job} objects and store the values in memer fields of the class 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/asarum/\+BY/job\+\_\+group.\+h\item 
+src/job\+\_\+group.\+cpp\end{DoxyCompactItemize}

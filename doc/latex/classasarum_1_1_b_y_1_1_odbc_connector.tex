@@ -1,0 +1,92 @@
+\doxysection{asarum\+::BY\+::Odbc\+Connector Class Reference}
+\hypertarget{classasarum_1_1_b_y_1_1_odbc_connector}{}\label{classasarum_1_1_b_y_1_1_odbc_connector}\index{asarum::BY::OdbcConnector@{asarum::BY::OdbcConnector}}
+Inheritance diagram for asarum\+::BY\+::Odbc\+Connector\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classasarum_1_1_b_y_1_1_odbc_connector}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classasarum_1_1_b_y_1_1_odbc_connector_adbe9fabeebad6d9e2b6bc2fdfa72da6e}{Odbc\+Connector}} (const char \texorpdfstring{$\ast$}{*}db\+Name)
+\begin{DoxyCompactList}\small\item\em Construct a new Odbc Connector object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classasarum_1_1_b_y_1_1_odbc_connector_adf7a539714faf5d7750c2fc3bcddf300}{change\+Schema}} (const char \texorpdfstring{$\ast$}{*}schema\+\_\+name)
+\begin{DoxyCompactList}\small\item\em changes the current schema. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classasarum_1_1_b_y_1_1_odbc_connector_acfa9fadeca80e9dc5fc9b0a777c3be08}{change\+Schema}} (const std\+::string \&r\+\_\+schema\+\_\+name)
+\begin{DoxyCompactList}\small\item\em changes the current schema. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classasarum_1_1_b_y_1_1_base_connector}{asarum\+::\+BY\+::\+Base\+Connector}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ Poco\+::\+Data\+::\+Session $>$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_base_connector_a0c0046e9b508bd85c5368d88eb95e715}{get\+Session}} ()
+\begin{DoxyCompactList}\small\item\em getter for the Poco\+::\+Data\+::\+Session \end{DoxyCompactList}\item 
+void {\bfseries exec\+SQL} (const char \texorpdfstring{$\ast$}{*}sql)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classasarum_1_1_b_y_1_1_base_connector}{asarum\+::\+BY\+::\+Base\+Connector}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ Poco\+::\+Data\+::\+Session $>$ {\bfseries m\+\_\+session\+\_\+ptr}
+\begin{DoxyCompactList}\small\item\em pointer to Poco\+::\+Data\+::\+Session object; \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classasarum_1_1_b_y_1_1_odbc_connector_adbe9fabeebad6d9e2b6bc2fdfa72da6e}\label{classasarum_1_1_b_y_1_1_odbc_connector_adbe9fabeebad6d9e2b6bc2fdfa72da6e} 
+\index{asarum::BY::OdbcConnector@{asarum::BY::OdbcConnector}!OdbcConnector@{OdbcConnector}}
+\index{OdbcConnector@{OdbcConnector}!asarum::BY::OdbcConnector@{asarum::BY::OdbcConnector}}
+\doxysubsubsection{\texorpdfstring{OdbcConnector()}{OdbcConnector()}}
+{\footnotesize\ttfamily asarum\+::\+BY\+::\+Odbc\+Connector\+::\+Odbc\+Connector (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{db\+Name }\end{DoxyParamCaption})}
+
+
+
+Construct a new Odbc Connector object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em db\+Name} & ODBC database. Use "{}\+DSN=\+My\+Conn"{} syntax. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classasarum_1_1_b_y_1_1_odbc_connector_adf7a539714faf5d7750c2fc3bcddf300}\label{classasarum_1_1_b_y_1_1_odbc_connector_adf7a539714faf5d7750c2fc3bcddf300} 
+\index{asarum::BY::OdbcConnector@{asarum::BY::OdbcConnector}!changeSchema@{changeSchema}}
+\index{changeSchema@{changeSchema}!asarum::BY::OdbcConnector@{asarum::BY::OdbcConnector}}
+\doxysubsubsection{\texorpdfstring{changeSchema()}{changeSchema()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void asarum\+::\+BY\+::\+Odbc\+Connector\+::change\+Schema (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{schema\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+changes the current schema. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em schema\+\_\+name} & name of the schema \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classasarum_1_1_b_y_1_1_odbc_connector_acfa9fadeca80e9dc5fc9b0a777c3be08}\label{classasarum_1_1_b_y_1_1_odbc_connector_acfa9fadeca80e9dc5fc9b0a777c3be08} 
+\index{asarum::BY::OdbcConnector@{asarum::BY::OdbcConnector}!changeSchema@{changeSchema}}
+\index{changeSchema@{changeSchema}!asarum::BY::OdbcConnector@{asarum::BY::OdbcConnector}}
+\doxysubsubsection{\texorpdfstring{changeSchema()}{changeSchema()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void asarum\+::\+BY\+::\+Odbc\+Connector\+::change\+Schema (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{r\+\_\+schema\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+changes the current schema. 
+
+wrapper to allow using std\+::string arguments
+
+
+\begin{DoxyParams}{Parameters}
+{\em schema\+\_\+name} & name of the schema\\
+\hline
+{\em r\+\_\+schema\+\_\+name} & ~\newline
+ \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/asarum/\+BY/Odbc\+Connector.\+h\item 
+src/Odbc\+Connector.\+cpp\end{DoxyCompactItemize}

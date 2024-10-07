@@ -1,0 +1,40 @@
+\doxysection{job\+\_\+group.\+h}
+\hypertarget{job__group_8h_source}{}\label{job__group_8h_source}\index{include/asarum/BY/job\_group.h@{include/asarum/BY/job\_group.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{job_8h}{job.h}}"{}}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }asarum\ \{}
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }BY\ \{}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{const}\ std::string\ HEAD\_COLS[]\{\textcolor{stringliteral}{"{}LP"{}},\ \ \ \ \ \ \ \textcolor{stringliteral}{"{}JOB\_CD"{}},\ \ \ \textcolor{stringliteral}{"{}ESC"{}},}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}SUB\_JOBS"{}},\ \textcolor{stringliteral}{"{}NEXT\_JOB"{}},\ \textcolor{stringliteral}{"{}TEMPL"{}}\};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_group}{JobGroup}}\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \textcolor{keyword}{const}\ std::string\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_group_adc228c7e0d95984e093ee49a46b01ff3}{m\_group\_name}};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00024\ \ \ std::vector<std::shared\_ptr<Job>>\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_group_a5f96e0a232f5c00a124c094516f236cf}{m\_jobs}};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00029\ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_group_a95c5ee82048141c722e54f5bedc32815}{JobGroup}}(\textcolor{keyword}{const}\ std::string\ \&group\_name);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_group_af4d039fe8a944dce2540fd0e2fcf46a4}{addJob}}(\textcolor{keyword}{const}\ std::shared\_ptr<Job>\ \&job);}
+\DoxyCodeLine{00034\ \ \ }
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_group_a29ace53b5bbf9bd98675be9db3a0e0f3}{getMaxFldLen}}();}
+\DoxyCodeLine{00038\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ str\_compare(\textcolor{keyword}{const}\ std::string\ \&a,\ \textcolor{keyword}{const}\ std::string\ \&b);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \textcolor{keywordtype}{unsigned}\ m\_len\_lp;}
+\DoxyCodeLine{00041\ \ \ \textcolor{keywordtype}{unsigned}\ m\_len\_job\_cd;}
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordtype}{unsigned}\ m\_len\_esc;}
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordtype}{unsigned}\ m\_len\_sub;}
+\DoxyCodeLine{00044\ \ \ \textcolor{keywordtype}{unsigned}\ m\_len\_next\_job;}
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordtype}{unsigned}\ m\_len\_templ;}
+\DoxyCodeLine{00046\ \};}
+\DoxyCodeLine{00047\ \}\ \textcolor{comment}{//\ namespace\ BY}}
+\DoxyCodeLine{00048\ \}\ \textcolor{comment}{//\ namespace\ asarum}}
+
+\end{DoxyCode}

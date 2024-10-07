@@ -1,0 +1,45 @@
+\doxysection{asarum\+::BY\+::Data\+Copier Class Reference}
+\hypertarget{classasarum_1_1_b_y_1_1_data_copier}{}\label{classasarum_1_1_b_y_1_1_data_copier}\index{asarum::BY::DataCopier@{asarum::BY::DataCopier}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classasarum_1_1_b_y_1_1_data_copier_af126c6f8b2d78bc1e30e7c858192679d}{Data\+Copier}} (const char \texorpdfstring{$\ast$}{*}odbc\+\_\+dsn, const char \texorpdfstring{$\ast$}{*}db\+\_\+name, const char \texorpdfstring{$\ast$}{*}schema=nullptr)
+\begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\item 
+\Hypertarget{classasarum_1_1_b_y_1_1_data_copier_a0c919b97a3ac101a21f8fcab2b12322d}\label{classasarum_1_1_b_y_1_1_data_copier_a0c919b97a3ac101a21f8fcab2b12322d} 
+{\bfseries Data\+Copier} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_odbc_connector}{Odbc\+Connector}} $>$ odbc\+\_\+conn\+\_\+ptr, const char \texorpdfstring{$\ast$}{*}db\+\_\+name, const char \texorpdfstring{$\ast$}{*}schema=nullptr)
+\item 
+\Hypertarget{classasarum_1_1_b_y_1_1_data_copier_ad85e63603920a05993dfefd17986bdcc}\label{classasarum_1_1_b_y_1_1_data_copier_ad85e63603920a05993dfefd17986bdcc} 
+void {\bfseries copy\+Data} ()
+\begin{DoxyCompactList}\small\item\em copies data from m\+\_\+odbc\+\_\+dsn ODBC to m\+\_\+db\+\_\+name SQLite db \end{DoxyCompactList}\item 
+\Hypertarget{classasarum_1_1_b_y_1_1_data_copier_a569d592efbee0fd3b5805af6942b1a54}\label{classasarum_1_1_b_y_1_1_data_copier_a569d592efbee0fd3b5805af6942b1a54} 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Data\+Copier} ()
+\begin{DoxyCompactList}\small\item\em descturctor. Closing connections \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classasarum_1_1_b_y_1_1_data_copier_af126c6f8b2d78bc1e30e7c858192679d}\label{classasarum_1_1_b_y_1_1_data_copier_af126c6f8b2d78bc1e30e7c858192679d} 
+\index{asarum::BY::DataCopier@{asarum::BY::DataCopier}!DataCopier@{DataCopier}}
+\index{DataCopier@{DataCopier}!asarum::BY::DataCopier@{asarum::BY::DataCopier}}
+\doxysubsubsection{\texorpdfstring{DataCopier()}{DataCopier()}}
+{\footnotesize\ttfamily asarum\+::\+BY\+::\+Data\+Copier\+::\+Data\+Copier (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{odbc\+\_\+dsn,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{db\+\_\+name,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{schema = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+constructor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em odbc\+\_\+dsn} & connection string to ODBC DB \\
+\hline
+{\em db\+\_\+name} & the name of the SQLife DB file name \\
+\hline
+{\em schema} & optional, schema name to copy data from ~\newline
+ \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/asarum/\+BY/Data\+Copier.\+h\item 
+src/Data\+Copier.\+cpp\end{DoxyCompactItemize}

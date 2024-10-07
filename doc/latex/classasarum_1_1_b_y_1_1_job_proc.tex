@@ -1,0 +1,120 @@
+\doxysection{asarum\+::BY\+::Job\+Proc Class Reference}
+\hypertarget{classasarum_1_1_b_y_1_1_job_proc}{}\label{classasarum_1_1_b_y_1_1_job_proc}\index{asarum::BY::JobProc@{asarum::BY::JobProc}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_proc_ae979e56087f52e9079e96b45df2de027}{get\+Data}} (const char \texorpdfstring{$\ast$}{*}filename)
+\begin{DoxyCompactList}\small\item\em function gets data for Jobs\+Groups \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_proc_a14be426cc55f8017a652f5206c53cdac}{get\+SQLite\+Data}} (const char \texorpdfstring{$\ast$}{*}db\+Name)
+\begin{DoxyCompactList}\small\item\em function gets jobs defintions from SQLite database divides them into {\bfseries{job groups}} and stores the groups in the {\bfseries{m\+\_\+job\+\_\+groups}} vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_proc_a310f8e591e7c3a1cea5bdf9a34f89e76}{export\+Jobs}} (const std\+::string \&path, const bool with\+Summary=false)
+\item 
+void \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_proc_a47c4e1c3c0f17575158fae40cc8fb762}{export\+Docs}} (const std\+::string \&path, const bool with\+Diagram=false)
+\begin{DoxyCompactList}\small\item\em the function saves documentation of jobs as a markdown files \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_proc_a5dabde1a970f1449598cca360188e00d}{export\+Single\+Doc}} (const std\+::string \&path, const std\+::string \&file\+Name, const bool with\+Diagram=false)
+\begin{DoxyCompactList}\small\item\em the function saves documentation on all job in the single document \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classasarum_1_1_b_y_1_1_job_proc_a4f19118ee7edaf50a8bb1088aaf15c46}\label{classasarum_1_1_b_y_1_1_job_proc_a4f19118ee7edaf50a8bb1088aaf15c46} 
+std\+::vector$<$ std\+::string $>$ {\bfseries m\+\_\+fields\+\_\+list}
+\begin{DoxyCompactList}\small\item\em stores the list of fields read from the fist line of the file. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_group}{asarum\+::\+BY\+::\+Job\+Group}} $>$ $>$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_proc_a8f71652b755d7c5ea868f1cfda9e537c}{m\+\_\+job\+\_\+groups}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+reads jobs definition from the file and generates documenation 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classasarum_1_1_b_y_1_1_job_proc_a47c4e1c3c0f17575158fae40cc8fb762}\label{classasarum_1_1_b_y_1_1_job_proc_a47c4e1c3c0f17575158fae40cc8fb762} 
+\index{asarum::BY::JobProc@{asarum::BY::JobProc}!exportDocs@{exportDocs}}
+\index{exportDocs@{exportDocs}!asarum::BY::JobProc@{asarum::BY::JobProc}}
+\doxysubsubsection{\texorpdfstring{exportDocs()}{exportDocs()}}
+{\footnotesize\ttfamily void asarum\+::\+BY\+::\+Job\+Proc\+::export\+Docs (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path,  }\item[{const bool}]{with\+Diagram = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+the function saves documentation of jobs as a markdown files 
+
+export markdown documentation into separate file for each \doxylink{classasarum_1_1_b_y_1_1_job_group}{Job\+Group} 
+\begin{DoxyParams}{Parameters}
+{\em path} & path where the Docs subfolder is to be created \\
+\hline
+{\em with\+Diagram} & if set to true, documents will also include mermaid diagrams \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classasarum_1_1_b_y_1_1_job_proc_a310f8e591e7c3a1cea5bdf9a34f89e76}\label{classasarum_1_1_b_y_1_1_job_proc_a310f8e591e7c3a1cea5bdf9a34f89e76} 
+\index{asarum::BY::JobProc@{asarum::BY::JobProc}!exportJobs@{exportJobs}}
+\index{exportJobs@{exportJobs}!asarum::BY::JobProc@{asarum::BY::JobProc}}
+\doxysubsubsection{\texorpdfstring{exportJobs()}{exportJobs()}}
+{\footnotesize\ttfamily void asarum\+::\+BY\+::\+Job\+Proc\+::export\+Jobs (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path,  }\item[{const bool}]{with\+Summary = {\ttfamily false} }\end{DoxyParamCaption})}
+
+Function connects to DB and creates Job\+Groups The function saves SQL, Templates for each Jobs Group \textquotesingle{}Jobs\textquotesingle{} subfolder
+
+export ESC SQL queries and XML templates to the Jobs folder 
+\begin{DoxyParams}{Parameters}
+{\em path} & the path where the Jobs subfoler is to be created \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classasarum_1_1_b_y_1_1_job_proc_a5dabde1a970f1449598cca360188e00d}\label{classasarum_1_1_b_y_1_1_job_proc_a5dabde1a970f1449598cca360188e00d} 
+\index{asarum::BY::JobProc@{asarum::BY::JobProc}!exportSingleDoc@{exportSingleDoc}}
+\index{exportSingleDoc@{exportSingleDoc}!asarum::BY::JobProc@{asarum::BY::JobProc}}
+\doxysubsubsection{\texorpdfstring{exportSingleDoc()}{exportSingleDoc()}}
+{\footnotesize\ttfamily void asarum\+::\+BY\+::\+Job\+Proc\+::export\+Single\+Doc (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path,  }\item[{const std\+::string \&}]{file\+Name,  }\item[{const bool}]{with\+Diagram = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+the function saves documentation on all job in the single document 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & directory where the document is to be saved @file\+Name the name of the file in which the document is to be saved \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classasarum_1_1_b_y_1_1_job_proc_ae979e56087f52e9079e96b45df2de027}\label{classasarum_1_1_b_y_1_1_job_proc_ae979e56087f52e9079e96b45df2de027} 
+\index{asarum::BY::JobProc@{asarum::BY::JobProc}!getData@{getData}}
+\index{getData@{getData}!asarum::BY::JobProc@{asarum::BY::JobProc}}
+\doxysubsubsection{\texorpdfstring{getData()}{getData()}}
+{\footnotesize\ttfamily void asarum\+::\+BY\+::\+Job\+Proc\+::get\+Data (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{file\+Name }\end{DoxyParamCaption})}
+
+
+
+function gets data for Jobs\+Groups 
+
+
+\begin{DoxyParams}{Parameters}
+{\em the} & name of the file with data \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classasarum_1_1_b_y_1_1_job_proc_a14be426cc55f8017a652f5206c53cdac}\label{classasarum_1_1_b_y_1_1_job_proc_a14be426cc55f8017a652f5206c53cdac} 
+\index{asarum::BY::JobProc@{asarum::BY::JobProc}!getSQLiteData@{getSQLiteData}}
+\index{getSQLiteData@{getSQLiteData}!asarum::BY::JobProc@{asarum::BY::JobProc}}
+\doxysubsubsection{\texorpdfstring{getSQLiteData()}{getSQLiteData()}}
+{\footnotesize\ttfamily void asarum\+::\+BY\+::\+Job\+Proc\+::get\+SQLite\+Data (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{db\+Name }\end{DoxyParamCaption})}
+
+
+
+function gets jobs defintions from SQLite database divides them into {\bfseries{job groups}} and stores the groups in the {\bfseries{m\+\_\+job\+\_\+groups}} vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em db\+Name} & ~\newline
+ \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classasarum_1_1_b_y_1_1_job_proc_a8f71652b755d7c5ea868f1cfda9e537c}\label{classasarum_1_1_b_y_1_1_job_proc_a8f71652b755d7c5ea868f1cfda9e537c} 
+\index{asarum::BY::JobProc@{asarum::BY::JobProc}!m\_job\_groups@{m\_job\_groups}}
+\index{m\_job\_groups@{m\_job\_groups}!asarum::BY::JobProc@{asarum::BY::JobProc}}
+\doxysubsubsection{\texorpdfstring{m\_job\_groups}{m\_job\_groups}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_group}{asarum\+::\+BY\+::\+Job\+Group}}$>$ $>$ asarum\+::\+BY\+::\+Job\+Proc\+::m\+\_\+job\+\_\+groups}
+
+vector stroring groups of jobs executed in a sequence every job group has a vector of Jobs objects 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/asarum/\+BY/\mbox{\hyperlink{job__proc_8h}{job\+\_\+proc.\+h}}\item 
+src/job\+\_\+proc.\+cpp\end{DoxyCompactItemize}

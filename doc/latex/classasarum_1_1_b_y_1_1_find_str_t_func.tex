@@ -1,0 +1,55 @@
+\doxysection{asarum\+::BY\+::Find\+Str\+TFunc Class Reference}
+\hypertarget{classasarum_1_1_b_y_1_1_find_str_t_func}{}\label{classasarum_1_1_b_y_1_1_find_str_t_func}\index{asarum::BY::FindStrTFunc@{asarum::BY::FindStrTFunc}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classasarum_1_1_b_y_1_1_find_str_t_func_a01b4f31f2680516d5d5f72285652e1bc}{Find\+Str\+TFunc}} (const std\+::string \&separator)
+\item 
+bool \mbox{\hyperlink{classasarum_1_1_b_y_1_1_find_str_t_func_af582379866c2c4c88c5868459c32c5d1}{operator()}} (std\+::string\+::const\+\_\+iterator \&next, const std\+::string\+::const\+\_\+iterator \&end, std\+::string \&tok) const
+\item 
+\Hypertarget{classasarum_1_1_b_y_1_1_find_str_t_func_a64f740763fe7d0c43d9800a36b3b1ce9}\label{classasarum_1_1_b_y_1_1_find_str_t_func_a64f740763fe7d0c43d9800a36b3b1ce9} 
+void {\bfseries reset} ()
+\item 
+\Hypertarget{classasarum_1_1_b_y_1_1_find_str_t_func_a33a31bd21a4e6dfa058c239c20e29122}\label{classasarum_1_1_b_y_1_1_find_str_t_func_a33a31bd21a4e6dfa058c239c20e29122} 
+void {\bfseries split} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classasarum_1_1_b_y_1_1_find_str_t_func_a01b4f31f2680516d5d5f72285652e1bc}\label{classasarum_1_1_b_y_1_1_find_str_t_func_a01b4f31f2680516d5d5f72285652e1bc} 
+\index{asarum::BY::FindStrTFunc@{asarum::BY::FindStrTFunc}!FindStrTFunc@{FindStrTFunc}}
+\index{FindStrTFunc@{FindStrTFunc}!asarum::BY::FindStrTFunc@{asarum::BY::FindStrTFunc}}
+\doxysubsubsection{\texorpdfstring{FindStrTFunc()}{FindStrTFunc()}}
+{\footnotesize\ttfamily Find\+Str\+TFunc\+::\+Find\+Str\+TFunc (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{separator }\end{DoxyParamCaption})}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em separator} & the separator to be used for tokenizing ~\newline
+ \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classasarum_1_1_b_y_1_1_find_str_t_func_af582379866c2c4c88c5868459c32c5d1}\label{classasarum_1_1_b_y_1_1_find_str_t_func_af582379866c2c4c88c5868459c32c5d1} 
+\index{asarum::BY::FindStrTFunc@{asarum::BY::FindStrTFunc}!operator()@{operator()}}
+\index{operator()@{operator()}!asarum::BY::FindStrTFunc@{asarum::BY::FindStrTFunc}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily bool Find\+Str\+TFunc\+::operator() (\begin{DoxyParamCaption}\item[{std\+::string\+::const\+\_\+iterator \&}]{next,  }\item[{const std\+::string\+::const\+\_\+iterator \&}]{end,  }\item[{std\+::string \&}]{tok }\end{DoxyParamCaption}) const}
+
+overloaded operator () used for checking if iterator for the tokenized reached the end of the string 
+\begin{DoxyParams}{Parameters}
+{\em next} & iterator showing next character \\
+\hline
+{\em end} & iterator showing the end of the string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false if reaching the end of the string 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/asarum/\+BY/Find\+Str\+TFunc.\+h\item 
+src/Find\+Str\+TFunc.\+cpp\end{DoxyCompactItemize}

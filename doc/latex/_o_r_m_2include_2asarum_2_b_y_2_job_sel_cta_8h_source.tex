@@ -1,0 +1,149 @@
+\doxysection{Job\+Sel\+Cta.\+h}
+\hypertarget{_o_r_m_2include_2asarum_2_b_y_2_job_sel_cta_8h_source}{}\label{_o_r_m_2include_2asarum_2_b_y_2_job_sel_cta_8h_source}\index{ORM/include/asarum/BY/JobSelCta.h@{ORM/include/asarum/BY/JobSelCta.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ JobSelCta.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ This\ file\ has\ been\ generated\ from\ jobdoc.xml.\ Do\ not\ edit.}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ asarum\_BY\_JobSelCta\_INCLUDED}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ asarum\_BY\_JobSelCta\_INCLUDED}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}Poco/ActiveRecord/ActiveRecord.h"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}asarum/BY/JobDef.h"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}asarum/BY/EntySelCta.h"{}}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{namespace\ }asarum\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{namespace\ }BY\ \{}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }JobSelCta:\ \textcolor{keyword}{public}\ Poco::ActiveRecord::ActiveRecord<Poco::Int32>}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{using\ }Ptr\ =\ Poco::AutoPtr<JobSelCta>;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{explicit}\ JobSelCta(ID\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00027\ \ \ \ \ JobSelCta()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00028\ \ \ \ \ JobSelCta(\textcolor{keyword}{const}\ JobSelCta\&\ other);}
+\DoxyCodeLine{00029\ \ \ \ \ \string~JobSelCta()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ Poco::Int32\ opt\_lck()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00032\ \ \ \ \ JobSelCta\&\ opt\_lck(Poco::Int32\ value);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ JobDef::Ptr\ job\_cd()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ job\_cdID()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00036\ \ \ \ \ JobSelCta\&\ job\_cd(JobDef::Ptr\ pObject);}
+\DoxyCodeLine{00037\ \ \ \ \ JobSelCta\&\ job\_cdID(\textcolor{keyword}{const}\ std::string\&\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ EntySelCta::Ptr\ enty\_sel\_cta\_cd()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ enty\_sel\_cta\_cdID()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00041\ \ \ \ \ JobSelCta\&\ enty\_sel\_cta\_cd(EntySelCta::Ptr\ pObject);}
+\DoxyCodeLine{00042\ \ \ \ \ JobSelCta\&\ enty\_sel\_cta\_cdID(\textcolor{keyword}{const}\ std::string\&\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{static}\ Ptr\ find(Poco::ActiveRecord::Context::Ptr\ pContext,\ \textcolor{keyword}{const}\ ID\&\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ insert();}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ update();}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ remove();}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::vector<std::string>\&\ columns();}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::string\&\ table();}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00054\ \ \ \ \ Poco::Int32\ \_opt\_lck\ =\ 0;}
+\DoxyCodeLine{00055\ \ \ \ \ std::string\ \_job\_cd;}
+\DoxyCodeLine{00056\ \ \ \ \ std::string\ \_enty\_sel\_cta\_cd;}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }Poco::Data::TypeHandler<JobSelCta>;}
+\DoxyCodeLine{00059\ \};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{keyword}{inline}\ Poco::Int32\ JobSelCta::opt\_lck()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00063\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordflow}{return}\ \_opt\_lck;}
+\DoxyCodeLine{00065\ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{keyword}{inline}\ JobSelCta\&\ JobSelCta::opt\_lck(Poco::Int32\ value)}
+\DoxyCodeLine{00069\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \_opt\_lck\ =\ value;}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00072\ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ std::string\&\ JobSelCta::job\_cdID()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00076\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{return}\ \_job\_cd;}
+\DoxyCodeLine{00078\ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{keyword}{inline}\ JobSelCta\&\ JobSelCta::job\_cdID(\textcolor{keyword}{const}\ std::string\&\ value)}
+\DoxyCodeLine{00082\ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \_job\_cd\ =\ value;}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00085\ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ std::string\&\ JobSelCta::enty\_sel\_cta\_cdID()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00089\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordflow}{return}\ \_enty\_sel\_cta\_cd;}
+\DoxyCodeLine{00091\ \}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{keyword}{inline}\ JobSelCta\&\ JobSelCta::enty\_sel\_cta\_cdID(\textcolor{keyword}{const}\ std::string\&\ value)}
+\DoxyCodeLine{00095\ \{}
+\DoxyCodeLine{00096\ \ \ \ \ \_enty\_sel\_cta\_cd\ =\ value;}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00098\ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \}\ \}\ \textcolor{comment}{//\ namespace\ asarum:BY}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{keyword}{namespace\ }Poco\ \{}
+\DoxyCodeLine{00105\ \textcolor{keyword}{namespace\ }Data\ \{}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00109\ \textcolor{keyword}{class\ }TypeHandler<asarum::BY::JobSelCta>}
+\DoxyCodeLine{00110\ \{}
+\DoxyCodeLine{00111\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keyword}{static}\ std::size\_t\ size()}
+\DoxyCodeLine{00113\ \ \ \ \ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 3;}
+\DoxyCodeLine{00115\ \ \ \ \ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ bind(std::size\_t\ pos,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_sel_cta}{asarum::BY::JobSelCta}}\&\ ar,\ AbstractBinder::Ptr\ pBinder,\ AbstractBinder::Direction\ dir)}
+\DoxyCodeLine{00118\ \ \ \ \ \{}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Int32>::bind(pos++,\ ar.\_opt\_lck,\ pBinder,\ dir);}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ TypeHandler<std::string>::bind(pos++,\ ar.\_job\_cd,\ pBinder,\ dir);}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ TypeHandler<std::string>::bind(pos++,\ ar.\_enty\_sel\_cta\_cd,\ pBinder,\ dir);}
+\DoxyCodeLine{00122\ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ extract(std::size\_t\ pos,\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_sel_cta}{asarum::BY::JobSelCta}}\&\ ar,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_sel_cta}{asarum::BY::JobSelCta}}\&\ deflt,\ AbstractExtractor::Ptr\ pExtr)}
+\DoxyCodeLine{00125\ \ \ \ \ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Int32>::extract(pos++,\ ar.\_opt\_lck,\ deflt.\_opt\_lck,\ pExtr);}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ TypeHandler<std::string>::extract(pos++,\ ar.\_job\_cd,\ deflt.\_job\_cd,\ pExtr);}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ TypeHandler<std::string>::extract(pos++,\ ar.\_enty\_sel\_cta\_cd,\ deflt.\_enty\_sel\_cta\_cd,\ pExtr);}
+\DoxyCodeLine{00129\ \}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prepare(std::size\_t\ pos,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_sel_cta}{asarum::BY::JobSelCta}}\&\ ar,\ AbstractPreparator::Ptr\ pPrep)}
+\DoxyCodeLine{00132\ \ \ \ \ \{}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ TypeHandler<Poco::Int32>::prepare(pos++,\ ar.\_opt\_lck,\ pPrep);}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ TypeHandler<std::string>::prepare(pos++,\ ar.\_job\_cd,\ pPrep);}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ TypeHandler<std::string>::prepare(pos++,\ ar.\_enty\_sel\_cta\_cd,\ pPrep);}
+\DoxyCodeLine{00136\ \ \ \ \ \}}
+\DoxyCodeLine{00137\ \};}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \}\ \}\ \textcolor{comment}{//\ namespace\ Poco::Data}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ asarum\_BY\_JobSelCta\_INCLUDED}}
+
+\end{DoxyCode}

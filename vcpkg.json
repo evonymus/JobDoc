@@ -1,0 +1,12 @@
+{
+  "dependencies": [
+    "boost-system",
+    "boost-filesystem",
+    "boost-program-options",
+    "boost-algorithm",
+    {
+      "name": "poco",
+      "features": ["sqlite3"]
+    }
+  ]
+}

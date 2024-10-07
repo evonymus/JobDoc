@@ -1,0 +1,33 @@
+\doxysection{connector.\+h}
+\hypertarget{connector_8h_source}{}\label{connector_8h_source}\index{src/dbConnect/connector.h@{src/dbConnect/connector.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ \_\_CONNECTOR\_\_}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ \_\_CONNECTOR\_\_}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}con-\/def.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <soci/session.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <soci/soci.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceasarum}{asarum}}\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }db\ \{}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{unsigned}\ ROWS\_RETURNED\ =\ 300;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classasarum_1_1db_1_1_connector}{Connector}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{classasarum_1_1db_1_1_connector_aad48724426558cd3aa3c931aac87bc0d}{Connector}}(\mbox{\hyperlink{classasarum_1_1db_1_1_con_def}{ConDef}}\ \&conDef);}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classasarum_1_1db_1_1_connector_a8d7b5caad7447ef9adb8b0534a803faa}{execSql}}(\textcolor{keyword}{const}\ std::string\ \&sql);}
+\DoxyCodeLine{00023\ \ \ \textcolor{comment}{//\ template\ for\ returning\ query\ result}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00026\ \ \ soci::rowset<soci::row>\ \mbox{\hyperlink{classasarum_1_1db_1_1_connector_a0d4dd40b18c84f525cd22a948fcf919e}{getQueryData}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ query);}
+\DoxyCodeLine{00027\ \ \ soci::session\ m\_sql;}
+\DoxyCodeLine{00028\ \};}
+\DoxyCodeLine{00029\ \}\ \textcolor{comment}{//\ namespace\ db}}
+\DoxyCodeLine{00030\ \}\ \textcolor{comment}{//\ namespace\ asarum}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ ifndef\ \_\_CONNECTOR\_\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

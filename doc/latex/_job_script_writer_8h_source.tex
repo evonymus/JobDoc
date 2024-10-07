@@ -1,0 +1,66 @@
+\doxysection{Job\+Script\+Writer.\+h}
+\hypertarget{_job_script_writer_8h_source}{}\label{_job_script_writer_8h_source}\index{include/asarum/BY/JobScriptWriter.h@{include/asarum/BY/JobScriptWriter.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}EntySelCta.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}JobDef.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <Poco/Data/Session.h>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <any>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <ostream>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceasarum}{asarum}}\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }BY\ \{}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{enum\ class}\ DB\_VARIANT\ \{\ ORACLE\ =\ 0,\ MSSQL\ =\ 1\ \};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_script_writer}{JobScriptWriter}}\ \{}
+\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_script_writer_ad88e2cf4aebce166abcf198cca364992}{JobScriptWriter}}(std::ostream\ \&r\_out);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordtype}{void}\ writeSingleJobScript(\textcolor{keyword}{const}\ asarum::BY::JobDef::Ptr\ job\_ptr,}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ DB\_VARIANT\ variant);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{void}}
+\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_script_writer_aaa01299deaca2201d57103678f18ccd6}{writeSingleJobScript}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *job\_name,}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<Poco::Data::Session>\ session\_ptr,}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DB\_VARIANT\ variant);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordtype}{void}}
+\DoxyCodeLine{00047\ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_script_writer_a06c730c08dca28e983db67e0ea5fd6e3}{writeJobSetScript}}(\textcolor{keyword}{const}\ std::vector<asarum::BY::JobDef::Ptr>\ \&r\_jobs,\ DB\_VARIANT\ variant);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00058\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_script_writer_ae818c2c6328fdaf90bacc12c3b2adcfb}{writeOrclJobSetScript}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *parent\_job\_name,}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<Poco::Data::Session>\ session\_ptr);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00065\ \ \ \textcolor{keywordtype}{void}}
+\DoxyCodeLine{00066\ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_script_writer_ae818c2c6328fdaf90bacc12c3b2adcfb}{writeOrclJobSetScript}}(\textcolor{keyword}{const}\ std::vector<asarum::BY::JobDef::Ptr>\ \&r\_jobs);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00077\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_script_writer_a727d001fdf9f03f5bfa183dd1543fbe1}{writeMssqlJobSetScript}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *parent\_job\_name,}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<Poco::Data::Session>\ session\_ptr);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00084\ \ \ \textcolor{keywordtype}{void}}
+\DoxyCodeLine{00085\ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_script_writer_a727d001fdf9f03f5bfa183dd1543fbe1}{writeMssqlJobSetScript}}(\textcolor{keyword}{const}\ std::vector<asarum::BY::JobDef::Ptr>\ \&r\_jobs);}
+\DoxyCodeLine{00086\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00088\ \ \ std::ostream\ *mp\_out;}
+\DoxyCodeLine{00089\ \ \ \textcolor{keywordtype}{void}\ writeEscScript(\textcolor{keyword}{const}\ asarum::BY::EntySelCta::Ptr\ esc\_ptr,\ DB\_VARIANT\ variant);}
+\DoxyCodeLine{00090\ \ \ \textcolor{keywordtype}{void}\ writeJobScript(\textcolor{keyword}{const}\ asarum::BY::JobDef::Ptr\ job\_ptr,\ DB\_VARIANT\ variant);}
+\DoxyCodeLine{00091\ \ \ \textcolor{keywordtype}{void}\ writeJobSelCtaScript(\textcolor{keyword}{const}\ asarum::BY::JobDef::Ptr\ job\_ptr,\ DB\_VARIANT\ variant);}
+\DoxyCodeLine{00092\ \ \ \textcolor{keywordtype}{void}\ writeTmplScript(\textcolor{keyword}{const}\ asarum::BY::AdtnData::Ptr\ adt\_ptr,\ DB\_VARIANT\ variant);}
+\DoxyCodeLine{00093\ \ \ \textcolor{keywordtype}{void}\ writeSchdlDetlScript(\textcolor{keyword}{const}\ asarum::BY::SchdDetl::Ptr\ schdl\_ptr,\ DB\_VARIANT\ variant);}
+\DoxyCodeLine{00098\ \ \ std::vector<JobDef::Ptr>\ getSubsequentJobs(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ parent,\ std::shared\_ptr<Poco::Data::Session>\ session\_ptr);}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00103\ \ \ std::string\ replaceSingleQuote(std::string\ \textcolor{keyword}{const}\ \&original);}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00114\ \ \ \textcolor{keywordtype}{void}\ sql\_cnv\_variant(\textcolor{keyword}{const}\ std::any\ var,\ std::ostream\ *r\_out,}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DB\_VARIANT\ variant);}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \};}
+\DoxyCodeLine{00118\ \}\ \textcolor{comment}{//\ namespace\ BY}}
+\DoxyCodeLine{00119\ \}\ \textcolor{comment}{//\ namespace\ asarum}}
+
+\end{DoxyCode}

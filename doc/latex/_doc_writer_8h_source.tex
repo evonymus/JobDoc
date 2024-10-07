@@ -1,0 +1,58 @@
+\doxysection{Doc\+Writer.\+h}
+\hypertarget{_doc_writer_8h_source}{}\label{_doc_writer_8h_source}\index{include/asarum/BY/DocWriter.h@{include/asarum/BY/DocWriter.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <ostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <Poco/AutoPtr.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}JobDefGetter.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceasarum}{asarum}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \ \ \textcolor{keyword}{namespace\ }BY}
+\DoxyCodeLine{00011\ \ \ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classasarum_1_1_b_y_1_1_doc_writer}{DocWriter}}}
+\DoxyCodeLine{00013\ \ \ \ \ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_doc_writer}{DocWriter}}(\textcolor{keyword}{const}\ std::shared\_ptr<Poco::Data::Session>\ session\_ptr);}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_doc_writer_a48e9f68331f75e1993a10473be036a34}{docScheduledJobs}}(\textcolor{keyword}{const}\ std::string\ \&r\_file\_name,}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ with\_diagrams\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_doc_writer_a46cf6fa3e63ce801ea0abbba0eabe8e3}{docAllJobs}}(\textcolor{keyword}{const}\ std::string\ \&r\_file\_name,}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ with\_diagrams\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \textcolor{comment}{//\ jobs\ from\ daatabase}}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ std::shared\_ptr<asarum::BY::JobDefGetter>\ m\_job\_getter\_ptr;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ std::shared\_ptr<std::ostream>\ m\_out\_ptr;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ printGroupHeader(\textcolor{keyword}{const}\ Poco::AutoPtr<JobDef>\ job\_ptr,\ std::ofstream\ \&r\_out);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ printGroupSchedule(\textcolor{keyword}{const}\ Poco::AutoPtr<JobDef>\ job\_ptr,\ std::ofstream\ \&r\_out);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ printGroupDiagram(\textcolor{keyword}{const}\ std::vector<Poco::AutoPtr<JobDef>>\ job\_ptr\_vec,\ std::ofstream\ \&r\_out);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ printEscDetails(\textcolor{keyword}{const}\ Poco::AutoPtr<EntySelCta>\ esc\_ptr,\ std::ofstream\ \&r\_out);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ printEscDetails(\textcolor{keyword}{const}\ Poco::AutoPtr<JobDef>\ job\_ptr,\ std::ofstream\ \&r\_out);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ printJobDetails(\textcolor{keyword}{const}\ Poco::AutoPtr<JobDef>\ job\_ptr,\ std::ofstream\ \&r\_out);}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ printItemTableDef(std::ofstream\ \&r\_out);}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>\ \textcolor{keywordtype}{void}\ printItemRow(T\ value,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ label,\ std::ofstream\ \&r\_out);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ printStepsDescriptions(std::vector<Poco::AutoPtr<JobDef>>\ grp\_ptr,\ std::ofstream\ \&sa,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ withDiagram);}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ std::string\ convertDate(\textcolor{keyword}{const}\ Poco::Nullable<Poco::Data::Date>\ \&n\_date);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ std::string\ convertDate(\textcolor{keyword}{const}\ Poco::Data::Date\ \&date);}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ std::string\ getJobType(\textcolor{keywordtype}{int}\ typ\_enu);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ std::string\ getEntyTyp(\textcolor{keywordtype}{int}\ enty\_typ\_enu);}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ std::string\ getSchdTypeEnu(\textcolor{keywordtype}{int}\ schd\_typ\_enu);}
+\DoxyCodeLine{00094\ \ \ \ \ \};}
+\DoxyCodeLine{00095\ \ \ \}\ \textcolor{comment}{//\ namespace\ BY}}
+\DoxyCodeLine{00096\ \}\ \textcolor{comment}{//\ namespace\ asarum}}
+
+\end{DoxyCode}

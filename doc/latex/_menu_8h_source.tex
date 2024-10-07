@@ -1,0 +1,102 @@
+\doxysection{Menu.\+h}
+\hypertarget{_menu_8h_source}{}\label{_menu_8h_source}\index{include/asarum/BY/Menu.h@{include/asarum/BY/Menu.h}}
+\mbox{\hyperlink{_menu_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <boost/program\_options.hpp>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <boost/program\_options/options\_description.hpp>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <boost/program\_options/positional\_options.hpp>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_base_connector_8h}{BaseConnector.h}}"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}SQLiteConnector.h"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}OdbcConnector.h"{}}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}JobScriptWriter.h"{}}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <Poco/Data/Session.h>}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{namespace\ }po\ =\ boost::program\_options;}
+\DoxyCodeLine{00025\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceasarum}{asarum}}\ \{}
+\DoxyCodeLine{00026\ \textcolor{keyword}{namespace\ }BY\ \{}
+\DoxyCodeLine{00032\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classasarum_1_1_b_y_1_1_menu}{Menu}}\ \{}
+\DoxyCodeLine{00033\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00039\ \ \ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_menu_a5d2fae3ba0344af73569d414865fc74d}{Menu}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ *arv[]);}
+\DoxyCodeLine{00044\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_menu_ad137c64218abc368893c012c1a14ac89}{handleMenu}}();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{comment}{\ \ /*************************************************************}}
+\DoxyCodeLine{00047\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ private}}
+\DoxyCodeLine{00048\ \textcolor{comment}{\ \ \ *************************************************************/}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00051\ \ \ std::shared\_ptr<SQLiteConnector>\ m\_sqlite\_conn\_ptr;}
+\DoxyCodeLine{00052\ \ \ std::shared\_ptr<OdbcConnector>\ m\_odbc\_conn\_ptr;}
+\DoxyCodeLine{00053\ \ \ std::string\ m\_notify\_list;}
+\DoxyCodeLine{00054\ \ \ po::options\_description\ m\_generic\_options;}
+\DoxyCodeLine{00055\ \ \ po::options\_description\ m\_source\_options;}
+\DoxyCodeLine{00056\ \ \ po::options\_description\ m\_code\_options;}
+\DoxyCodeLine{00057\ \ \ po::options\_description\ m\_doc\_options;}
+\DoxyCodeLine{00058\ \ \ po::options\_description\ m\_output\_options;}
+\DoxyCodeLine{00059\ \ \ po::options\_description\ m\_copy\_options;}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ po::options\_description\ m\_visible\_options;}
+\DoxyCodeLine{00062\ \ \ po::options\_description\ m\_cmd\_line\_options;}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ po::positional\_options\_description\ m\_pos\_options;}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ po::variables\_map\ m\_var\_map;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/\ variables\ used\ by\ function\ called}}
+\DoxyCodeLine{00069\ \ \ std::string\ m\_path;}
+\DoxyCodeLine{00070\ \ \ std::string\ m\_file\_name;}
+\DoxyCodeLine{00071\ \ \ std::string\ m\_config\_file\_name;}
+\DoxyCodeLine{00072\ \ \ std::string\ m\_sqlite\_name;}
+\DoxyCodeLine{00073\ \ \ std::string\ m\_odbc\_string;}
+\DoxyCodeLine{00074\ \ \ std::string\ m\_odbc\_schema;}
+\DoxyCodeLine{00075\ \ \ std::string\ m\_single\_file\_name;}
+\DoxyCodeLine{00076\ \ \ \textcolor{comment}{//\ variable\ used\ to\ generate\ script\ for\ a\ single\ job}}
+\DoxyCodeLine{00077\ \ \ std::string\ m\_job\_name;}
+\DoxyCodeLine{00078\ \ \ \textcolor{comment}{//\ variable\ used\ to\ generate\ script\ for\ the\ parent\ job\ and\ all\ descendants}}
+\DoxyCodeLine{00079\ \ \ std::string\ m\_parent\_job\_name;}
+\DoxyCodeLine{00080\ \ \ \textcolor{comment}{//\ name\ of\ SQLite\ database\ for\ the\ copy\ of\ ODBC\ db\ }}
+\DoxyCodeLine{00081\ \ \ std::string\ m\_copy\_to\_db\_name;}
+\DoxyCodeLine{00082\ \ \ DB\_VARIANT\ m\_db\_variant;}
+\DoxyCodeLine{00083\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/\ db\ connection}}
+\DoxyCodeLine{00084\ \ \ std::string\ m\_db\_service;}
+\DoxyCodeLine{00085\ \ \ std::string\ m\_db\_user;}
+\DoxyCodeLine{00086\ \ \ std::string\ m\_db\_password;}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \textcolor{keywordtype}{bool}\ m\_with\_images;}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \textcolor{keywordtype}{void}\ initMenu(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ *argv[]);}
+\DoxyCodeLine{00092\ \ \ \textcolor{keywordtype}{void}\ initGenericOptions();}
+\DoxyCodeLine{00093\ \ \ \textcolor{keywordtype}{void}\ initSourceOptions();}
+\DoxyCodeLine{00094\ \ \ \textcolor{keywordtype}{void}\ initCodeOptions();}
+\DoxyCodeLine{00095\ \ \ \textcolor{keywordtype}{void}\ initDocOptions();}
+\DoxyCodeLine{00096\ \ \ \textcolor{keywordtype}{void}\ initCopyOptions();}
+\DoxyCodeLine{00097\ \ \ \textcolor{keywordtype}{void}\ initOutputOptions();}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ menu\ handlers\ (triggers)\ -\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00100\ \ \ \textcolor{comment}{//void\ handleCodeGeneration(bool\ withSummary);}}
+\DoxyCodeLine{00101\ \ \ \textcolor{keywordtype}{void}\ handleSingleJobScriptGeneration();}
+\DoxyCodeLine{00102\ \ \ \textcolor{keywordtype}{void}\ handleNextJobsScriptsGeneration();}
+\DoxyCodeLine{00103\ \ \ \textcolor{keywordtype}{void}\ handleScriptAllScheduled();}
+\DoxyCodeLine{00104\ \ \ \textcolor{keywordtype}{void}\ handleDocsGeneration();}
+\DoxyCodeLine{00105\ \ \ \textcolor{keywordtype}{void}\ handleHelp();}
+\DoxyCodeLine{00106\ \ \ \textcolor{keywordtype}{void}\ handleVersion();}
+\DoxyCodeLine{00107\ \ \ \textcolor{keywordtype}{void}\ handleCopyDB();}
+\DoxyCodeLine{00108\ \ \ \textcolor{keywordtype}{void}\ setDataSource();}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ connection\ methods\ -\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00111\ \ \ }
+\DoxyCodeLine{00113\ \ \ \textcolor{keywordtype}{void}\ setSQLiteConnector(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ conn\_string);}
+\DoxyCodeLine{00114\ \ \ \textcolor{keywordtype}{void}\ setOdbcConnector(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ conn\_string);}
+\DoxyCodeLine{00117\ \ \ \textcolor{keywordtype}{bool}\ isConnectionDefined();}
+\DoxyCodeLine{00118\ \ \ std::shared\_ptr<Poco::Data::Session>\ getSession();}
+\DoxyCodeLine{00122\ \ \ \textcolor{keywordtype}{bool}\ fileExists(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *fileName);}
+\DoxyCodeLine{00123\ \};}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \}\ \textcolor{comment}{//\ namespace\ BY}}
+\DoxyCodeLine{00126\ \}\ \textcolor{comment}{//\ namespace\ asarum}}
+
+\end{DoxyCode}

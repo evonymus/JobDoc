@@ -1,0 +1,200 @@
+\doxysection{asarum\+::BY\+::Job\+Def\+Getter Class Reference}
+\hypertarget{classasarum_1_1_b_y_1_1_job_def_getter}{}\label{classasarum_1_1_b_y_1_1_job_def_getter}\index{asarum::BY::JobDefGetter@{asarum::BY::JobDefGetter}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classasarum_1_1_b_y_1_1_job_def_getter_ac11020e89e5a8b401ccf37a28d9b2c1a}\label{classasarum_1_1_b_y_1_1_job_def_getter_ac11020e89e5a8b401ccf37a28d9b2c1a} 
+{\bfseries Job\+Def\+Getter} (std\+::shared\+\_\+ptr$<$ Poco\+::\+Data\+::\+Session $>$ session\+\_\+ptr)
+\item 
+std\+::vector$<$ Poco\+::\+Auto\+Ptr$<$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def}{asarum\+::\+BY\+::\+Job\+Def}} $>$ $>$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter_aa0f485eeab37f60c384aedd94c2f7877}{get\+All\+Job\+Defs}} ()
+\begin{DoxyCompactList}\small\item\em gets definition of all jobs as written in JOB\+\_\+\+DEFN\+\_\+T table \end{DoxyCompactList}\item 
+Poco\+::\+Auto\+Ptr$<$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def}{asarum\+::\+BY\+::\+Job\+Def}} $>$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter_adfa7bc2cfb6cbf4d5bf200cb43a9ede5}{get\+Job\+Def}} (const char \texorpdfstring{$\ast$}{*}job\+\_\+name)
+\begin{DoxyCompactList}\small\item\em returns pointer to the jobs which name is given as the parameter \end{DoxyCompactList}\item 
+std\+::vector$<$ Job\+Sel\+Cta\+Ptr $>$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter_aa04959e2ed4eee68f250e6a2ee3c3da1}{get\+Job\+Sel\+Ctas}} (const Job\+Ptr job\+\_\+ptr)
+\begin{DoxyCompactList}\small\item\em function gets data stored in JOB\+\_\+\+SEL\+\_\+\+CTA\+\_\+T, table linking jobs with Entity\+Selection\+Criteria (ESC) \end{DoxyCompactList}\item 
+std\+::vector$<$ Poco\+::\+Auto\+Ptr$<$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_sel_cta}{Job\+Sel\+Cta}} $>$ $>$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter_ad0d5330aa62f51a8509d7ddfb3952d7d}{get\+All\+Job\+Sel\+Ctas}} ()
+\begin{DoxyCompactList}\small\item\em gets the content of JOB\+\_\+\+DEFN\+\_\+\+SEL\+\_\+\+CTA\+\_\+T \end{DoxyCompactList}\item 
+std\+::vector$<$ Poco\+::\+Auto\+Ptr$<$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{Adtn\+Data}} $>$ $>$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter_ab258112a6ea1570399b75aa3510270d3}{get\+All\+Adtn\+Templates}} ()
+\begin{DoxyCompactList}\small\item\em gets those records from ADTN\+\_\+\+DATA\+\_\+T that have ADTN\+\_\+\+DATA\+\_\+\+CD NOT Null. ADTN\+\_\+\+DATA\+\_\+\+CD contains the name of the template \end{DoxyCompactList}\item 
+std\+::vector$<$ Poco\+::\+Auto\+Ptr$<$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_schd_detl}{Schd\+Detl}} $>$ $>$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter_a1ef2003261f1e06a661dc0913a74c340}{get\+All\+Schd\+Detls}} ()
+\begin{DoxyCompactList}\small\item\em gets the content of SCHD\+\_\+\+DETL\+\_\+T table \end{DoxyCompactList}\item 
+\Hypertarget{classasarum_1_1_b_y_1_1_job_def_getter_a71adbd782d85528abdeb6407b1b3901d}\label{classasarum_1_1_b_y_1_1_job_def_getter_a71adbd782d85528abdeb6407b1b3901d} 
+std\+::unique\+\_\+ptr$<$ Esc\+Map $>$ {\bfseries get\+Esc\+Map} ()
+\item 
+std\+::vector$<$ Poco\+::\+Auto\+Ptr$<$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_enty_sel_cta}{asarum\+::\+BY\+::\+Enty\+Sel\+Cta}} $>$ $>$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter_a431067822f8f97cecb34cfed4ff0774b}{get\+All\+Enty\+Sel\+Ctas}} ()
+\begin{DoxyCompactList}\small\item\em function return the content of ENTY\+\_\+\+SEL\+\_\+\+CTA\+\_\+T table i.\+e., the table storing ESC queries \end{DoxyCompactList}\item 
+std\+::vector$<$ Poco\+::\+Auto\+Ptr$<$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def}{asarum\+::\+BY\+::\+Job\+Def}} $>$ $>$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter_ab3cc1192df84107cc645a6ba23fb4334}{get\+Scheduled\+Job\+Defs}} ()
+\begin{DoxyCompactList}\small\item\em function get the list of the jobs having a schedule. Those ones can potentially have NEXT\+\_\+\+JOB\+\_\+\+CD\+\_\+\+SUCCESS set \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def_getter_a651cd3da07cf322006e824ac97ae36bd}{get\+Child\+Jobs}} (const asarum\+::\+BY\+::\+Job\+Def\+::\+Ptr p\+Job, std\+::vector$<$ asarum\+::\+BY\+::\+Job\+Def\+::\+Ptr $>$ \&r\+\_\+result)
+\begin{DoxyCompactList}\small\item\em The function recurrently gets the jobs indicated by next\+\_\+job\+\_\+cd\+\_\+success and adds it to the result vector. \end{DoxyCompactList}\item 
+\Hypertarget{classasarum_1_1_b_y_1_1_job_def_getter_a78630106fd6ab570e45d9a327737e38c}\label{classasarum_1_1_b_y_1_1_job_def_getter_a78630106fd6ab570e45d9a327737e38c} 
+void {\bfseries get\+Child\+Jobs} (const char \texorpdfstring{$\ast$}{*}job\+\_\+name, std\+::vector$<$ asarum\+::\+BY\+::\+Job\+Def\+::\+Ptr $>$ \&r\+\_\+result)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classasarum_1_1_b_y_1_1_job_def_getter_ab258112a6ea1570399b75aa3510270d3}\label{classasarum_1_1_b_y_1_1_job_def_getter_ab258112a6ea1570399b75aa3510270d3} 
+\index{asarum::BY::JobDefGetter@{asarum::BY::JobDefGetter}!getAllAdtnTemplates@{getAllAdtnTemplates}}
+\index{getAllAdtnTemplates@{getAllAdtnTemplates}!asarum::BY::JobDefGetter@{asarum::BY::JobDefGetter}}
+\doxysubsubsection{\texorpdfstring{getAllAdtnTemplates()}{getAllAdtnTemplates()}}
+{\footnotesize\ttfamily std\+::vector$<$ Poco\+::\+Auto\+Ptr$<$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_adtn_data}{by\+::\+Adtn\+Data}} $>$ $>$ asarum\+::\+BY\+::\+Job\+Def\+Getter\+::get\+All\+Adtn\+Templates (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+gets those records from ADTN\+\_\+\+DATA\+\_\+T that have ADTN\+\_\+\+DATA\+\_\+\+CD NOT Null. ADTN\+\_\+\+DATA\+\_\+\+CD contains the name of the template 
+
+\begin{DoxyReturn}{Returns}
+vector of \doxylink{classasarum_1_1_b_y_1_1_adtn_data}{Adtn\+Data} objects ~\newline
+ 
+\end{DoxyReturn}
+\Hypertarget{classasarum_1_1_b_y_1_1_job_def_getter_a431067822f8f97cecb34cfed4ff0774b}\label{classasarum_1_1_b_y_1_1_job_def_getter_a431067822f8f97cecb34cfed4ff0774b} 
+\index{asarum::BY::JobDefGetter@{asarum::BY::JobDefGetter}!getAllEntySelCtas@{getAllEntySelCtas}}
+\index{getAllEntySelCtas@{getAllEntySelCtas}!asarum::BY::JobDefGetter@{asarum::BY::JobDefGetter}}
+\doxysubsubsection{\texorpdfstring{getAllEntySelCtas()}{getAllEntySelCtas()}}
+{\footnotesize\ttfamily vector$<$ Poco\+::\+Auto\+Ptr$<$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_enty_sel_cta}{by\+::\+Enty\+Sel\+Cta}} $>$ $>$ asarum\+::\+BY\+::\+Job\+Def\+Getter\+::get\+All\+Enty\+Sel\+Ctas (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+function return the content of ENTY\+\_\+\+SEL\+\_\+\+CTA\+\_\+T table i.\+e., the table storing ESC queries 
+
+\begin{DoxyReturn}{Returns}
+vector of \doxylink{classasarum_1_1_b_y_1_1_enty_sel_cta}{Enty\+Sel\+Cta} pointers 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+asarum\+::\+BY\+:\doxylink{classasarum_1_1_b_y_1_1_enty_sel_cta}{Enty\+Sel\+Cta} 
+\end{DoxySeeAlso}
+\Hypertarget{classasarum_1_1_b_y_1_1_job_def_getter_aa0f485eeab37f60c384aedd94c2f7877}\label{classasarum_1_1_b_y_1_1_job_def_getter_aa0f485eeab37f60c384aedd94c2f7877} 
+\index{asarum::BY::JobDefGetter@{asarum::BY::JobDefGetter}!getAllJobDefs@{getAllJobDefs}}
+\index{getAllJobDefs@{getAllJobDefs}!asarum::BY::JobDefGetter@{asarum::BY::JobDefGetter}}
+\doxysubsubsection{\texorpdfstring{getAllJobDefs()}{getAllJobDefs()}}
+{\footnotesize\ttfamily vector$<$ Poco\+::\+Auto\+Ptr$<$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def}{by\+::\+Job\+Def}} $>$ $>$ asarum\+::\+BY\+::\+Job\+Def\+Getter\+::get\+All\+Job\+Defs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+gets definition of all jobs as written in JOB\+\_\+\+DEFN\+\_\+T table 
+
+Gets vector with the Jobs defintion.
+
+\begin{DoxyReturn}{Returns}
+vector of$<$\+Job\+Def$>$ objects ~\newline
+
+
+vector of Poco\+::\+Auto\+Ptr pointers to \doxylink{classasarum_1_1_b_y_1_1_job_def}{Job\+Def} objects 
+\end{DoxyReturn}
+\Hypertarget{classasarum_1_1_b_y_1_1_job_def_getter_ad0d5330aa62f51a8509d7ddfb3952d7d}\label{classasarum_1_1_b_y_1_1_job_def_getter_ad0d5330aa62f51a8509d7ddfb3952d7d} 
+\index{asarum::BY::JobDefGetter@{asarum::BY::JobDefGetter}!getAllJobSelCtas@{getAllJobSelCtas}}
+\index{getAllJobSelCtas@{getAllJobSelCtas}!asarum::BY::JobDefGetter@{asarum::BY::JobDefGetter}}
+\doxysubsubsection{\texorpdfstring{getAllJobSelCtas()}{getAllJobSelCtas()}}
+{\footnotesize\ttfamily std\+::vector$<$ Poco\+::\+Auto\+Ptr$<$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_sel_cta}{by\+::\+Job\+Sel\+Cta}} $>$ $>$ asarum\+::\+BY\+::\+Job\+Def\+Getter\+::get\+All\+Job\+Sel\+Ctas (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+gets the content of JOB\+\_\+\+DEFN\+\_\+\+SEL\+\_\+\+CTA\+\_\+T 
+
+\begin{DoxyReturn}{Returns}
+vector of \doxylink{classasarum_1_1_b_y_1_1_job_sel_cta}{Job\+Sel\+Cta} 
+\end{DoxyReturn}
+\Hypertarget{classasarum_1_1_b_y_1_1_job_def_getter_a1ef2003261f1e06a661dc0913a74c340}\label{classasarum_1_1_b_y_1_1_job_def_getter_a1ef2003261f1e06a661dc0913a74c340} 
+\index{asarum::BY::JobDefGetter@{asarum::BY::JobDefGetter}!getAllSchdDetls@{getAllSchdDetls}}
+\index{getAllSchdDetls@{getAllSchdDetls}!asarum::BY::JobDefGetter@{asarum::BY::JobDefGetter}}
+\doxysubsubsection{\texorpdfstring{getAllSchdDetls()}{getAllSchdDetls()}}
+{\footnotesize\ttfamily std\+::vector$<$ Poco\+::\+Auto\+Ptr$<$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_schd_detl}{by\+::\+Schd\+Detl}} $>$ $>$ asarum\+::\+BY\+::\+Job\+Def\+Getter\+::get\+All\+Schd\+Detls (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+gets the content of SCHD\+\_\+\+DETL\+\_\+T table 
+
+\begin{DoxyReturn}{Returns}
+vector of \doxylink{classasarum_1_1_b_y_1_1_schd_detl}{Schd\+Detl} objects ~\newline
+ 
+\end{DoxyReturn}
+\Hypertarget{classasarum_1_1_b_y_1_1_job_def_getter_a651cd3da07cf322006e824ac97ae36bd}\label{classasarum_1_1_b_y_1_1_job_def_getter_a651cd3da07cf322006e824ac97ae36bd} 
+\index{asarum::BY::JobDefGetter@{asarum::BY::JobDefGetter}!getChildJobs@{getChildJobs}}
+\index{getChildJobs@{getChildJobs}!asarum::BY::JobDefGetter@{asarum::BY::JobDefGetter}}
+\doxysubsubsection{\texorpdfstring{getChildJobs()}{getChildJobs()}}
+{\footnotesize\ttfamily void asarum\+::\+BY\+::\+Job\+Def\+Getter\+::get\+Child\+Jobs (\begin{DoxyParamCaption}\item[{const asarum\+::\+BY\+::\+Job\+Def\+::\+Ptr}]{p\+Job,  }\item[{std\+::vector$<$ asarum\+::\+BY\+::\+Job\+Def\+::\+Ptr $>$ \&}]{r\+\_\+result }\end{DoxyParamCaption})}
+
+
+
+The function recurrently gets the jobs indicated by next\+\_\+job\+\_\+cd\+\_\+success and adds it to the result vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+job,pointer} & to the parent jobs \\
+\hline
+{\em r\+\_\+result} & reference to the vector with pointers of all jobs called in sequence, starting \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classasarum_1_1_b_y_1_1_job_def_getter_adfa7bc2cfb6cbf4d5bf200cb43a9ede5}\label{classasarum_1_1_b_y_1_1_job_def_getter_adfa7bc2cfb6cbf4d5bf200cb43a9ede5} 
+\index{asarum::BY::JobDefGetter@{asarum::BY::JobDefGetter}!getJobDef@{getJobDef}}
+\index{getJobDef@{getJobDef}!asarum::BY::JobDefGetter@{asarum::BY::JobDefGetter}}
+\doxysubsubsection{\texorpdfstring{getJobDef()}{getJobDef()}}
+{\footnotesize\ttfamily Poco\+::\+Auto\+Ptr$<$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def}{asarum\+::\+BY\+::\+Job\+Def}} $>$ asarum\+::\+BY\+::\+Job\+Def\+Getter\+::get\+Job\+Def (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{job\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+returns pointer to the jobs which name is given as the parameter 
+
+
+\begin{DoxyParams}{Parameters}
+{\em job\+\_\+name} & name of the job \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Poco\+::\+Auto\+Ptr pointer to the job ~\newline
+
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em job\+\_\+name} & name of the job \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Poco\+::\+Auto\+Ptr pointer to the job 
+\end{DoxyReturn}
+\Hypertarget{classasarum_1_1_b_y_1_1_job_def_getter_aa04959e2ed4eee68f250e6a2ee3c3da1}\label{classasarum_1_1_b_y_1_1_job_def_getter_aa04959e2ed4eee68f250e6a2ee3c3da1} 
+\index{asarum::BY::JobDefGetter@{asarum::BY::JobDefGetter}!getJobSelCtas@{getJobSelCtas}}
+\index{getJobSelCtas@{getJobSelCtas}!asarum::BY::JobDefGetter@{asarum::BY::JobDefGetter}}
+\doxysubsubsection{\texorpdfstring{getJobSelCtas()}{getJobSelCtas()}}
+{\footnotesize\ttfamily std\+::vector$<$ Poco\+::\+Auto\+Ptr$<$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_sel_cta}{asarum\+::\+BY\+::\+Job\+Sel\+Cta}} $>$ $>$ asarum\+::\+BY\+::\+Job\+Def\+Getter\+::get\+Job\+Sel\+Ctas (\begin{DoxyParamCaption}\item[{const Job\+Ptr}]{job\+\_\+ptr }\end{DoxyParamCaption})}
+
+
+
+function gets data stored in JOB\+\_\+\+SEL\+\_\+\+CTA\+\_\+T, table linking jobs with Entity\+Selection\+Criteria (ESC) 
+
+\begin{DoxyReturn}{Returns}
+vector of \doxylink{classasarum_1_1_b_y_1_1_job_sel_cta}{Job\+Sel\+Cta} pointers 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em job\+\_\+ptr,pointer} & to the job for which selection crtieria is sought \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classasarum_1_1_b_y_1_1_job_sel_cta}{asarum\+::\+BY\+::\+Job\+Sel\+Cta} ~\newline
+ 
+\end{DoxySeeAlso}
+\Hypertarget{classasarum_1_1_b_y_1_1_job_def_getter_ab3cc1192df84107cc645a6ba23fb4334}\label{classasarum_1_1_b_y_1_1_job_def_getter_ab3cc1192df84107cc645a6ba23fb4334} 
+\index{asarum::BY::JobDefGetter@{asarum::BY::JobDefGetter}!getScheduledJobDefs@{getScheduledJobDefs}}
+\index{getScheduledJobDefs@{getScheduledJobDefs}!asarum::BY::JobDefGetter@{asarum::BY::JobDefGetter}}
+\doxysubsubsection{\texorpdfstring{getScheduledJobDefs()}{getScheduledJobDefs()}}
+{\footnotesize\ttfamily vector$<$ Poco\+::\+Auto\+Ptr$<$ \mbox{\hyperlink{classasarum_1_1_b_y_1_1_job_def}{by\+::\+Job\+Def}} $>$ $>$ asarum\+::\+BY\+::\+Job\+Def\+Getter\+::get\+Scheduled\+Job\+Defs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+function get the list of the jobs having a schedule. Those ones can potentially have NEXT\+\_\+\+JOB\+\_\+\+CD\+\_\+\+SUCCESS set 
+
+Gets vector with the Jobs defintion.
+
+\begin{DoxyReturn}{Returns}
+vector of pointers to \doxylink{classasarum_1_1_b_y_1_1_job_def}{Job\+Def} ~\newline
+
+
+vector of Poco\+::\+Auto\+Ptr pointers to \doxylink{classasarum_1_1_b_y_1_1_job_def}{Job\+Def} objects 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/asarum/\+BY/Job\+Def\+Getter.\+h\item 
+src/Job\+Def\+Getter.\+cpp\end{DoxyCompactItemize}
