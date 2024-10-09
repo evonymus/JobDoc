@@ -48,7 +48,9 @@ add_executable( ${EXEC}
   ${SRC_DIR}/test.cpp
   ${SRC_DIR}/Menu.cpp
   ${SRC_DIR}/BaseConnector.cpp
-  ${SRC_DIR}/Meter.cpp)
+  ${SRC_DIR}/Meter.cpp
+  ${SRC_DIR}/EscValidator.cpp
+)
 
 set(CMAKE_EXE_LINKER_FLAGS /NODEFAULTLIB:\"Poco:Poco::Foundationd\")
 

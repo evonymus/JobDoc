@@ -61,6 +61,12 @@ namespace asarum
       /// @param r_out 
       void printEscDetails(const Poco::AutoPtr<JobDef> job_ptr, std::ofstream &r_out);
 
+      /// <summary>
+      /// The function return the comment in ESC code enwrapped using /** ..**/ string
+      /// </summary>
+      /// <param name="esc_ptr">Pointer to EntySelCta object</param>
+      std::string getEscComments(const Poco::AutoPtr<EntySelCta> esc_ptr);
+
       /// @brief writes details of a job
       /// @param job_ptr pointer to the job 
       /// @param r_out output stream 

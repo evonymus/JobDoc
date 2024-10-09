@@ -62,6 +62,7 @@ private:
   po::options_description m_visible_options;
   po::options_description m_cmd_line_options;
   po::options_description m_jmeter_options;
+  po::options_description m_validation_options;
 
   po::positional_options_description m_pos_options;
 
@@ -99,6 +100,7 @@ private:
   void initDocOptions();
   void initCopyOptions();
   void initOutputOptions();
+  void initValidationOptions();
 
   // ---------- menu handlers (triggers) ---------
   //void handleCodeGeneration(bool withSummary);
@@ -109,6 +111,7 @@ private:
   void handleVersion();
   void handleCopyDB();
   void handleCodeOptions();
+  void handleValidationOptions();
   void setDataSource();
 
   // ---------- connection methods -------

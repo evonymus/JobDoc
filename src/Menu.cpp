@@ -6,6 +6,7 @@
 #include "asarum/BY/SQLiteConnector.h"
 #include "asarum/BY/Meter.h"
 #include "asarum/BY/CodeWriter.h"
+#include "asarum/BY/EscValidator.h"
 #include "version.h"
 #include <boost/filesystem.hpp>
 #include <ctime>
@@ -22,9 +23,11 @@ const char *ESC_QRY_DIR = "\\ESC_Queries";
 const char *DOC_DIR = "\\Docs";
 const char *SCRIPT_DIR = "\\Scripts";
 const char* JMETER_DIR = "\\JMeter";
+const char* VALIDATION_DIR = "\\Validation";
 const char *DEFAULT_DOC_NAME = "JobServerDocument_";
 const char* DEFAULT_JMETER_NAME = "EscJMeter_";
 const char *DEFAULT_COPY_DB_NAME = "JobsCopy_";
+const char* DEFAULT_VALIDATION_FILE = "Validation";
 
 /// constructor
 /// @param argc number of arguments, taken from main
@@ -35,6 +38,7 @@ by::Menu::Menu(int argc, char *argv[])
       m_copy_options("Copy Jobs From ODBC to SQLite"),
       m_script_options("Generate Jobs Source Scripts"),
       m_code_options("Code Handling"),
+      m_validation_options("Validation of ESC Queries"),
       m_doc_options("Docs Generation"), m_cmd_line_options(),
       m_visible_options("Allowed Options"), m_pos_options(),
       m_db_variant{by::DB_VARIANT::ORACLE} {
@@ -76,11 +80,13 @@ void by::Menu::initMenu(int argc, char *argv[]) {
   initCodeOptions();
   initCopyOptions();
   initOutputOptions();
+  initValidationOptions();
 
   m_visible_options.add(m_generic_options)
       .add(m_source_options)
       .add(m_script_options)
       .add(m_doc_options)
+      .add(m_validation_options)
       .add(m_code_options)
       .add(m_copy_options)
       .add(m_output_options);
@@ -92,7 +98,8 @@ void by::Menu::initMenu(int argc, char *argv[]) {
       .add(m_doc_options)
       .add(m_copy_options)
       .add(m_output_options)
-      .add(m_code_options);
+      .add(m_code_options)
+      .add(m_validation_options);
 
   po::store(po::command_line_parser(argc, argv)
                 .options(m_cmd_line_options)
@@ -139,11 +146,17 @@ void by::Menu::handleMenu() {
     handleDocsGeneration();
   } else if (m_var_map.count("copy") > 0) {
     handleCopyDB();
-  }
+  } 
 
-   if (m_var_map.count("generate-jmeter") > 0) {
+
+   if (m_var_map.count("generate-jmeter") || m_var_map.count("save-esc-queries")) {
       handleCodeOptions();
   }
+  
+   if (m_var_map.count("validate") > 0) {
+       handleValidationOptions();
+   }
+
 }
 
 //------ PRIVATE FUNCTIONS ----------------------------
@@ -232,6 +245,12 @@ void by::Menu::initOutputOptions() {
       ("image,i", "(optional) include sequence diagrams");
 }
 
+/// <summary>
+/// Initializes the options validating ESC Queries
+/// </summary>
+void by::Menu::initValidationOptions() {
+    m_validation_options.add_options()("validate,V", "Validate ESC Queries");
+}
 
 // ------------- handlers triggering actions  ----------
 
@@ -390,6 +409,24 @@ void by::Menu::handleCodeOptions() {
 
 }
 
+void by::Menu::handleValidationOptions() {
+    if (!isConnectionDefined()) {
+        throw std::invalid_argument("No connection to database for validaiton was specified");
+    }
+
+    if (m_var_map.count("validate")) {
+        const std::string val_dir = m_path + VALIDATION_DIR;
+        const std::string file_name = val_dir + '\\' + "Validation.txt";
+        fs::create_directory(val_dir);
+        std::ofstream f_out(file_name);
+
+        by::JobDefGetter jobGetter(getSession());
+        by::EscValidator escValidator(jobGetter.getAllEntySelCtas(), f_out);
+        escValidator.validate();
+        f_out.close();
+
+    }
+}
 /// <summary>
 /// The function displays help message
 /// </summary>

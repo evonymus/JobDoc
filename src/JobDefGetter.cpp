@@ -42,7 +42,7 @@ asarum::BY::JobDefGetter::getJobDef(const char *job_name) {
 /***************************************************************/
 vector<Poco::AutoPtr<by::EntySelCta>> by::JobDefGetter::getAllEntySelCtas() {
   pa::Query<by::EntySelCta> query{m_context_ptr};
-  return query.execute();
+  return query.orderBy("enty_sel_cta_cd").execute();
 }
 /***************************************************************/
 std::vector<Poco::AutoPtr<by::AdtnData>>
