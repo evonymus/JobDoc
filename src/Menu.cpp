@@ -416,7 +416,7 @@ void by::Menu::handleValidationOptions() {
 
     if (m_var_map.count("validate")) {
         const std::string val_dir = m_path + VALIDATION_DIR;
-        const std::string file_name = val_dir + '\\' + "Validation.txt";
+        const std::string file_name = val_dir + '\\' + "Validation.csv";
         fs::create_directory(val_dir);
         std::ofstream f_out(file_name);
 
