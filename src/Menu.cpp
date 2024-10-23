@@ -161,8 +161,14 @@ void by::Menu::handleMenu() {
 
 // closing connection on exit
 by::Menu::~Menu() {
+    // if odbc connection 
     if (m_odbc_conn_ptr != nullptr) {
         m_odbc_conn_ptr->m_session_ptr->close();
+    }
+
+    //if connection to SQLite is created, close the session
+    if (m_sqlite_conn_ptr != nullptr) {
+        m_sqlite_conn_ptr->m_session_ptr->close();
     }
 }
 
