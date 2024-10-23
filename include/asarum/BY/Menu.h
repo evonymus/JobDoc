@@ -37,6 +37,8 @@ public:
    * @param argv[] array of argc parameters
    */
   Menu(int argc, char *arv[]);
+
+  ~Menu();
   /**
    * @brief responses to the options specified in the command prompt and
    * executes appropriate menu handler

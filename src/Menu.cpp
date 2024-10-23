@@ -159,6 +159,13 @@ void by::Menu::handleMenu() {
 
 }
 
+// closing connection on exit
+by::Menu::~Menu() {
+    if (m_odbc_conn_ptr != nullptr) {
+        m_odbc_conn_ptr->m_session_ptr->close();
+    }
+}
+
 //------ PRIVATE FUNCTIONS ----------------------------
 
 /// <summary>
@@ -348,8 +355,7 @@ void asarum::BY::Menu::handleCopyDB() {
     }
 
     std::cout << "\nStarting copying ODBC database ...\n";
-    by::DataCopier dataCopier{m_odbc_conn_ptr, m_copy_to_db_name.c_str(),
-                              m_odbc_schema.c_str()};
+    by::DataCopier dataCopier{*m_odbc_conn_ptr, m_copy_to_db_name.c_str(), m_odbc_schema.c_str()};
     dataCopier.copyData();
     std::cout << "\nData copied to " << m_copy_to_db_name << " database\n";
   }
@@ -398,6 +404,7 @@ void by::Menu::handleCodeOptions() {
 		by::Meter meter{ getSession() };
 	    meter.generateJdbcTestFile(f_out);
         f_out.close();
+        std::cout << "Generating of JMeter test file completed\n";
 	}
 
     if (m_var_map.count("save-esc-queries") > 0) {
@@ -405,6 +412,7 @@ void by::Menu::handleCodeOptions() {
         fs::create_directory(query_dir);
         by::CodeWriter codeWriter(getSession());
         codeWriter.saveEscQueries(query_dir);
+        std::cout << "Generation of ESC Queries completed\n";
     }
 
 }
@@ -423,6 +431,7 @@ void by::Menu::handleValidationOptions() {
         by::JobDefGetter jobGetter(getSession());
         by::EscValidator escValidator(jobGetter.getAllEntySelCtas(), f_out);
         escValidator.validate();
+        std::cout << "Validation file created\n";
         f_out.close();
 
     }

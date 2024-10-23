@@ -22,31 +22,12 @@ using AdtnDatPtr_t = Poco::AutoPtr<by::AdtnData>;
 using SchdDtlPtr_t = Poco::AutoPtr<by::SchdDetl>;
 using JobSelCtaPtr_t = Poco::AutoPtr<by::JobSelCta>;
 
-asarum::BY::DataCopier::DataCopier(const char *odbc_dsn, const char *db_name, const char *schema)
-    : m_odbc_dsn{odbc_dsn}, m_db_name{db_name},
-      m_orig_conn_ptr{new by::OdbcConnector(odbc_dsn)},
-      m_dest_conn_ptr{new by::SQLiteConnector(db_name)}
 
-{
-    // if schema parameter specified, change schema
-    if (schema != nullptr)
-    {
-        m_orig_conn_ptr->changeSchema(schema);
-    }
-}
-
-/***************************************************************/
-
-asarum::BY::DataCopier::DataCopier(std::shared_ptr<OdbcConnector> odbc_conn_ptr, const char *db_name, const char *schema)
+asarum::BY::DataCopier::DataCopier(const OdbcConnector &odbc_conn_ref, const char *db_name, const char *schema)
     : m_odbc_dsn{nullptr}, m_db_name{db_name},
-      m_orig_conn_ptr{odbc_conn_ptr},
+      m_orig_conn_ref{odbc_conn_ref},
       m_dest_conn_ptr{new by::SQLiteConnector(db_name)}
 {
-    // if schema parameter specified, change schema
-    if (schema != nullptr)
-    {
-        m_orig_conn_ptr->changeSchema(schema);
-    }
 }
 
 /***************************************************************/
@@ -54,7 +35,7 @@ void asarum::BY::DataCopier::copyData()
 {
     try
     {
-        by::JobDefGetter from_getter{m_orig_conn_ptr->m_session_ptr};
+        by::JobDefGetter from_getter{m_orig_conn_ref.m_session_ptr};
         pa::Context::Ptr dest_context_ptr{new pa::Context(*m_dest_conn_ptr->m_session_ptr)};
 
         std::vector<JobPtr_t> jobs = from_getter.getAllJobDefs();
@@ -80,11 +61,6 @@ asarum::BY::DataCopier::~DataCopier()
     if (m_dest_conn_ptr->m_session_ptr != nullptr)
     {
         m_dest_conn_ptr->m_session_ptr->close();
-    }
-
-    if (m_orig_conn_ptr->m_session_ptr != nullptr)
-    {
-        m_orig_conn_ptr->m_session_ptr->close();
     }
 }
 
