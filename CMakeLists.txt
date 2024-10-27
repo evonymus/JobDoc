@@ -31,6 +31,7 @@ link_directories("C:/Users/mdzie/Development/JobDoc/build/vcpkg_installed/x64-wi
 
 add_executable( ${EXEC} 
   ${SRC_DIR}/main.cpp
+  ${SRC_DIR}/Config.cpp
   ${SRC_DIR}/FindStrTFunc.cpp
   ${SRC_DIR}/Tokenizer.cpp
   ${SRC_DIR}/SQLiteConnector.cpp
